@@ -212,6 +212,26 @@
     .explain.bad strong { color: var(--bad); }
     .explain p { margin: 6px 0 0; }
     .pill.scen { background: var(--navy); color: #fff; }
+    button.choice.selected { border-color: var(--gold); background: #fbf6ea; box-shadow: inset 0 0 0 2px var(--gold); }
+    .course { margin-bottom: 22px; }
+    .course-head { font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin: 4px 0 10px; border-bottom: 2px solid var(--gold); padding-bottom: 6px; }
+    .course-head .muted { text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: 6px; }
+    .folder-card.locked { opacity: .55; background: #f1eee7; box-shadow: none; }
+    .folder-card.locked:hover { opacity: .8; }
+    .lock { font-size: 12px; font-weight: 650; color: var(--muted); margin-bottom: 6px; }
+    .lock.open { color: var(--gold); }
+    .boss-line.passed strong { color: var(--ok); }
+    .boss-result { text-align: center; padding: 26px 16px; border-top: 6px solid var(--bad); }
+    .boss-result.pass { border-top-color: var(--ok); }
+    .boss-badge { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--bad); }
+    .boss-result.pass .boss-badge { color: var(--ok); }
+    .boss-score { font-size: 56px; font-weight: 750; color: var(--navy); line-height: 1.1; margin: 6px 0; }
+    .review-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .review-item:last-child { border-bottom: 0; }
+    .review-q { white-space: pre-line; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
+    .review-a { font-size: 14px; margin-top: 2px; }
+    .review-a.ok { color: var(--ok); }
+    .review-a.bad { color: var(--bad); }
     button { touch-action: manipulation; }
     #toast {
       position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 30px);
@@ -483,7 +503,6 @@
           });
           const bb = betterBoss(local.bestBoss, f.bestBoss); if (bb) local.bestBoss = bb;
           const bm = betterMatch(local.bestMatch, f.bestMatch); if (bm) local.bestMatch = bm;
-          if (f.unlocked) local.unlocked = true;
         }
         folderMap[f.id] = local.id;
       });
@@ -593,10 +612,75 @@
     }
 
     function render() {
+      if (matchTimer && view.page !== "match") { clearInterval(matchTimer); matchTimer = null; }
       if (view.page === "home") renderHome();
       else if (view.page === "folder") renderFolder();
       else if (view.page === "quiz") renderQuiz();
+      else if (view.page === "boss") renderBoss();
+      else if (view.page === "match") renderMatch();
       else renderStudy();
+    }
+
+    /* ---------- Courses, chapter order and soft gating ---------- */
+    const BOSS_PASS = 80;
+    const sessionUnlocked = new Set();
+
+    function hasOrder(f) { return typeof f.order === "number" && Number.isFinite(f.order); }
+
+    function prevChapter(f) {
+      if (!f || !f.course || !hasOrder(f)) return null;
+      return state.folders
+        .filter((x) => x !== f && x.course === f.course && hasOrder(x) && x.order < f.order)
+        .sort((a, b) => b.order - a.order)[0] || null;
+    }
+
+    function nextChapter(f) {
+      if (!f || !f.course || !hasOrder(f)) return null;
+      return state.folders
+        .filter((x) => x !== f && x.course === f.course && hasOrder(x) && x.order > f.order)
+        .sort((a, b) => a.order - b.order)[0] || null;
+    }
+    // The previous chapter this folder is waiting on, or null if it's open.
+
+    function lockedBehind(f) {
+      const prev = prevChapter(f);
+      return prev && !(prev.bestBoss && prev.bestBoss.passed) ? prev : null;
+    }
+
+    function chLabel(f) { return hasOrder(f) ? "Ch " + f.order : f.name; }
+
+    function fmtDate(iso) {
+      if (!iso) return "";
+      const d = new Date(iso.length === 10 ? iso + "T12:00:00" : iso);
+      return isNaN(d) ? "" : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    }
+
+    function fmtTime(ms) {
+      const s = Math.max(0, ms) / 1000;
+      const m = Math.floor(s / 60);
+      const rest = s - m * 60;
+      return m ? `${m}:${rest.toFixed(1).padStart(4, "0")}` : `${rest.toFixed(1)}s`;
+    }
+
+    function bossLine(f) {
+      const b = f.bestBoss;
+      if (!b) return `<span class="boss-line">Boss quiz: not taken yet</span>`;
+      return `<span class="boss-line ${b.passed ? "passed" : ""}">Boss best: <strong>${Math.round(b.pct)}%</strong> ${b.passed ? "✓ passed" : "· not passed yet"}</span>`;
+    }
+
+    function folderCardHtml(f) {
+      const all = cardsIn(f.id);
+      const retired = all.filter((c) => prog(c.id).retired).length;
+      const scen = all.filter(isScenario).length;
+      const prev = lockedBehind(f);
+      const locked = prev && !sessionUnlocked.has(f.id);
+      return `
+        <div class="card folder-card ${locked ? "locked" : ""}" data-open="${f.id}" ${locked ? `data-locked="${escaped(chLabel(prev))}"` : ""}>
+          ${locked ? `<div class="lock">🔒 Pass ${escaped(chLabel(prev))} boss to unlock</div>` : (prev ? `<div class="lock open">Opened early</div>` : "")}
+          <h3>${escaped(f.name)}</h3>
+          <div class="muted">${all.length} cards · ${retired} mastered${scen ? ` · ${scen} scenarios` : ""}</div>
+          <div class="muted" style="margin-top:6px">${bossLine(f)}${f.bestMatch ? ` · Match best ${fmtTime(f.bestMatch.ms)}` : ""}</div>
+        </div>`;
     }
 
     function renderHome() {
@@ -606,17 +690,29 @@
         <button class="secondary" id="importBtn">Import</button>
         <button class="gold" id="newFolderBtn">New folder</button>
       `;
-      const folders = state.folders.map((f) => {
-        const all = cardsIn(f.id);
-        const retired = all.filter((c) => prog(c.id).retired).length;
+      const courses = [];
+      state.folders.forEach((f) => { if (f.course && !courses.includes(f.course)) courses.push(f.course); });
+      courses.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+      const byOrder = (a, b) => (hasOrder(a) ? a.order : Infinity) - (hasOrder(b) ? b.order : Infinity);
+      let html = courses.map((course) => {
+        const fs = state.folders.filter((f) => f.course === course).slice().sort(byOrder);
+        const passed = fs.filter((f) => f.bestBoss && f.bestBoss.passed).length;
         return `
-          <div class="card folder-card" data-open="${f.id}">
-            <h3>${escaped(f.name)}</h3>
-            <div class="muted">${all.length} cards · ${retired} mastered</div>
-          </div>`;
+          <section class="course">
+            <h2 class="course-head">${escaped(course)} <span class="muted">${passed} of ${fs.length} boss quizzes passed</span></h2>
+            <div class="grid">${fs.map(folderCardHtml).join("")}</div>
+          </section>`;
       }).join("");
+      const others = state.folders.filter((f) => !f.course);
+      if (others.length) {
+        html += `
+          <section class="course">
+            ${courses.length ? `<h2 class="course-head">Other folders</h2>` : ""}
+            <div class="grid">${others.map(folderCardHtml).join("")}</div>
+          </section>`;
+      }
       app.innerHTML = `
-        <div class="grid">${folders || `<div class="empty">No folders yet.</div>`}</div>
+        ${html || `<div class="empty">No folders yet.</div>`}
         <footer class="note">Cards are saved in this browser only. Export a backup if you study on more than one computer.${BUILD_INFO && BUILD_INFO.decks ? ` · Includes ${BUILD_INFO.decks} built-in deck${BUILD_INFO.decks === 1 ? "" : "s"} (updated ${escaped(BUILD_INFO.date)})` : ""}</footer>
       `;
       document.getElementById("newFolderBtn").onclick = () => openFolderForm();
@@ -624,6 +720,10 @@
       document.getElementById("importBtn").onclick = openImportDialog;
       app.querySelectorAll("[data-open]").forEach((el) => {
         el.onclick = () => {
+          if (el.dataset.locked) {
+            if (!confirm(`This chapter is locked until you pass the ${el.dataset.locked} boss quiz.\n\nOpen anyway?`)) return;
+            sessionUnlocked.add(el.dataset.open);
+          }
           view.page = "folder";
           view.folderId = el.dataset.open;
           render();
@@ -666,6 +766,8 @@
           <div class="row" style="justify-content:space-between">
             <div>
               <div class="muted">${left} in the mix · ${retired} pulled out after ${RETIRE_AFTER} correct in a row</div>
+              <div class="muted" style="margin-top:4px">${bossLine(folder)}${folder.bestBoss ? ` <span class="muted">(${fmtDate(folder.bestBoss.date)})</span>` : ""}</div>
+              ${lockedBehind(folder) ? `<div class="muted" style="margin-top:4px">🔒 Opened early: ${escaped(chLabel(lockedBehind(folder)))} boss not passed yet</div>` : ""}
             </div>
             <div class="row">
               <button class="secondary" id="resetBtn">Reset progress</button>
@@ -673,6 +775,10 @@
               <button class="secondary" id="quizBtn" ${left ? "" : "disabled"}>Multiple choice</button>
               <button class="gold" id="studyBtn" ${left ? "" : "disabled"}>Study shuffled</button>
             </div>
+          </div>
+          <div class="row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
+            <button class="gold" id="bossBtn" ${all.length >= 2 ? "" : "disabled"} title="All ${all.length} cards, pass mark ${BOSS_PASS}%">Boss quiz</button>
+            <span class="muted">Every card in this folder, mastered ones included · pass ${BOSS_PASS}% to clear the chapter</span>
           </div>
         </div>
         <div class="card" style="margin-top:12px">${list || `<div class="empty">No cards in this folder yet.</div>`}</div>
@@ -695,6 +801,7 @@
       document.getElementById("addCardBtn").onclick = () => openCardForm();
       document.getElementById("studyBtn").onclick = startStudy;
       document.getElementById("quizBtn").onclick = () => startQuiz();
+      document.getElementById("bossBtn").onclick = startBoss;
       app.querySelectorAll("[data-edit]").forEach((b) => b.onclick = () => openCardForm(state.cards.find((c) => c.id === b.dataset.edit)));
       app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => {
         if (!confirm("Delete this card?")) return;
@@ -1013,6 +1120,131 @@
       render();
     }
 
+    function startBoss() {
+      const cards = shuffle(cardsIn(view.folderId));
+      if (cards.length < 2) { alert("Add at least 2 cards to this folder for a boss quiz."); return; }
+      if (cards.some((c) => !isScenario(c) && distractorPool(c).length < 1)) {
+        alert("Add at least 2 regular (non-scenario) cards in this folder so the quiz can invent wrong answers.");
+        return;
+      }
+      view.page = "boss";
+      view.boss = { folderId: view.folderId, ids: cards.map((c) => c.id), index: 0, sel: null, choices: makeChoices(cards[0]), answers: [], result: null };
+      render();
+    }
+
+    function renderBoss() {
+      const b = view.boss;
+      const folder = folderById(view.folderId);
+      if (!b || !folder) { view.page = "folder"; return render(); }
+      headerSub.textContent = folder.name + " · boss quiz";
+      headerActions.innerHTML = `<button class="secondary" id="exitBoss">${b.result ? "Back to folder" : "Quit boss"}</button>`;
+      document.getElementById("exitBoss").onclick = () => {
+        if (!b.result && b.answers.length && !confirm("Quit the boss quiz? This attempt won't count.")) return;
+        backToFolder();
+      };
+      if (b.result) return renderBossResults(b, folder);
+
+      const card = state.cards.find((c) => c.id === b.ids[b.index]);
+      if (!card) { b.ids.splice(b.index, 1); if (b.index >= b.ids.length) finishBoss(); else { b.choices = makeChoices(state.cards.find((c) => c.id === b.ids[b.index])); render(); } return; }
+      const total = b.ids.length;
+      const pct = Math.round((b.index / total) * 100);
+      const prompt = isScenario(card) ? scenarioPrompt(card, `Boss quiz · pass mark ${BOSS_PASS}%`) : `
+          <div class="flash quiz">
+            <div class="hint">Boss quiz · pass mark ${BOSS_PASS}%</div>
+            <h2>${escaped(card.front)}</h2>
+            ${card.subtitle || card.year ? `<div class="subtitle">${escaped(card.subtitle || card.year)}</div>` : ""}
+          </div>`;
+      app.innerHTML = `
+        <div class="study-wrap">
+          <div>
+            <div class="row" style="justify-content:space-between">
+              <span class="muted">Question ${b.index + 1} of ${total}</span>
+              <span class="muted">No feedback until the end · no skipping</span>
+            </div>
+            <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
+          </div>
+          ${prompt}
+          <div class="choices">${b.choices.map((ch, i) => `<button class="choice ${b.sel === i ? "selected" : ""}" data-bpick="${i}">${escaped(ch.text)}</button>`).join("")}</div>
+          <div class="row" style="justify-content:center">
+            <button class="gold" id="bossNext" ${b.sel === null ? "disabled" : ""}>${b.index + 1 >= total ? "Lock in & finish" : "Lock in & next"}</button>
+          </div>
+        </div>`;
+      app.querySelectorAll("[data-bpick]").forEach((btn) => {
+        btn.onclick = () => { b.sel = Number(btn.dataset.bpick); render(); };
+      });
+      document.getElementById("bossNext").onclick = () => {
+        if (b.sel === null) return;
+        b.answers.push({ id: card.id, choices: b.choices, picked: b.sel, ok: !!b.choices[b.sel].correct });
+        b.index += 1;
+        b.sel = null;
+        if (b.index >= b.ids.length) return finishBoss();
+        b.choices = makeChoices(state.cards.find((c) => c.id === b.ids[b.index]) || card);
+        render();
+        window.scrollTo(0, 0);
+      };
+    }
+
+    function finishBoss() {
+      const b = view.boss;
+      const folder = folderById(b.folderId);
+      const total = b.answers.length;
+      const correct = b.answers.filter((a) => a.ok).length;
+      const pct = total ? Math.round((correct / total) * 100) : 0;
+      const passed = pct >= BOSS_PASS;
+      const prevBest = folder.bestBoss;
+      const now = new Date();
+      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+      const newBest = !prevBest || pct > (Number(prevBest.pct) || 0);
+      if (newBest) folder.bestBoss = { pct, passed: passed || !!(prevBest && prevBest.passed), date: today };
+      else if (passed && !prevBest.passed) folder.bestBoss.passed = true;
+      folder.lastBoss = { pct, passed, date: today };
+      const next = nextChapter(folder);
+      b.result = { pct, passed, correct, total, newBest: newBest && !!prevBest, unlocked: passed && next && !(prevBest && prevBest.passed) ? next.id : null };
+      save();
+      render();
+      window.scrollTo(0, 0);
+    }
+
+    function renderBossResults(b, folder) {
+      const r = b.result;
+      const missed = b.answers.filter((a) => !a.ok);
+      const next = nextChapter(folder);
+      const review = missed.map((a) => {
+        const card = state.cards.find((c) => c.id === a.id);
+        if (!card) return "";
+        const right = a.choices.find((c) => c.correct);
+        const why = isScenario(card) ? (cleanStr(card.explanation) || cleanStr(card.answer)) : "";
+        const pts = !isScenario(card) ? (card.points || card.protections || []) : [];
+        return `
+          <div class="review-item">
+            <div class="review-q">${escaped(card.front)}</div>
+            <div class="review-a bad">✗ Your answer: ${escaped(a.choices[a.picked].text)}</div>
+            <div class="review-a ok">✓ Correct: ${escaped(right ? right.text : cardAnswerText(card))}</div>
+            ${why ? `<div class="muted" style="margin-top:4px">${escaped(why)}</div>` : ""}
+            ${pts.length ? `<ul class="muted" style="margin:4px 0 0;padding-left:18px">${pts.map((x) => `<li>${escaped(x)}</li>`).join("")}</ul>` : ""}
+          </div>`;
+      }).join("");
+      app.innerHTML = `
+        <div class="card boss-result ${r.passed ? "pass" : "fail"}" id="bossResult">
+          <div class="boss-badge">${r.passed ? "Boss defeated" : "Not yet"}</div>
+          <div class="boss-score">${r.pct}%</div>
+          <div class="muted">${r.correct} of ${r.total} correct · pass mark ${BOSS_PASS}%${folder.bestBoss ? ` · best ${Math.round(folder.bestBoss.pct)}%` : ""}${r.newBest ? " · new best!" : ""}</div>
+          ${r.passed && next ? `<p style="margin:10px 0 0"><strong>${escaped(next.name)}</strong> is ${r.unlocked ? "now unlocked" : "open"}.</p>` : ""}
+          ${!r.passed ? `<p style="margin:10px 0 0" class="muted">Review the misses below, practice them, then try again.</p>` : ""}
+          <div class="row" style="justify-content:center;margin-top:14px">
+            <button class="${r.passed ? "secondary" : "gold"}" id="bossPractice" ${missed.length ? "" : "disabled"}>Practice missed (${missed.length})</button>
+            <button class="secondary" id="bossRetake">Retake boss</button>
+            ${r.passed && next ? `<button class="gold" id="bossNextCh">Go to ${escaped(chLabel(next))}</button>` : ""}
+          </div>
+        </div>
+        ${missed.length ? `<div class="card" style="margin-top:12px"><h3 style="margin:0 0 6px">Review missed questions</h3>${review}</div>` : ""}
+      `;
+      document.getElementById("bossPractice").onclick = () => startQuiz(missed.map((a) => a.id));
+      document.getElementById("bossRetake").onclick = startBoss;
+      const go = document.getElementById("bossNextCh");
+      if (go) go.onclick = () => { view.folderId = next.id; view.page = "folder"; render(); };
+    }
+
     function markResult(correct) {
       const card = currentCard();
       if (!card) return;
@@ -1270,6 +1502,7 @@
       render();
     }
 
+    let matchTimer = null;
     let toastTimer = null;
     function toast(msg) {
       let el = document.getElementById("toast");
