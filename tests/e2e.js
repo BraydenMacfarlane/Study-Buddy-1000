@@ -520,7 +520,8 @@ async function testReal(raw) {
     await p.waitForSelector('#matchResult');
     ok(ids.length === 6, `${mode}: matching game completes on Ch 1`);
     await p.click('#matchBack'); await p.click('#backHome');
-    ok(await p.locator('.folder-card.locked').count() === 0, `${mode}: Ch 2 unlocked on home`);
+    ok(await p.locator('.folder-card.locked[data-open="deck-c202-ch02"]').count() === 0 && await p.locator('[data-open="deck-c202-ch02"]').count() === 1, `${mode}: Ch 2 unlocked on home`);
+    if (await p.locator('[data-open="deck-c202-ch03"]').count()) ok(await p.locator('.folder-card.locked[data-open="deck-c202-ch03"]').count() === 1, `${mode}: Ch 3 still locked behind Ch 2 boss`);
     await p.click('[data-open="deck-c202-ch02"]'); await p.click('#matchBtn');
     ok(/Read the study guide first\? \(~15 min\)/.test(await p.textContent('.dialog-body')), `${mode}: Ch 2 nudge shows ~15 min`);
     await p.click('#ovSkip');
