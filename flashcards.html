@@ -213,17 +213,30 @@
     .explain.bad strong { color: var(--bad); }
     .explain p { margin: 6px 0 0; }
     .pill.scen { background: var(--navy); color: #fff; }
-    details.overview { margin-bottom: 12px; padding: 0; overflow: hidden; }
-    details.overview > summary {
-      list-style: none; cursor: pointer; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 6px 12px;
-      align-items: baseline; border-left: 5px solid var(--gold);
-    }
-    details.overview > summary::-webkit-details-marker { display: none; }
-    details.overview > summary::after { content: "▸"; margin-left: auto; color: var(--gold); transition: transform .2s; }
-    details.overview[open] > summary::after { transform: rotate(90deg); }
-    .ov-title { font-weight: 700; color: var(--navy); font-size: 16px; }
+    .guide-card { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; border-left: 5px solid var(--gold); }
+    .ov-title { font-weight: 700; color: var(--navy); font-size: 16px; margin-right: 8px; }
+    .ov-status { margin-left: 8px; }
     .ov-status.unread { color: #8a6d2b; font-weight: 650; }
-    .ov-body { padding: 0 18px 16px; border-top: 1px solid var(--line); }
+    .ok-text { color: var(--ok); }
+    .ov-done { margin-top: 8px; font-size: 13px; color: var(--ok); font-weight: 650; }
+    .guide-sticky {
+      position: sticky; top: 0; z-index: 5; background: var(--cream); padding: 10px 0 8px;
+      display: flex; align-items: center; gap: 12px; font-size: 13px;
+    }
+    .guide-bar { flex: 1; height: 6px; background: #e6e1d6; border-radius: 99px; overflow: hidden; }
+    .guide-bar > span { display: block; height: 100%; width: 0; background: var(--gold); transition: width .1s; }
+    .guide-sticky .muted { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .guide-wrap { max-width: calc(68ch + 72px); font-size: 17.5px; margin: 0 auto; }
+    .guide { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 30px 36px 26px; box-shadow: var(--shadow); }
+    .guide-meta { color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: .06em; line-height: 1.6; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .guide-meta .muted { letter-spacing: 0; font-weight: 400; }
+    .md.guide-md { font-size: 17.5px; line-height: 1.75; color: #222; }
+    .md.guide-md h3 { font-size: 27px; margin: 24px 0 10px; line-height: 1.25; }
+    .md.guide-md h4 { font-size: 21px; margin: 30px 0 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .md.guide-md h5 { font-size: 15px; margin: 22px 0 4px; color: #8a6d2b; }
+    .md.guide-md p { margin: 10px 0 14px; }
+    .md.guide-md li { margin: 6px 0; }
+    .guide-end { text-align: center; margin-top: 26px; padding-top: 18px; border-top: 2px solid var(--gold); }
     .md { line-height: 1.6; font-size: 15px; }
     .md h3, .md h4, .md h5 { color: var(--navy); margin: 18px 0 6px; line-height: 1.3; }
     .md h3 { font-size: 20px; } .md h4 { font-size: 17px; } .md h5 { font-size: 15px; text-transform: uppercase; letter-spacing: .05em; }
@@ -279,6 +292,10 @@
       .flash h2 { font-size: 24px; }
       .scenario-text { font-size: 17px; }
       header { flex-wrap: wrap; }
+      .guide { padding: 20px 18px; border-radius: 12px; }
+      .md.guide-md { font-size: 17px; line-height: 1.7; }
+      .md.guide-md h3 { font-size: 23px; }
+      .md.guide-md h4 { font-size: 19px; }
     }
     .review-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
     .review-item:last-child { border-bottom: 0; }
@@ -337,6 +354,17 @@
 
     const uid = () => crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
 
+    /* ---------- Local-calendar date helpers (YYYY-MM-DD in the device's own time zone, never UTC) ---------- */
+    function isoOf(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
+    function todayISO() { return isoOf(new Date()); }
+    function parseISO(iso) { const [y, m, d] = String(iso).split("-").map(Number); return new Date(y, m - 1, d, 12); }
+    function validISO(iso) { return /^\d{4}-\d{2}-\d{2}$/.test(String(iso || "")) && isoOf(parseISO(iso)) === iso; }
+    function addDays(iso, n) { const d = parseISO(iso); d.setDate(d.getDate() + n); return isoOf(d); }
+    function daysBetween(a, b) { // whole calendar days from a to b (DST-safe)
+      const [y1, m1, d1] = a.split("-").map(Number), [y2, m2, d2] = b.split("-").map(Number);
+      return Math.round((Date.UTC(y2, m2 - 1, d2) - Date.UTC(y1, m1 - 1, d1)) / 86400000);
+    }
+
     function seed() {
       const folderId = uid();
       return {
@@ -366,6 +394,8 @@
         if (f.id === undefined || f.id === null || f.id === "") f.id = uid();
         f.id = String(f.id);
         if (typeof f.name !== "string" || !f.name.trim()) f.name = f.name ? String(f.name) : "Untitled folder";
+        if (f.overviewRead && !f.guideRead) f.guideRead = f.overviewRead;
+        delete f.overviewRead;
       });
       out.cards.forEach((c) => {
         if (c.id === undefined || c.id === null || c.id === "") c.id = uid();
@@ -554,7 +584,7 @@
           state.folders.push(local);
           sum.foldersAdded += 1;
         } else {
-          ["deckId", "deckFolderName", "course", "order", "summary", "source", "overviewRead"].forEach((k) => {
+          ["deckId", "deckFolderName", "course", "order", "summary", "source", "guideRead", "conceptPass", "quizBest"].forEach((k) => {
             if (local[k] === undefined && f[k] !== undefined) local[k] = f[k];
           });
           const bb = betterBoss(local.bestBoss, f.bestBoss); if (bb) local.bestBoss = bb;
@@ -668,12 +698,14 @@
     }
 
     function render() {
+      window.onscroll = null;
       if (matchTimer && view.page !== "match") { clearInterval(matchTimer); matchTimer = null; }
       if (view.page === "home") renderHome();
       else if (view.page === "folder") renderFolder();
       else if (view.page === "quiz") renderQuiz();
       else if (view.page === "boss") renderBoss();
       else if (view.page === "match") renderMatch();
+      else if (view.page === "guide") renderGuide();
       else renderStudy();
     }
 
@@ -736,7 +768,7 @@
           <h3>${escaped(f.name)}</h3>
           <div class="muted">${all.length} cards · ${retired} mastered${scen ? ` · ${scen} scenarios` : ""}</div>
           <div class="muted" style="margin-top:6px">${bossLine(f)}${f.bestMatch ? ` · Match best ${fmtTime(f.bestMatch.ms)}` : ""}</div>
-          ${cleanStr(f.summary) && !f.overviewRead ? `<a href="#" class="ov-link" data-ov="1">📖 Read overview (~${readMinutes(f.summary)} min)</a>` : ""}
+          ${cleanStr(f.summary) ? (f.guideRead ? `<div class="ov-done">✓ Study guide read</div>` : `<a href="#" class="ov-link" data-guide="1">📖 Read study guide (~${readMinutes(f.summary)} min)</a>`) : ""}
         </div>`;
     }
 
@@ -777,16 +809,16 @@
       document.getElementById("importBtn").onclick = openImportDialog;
       app.querySelectorAll("[data-open]").forEach((el) => {
         el.onclick = (e) => {
-          const wantOverview = !!(e.target.closest && e.target.closest("[data-ov]"));
-          if (wantOverview) e.preventDefault();
+          const wantGuide = !!(e.target.closest && e.target.closest("[data-guide]"));
+          if (wantGuide) e.preventDefault();
           if (el.dataset.locked) {
             if (!confirm(`This chapter is locked until you pass the ${el.dataset.locked} boss quiz.\n\nOpen anyway?`)) return;
             sessionUnlocked.add(el.dataset.open);
           }
-          view.page = "folder";
+          view.page = wantGuide ? "guide" : "folder";
           view.folderId = el.dataset.open;
-          if (wantOverview) { view.ovOpen = el.dataset.open; view.ovScroll = true; }
           render();
+          if (wantGuide) window.scrollTo(0, 0);
         };
       });
     }
@@ -823,7 +855,7 @@
           </div>`;
       }).join("");
       app.innerHTML = `
-        ${overviewHtml(folder)}
+        ${guideCardHtml(folder)}
         <div class="card">
           <div class="row" style="justify-content:space-between">
             <div>
@@ -862,11 +894,12 @@
         render();
       };
       document.getElementById("addCardBtn").onclick = () => openCardForm();
-      document.getElementById("studyBtn").onclick = () => withOverviewCheck(startStudy);
-      document.getElementById("quizBtn").onclick = () => withOverviewCheck(() => startQuiz());
-      document.getElementById("bossBtn").onclick = () => withOverviewCheck(startBoss);
-      document.getElementById("matchBtn").onclick = () => withOverviewCheck(startMatch);
-      bindOverview(folder);
+      document.getElementById("studyBtn").onclick = () => withGuideCheck(startStudy);
+      document.getElementById("quizBtn").onclick = () => withGuideCheck(() => startQuiz());
+      document.getElementById("bossBtn").onclick = () => withGuideCheck(startBoss);
+      document.getElementById("matchBtn").onclick = () => withGuideCheck(startMatch);
+      const gb = document.getElementById("openGuide");
+      if (gb) gb.onclick = () => openGuide(folder.id);
       app.querySelectorAll("[data-edit]").forEach((b) => b.onclick = () => openCardForm(state.cards.find((c) => c.id === b.dataset.edit)));
       app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => {
         if (!confirm("Delete this card?")) return;
@@ -877,8 +910,9 @@
       });
     }
 
-    /* ---------- Chapter overview (markdown summary on deck folders) ---------- */
-    function readMinutes(md) { return Math.max(1, Math.round(cleanStr(md).split(/\s+/).filter(Boolean).length / 200)); }
+    /* ---------- Study guide (markdown `summary` on deck folders) ---------- */
+    function guideWords(md) { return cleanStr(md).split(/\s+/).filter(Boolean).length; }
+    function readMinutes(md) { return Math.max(1, Math.round(guideWords(md) / 220)); }
 
     // Tiny, safe markdown renderer: everything is HTML-escaped first, then a small set of syntax is turned into tags.
     function mdInline(s) {
@@ -926,58 +960,104 @@
       return html;
     }
 
-    function overviewHtml(folder) {
+    function guideStatus(folder) {
+      return folder.guideRead ? `✓ Read${typeof folder.guideRead === "string" ? " " + escaped(fmtDate(folder.guideRead)) : ""}` : "Not read yet";
+    }
+
+    function guideCardHtml(folder) {
       if (!cleanStr(folder.summary)) return "";
-      const read = !!folder.overviewRead;
-      const open = view.ovOpen === folder.id;
+      const read = !!folder.guideRead;
       return `
-        <details class="card overview" id="overview" ${open ? "open" : ""}>
-          <summary>
-            <span class="ov-title">📘 Chapter overview</span>
+        <div class="card guide-card" id="guideCard">
+          <div>
+            <span class="ov-title">📘 Study guide</span>
             <span class="muted">~${readMinutes(folder.summary)} min read</span>
-            <span class="muted ov-status ${read ? "" : "unread"}">${read ? `✓ Read${typeof folder.overviewRead === "string" ? " " + escaped(fmtDate(folder.overviewRead)) : ""}` : "Not read yet"}</span>
-          </summary>
-          <div class="ov-body">
-            <div class="md">${renderMarkdown(folder.summary)}</div>
-            ${cleanStr(folder.source) ? `<div class="ov-source">📚 Source: ${escaped(folder.source)}</div>` : ""}
-            <div class="row" style="justify-content:flex-end;margin-top:12px">
-              ${read ? `<button class="secondary" id="ovUnread">Mark as unread</button>` : `<button class="gold" id="ovRead">Mark as read</button>`}
-            </div>
+            <span class="muted ov-status ${read ? "" : "unread"}">${guideStatus(folder)}</span>
+            ${cleanStr(folder.source) ? `<div class="muted" style="margin-top:4px">📚 ${escaped(folder.source)}</div>` : ""}
           </div>
-        </details>`;
+          <button class="${read ? "secondary" : "gold"}" id="openGuide">${read ? "Open study guide" : "Read study guide"}</button>
+        </div>`;
     }
 
-    function bindOverview(folder) {
-      const el = document.getElementById("overview");
-      if (!el) return;
-      el.ontoggle = () => { view.ovOpen = el.open ? folder.id : null; };
-      const now = new Date();
-      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-      const r = document.getElementById("ovRead");
-      if (r) r.onclick = () => { folder.overviewRead = today; view.ovOpen = null; save(); render(); window.scrollTo(0, 0); toast("Overview marked as read. Nice, now practice it."); };
-      const u = document.getElementById("ovUnread");
-      if (u) u.onclick = () => { delete folder.overviewRead; save(); render(); };
-      if (view.ovScroll) { view.ovScroll = false; el.scrollIntoView({ block: "start" }); }
+    function openGuide(folderId) {
+      if (modal.open) modal.close();
+      view.folderId = folderId;
+      view.page = "guide";
+      render();
+      window.scrollTo(0, 0);
     }
 
-    const overviewSkipped = new Set();
-    // Gentle nudge before the first practice session of a folder whose overview hasn't been read.
-    function withOverviewCheck(fn) {
+    // Comfortable long-read screen for the study guide.
+    function renderGuide() {
+      const folder = folderById(view.folderId);
+      if (!folder || !cleanStr(folder.summary)) { view.page = folder ? "folder" : "home"; return render(); }
+      const words = guideWords(folder.summary);
+      const mins = readMinutes(folder.summary);
+      const read = !!folder.guideRead;
+      headerSub.textContent = folder.name + " · study guide";
+      headerActions.innerHTML = `<button class="secondary" id="guideBack">Back to chapter</button>`;
+      app.innerHTML = `
+        <div class="guide-wrap">
+        <div class="guide-sticky">
+          <div class="guide-bar"><span id="guideBar"></span></div>
+          <span class="muted" id="guideLeft">~${mins} min read</span>
+        </div>
+        <article class="guide" id="guideArticle">
+          <div class="guide-meta">📘 Study guide · ${escaped(folder.name)}<br><span class="muted">~${mins} min read · ${words.toLocaleString()} words${read ? ` · <span class="ok-text">${guideStatus(folder)}</span>` : ""}</span></div>
+          <div class="md guide-md">${renderMarkdown(folder.summary)}</div>
+          ${cleanStr(folder.source) ? `<div class="ov-source">📚 Source: ${escaped(folder.source)}</div>` : ""}
+          <div class="guide-end">
+            ${read
+              ? `<div class="ok-text" style="font-weight:650">${guideStatus(folder)}. Nice work.</div>
+                 <div class="row" style="justify-content:center;margin-top:10px">
+                   <button class="gold" id="guideDone">Back to chapter</button>
+                   <button class="secondary" id="guideUnread">Mark as unread</button>
+                 </div>`
+              : `<div class="muted">Finished reading?</div>
+                 <div class="row" style="justify-content:center;margin-top:10px">
+                   <button class="gold" id="guideRead">✓ Mark as read</button>
+                   <button class="secondary" id="guideDone">Back to chapter</button>
+                 </div>`}
+          </div>
+        </article>
+        </div>`;
+      const back = () => { view.page = "folder"; render(); window.scrollTo(0, 0); };
+      document.getElementById("guideBack").onclick = back;
+      document.getElementById("guideDone").onclick = back;
+      const r = document.getElementById("guideRead");
+      if (r) r.onclick = () => { folder.guideRead = todayISO(); save(); toast("Study guide marked as read ✓"); back(); };
+      const u = document.getElementById("guideUnread");
+      if (u) u.onclick = () => { delete folder.guideRead; save(); render(); };
+      const bar = document.getElementById("guideBar"), left = document.getElementById("guideLeft");
+      const onScroll = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 1;
+        bar.style.width = Math.round(pct * 100) + "%";
+        const rem = Math.ceil(mins * (1 - pct));
+        left.textContent = pct >= 0.98 ? "Done, mark it read below" : `~${rem} min left · ${Math.round(pct * 100)}%`;
+      };
+      window.onscroll = onScroll;
+      onScroll();
+    }
+
+    const guideSkipped = new Set();
+    // Gentle nudge before the first practice session of a folder whose study guide hasn't been read.
+    function withGuideCheck(fn) {
       const f = folderById(view.folderId);
-      if (!f || !cleanStr(f.summary) || f.overviewRead || overviewSkipped.has(f.id)) return fn();
+      if (!f || !cleanStr(f.summary) || f.guideRead || guideSkipped.has(f.id)) return fn();
       modal.innerHTML = `
         <div class="dialog-head">Before you start</div>
         <div class="dialog-body">
-          <p style="margin-top:0"><strong>Read the chapter overview first? (${readMinutes(f.summary)} min)</strong></p>
-          <div class="muted">A quick read of the big picture makes the cards and scenarios stick.</div>
+          <p style="margin-top:0"><strong>Read the study guide first? (~${readMinutes(f.summary)} min)</strong></p>
+          <div class="muted">A read-through of the chapter makes the cards and scenarios stick.</div>
           <div class="row" style="justify-content:flex-end;margin-top:14px">
             <button class="secondary" id="ovSkip">Skip for now</button>
-            <button class="gold" id="ovGo">Read overview</button>
+            <button class="gold" id="ovGo">Read study guide</button>
           </div>
         </div>`;
       modal.showModal();
-      document.getElementById("ovSkip").onclick = () => { overviewSkipped.add(f.id); modal.close(); fn(); };
-      document.getElementById("ovGo").onclick = () => { modal.close(); view.ovOpen = f.id; view.ovScroll = true; render(); };
+      document.getElementById("ovSkip").onclick = () => { guideSkipped.add(f.id); modal.close(); fn(); };
+      document.getElementById("ovGo").onclick = () => openGuide(f.id);
     }
 
     function startStudy() {
@@ -1370,8 +1450,7 @@
       const pct = total ? Math.round((correct / total) * 100) : 0;
       const passed = pct >= BOSS_PASS;
       const prevBest = folder.bestBoss;
-      const now = new Date();
-      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+      const today = todayISO();
       const newBest = !prevBest || pct > (Number(prevBest.pct) || 0);
       if (newBest) folder.bestBoss = { pct, passed: passed || !!(prevBest && prevBest.passed), date: today };
       else if (passed && !prevBest.passed) folder.bestBoss.passed = true;
@@ -1523,8 +1602,7 @@
       const prev = folder.bestMatch;
       const pairs = m.pairs.length;
       const isBest = !prev || prev.pairs !== pairs || ms < prev.ms;
-      const now = new Date();
-      if (isBest) folder.bestMatch = { ms, pairs, date: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}` };
+      if (isBest) folder.bestMatch = { ms, pairs, date: todayISO() };
       m.result = { ms, isBest: isBest && !!prev && prev.pairs === pairs, first: !prev };
       save();
       setTimeout(() => { if (view.page === "match" && view.match === m) render(); }, 450);
