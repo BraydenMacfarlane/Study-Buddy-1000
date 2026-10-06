@@ -194,7 +194,8 @@
     button.choice:hover:not(:disabled) { border-color: var(--gold); }
     button.choice.correct { background: #e5f4ea; border-color: var(--ok); color: var(--ok); }
     button.choice.wrong { background: #f8eaea; border-color: var(--bad); color: var(--bad); }
-    button.choice.idle { opacity: 0.55; }
+    button.choice:disabled { opacity: 1; }
+    button.choice.idle, button.choice.idle:disabled { opacity: 0.55; }
     .flash.quiz {
       min-height: 180px;
       cursor: default;
