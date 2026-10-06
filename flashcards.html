@@ -212,6 +212,14 @@
     .explain.bad strong { color: var(--bad); }
     .explain p { margin: 6px 0 0; }
     .pill.scen { background: var(--navy); color: #fff; }
+    .readmore {
+      display: flex; gap: 8px; align-items: baseline; margin-top: 12px; padding: 8px 10px;
+      border-left: 3px solid var(--gold); background: #fbf6ea; border-radius: 0 8px 8px 0;
+      font-size: 13px; line-height: 1.4; color: var(--navy-2); text-align: left;
+    }
+    .readmore .rm-label { color: #8a6d2b; font-weight: 750; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .flash.back .readmore { margin-top: auto; }
+    .flash.back ul + .readmore, .flash.back p + .readmore { margin-top: 16px; }
     button.choice.selected { border-color: var(--gold); background: #fbf6ea; box-shadow: inset 0 0 0 2px var(--gold); }
     .course { margin-bottom: 22px; }
     .course-head { font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin: 4px 0 10px; border-bottom: 2px solid var(--gold); padding-bottom: 6px; }
@@ -932,9 +940,19 @@
       const why = isScenario(card) ? (cleanStr(card.explanation) || cleanStr(card.answer)) : "";
       return `
         <div class="explain ${ok ? "ok" : "bad"}" id="explainBox">
-          <strong>${ok ? "Correct" : "Not quite"}</strong>${ok ? "" : ` · Best answer: <em>${escaped(correctText)}</em>`}
+          <strong>${ok ? "Correct" : "Not quite"}</strong>${ok ? "" : ` · Best answer: <em>${escaped(truncate(correctText, 220))}</em>`}
           ${why ? `<p>${escaped(why)}</p>` : ""}
+          ${readMoreHtml(card)}
         </div>`;
+    }
+
+    // The card's source/"Read more" note, shown only after answering or flipping.
+
+    function readMoreHtml(card) {
+      const raw = cleanStr(card && (card.note || card.extra));
+      if (!raw) return "";
+      const m = raw.match(/^read more\s*[:\-–]\s*(.*)$/i);
+      return `<div class="readmore"><span class="rm-label">📖 ${m ? "Read more" : "Note"}</span><span class="rm-text">${escaped(m ? m[1] : raw)}</span></div>`;
     }
 
     function scenarioPrompt(card, hint) {
@@ -1025,16 +1043,16 @@
       const body = view.flipped ? `
         <div class="flash back" id="flipCard">
           <div class="hint">Answer · tap to hide</div>
-          ${card.subtitle || card.year ? `<div class="muted">${escaped(card.subtitle || card.year)}${card.note || card.extra ? " · " + escaped(card.note || card.extra) : ""}</div>` : (card.note || card.extra ? `<div class="muted">${escaped(card.note || card.extra)}</div>` : "")}
+          ${card.subtitle || card.year ? `<div class="muted">${escaped(card.subtitle || card.year)}</div>` : ""}
           ${card.answer || card.purpose ? `<p>${escaped(card.answer || card.purpose)}</p>` : ""}
           ${(card.points || card.protections || []).length ? `<ul>${(card.points || card.protections || []).map((x) => `<li>${escaped(x)}</li>`).join("")}</ul>` : ""}
+          ${readMoreHtml(card)}
         </div>
       ` : `
         <div class="flash" id="flipCard">
           <div class="hint">Front · tap to flip</div>
           <h2>${escaped(card.front)}</h2>
           ${card.subtitle || card.year ? `<div class="subtitle">${escaped(card.subtitle || card.year)}</div>` : ""}
-          ${card.note || card.extra ? `<div class="muted" style="color:#c5d0dc;margin-top:8px">${escaped(card.note || card.extra)}</div>` : ""}
         </div>
       `;
       app.innerHTML = `
@@ -1112,7 +1130,7 @@
           </div>
           ${prompt}
           <div class="choices">${choiceHtml}</div>
-          ${locked && isScenario(card) ? feedbackBox(card, !!view.choices[view.picked].correct) : ""}
+          ${locked ? feedbackBox(card, !!view.choices[view.picked].correct) : ""}
           ${locked ? `<div class="row" style="justify-content:center"><button class="gold" id="nextQuiz">${view.index + 1 >= view.quizTotal ? "See results" : "Next"}</button></div>` : ""}
         </div>
       `;
@@ -1249,6 +1267,7 @@
             <div class="review-a ok">✓ Correct: ${escaped(right ? right.text : cardAnswerText(card))}</div>
             ${why ? `<div class="muted" style="margin-top:4px">${escaped(why)}</div>` : ""}
             ${pts.length ? `<ul class="muted" style="margin:4px 0 0;padding-left:18px">${pts.map((x) => `<li>${escaped(x)}</li>`).join("")}</ul>` : ""}
+            ${readMoreHtml(card)}
           </div>`;
       }).join("");
       app.innerHTML = `
@@ -1390,6 +1409,15 @@
             <button class="gold" id="matchAgain">Play again</button>
             <button class="secondary" id="matchBack">Back to folder</button>
           </div>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0 0 6px">The pairs</h3>
+          ${m.pairs.map((x) => { const c = state.cards.find((k) => k.id === x.id); return `
+            <div class="review-item">
+              <div class="review-q" style="margin-bottom:2px">${escaped(c ? c.front : x.term)}</div>
+              <div class="muted">${escaped(x.full)}</div>
+              ${c ? readMoreHtml(c) : ""}
+            </div>`; }).join("")}
         </div>`;
       document.getElementById("matchAgain").onclick = startMatch;
       document.getElementById("matchBack").onclick = backToFolder;
@@ -1482,7 +1510,7 @@
           <textarea id="cardFront" class="short">${escaped(card ? card.front : "")}</textarea>
           <label>Subtitle (optional)</label>
           <input id="cardSubtitle" type="text" value="${escaped(subtitle)}" placeholder="Year, unit, topic..." />
-          <label>Small note (optional)</label>
+          <label>Read more / source note (optional, shown after answering)</label>
           <input id="cardNote" type="text" value="${escaped(note)}" />
           <div id="basicFields">
             <label>Back (answer)</label>
