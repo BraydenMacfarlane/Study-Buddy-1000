@@ -464,8 +464,93 @@ async function testPlanner() {
   await B.ctx.close();
 }
 
+async function testResumeAndQuick() {
+  console.log('\n[9] Resume mid-session + Quick quiz');
+  const { ctx, p } = await page();
+  await p.goto(SAMPLES); await p.click('[data-open="deck-c202-ch01"]');
+  // Start full quiz, answer 2, Save & leave
+  await p.click('#quizBtn'); await skipNudge(p);
+  ok(/Save & leave/.test(await p.textContent('#exitStudy')), 'mid-quiz exit button says Save & leave');
+  const total = await S(p, () => view.quizTotal);
+  ok(total === 12, 'full quiz has 12 questions');
+  for (let i = 0; i < 2; i++) {
+    const idx = await S(p, () => view.choices.findIndex((c) => c.correct));
+    await p.click(`[data-choice="${idx}"]`); await p.click('#nextQuiz');
+  }
+  const mid = await S(p, () => ({ index: view.index, score: view.score, asked: view.asked, id: view.queue[view.index] }));
+  ok(mid.index === 2 && mid.score === 2, `after 2 correct: index=${mid.index} score=${mid.score}`);
+  await p.click('#exitStudy'); // Save & leave
+  ok((await S(p, () => view.page)) === 'folder', 'Save & leave returns to folder');
+  ok(await p.locator('#resumeRow [data-resume="quiz"]').count() === 1, 'folder shows Resume quiz button');
+  const resumeTxt = await p.textContent('[data-resume="quiz"]');
+  ok(/Resume quiz/.test(resumeTxt) && /Question 3 of 12/.test(resumeTxt) && /2 correct/.test(resumeTxt), 'Resume label shows progress: ' + resumeTxt.replace(/\s+/g, ' ').trim());
+  ok(await p.locator('#quickBtn').count() === 1, 'Quick quiz button present');
+  // Resume continues exactly
+  await p.click('[data-resume="quiz"]');
+  const resumed = await S(p, () => ({ page: view.page, index: view.index, score: view.score, asked: view.asked, id: view.queue[view.index], leave: document.getElementById('exitStudy').textContent }));
+  ok(resumed.page === 'quiz' && resumed.index === mid.index && resumed.score === mid.score && resumed.id === mid.id, 'resume restores exact quiz state');
+  ok(/Save & leave/.test(resumed.leave), 'resumed mid-quiz still shows Save & leave');
+  // Finish the quiz -> resume clears
+  for (let i = resumed.index; i < total; i++) {
+    const idx = await S(p, () => view.choices.findIndex((c) => c.correct));
+    await p.click(`[data-choice="${idx}"]`); await p.click('#nextQuiz');
+  }
+  ok(/Quiz complete/.test(await p.textContent('#app')), 'quiz completed');
+  await p.click('#backDone');
+  ok(await p.locator('[data-resume="quiz"]').count() === 0, 'completing clears Resume quiz');
+  // Quick quiz length
+  await p.click('#quickBtn');
+  const qn = await S(p, () => ({ total: view.quizTotal, kind: view.quizKind, full: view.quizFull }));
+  ok(qn.kind === 'quick' && qn.total === 10 && qn.full === false, `quick quiz: kind=quick, length=${qn.total}, not full`);
+  ok(/Save & leave/.test(await p.textContent('#exitStudy')), 'quick quiz mid: Save & leave');
+  // leave mid-quick, resume, complete
+  const qi = await S(p, () => view.choices.findIndex((c) => c.correct));
+  await p.click(`[data-choice="${qi}"]`); await p.click('#nextQuiz');
+  await p.click('#exitStudy');
+  ok(await p.locator('[data-resume="quick"]').count() === 1 && /Question 2 of 10/.test(await p.textContent('[data-resume="quick"]')), 'Resume quick shows after leave');
+  await p.click('[data-resume="quick"]');
+  for (let i = await S(p, () => view.index); i < 10; i++) {
+    const idx = await S(p, () => view.choices.findIndex((c) => c.correct));
+    await p.click(`[data-choice="${idx}"]`); await p.click('#nextQuiz');
+  }
+  const results = await p.textContent('#app');
+  ok(/Quiz complete/.test(results) && /Quick · 10 cards/.test(results) && /Retake quick/.test(results), 'quick results note Quick · N cards + Retake quick');
+  // Quick does not count as full quiz for path (quizBest unchanged if we never set it from quick)
+  const qb = await S(p, () => folderById('deck-c202-ch01').quizBest);
+  // We finished a full quiz earlier at 100%, so quizBest should be 100; quick must not wipe it
+  ok(qb === 100, 'quick quiz does not replace quizBest from full quiz (still ' + qb + ')');
+  await p.click('#backDone');
+  ok(await p.locator('[data-resume="quick"]').count() === 0, 'completing quick clears resume');
+  // Starting fresh with a saved session asks to discard
+  await p.click('#quizBtn');
+  for (let i = 0; i < 1; i++) { const idx = await S(p, () => view.choices.findIndex((c) => c.correct)); await p.click(`[data-choice="${idx}"]`); await p.click('#nextQuiz'); }
+  await p.click('#exitStudy');
+  p.dialogAnswers = [false]; p.dialogLog.length = 0;
+  await p.click('#quizBtn');
+  ok(p.dialogLog.some((m) => /discard/i.test(m)) && await p.locator('[data-resume="quiz"]').count() === 1, 'Start fresh with saved session asks discard; cancel keeps resume');
+  p.dialogAnswers = [true];
+  await p.click('#quizBtn');
+  ok((await S(p, () => view.page + ':' + view.index + ':' + view.quizKind)) === 'quiz:0:full' && await p.locator('[data-resume="quiz"]').count() === 0, 'confirm discard starts fresh full quiz and clears resume');
+  await p.click('#exitStudy');
+  // Export includes sessions
+  await p.click('#quizBtn');
+  const idx2 = await S(p, () => view.choices.findIndex((c) => c.correct));
+  await p.click(`[data-choice="${idx2}"]`); await p.click('#nextQuiz');
+  await p.click('#exitStudy');
+  await p.click('#backHome');
+  const [dl] = await Promise.all([p.waitForEvent('download'), p.click('#exportBtn')]);
+  const bp = path.join(T, 'backup-sessions.json'); await dl.saveAs(bp);
+  const backup = JSON.parse(fs.readFileSync(bp, 'utf8'));
+  const sk = Object.keys(backup.sessions || {}).find((k) => k.endsWith(':quiz'));
+  ok(sk && backup.sessions[sk].index === 1, 'Export backup includes sessions keyed by folder:mode');
+  await hideToast(p);
+  await p.click('[data-open="deck-c202-ch01"]');
+  await p.screenshot({ path: SHOTS + '/folder-resume-quick.png' });
+  await ctx.close();
+}
+
 async function testReal(raw) {
-  console.log('\n[9] Real inbox decks in dist/flashcards.html');
+  console.log('\n[10] Real inbox decks in dist/flashcards.html');
   const decks = fs.readdirSync(ROOT + '/decks/inbox').filter((f) => f.endsWith('.json')).sort().map((f) => JSON.parse(fs.readFileSync(ROOT + '/decks/inbox/' + f, 'utf8')));
   const d1 = decks.find((d) => d.id === 'c202-ch01'), d2 = decks.find((d) => d.id === 'c202-ch02');
   ok(d1 && d2, `inbox has ${decks.map((d) => d.id + ' (' + d.cards.length + ' cards)').join(', ')}`);
@@ -553,7 +638,7 @@ async function testReal(raw) {
 }
 
 async function screenshots() {
-  console.log('\n[10] Screenshots');
+  console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
   for (const [tag, opt] of [['desktop', { viewport: { width: 1280, height: 800 } }], ['phone', { device: 'iPhone 13' }]]) {
     // samples: grouping/locked, scenario, boss results, match
@@ -622,6 +707,7 @@ async function screenshots() {
     await testBundled();
     await testPath();
     await testPlanner();
+    await testResumeAndQuick();
     await testReal(raw);
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
