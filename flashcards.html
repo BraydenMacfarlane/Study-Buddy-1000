@@ -199,6 +199,20 @@
       min-height: 180px;
       cursor: default;
     }
+    textarea.short { min-height: 64px; }
+    .flash.scenario { align-items: stretch; text-align: left; justify-content: center; }
+    .flash.scenario .hint { text-align: center; }
+    .scenario-text { font-size: 19px; line-height: 1.5; white-space: pre-line; margin-top: 18px; }
+    .explain {
+      border-radius: 12px; padding: 12px 14px; line-height: 1.45; border: 1px solid var(--line); background: #fff;
+    }
+    .explain.ok { border-color: var(--ok); background: #eef7f1; }
+    .explain.bad { border-color: var(--bad); background: #fbf1f1; }
+    .explain.ok strong { color: var(--ok); }
+    .explain.bad strong { color: var(--bad); }
+    .explain p { margin: 6px 0 0; }
+    .pill.scen { background: var(--navy); color: #fff; }
+    button { touch-action: manipulation; }
     #toast {
       position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 30px);
       background: var(--navy-2); color: #fff; border-left: 4px solid var(--gold);
@@ -632,12 +646,14 @@
       const list = all.map((c) => {
         const p = prog(c.id);
         const tag = p.retired ? "mastered" : (p.streak ? `${p.streak} in a row` : "active");
+        const scen = isScenario(c);
         return `
           <div class="list-item">
             <div>
-              <strong>${escaped(c.front)}</strong>
+              <strong>${escaped(scen ? truncate(c.front, 140) : c.front)}</strong>
+              ${scen ? `<span class="pill scen">scenario</span>` : ""}
               <span class="pill">${tag}</span>
-              <div class="muted">${escaped(c.subtitle || c.year || c.note || c.extra || "")}</div>
+              <div class="muted">${escaped(c.subtitle || c.year || c.note || c.extra || (scen ? c.choices.length + " choices" : ""))}</div>
             </div>
             <div class="row">
               <button class="secondary" data-edit="${c.id}">Edit</button>
@@ -696,27 +712,54 @@
       view.queue = queue.map((c) => c.id);
       view.index = 0;
       view.flipped = false;
+      view.studyPicked = null;
       render();
     }
 
     function cardAnswerText(c) {
+      if (isScenario(c)) return cleanStr(c.answer) || cleanStr(c.choices[c.correct]) || cleanStr(c.explanation);
       const body = String(c.answer || c.purpose || "").trim();
       const pts = c.points || c.protections || [];
       if (body) return body;
       return pts.join("; ");
     }
 
-    function makeChoices(card) {
+    function truncate(s, n) {
+      const t = cleanStr(s).replace(/\s+/g, " ");
+      if (t.length <= n) return t;
+      const cut = t.slice(0, n);
+      const sp = cut.lastIndexOf(" ");
+      return (sp > n * 0.6 ? cut.slice(0, sp) : cut).replace(/[\s,;:.\-–]+$/, "") + "…";
+    }
+
+    // Wrong-answer pool for a regular card: other regular cards in the folder, topped up from
+    // the same course if the folder alone is too small. Scenario cards never feed this pool.
+
+    function distractorPool(card) {
       const correct = cardAnswerText(card);
-      const pool = cardsIn(view.folderId)
-        .filter((c) => c.id !== card.id)
-        .map(cardAnswerText)
-        .filter((text) => text && text !== correct);
+      const folder = folderById(card.folderId);
       const unique = [];
-      pool.forEach((text) => {
-        if (!unique.includes(text)) unique.push(text);
+      const add = (cards) => cards.forEach((c) => {
+        if (c.id === card.id || isScenario(c)) return;
+        const text = cardAnswerText(c);
+        if (text && text !== correct && !unique.includes(text)) unique.push(text);
       });
-      const wrong = shuffle(unique).slice(0, 3);
+      add(cardsIn(card.folderId));
+      if (unique.length < 3 && folder && folder.course) {
+        const extra = [];
+        state.folders.filter((f) => f.id !== folder.id && f.course === folder.course).forEach((f) => extra.push(...cardsIn(f.id)));
+        add(shuffle(extra));
+      }
+      return unique;
+    }
+
+    function makeChoices(card) {
+      if (isScenario(card)) {
+        // Keep the author's order (Legal / Illegal / Depends style sets read best as written).
+        return card.choices.map((text, i) => ({ text, correct: i === Number(card.correct) }));
+      }
+      const correct = cardAnswerText(card);
+      const wrong = shuffle(distractorPool(card)).slice(0, 3);
       return shuffle([{ text: correct, correct: true }].concat(wrong.map((text) => ({ text, correct: false }))));
     }
 
@@ -724,13 +767,16 @@
       const source = ids && ids.length ? ids : cardsIn(view.folderId).map((c) => c.id);
       const queue = shuffle(source.map((id) => state.cards.find((c) => c.id === id)).filter(Boolean));
       if (!queue.length) return;
-      if (cardsIn(view.folderId).length < 2) {
-        alert("Add at least 2 cards in this folder so the quiz can invent wrong answers.");
+      if (queue.some((c) => !isScenario(c) && distractorPool(c).length < 1)) {
+        alert("Add at least 2 regular (non-scenario) cards in this folder so the quiz can invent wrong answers.");
         return;
       }
       view.page = "quiz";
       view.queue = queue.map((c) => c.id);
-      if (!ids) view.quizSource = view.queue.slice();
+      if (!ids || view.quizFolder !== view.folderId) {
+        view.quizSource = cardsIn(view.folderId).map((c) => c.id);
+        view.quizFolder = view.folderId;
+      }
       view.quizTotal = view.queue.length;
       view.index = 0;
       view.picked = null;
@@ -747,18 +793,38 @@
       return state.cards.find((c) => c.id === id);
     }
 
+    function feedbackBox(card, ok) {
+      const correctText = isScenario(card) ? card.choices[card.correct] : cardAnswerText(card);
+      const why = isScenario(card) ? (cleanStr(card.explanation) || cleanStr(card.answer)) : "";
+      return `
+        <div class="explain ${ok ? "ok" : "bad"}" id="explainBox">
+          <strong>${ok ? "Correct" : "Not quite"}</strong>${ok ? "" : ` · Best answer: <em>${escaped(correctText)}</em>`}
+          ${why ? `<p>${escaped(why)}</p>` : ""}
+        </div>`;
+    }
+
+    function scenarioPrompt(card, hint) {
+      return `
+        <div class="flash quiz scenario">
+          <div class="hint">${escaped(hint)}</div>
+          ${card.subtitle ? `<div class="subtitle" style="font-size:15px;margin-top:14px">${escaped(card.subtitle)}</div>` : ""}
+          <div class="scenario-text">${escaped(card.front)}</div>
+        </div>`;
+    }
+
     function renderStudy() {
       const folder = folderById(view.folderId);
       const all = cardsIn(view.folderId);
       const left = activeCards(view.folderId).length;
       const retired = all.length - left;
+      const pendingScenario = view.studyPicked !== null && view.studyPicked !== undefined;
       headerSub.textContent = folder ? folder.name : "Study";
       headerActions.innerHTML = `
         <button class="secondary" id="exitStudy">Back to folder</button>
         <button class="secondary" id="resetStudy">Reset progress</button>
       `;
 
-      if (!view.queue.length || left === 0) {
+      if ((!view.queue.length || left === 0) && !pendingScenario) {
         app.innerHTML = `
           <div class="empty card">
             <h2>This folder is clear</h2>
@@ -779,6 +845,49 @@
       if (!card) { startStudy(); return; }
       const p = prog(card.id);
       const pct = all.length ? Math.round((retired / all.length) * 100) : 0;
+      const top = `
+          <div>
+            <div class="row" style="justify-content:space-between">
+              <span class="muted">Card ${view.index + 1} of ${view.queue.length} in this shuffle</span>
+              <span class="muted">${left} still in the mix · streak ${p.streak}/${RETIRE_AFTER}</span>
+            </div>
+            <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
+          </div>`;
+
+      if (isScenario(card)) {
+        const locked = pendingScenario;
+        const choiceHtml = card.choices.map((text, i) => {
+          let cls = "choice";
+          if (locked && i === Number(card.correct)) cls += " correct";
+          else if (locked && i === view.studyPicked) cls += " wrong";
+          else if (locked) cls += " idle";
+          return `<button class="${cls}" data-spick="${i}" ${locked ? "disabled" : ""}>${escaped(text)}</button>`;
+        }).join("");
+        app.innerHTML = `
+          <div class="study-wrap">
+            ${top}
+            ${scenarioPrompt(card, "Scenario · choose the best answer")}
+            <div class="choices">${choiceHtml}</div>
+            ${locked ? feedbackBox(card, view.studyPicked === Number(card.correct)) : ""}
+            <div class="row" style="justify-content:center">
+              ${locked ? `<button class="gold" id="nextStudy">Next</button>` : `<span class="muted">Pick an answer, it's graded automatically</span>`}
+            </div>
+          </div>`;
+        document.getElementById("exitStudy").onclick = backToFolder;
+        document.getElementById("resetStudy").onclick = resetAndStay;
+        app.querySelectorAll("[data-spick]").forEach((btn) => {
+          btn.onclick = () => {
+            if (view.studyPicked !== null && view.studyPicked !== undefined) return;
+            view.studyPicked = Number(btn.dataset.spick);
+            markResult(view.studyPicked === Number(card.correct));
+            render();
+          };
+        });
+        const next = document.getElementById("nextStudy");
+        if (next) next.onclick = () => { view.studyPicked = null; advanceStudy(); };
+        return;
+      }
+
       const body = view.flipped ? `
         <div class="flash back" id="flipCard">
           <div class="hint">Answer · tap to hide</div>
@@ -796,13 +905,7 @@
       `;
       app.innerHTML = `
         <div class="study-wrap">
-          <div>
-            <div class="row" style="justify-content:space-between">
-              <span class="muted">Card ${view.index + 1} of ${view.queue.length} in this shuffle</span>
-              <span class="muted">${left} still in the mix · streak ${p.streak}/${RETIRE_AFTER}</span>
-            </div>
-            <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
-          </div>
+          ${top}
           ${body}
           <div class="row" style="justify-content:center">
             <button class="secondary" id="flipBtn">${view.flipped ? "Hide answer" : "Show answer"}</button>
@@ -841,7 +944,7 @@
             </div>
           </div>`;
         document.getElementById("quizAgain").onclick = () => startQuiz(view.quizSource);
-        document.getElementById("quizMissed").onclick = () => startQuiz(view.missed);
+        document.getElementById("quizMissed").onclick = () => startQuiz(view.missed.slice());
         document.getElementById("backDone").onclick = backToFolder;
         return;
       }
@@ -857,6 +960,12 @@
         return `<button class="${cls}" data-choice="${i}" ${locked ? "disabled" : ""}>${escaped(choice.text)}</button>`;
       }).join("");
       const pct = view.quizTotal ? Math.round((view.asked / view.quizTotal) * 100) : 0;
+      const prompt = isScenario(card) ? scenarioPrompt(card, "Scenario · choose the best answer") : `
+          <div class="flash quiz">
+            <div class="hint">Choose the best answer</div>
+            <h2>${escaped(card.front)}</h2>
+            ${card.subtitle || card.year ? `<div class="subtitle">${escaped(card.subtitle || card.year)}</div>` : ""}
+          </div>`;
 
       app.innerHTML = `
         <div class="study-wrap">
@@ -867,17 +976,15 @@
             </div>
             <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
           </div>
-          <div class="flash quiz">
-            <div class="hint">Choose the best answer</div>
-            <h2>${escaped(card.front)}</h2>
-            ${card.subtitle || card.year ? `<div class="subtitle">${escaped(card.subtitle || card.year)}</div>` : ""}
-          </div>
+          ${prompt}
           <div class="choices">${choiceHtml}</div>
+          ${locked && isScenario(card) ? feedbackBox(card, !!view.choices[view.picked].correct) : ""}
           ${locked ? `<div class="row" style="justify-content:center"><button class="gold" id="nextQuiz">${view.index + 1 >= view.quizTotal ? "See results" : "Next"}</button></div>` : ""}
         </div>
       `;
       app.querySelectorAll("[data-choice]").forEach((btn) => {
         btn.onclick = () => {
+          if (view.picked !== null) return;
           const i = Number(btn.dataset.choice);
           view.picked = i;
           view.asked += 1;
@@ -922,6 +1029,10 @@
 
     function grade(correct) {
       markResult(correct);
+      advanceStudy();
+    }
+
+    function advanceStudy() {
       const remainingIds = view.queue.filter((id, i) => i !== view.index && !prog(id).retired);
       if (!remainingIds.length) {
         view.queue = shuffle(activeCards(view.folderId)).map((c) => c.id);
@@ -931,6 +1042,7 @@
         view.index = view.index >= view.queue.length ? 0 : view.index;
       }
       view.flipped = false;
+      view.studyPicked = null;
       render();
     }
 
@@ -970,23 +1082,43 @@
     }
 
     function openCardForm(card) {
+      const scen = !!(card && isScenario(card));
       const subtitle = card ? (card.subtitle || card.year || "") : "";
       const note = card ? (card.note || card.extra || "") : "";
       const answer = card ? (card.answer || card.purpose || "") : "";
       const points = card ? (card.points || card.protections || []) : [];
+      const choices = scen ? card.choices : [];
       modal.innerHTML = `
         <div class="dialog-head">${card ? "Edit card" : "New card"}</div>
         <div class="dialog-body">
-          <label>Front (prompt or question)</label>
-          <input id="cardFront" type="text" value="${escaped(card ? card.front : "")}" />
+          <label for="cardType">Card type</label>
+          <select id="cardType">
+            <option value="basic" ${scen ? "" : "selected"}>Flash card (flip to see answer)</option>
+            <option value="scenario" ${scen ? "selected" : ""}>Scenario (pick the right answer)</option>
+          </select>
+          <label id="frontLabel" for="cardFront">Front (prompt or question)</label>
+          <textarea id="cardFront" class="short">${escaped(card ? card.front : "")}</textarea>
           <label>Subtitle (optional)</label>
           <input id="cardSubtitle" type="text" value="${escaped(subtitle)}" placeholder="Year, unit, topic..." />
           <label>Small note (optional)</label>
           <input id="cardNote" type="text" value="${escaped(note)}" />
-          <label>Back (answer)</label>
-          <textarea id="cardAnswer">${escaped(answer)}</textarea>
-          <label>Extra points on the back (optional, one per line)</label>
-          <textarea id="cardPoints">${escaped(points.join("\n"))}</textarea>
+          <div id="basicFields">
+            <label>Back (answer)</label>
+            <textarea id="cardAnswer">${escaped(answer)}</textarea>
+            <label>Extra points on the back (optional, one per line)</label>
+            <textarea id="cardPoints">${escaped(points.join("\n"))}</textarea>
+          </div>
+          <div id="scenarioFields">
+            <label>Choices (one per line, 2–5)</label>
+            <textarea id="cardChoices" class="short" placeholder="Legal&#10;Illegal&#10;Depends">${escaped(choices.join("\n"))}</textarea>
+            <label for="cardCorrect">Correct choice</label>
+            <select id="cardCorrect"></select>
+            <label>Explanation (shown after answering)</label>
+            <textarea id="cardExplanation" class="short">${escaped(scen ? card.explanation || "" : "")}</textarea>
+            <label>Short answer (optional, used in reviews)</label>
+            <input id="cardScenarioAnswer" type="text" value="${escaped(scen ? card.answer || "" : "")}" />
+          </div>
+          <div id="formError" class="muted" style="color:var(--bad);margin-top:8px"></div>
           <div class="row" style="justify-content:flex-end;margin-top:14px">
             <button class="secondary" id="cancelModal">Cancel</button>
             <button class="gold" id="saveCard">Save card</button>
@@ -994,17 +1126,54 @@
         </div>
       `;
       modal.showModal();
-      document.getElementById("cancelModal").onclick = () => modal.close();
-      document.getElementById("saveCard").onclick = () => {
-        const front = document.getElementById("cardFront").value.trim();
-        const answer = document.getElementById("cardAnswer").value.trim();
-        const points = document.getElementById("cardPoints").value.split("\n").map((s) => s.trim()).filter(Boolean);
-        const subtitle = document.getElementById("cardSubtitle").value.trim();
-        const note = document.getElementById("cardNote").value.trim();
-        if (!front || !answer) return;
-        const payload = { front, subtitle, note, answer, points, year: subtitle, extra: note, purpose: answer, protections: points };
-        if (card) Object.assign(card, payload);
-        else state.cards.push({ id: uid(), folderId: view.folderId, ...payload });
+      const $ = (id) => document.getElementById(id);
+      const choiceLines = () => $("cardChoices").value.split("\n").map((s) => s.trim()).filter(Boolean);
+      let selected = scen ? Number(card.correct) : 0;
+      const fillCorrect = () => {
+        const lines = choiceLines();
+        if (selected >= lines.length) selected = 0;
+        $("cardCorrect").innerHTML = lines.length
+          ? lines.map((t, i) => `<option value="${i}" ${i === selected ? "selected" : ""}>${i + 1}. ${escaped(truncate(t, 60))}</option>`).join("")
+          : `<option value="0">Type the choices above first</option>`;
+      };
+      const syncType = () => {
+        const isScen = $("cardType").value === "scenario";
+        $("basicFields").style.display = isScen ? "none" : "";
+        $("scenarioFields").style.display = isScen ? "" : "none";
+        $("frontLabel").textContent = isScen ? "Scenario (what happens?)" : "Front (prompt or question)";
+      };
+      fillCorrect();
+      syncType();
+      $("cardType").onchange = syncType;
+      $("cardChoices").oninput = fillCorrect;
+      $("cardCorrect").onchange = () => { selected = Number($("cardCorrect").value); };
+      $("cancelModal").onclick = () => modal.close();
+      $("saveCard").onclick = () => {
+        const err = (m) => { $("formError").textContent = m; };
+        const front = $("cardFront").value.trim();
+        const subtitle = $("cardSubtitle").value.trim();
+        const note = $("cardNote").value.trim();
+        let payload;
+        if ($("cardType").value === "scenario") {
+          const lines = choiceLines();
+          const correct = Number($("cardCorrect").value);
+          if (!front) return err("Write the scenario first.");
+          if (lines.length < 2 || lines.length > 5) return err("A scenario needs 2 to 5 choices, one per line.");
+          if (!Number.isInteger(correct) || correct < 0 || correct >= lines.length) return err("Pick the correct choice.");
+          payload = { type: "scenario", front, subtitle, note, choices: lines, correct, explanation: $("cardExplanation").value.trim(), answer: $("cardScenarioAnswer").value.trim(), points: [] };
+        } else {
+          const answer = $("cardAnswer").value.trim();
+          const points = $("cardPoints").value.split("\n").map((s) => s.trim()).filter(Boolean);
+          if (!front || !answer) return err("A flash card needs a front and an answer.");
+          payload = { front, subtitle, note, answer, points, year: subtitle, extra: note, purpose: answer, protections: points };
+        }
+        if (card) {
+          if (payload.type === "scenario") { delete card.year; delete card.extra; delete card.purpose; delete card.protections; }
+          else { delete card.type; delete card.choices; delete card.correct; delete card.explanation; }
+          Object.assign(card, payload);
+        } else {
+          state.cards.push({ id: uid(), folderId: view.folderId, ...payload });
+        }
         save();
         modal.close();
         render();
