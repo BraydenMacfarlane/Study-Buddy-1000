@@ -243,6 +243,10 @@
       { front: "Patient Protection and Affordable Care Act (ACA)", year: "2010", purpose: "Was created to make healthcare more affordable and more easily accessible to a wider range of Americans.", protections: ["Businesses with fewer than 50 full-time employees do not have to provide health insurance for employees", "Businesses with fewer than 25 employees may receive tax breaks for complying with the ACA", "Expanded access to coverage and consumer protections in the individual and small-group markets"] }
     ];
 
+    // Decks baked into this file by build.sh from decks/inbox/*.json. Keep the marker comments intact.
+    const BUNDLED_DECKS = /*BUNDLED_DECKS_START*/[]/*BUNDLED_DECKS_END*/;
+    const BUILD_INFO = /*BUILD_INFO_START*/null/*BUILD_INFO_END*/;
+
     const uid = () => crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
 
     function seed() {
@@ -516,7 +520,35 @@
         (sum.unchanged ? ` · ${sum.unchanged} already up to date` : "") + (sum.skipped ? ` · ${sum.skipped} skipped` : "");
     }
 
+    function hashString(s) {
+      let h = 0x811c9dc5;
+      for (let i = 0; i < s.length; i++) {
+        h ^= s.charCodeAt(i);
+        h = Math.imul(h, 0x01000193) >>> 0;
+      }
+      return h.toString(16).padStart(8, "0");
+    }
+
+    // Merge decks shipped inside this file. Each deck is applied once per content version
+    // (hash stored in state.bundled), so a deck the user deleted only comes back if it changed.
+    function applyBundledDecks() {
+      const sum = newSummary();
+      (Array.isArray(BUNDLED_DECKS) ? BUNDLED_DECKS : []).forEach((deck) => {
+        if (!deck || typeof deck !== "object" || !Array.isArray(deck.cards)) return;
+        const key = cleanStr(deck.id) || cleanStr(deck.folder);
+        if (!key) return;
+        const h = hashString(JSON.stringify(deck));
+        if (state.bundled[key] === h) return;
+        mergeDeck(deck, sum);
+        state.bundled[key] = h;
+      });
+      if (sum.decks.length) save();
+      return sum;
+    }
+
     let state = load();
+    let bundledSummary = null;
+    try { bundledSummary = applyBundledDecks(); } catch (err) { console.warn("Bundled decks could not be applied", err); }
     let view = { page: "home", folderId: null, queue: [], index: 0, flipped: false, choices: [], picked: null, score: 0, asked: 0, run: 0, missed: [], quizTotal: 0, quizSource: [] };
 
     const app = document.getElementById("app");
@@ -571,7 +603,7 @@
       }).join("");
       app.innerHTML = `
         <div class="grid">${folders || `<div class="empty">No folders yet.</div>`}</div>
-        <footer class="note">Cards are saved in this browser only. Export a backup if you study on more than one computer.</footer>
+        <footer class="note">Cards are saved in this browser only. Export a backup if you study on more than one computer.${BUILD_INFO && BUILD_INFO.decks ? ` · Includes ${BUILD_INFO.decks} built-in deck${BUILD_INFO.decks === 1 ? "" : "s"} (updated ${escaped(BUILD_INFO.date)})` : ""}</footer>
       `;
       document.getElementById("newFolderBtn").onclick = () => openFolderForm();
       document.getElementById("exportBtn").onclick = exportData;
@@ -1044,6 +1076,7 @@
       }
       if (!confirm("Replace ALL folders, cards and progress in this browser with this backup?\n\nThis can't be undone. Tip: Export first if you might want your current data.")) return;
       state = migrate(JSON.parse(JSON.stringify(data)));
+      applyBundledDecks();
       save();
       modal.close();
       view.page = "home";
@@ -1087,6 +1120,9 @@
       if (app) app.innerHTML = "<div class=\"card\"><strong>Something broke.</strong><div class=\"muted\">"+String(msg)+"</div></div>";
     };
     try { render(); } catch (err) { window.onerror(err && err.message ? err.message : err); }
+    if (bundledSummary && (bundledSummary.foldersAdded || bundledSummary.cardsAdded || bundledSummary.cardsUpdated)) {
+      toast(`New study material: ${bundledSummary.decks.join(", ")} (${bundledSummary.cardsAdded} new, ${bundledSummary.cardsUpdated} updated cards)`);
+    }
   </script>
 </body>
 </html>

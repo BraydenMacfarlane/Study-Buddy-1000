@@ -1,0 +1,20 @@
+{
+  "id": "c202-ch02",
+  "folder": "C202 Ch 2: The Legal Environment of HR",
+  "course": "C202",
+  "order": 2,
+  "cards": [
+    { "id": "c202-ch02-001", "front": "Equal employment opportunity (EEO)", "answer": "The condition in which all individuals have an equal chance for employment regardless of race, color, religion, sex, age, disability, or national origin." },
+    { "id": "c202-ch02-002", "front": "Disparate treatment", "answer": "Intentionally treating people differently because of a protected characteristic.", "note": "Intentional discrimination" },
+    { "id": "c202-ch02-003", "front": "Disparate impact", "answer": "A neutral-looking employment practice that disproportionately excludes a protected group and is not job-related.", "points": ["Four-fifths (80%) rule is a common screen", "Employer must show business necessity"] },
+    { "id": "c202-ch02-004", "front": "Bona fide occupational qualification (BFOQ)", "answer": "A necessary, not merely preferred, characteristic for performing a job that can legally justify a protected-class requirement (never race)." },
+    { "id": "c202-ch02-005", "front": "Reasonable accommodation", "answer": "An employer's adjustment to a job or workplace that lets a qualified person with a disability or religious need perform the work, unless it causes undue hardship." },
+    { "id": "c202-ch02-006", "front": "Sexual harassment: quid pro quo", "answer": "Job benefits or decisions are made conditional on submitting to sexual advances." },
+    { "id": "c202-ch02-007", "front": "Hostile work environment", "answer": "Unwelcome conduct based on a protected characteristic that is severe or pervasive enough to create an intimidating or offensive workplace." },
+    { "id": "c202-ch02-008", "front": "Retaliation", "answer": "Punishing an employee for engaging in protected activity such as filing a discrimination complaint or participating in an investigation.", "subtitle": "Most common EEOC charge" },
+    { "id": "c202-ch02-014", "type": "scenario", "front": "A warehouse posts a job requiring applicants to lift 50 lbs. The job actually requires lifting boxes of up to 50 lbs several times per hour.", "choices": ["Legal", "Illegal", "Depends"], "correct": 0, "explanation": "A physical requirement that is genuinely job-related and consistent with business necessity is legal, even if it screens out some applicants." },
+    { "id": "c202-ch02-015", "type": "scenario", "front": "A manager tells a qualified 58-year-old applicant they are looking for someone with 'more energy who will stay with us for decades' and hires a 30-year-old instead.", "choices": ["Legal", "Illegal", "Depends"], "correct": 1, "explanation": "The ADEA protects workers 40 and older. Comments tying the decision to age are evidence of disparate treatment." },
+    { "id": "c202-ch02-016", "type": "scenario", "front": "An employee who filed an EEOC complaint is moved to the night shift two weeks later, with no business reason given.", "choices": ["Legal", "Illegal", "Depends"], "correct": 1, "explanation": "An adverse action shortly after protected activity, without a legitimate reason, is classic retaliation." },
+    { "id": "c202-ch02-017", "type": "scenario", "front": "A restaurant requires all servers to be under 5'10\" because the manager prefers how shorter staff look in uniforms. Most women pass and many men do not.\n\nWhat kind of issue is this most likely?", "choices": ["Disparate impact without business necessity", "A valid BFOQ", "Quid pro quo harassment", "Reasonable accommodation"], "correct": 0, "explanation": "A neutral rule that disproportionately excludes one sex, without job-related justification, creates disparate impact liability." }
+  ]
+}
