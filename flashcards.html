@@ -213,6 +213,32 @@
     .explain.bad strong { color: var(--bad); }
     .explain p { margin: 6px 0 0; }
     .pill.scen { background: var(--navy); color: #fff; }
+    .plan-banner { margin-bottom: 18px; border-left: 5px solid var(--navy); }
+    .status-pill { display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; background: #efe7d4; color: var(--navy-2); white-space: nowrap; }
+    .status-pill.on, .status-pill.passed { background: #e5f4ea; color: var(--ok); }
+    .status-pill.ahead { background: #dfeaf7; color: var(--navy); }
+    .status-pill.behind, .status-pill.overdue { background: #f8eaea; color: var(--bad); }
+    .status-pill.today, .status-pill.current { background: var(--gold); color: var(--navy-2); }
+    .status-pill.soon { background: #eceff3; color: var(--muted); font-weight: 500; }
+    .status-pill.ms { background: var(--navy); color: #fff; }
+    .pace-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+    .pace { position: relative; display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 12px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; background: #fff; font-weight: 400; }
+    .pace.sel { border-color: var(--gold); box-shadow: inset 0 0 0 2px var(--gold); background: #fffaf0; }
+    .pace input[type=radio] { position: absolute; opacity: 0; pointer-events: none; }
+    .pace-title { font-weight: 700; color: var(--navy); font-size: 15px; }
+    .pace .muted { font-size: 12px; }
+    input[type=date] { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; background: #fff; font: inherit; }
+    .plan-list { margin-top: 10px; }
+    .plan-week { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8a6d2b; margin: 14px 0 4px; }
+    .plan-row { display: grid; grid-template-columns: 52px 1fr 110px 100px; gap: 8px; align-items: center; padding: 8px 6px; border-bottom: 1px solid var(--line); font-size: 14px; }
+    .plan-row.cur { background: #fffaf0; border-radius: 8px; }
+    .plan-row.milestone { background: #f4f6f9; border-radius: 8px; }
+    .plan-ch { font-weight: 700; color: var(--navy); }
+    .plan-title a { color: var(--navy); }
+    .plan-due { color: var(--muted); font-size: 13px; }
+    .plan-state { text-align: right; }
+    @media (max-width: 860px) { .pace-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .plan-row { grid-template-columns: 44px 1fr 86px; } .plan-state { grid-column: 2 / 4; text-align: left; } }
     .path-head { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; margin-bottom: 10px; }
     .path-head strong { color: var(--navy); font-size: 16px; }
     .path-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
@@ -410,6 +436,12 @@
       out.cards = Array.isArray(out.cards) ? out.cards.filter((c) => c && typeof c === "object") : [];
       out.progress = out.progress && typeof out.progress === "object" && !Array.isArray(out.progress) ? out.progress : {};
       out.bundled = out.bundled && typeof out.bundled === "object" && !Array.isArray(out.bundled) ? out.bundled : {};
+      out.plans = out.plans && typeof out.plans === "object" && !Array.isArray(out.plans) ? out.plans : {};
+      Object.keys(out.plans).forEach((k) => {
+        const p = out.plans[k];
+        if (!p || typeof p !== "object" || !Array.isArray(p.schedule)) { delete out.plans[k]; return; }
+        if (!Array.isArray(p.history)) p.history = [];
+      });
       out.folders.forEach((f) => {
         if (f.id === undefined || f.id === null || f.id === "") f.id = uid();
         f.id = String(f.id);
@@ -612,6 +644,7 @@
         }
         folderMap[f.id] = local.id;
       });
+      Object.keys(incoming.plans || {}).forEach((k) => { if (!state.plans[k]) state.plans[k] = incoming.plans[k]; });
       incoming.cards.forEach((c) => {
         const folderId = folderMap[c.folderId] !== undefined ? folderMap[c.folderId] : c.folderId;
         const inProg = incoming.progress[c.id];
@@ -726,6 +759,7 @@
       else if (view.page === "boss") renderBoss();
       else if (view.page === "match") renderMatch();
       else if (view.page === "guide") renderGuide();
+      else if (view.page === "plan") renderPlan();
       else renderStudy();
     }
 
@@ -795,6 +829,7 @@
     function renderHome() {
       headerSub.textContent = "Pick a folder or make a new set";
       headerActions.innerHTML = `
+        ${plannableCourses().length ? `<button class="secondary" id="planBtn">Plan</button>` : ""}
         <button class="secondary" id="exportBtn">Export</button>
         <button class="secondary" id="importBtn">Import</button>
         <button class="gold" id="newFolderBtn">New folder</button>
@@ -820,11 +855,17 @@
             <div class="grid">${others.map(folderCardHtml).join("")}</div>
           </section>`;
       }
+      const banners = plannableCourses().map(planBannerHtml).join("");
       app.innerHTML = `
+        ${banners}
         ${html || `<div class="empty">No folders yet.</div>`}
         <footer class="note">Cards are saved in this browser only. Export a backup if you study on more than one computer.${BUILD_INFO && BUILD_INFO.decks ? ` · Includes ${BUILD_INFO.decks} built-in deck${BUILD_INFO.decks === 1 ? "" : "s"} (updated ${escaped(BUILD_INFO.date)})` : ""}</footer>
       `;
       document.getElementById("newFolderBtn").onclick = () => openFolderForm();
+      const pb = document.getElementById("planBtn");
+      if (pb) pb.onclick = () => { view.page = "plan"; render(); };
+      app.querySelectorAll("[data-plan-open]").forEach((b) => { b.onclick = () => { view.planCourse = b.dataset.planOpen; view.planDraft = null; view.page = "plan"; render(); }; });
+      app.querySelectorAll("[data-plan-go]").forEach((b) => { b.onclick = () => runStep(b.dataset.planGo, b.dataset.stepKey); });
       document.getElementById("exportBtn").onclick = exportData;
       document.getElementById("importBtn").onclick = openImportDialog;
       app.querySelectorAll("[data-open]").forEach((el) => {
@@ -1149,6 +1190,392 @@
       modal.showModal();
       document.getElementById("ovSkip").onclick = () => { guideSkipped.add(f.id); modal.close(); fn(); };
       document.getElementById("ovGo").onclick = () => openGuide(f.id);
+    }
+
+    /* ---------- Pacing planner ---------- */
+    // Per-course configuration. Courses not listed here get a generic plan built from their chapter folders.
+    const COURSE_CONFIG = {
+      C202: {
+        title: "C202 Managing Human Capital",
+        chapters: 14,
+        started: "2026-09-23",
+        quarters: [
+          { label: "Q1", chapters: [1, 2, 3, 4] },
+          { label: "Q2", chapters: [5, 6, 7, 8] },
+          { label: "Q3", chapters: [9, 10, 11, 12] },
+          { label: "Q4", chapters: [13, 14] }
+        ],
+        presets: {
+          speedy: { label: "Speedy", length: "2 weeks", weeks: [[1, 2, 3, 4, 5, 6, 7, 8], [9, 10, 11, 12, 13, 14]] },
+          medium: { label: "Medium", length: "3 weeks", recommended: true, weeks: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12, 13, 14]] },
+          deliberate: { label: "Deliberate", length: "4 weeks", weeks: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14]] }
+        }
+      }
+    };
+    const PACES = ["speedy", "medium", "deliberate", "custom"];
+
+    function splitWeeks(chapters, k) {
+      const out = [];
+      let i = 0;
+      for (let w = 0; w < k; w++) {
+        const size = Math.ceil((chapters.length - i) / (k - w));
+        out.push(chapters.slice(i, i + size));
+        i += size;
+      }
+      return out.filter((w) => w.length);
+    }
+    function courseInfo(course) {
+      const cfg = COURSE_CONFIG[course];
+      if (cfg) return { course, ...cfg };
+      const orders = state.folders.filter((f) => f.course === course && hasOrder(f)).map((f) => Math.ceil(f.order));
+      const n = orders.length ? Math.max(...orders) : 0;
+      const chapters = Array.from({ length: n }, (_, i) => i + 1);
+      return {
+        course, title: course, chapters: n, started: null, quarters: [],
+        presets: {
+          speedy: { label: "Speedy", length: "2 weeks", weeks: splitWeeks(chapters, 2) },
+          medium: { label: "Medium", length: "3 weeks", recommended: true, weeks: splitWeeks(chapters, 3) },
+          deliberate: { label: "Deliberate", length: "4 weeks", weeks: splitWeeks(chapters, 4) }
+        }
+      };
+    }
+    function plannableCourses() {
+      const list = Object.keys(COURSE_CONFIG).filter((c) => state.folders.some((f) => f.course === c) || state.plans[c]);
+      state.folders.forEach((f) => { if (f.course && hasOrder(f) && !list.includes(f.course)) list.push(f.course); });
+      return list;
+    }
+    function chapterFolder(course, ch) { return state.folders.find((f) => f.course === course && f.order === ch) || null; }
+    function chapterPassed(course, ch) { const f = chapterFolder(course, ch); return !!(f && f.bestBoss && f.bestBoss.passed); }
+    function chapterTitle(course, ch) {
+      const f = chapterFolder(course, ch);
+      if (!f) return "";
+      return f.name.replace(new RegExp("^\\s*" + course.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s*Ch(apter)?\\s*" + ch + "\\s*[:\\-–]\\s*", "i"), "");
+    }
+    function paceLabel(plan, info) {
+      if (!plan) return "";
+      if (plan.pace === "custom") return `Custom (finish by ${fmtDay(plan.targetDate)})`;
+      const p = info.presets[plan.pace];
+      return p ? `${p.label} (${p.length}${p.recommended ? ", recommended" : ""})` : plan.pace;
+    }
+    function fmtDay(iso) {
+      return validISO(iso) ? parseISO(iso).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }) : "";
+    }
+
+    // Build a schedule. Chapters whose boss is passed stay done (keeping their old due date);
+    // only the remaining chapters are scheduled, starting at startDate.
+    function buildSchedule(info, pace, startDate, targetDate, oldPlan) {
+      const all = Array.from({ length: info.chapters }, (_, i) => i + 1);
+      const remaining = all.filter((ch) => !chapterPassed(info.course, ch));
+      const sched = [];
+      all.filter((ch) => chapterPassed(info.course, ch)).forEach((ch) => {
+        const old = oldPlan && (oldPlan.schedule || []).find((x) => x.chapter === ch);
+        const f = chapterFolder(info.course, ch);
+        sched.push({ chapter: ch, due: old && validISO(old.due) ? old.due : (f.bestBoss.date && validISO(f.bestBoss.date) ? f.bestBoss.date : startDate) });
+      });
+      if (pace === "custom") {
+        if (!validISO(targetDate)) throw new Error("Pick a target date.");
+        const days = daysBetween(startDate, targetDate) + 1;
+        if (days < 1) throw new Error("The target date has to be on or after the start date.");
+        remaining.forEach((ch, i) => sched.push({ chapter: ch, due: addDays(startDate, Math.ceil(((i + 1) * days) / remaining.length) - 1) }));
+      } else {
+        const preset = info.presets[pace];
+        if (!preset) throw new Error("Unknown pace.");
+        const placed = new Set();
+        const weeks = preset.weeks.map((w) => w.filter((ch) => remaining.includes(ch))).filter((w) => w.length);
+        weeks.forEach((w) => w.forEach((ch) => placed.add(ch)));
+        const leftovers = remaining.filter((ch) => !placed.has(ch));
+        if (leftovers.length) { if (weeks.length) weeks[weeks.length - 1].push(...leftovers); else weeks.push(leftovers); }
+        weeks.forEach((w, wi) => w.forEach((ch, i) => sched.push({ chapter: ch, due: addDays(startDate, 7 * wi + Math.ceil(((i + 1) * 7) / w.length) - 1) })));
+      }
+      sched.sort((a, b) => a.chapter - b.chapter);
+      return sched;
+    }
+
+    function makePlan(course, pace, startDate, targetDate) {
+      const info = courseInfo(course);
+      if (!PACES.includes(pace)) throw new Error("Pick a pace.");
+      if (!validISO(startDate)) throw new Error("Pick a valid start date.");
+      const old = state.plans[course];
+      const schedule = buildSchedule(info, pace, startDate, targetDate, old);
+      const remainingDues = schedule.filter((e) => !chapterPassed(course, e.chapter)).map((e) => e.due).sort();
+      const history = old ? (old.history || []).concat([{ pace: old.pace, startDate: old.startDate, targetDate: old.targetDate, createdAt: old.createdAt, replacedOn: todayISO(), passedAtSwitch: schedule.filter((e) => chapterPassed(course, e.chapter)).length }]) : [];
+      state.plans[course] = {
+        pace, startDate,
+        targetDate: pace === "custom" ? targetDate : (remainingDues[remainingDues.length - 1] || startDate),
+        createdAt: todayISO(),
+        schedule, history
+      };
+      save();
+      return state.plans[course];
+    }
+
+    function planMilestones(info, plan) {
+      return (info.quarters || []).map((q) => {
+        const dues = plan.schedule.filter((e) => q.chapters.includes(e.chapter)).map((e) => e.due).sort();
+        if (!dues.length) return null;
+        return { milestone: true, label: `${q.label} quarterly quiz`, chapters: q.chapters, due: dues[dues.length - 1], ready: q.chapters.every((ch) => chapterPassed(info.course, ch)) };
+      }).filter(Boolean);
+    }
+
+    // Where the plan stands today.
+    function planStatus(course, plan, today = todayISO()) {
+      const info = courseInfo(course);
+      const items = plan.schedule.map((e) => ({ ...e, folder: chapterFolder(course, e.chapter), passed: chapterPassed(course, e.chapter) }));
+      const passed = items.filter((e) => e.passed).length;
+      const dueBefore = items.filter((e) => e.due < today).length;
+      const dueByToday = items.filter((e) => e.due <= today).length;
+      let status = "on", diff = 0;
+      if (passed < dueBefore) { status = "behind"; diff = dueBefore - passed; }
+      else if (passed > dueByToday) { status = "ahead"; diff = passed - dueByToday; }
+      const wi = Math.max(0, Math.floor(daysBetween(plan.startDate, today) / 7));
+      const wkStart = addDays(plan.startDate, 7 * wi), wkEnd = addDays(wkStart, 6);
+      let week = items.filter((e) => e.due >= wkStart && e.due <= wkEnd);
+      const overdue = items.filter((e) => !e.passed && e.due < wkStart);
+      const ordered = items.slice().sort((a, b) => (a.due < b.due ? -1 : a.due > b.due ? 1 : a.chapter - b.chapter));
+      const current = ordered.find((e) => !e.passed) || null;
+      let nextStep = null;
+      if (current && current.folder) nextStep = pathSteps(current.folder).next;
+      return { info, items, passed, total: items.length, dueBefore, dueByToday, status, diff, week, overdue, wkStart, wkEnd, weekNo: wi + 1, current, nextStep, today };
+    }
+    function statusText(st) {
+      if (st.status === "behind") return `Behind by ${st.diff} chapter${st.diff === 1 ? "" : "s"}`;
+      if (st.status === "ahead") return `Ahead by ${st.diff} chapter${st.diff === 1 ? "" : "s"}`;
+      return "On track";
+    }
+    function itemState(e, st) {
+      if (e.passed) return ["passed", "✓ passed"];
+      if (!e.folder) return ["soon", "coming soon"];
+      if (e.due < st.today) return ["overdue", "overdue"];
+      if (e.due === st.today) return ["today", "due today"];
+      if (st.current && st.current.chapter === e.chapter) return ["current", "current"];
+      return ["upcoming", "upcoming"];
+    }
+
+    function planBannerHtml(course) {
+      const info = courseInfo(course);
+      const plan = state.plans[course];
+      if (!plan) {
+        return `
+          <div class="card plan-banner" data-plan-course="${escaped(course)}">
+            <div><strong>${escaped(info.title)}</strong> <span class="muted">· no study plan yet</span></div>
+            <div class="muted" style="margin-top:4px">Pick a pace: Speedy (2 weeks), Medium (3 weeks, recommended), Deliberate (4 weeks), or your own target date.</div>
+            <div class="row" style="margin-top:10px"><button class="gold small" data-plan-open="${escaped(course)}">Plan my pace</button></div>
+          </div>`;
+      }
+      const st = planStatus(course, plan);
+      const weekList = st.week.map((e) => `Ch ${e.chapter}${e.passed ? " ✓" : e.folder ? "" : " (coming soon)"}`).join(", ");
+      const cur = st.current;
+      return `
+        <div class="card plan-banner" data-plan-course="${escaped(course)}" id="planBanner">
+          <div class="row" style="justify-content:space-between">
+            <div><strong>${escaped(info.title)}</strong> <span class="muted">· ${escaped(paceLabel(plan, info))}</span></div>
+            <span class="status-pill ${st.status}" id="planStatus">${statusText(st)}</span>
+          </div>
+          <div class="muted" style="margin-top:6px">Week ${st.weekNo} (${fmtDay(st.wkStart)} – ${fmtDay(st.wkEnd)}): ${weekList || "nothing due this week"}${st.overdue.length ? ` · overdue: ${st.overdue.map((e) => "Ch " + e.chapter).join(", ")}` : ""} · ${st.passed} of ${st.total} bosses passed</div>
+          <div class="row" style="margin-top:10px;justify-content:space-between">
+            <div id="planNext">${cur
+              ? (cur.folder
+                ? `Next: <strong>Ch ${cur.chapter} · ${escaped(st.nextStep ? st.nextStep.title : "Boss quiz")}</strong> <span class="muted">(due ${fmtDay(cur.due)})</span>`
+                : `Next: <strong>Ch ${cur.chapter}</strong> <span class="muted">coming soon, deck not loaded yet (due ${fmtDay(cur.due)})</span>`)
+              : `<strong>All chapters passed 🎉</strong>`}</div>
+            <div class="row">
+              ${cur && cur.folder ? `<button class="gold small" id="planGo" data-plan-go="${escaped(cur.folder.id)}" data-step-key="${st.nextStep ? st.nextStep.key : "boss"}">Go</button>` : ""}
+              <button class="secondary small" data-plan-open="${escaped(course)}">Open plan</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderPlan() {
+      const courses = plannableCourses();
+      if (!courses.length) { view.page = "home"; return render(); }
+      const course = courses.includes(view.planCourse) ? view.planCourse : (courses.includes("C202") ? "C202" : courses[0]);
+      view.planCourse = course;
+      const info = courseInfo(course);
+      const plan = state.plans[course];
+      const draft = view.planDraft && view.planDraft.course === course ? view.planDraft : { course, pace: plan ? plan.pace : "medium", target: plan && plan.pace === "custom" ? plan.targetDate : addDays(todayISO(), 20), start: todayISO() };
+      view.planDraft = draft;
+      const passedCount = Array.from({ length: info.chapters }, (_, i) => i + 1).filter((ch) => chapterPassed(course, ch)).length;
+      headerSub.textContent = "Study plan";
+      headerActions.innerHTML = `<button class="secondary" id="planBack">All folders</button>`;
+      const paceCard = (key) => {
+        const p = info.presets[key];
+        const label = key === "custom" ? "Custom" : p.label;
+        const sub = key === "custom" ? "Pick a target date" : `${p.length} · ${p.weeks.map((w, i) => `Wk${i + 1} Ch${w[0]}${w.length > 1 ? "–" + w[w.length - 1] : ""}`).join(", ")}`;
+        return `
+          <label class="pace ${draft.pace === key ? "sel" : ""}">
+            <input type="radio" name="pace" value="${key}" ${draft.pace === key ? "checked" : ""} />
+            <span class="pace-title">${label}${key !== "custom" && p.recommended ? ` <span class="pill next-pill">Recommended</span>` : ""}</span>
+            <span class="muted">${escaped(sub)}</span>
+            ${key === "custom" ? `<input type="date" id="planTarget" value="${escaped(draft.target)}" />` : ""}
+          </label>`;
+      };
+      let scheduleHtml = "";
+      if (plan) {
+        const st = planStatus(course, plan);
+        const rows = st.items.map((e) => ({ ...e, kind: "ch" })).concat(planMilestones(info, plan).map((m) => ({ ...m, kind: "ms" })))
+          .sort((a, b) => (a.due < b.due ? -1 : a.due > b.due ? 1 : (a.kind === b.kind ? (a.chapter || 0) - (b.chapter || 0) : a.kind === "ch" ? -1 : 1)));
+        let lastGroup = null;
+        scheduleHtml = rows.map((r) => {
+          const off = daysBetween(plan.startDate, r.due);
+          const group = off < 0 ? "Done before this plan" : `Week ${Math.floor(off / 7) + 1} · ${fmtDay(addDays(plan.startDate, Math.floor(off / 7) * 7))} – ${fmtDay(addDays(plan.startDate, Math.floor(off / 7) * 7 + 6))}`;
+          const head = group !== lastGroup ? `<div class="plan-week">${escaped(group)}</div>` : "";
+          lastGroup = group;
+          if (r.kind === "ms") {
+            return head + `<div class="plan-row milestone"><span class="plan-ch">🏁</span><span class="plan-title"><strong>${escaped(r.label)}</strong> <span class="muted">Ch ${r.chapters[0]}–${r.chapters[r.chapters.length - 1]} · reminder${r.ready ? ", you're ready" : ""}</span></span><span class="plan-due">by ${fmtDay(r.due)}</span><span class="plan-state"><span class="status-pill ms">quiz</span></span></div>`;
+          }
+          const [cls, label] = itemState(r, st);
+          const isCur = st.current && st.current.chapter === r.chapter;
+          return head + `
+            <div class="plan-row ${cls} ${isCur ? "cur" : ""}" data-plan-ch="${r.chapter}">
+              <span class="plan-ch">Ch ${r.chapter}</span>
+              <span class="plan-title">${r.folder ? `<a href="#" data-plan-folder="${escaped(r.folder.id)}">${escaped(chapterTitle(course, r.chapter) || r.folder.name)}</a>${isCur && st.nextStep ? ` <span class="muted">· next: ${escaped(st.nextStep.title)}</span>` : ""}` : `<span class="muted">Deck not loaded yet</span>`}</span>
+              <span class="plan-due">${fmtDay(r.due)}</span>
+              <span class="plan-state"><span class="status-pill ${cls}">${label}</span></span>
+            </div>`;
+        }).join("");
+        scheduleHtml = `
+          <div class="card" style="margin-top:12px" id="planSchedule">
+            <div class="row" style="justify-content:space-between">
+              <div><strong style="color:var(--navy);font-size:16px">${escaped(paceLabel(plan, info))}</strong>
+                <div class="muted">${fmtDay(plan.startDate)} → ${fmtDay(plan.targetDate)} · planned ${escaped(fmtDate(plan.createdAt))}${plan.history && plan.history.length ? ` · pace changed ${plan.history.length}×` : ""}</div></div>
+              <div class="row"><span class="status-pill ${st.status}">${statusText(st)}</span><button class="secondary small" id="sharePlan">Share plan</button></div>
+            </div>
+            <div class="plan-list">${scheduleHtml}</div>
+          </div>`;
+      }
+      app.innerHTML = `
+        ${courses.length > 1 ? `<div class="row" style="margin-bottom:10px">${courses.map((c) => `<button class="${c === course ? "gold" : "secondary"} small" data-plan-tab="${escaped(c)}">${escaped(c)}</button>`).join("")}</div>` : ""}
+        <div class="card">
+          <h2 style="margin:0 0 4px;color:var(--navy);font-size:20px">${escaped(info.title)} · study plan</h2>
+          <div class="muted">${info.started ? `Course started ${fmtDay(info.started)}, ${parseISO(info.started).getFullYear()} · ` : ""}${info.chapters} chapters${info.quarters.length ? ` in ${info.quarters.length} quarters, each ending with a quarterly quiz` : ""} · ${passedCount} of ${info.chapters} chapter bosses passed</div>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <strong style="color:var(--navy)">${plan ? "Change pace" : "Pick your pace"}</strong>
+          <div class="pace-grid">${PACES.map(paceCard).join("")}</div>
+          <div class="row" style="margin-top:10px;align-items:flex-end">
+            <div><label for="planStart" style="margin-top:0">Start date</label><input type="date" id="planStart" value="${escaped(draft.start)}" /></div>
+            <button class="gold" id="savePlan">${plan ? "Replan remaining chapters" : "Create plan"}</button>
+          </div>
+          <div class="muted" style="margin-top:8px">${passedCount ? `${passedCount} passed chapter${passedCount === 1 ? "" : "s"} stay done; ` : ""}${info.chapters - passedCount} remaining chapter${info.chapters - passedCount === 1 ? "" : "s"} get scheduled from the start date. You can change pace anytime.</div>
+          <div id="planError" class="muted" style="color:var(--bad);margin-top:6px"></div>
+        </div>
+        ${scheduleHtml}`;
+      document.getElementById("planBack").onclick = () => { view.page = "home"; render(); };
+      app.querySelectorAll("[data-plan-tab]").forEach((b) => { b.onclick = () => { view.planCourse = b.dataset.planTab; view.planDraft = null; render(); }; });
+      app.querySelectorAll("input[name=pace]").forEach((r) => { r.onchange = () => { draft.pace = r.value; render(); }; });
+      const tgt = document.getElementById("planTarget");
+      if (tgt) tgt.onchange = () => { draft.target = tgt.value; draft.pace = "custom"; render(); };
+      const startEl = document.getElementById("planStart");
+      startEl.onchange = () => { draft.start = startEl.value; };
+      document.getElementById("savePlan").onclick = () => {
+        draft.start = startEl.value;
+        if (tgt) draft.target = tgt.value;
+        try {
+          const had = !!state.plans[course];
+          makePlan(course, draft.pace, draft.start, draft.target);
+          view.planDraft = null;
+          render();
+          toast(had ? "Plan updated: remaining chapters rescheduled." : "Plan created. You've got this.");
+        } catch (err) {
+          document.getElementById("planError").textContent = err.message || String(err);
+        }
+      };
+      app.querySelectorAll("[data-plan-folder]").forEach((a) => { a.onclick = (e) => { e.preventDefault(); view.folderId = a.dataset.planFolder; view.page = "folder"; render(); window.scrollTo(0, 0); }; });
+      const share = document.getElementById("sharePlan");
+      if (share) share.onclick = () => sharePlan(course);
+    }
+
+    function planText(course) {
+      const plan = state.plans[course];
+      if (!plan) return "";
+      const st = planStatus(course, plan);
+      const info = st.info;
+      const lines = [];
+      lines.push(`${info.title} study plan`);
+      lines.push(`Generated: ${st.today}`);
+      lines.push(`Pace: ${paceLabel(plan, info)}`);
+      lines.push(`Start: ${plan.startDate} · Target finish: ${plan.targetDate}${info.started ? ` · Course started: ${info.started}` : ""}`);
+      lines.push(`Status: ${statusText(st)} · ${st.passed} of ${st.total} chapter bosses passed · ${st.dueBefore} chapter(s) due before today`);
+      if (st.current) {
+        lines.push(`Current chapter: Ch ${st.current.chapter}${st.current.folder ? ` (${st.current.folder.name})` : " (deck not loaded yet)"}${st.nextStep ? ` · Next step: ${st.nextStep.title}` : ""}`);
+      } else {
+        lines.push("Current chapter: none, every chapter boss is passed");
+      }
+      lines.push("Schedule:");
+      const rows = st.items.map((e) => ({ ...e, kind: "ch" })).concat(planMilestones(info, plan).map((m) => ({ ...m, kind: "ms" })))
+        .sort((a, b) => (a.due < b.due ? -1 : a.due > b.due ? 1 : (a.kind === b.kind ? (a.chapter || 0) - (b.chapter || 0) : a.kind === "ch" ? -1 : 1)));
+      rows.forEach((r) => {
+        const day = parseISO(r.due).toLocaleDateString("en-US", { weekday: "short" });
+        if (r.kind === "ms") { lines.push(`  >> ${r.label} (Ch ${r.chapters[0]}-${r.chapters[r.chapters.length - 1]}) by ${day} ${r.due} · reminder${r.ready ? ", ready" : ""}`); return; }
+        let status;
+        if (r.passed) status = `passed${r.folder && r.folder.bestBoss ? ` (boss ${Math.round(r.folder.bestBoss.pct)}%)` : ""}`;
+        else if (!r.folder) status = "coming soon (no deck yet)";
+        else {
+          const steps = pathSteps(r.folder);
+          status = (r.due < st.today ? "overdue" : r.due === st.today ? "due today" : "upcoming") +
+            ` · steps done: ${steps.steps.filter((s) => s.done && !s.na).map((s) => s.title).join(", ") || "none"}` +
+            (steps.next ? ` · next: ${steps.next.title}` : "");
+        }
+        lines.push(`  Ch ${String(r.chapter).padEnd(2)}  due ${day} ${r.due}  ${status}`);
+      });
+      if (plan.history && plan.history.length) {
+        const h = plan.history[plan.history.length - 1];
+        lines.push(`Pace changes: ${plan.history.length} (last: ${h.pace} -> ${plan.pace} on ${h.replacedOn})`);
+      }
+      return lines.join("\n");
+    }
+
+    function copyText(text) {
+      const fallback = () => {
+        const ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        let ok = false;
+        try { ok = document.execCommand("copy"); } catch {}
+        ta.remove();
+        return ok;
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text).then(() => true, () => fallback());
+      } catch {}
+      return Promise.resolve(fallback());
+    }
+
+    function downloadText(name, text) {
+      const blob = new Blob([text], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+
+    function sharePlan(course) {
+      const text = planText(course);
+      const file = `${course.toLowerCase()}-plan.txt`;
+      modal.innerHTML = `
+        <div class="dialog-head">Share plan</div>
+        <div class="dialog-body">
+          <div class="muted" id="copyStatus">Copying to clipboard…</div>
+          <textarea id="planTextBox" readonly style="min-height:240px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;margin-top:8px">${escaped(text)}</textarea>
+          <div class="row" style="justify-content:flex-end;margin-top:12px">
+            <button class="secondary" id="copyAgain">Copy</button>
+            <button class="secondary" id="downloadPlan">Download ${escaped(file)}</button>
+            <button class="gold" id="closeShare">Done</button>
+          </div>
+        </div>`;
+      modal.showModal();
+      const status = document.getElementById("copyStatus");
+      const doCopy = () => copyText(text).then((ok) => {
+        status.textContent = ok ? "Copied to clipboard. Paste it to your study assistant, or download the file." : "Couldn't reach the clipboard here. Select the text below or download the file.";
+      });
+      doCopy();
+      document.getElementById("copyAgain").onclick = doCopy;
+      document.getElementById("downloadPlan").onclick = () => downloadText(file, text);
+      document.getElementById("closeShare").onclick = () => modal.close();
     }
 
     function startStudy(mode) {
