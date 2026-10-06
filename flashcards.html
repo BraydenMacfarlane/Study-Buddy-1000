@@ -255,16 +255,44 @@
       };
     }
 
+    // Bring any saved/imported state up to the current shape without dropping anything.
+    // Older saves (v1: folders/cards/progress only) gain the newer optional fields with defaults.
+    function migrate(data) {
+      const out = data && typeof data === "object" ? data : {};
+      out.folders = Array.isArray(out.folders) ? out.folders.filter((f) => f && typeof f === "object") : [];
+      out.cards = Array.isArray(out.cards) ? out.cards.filter((c) => c && typeof c === "object") : [];
+      out.progress = out.progress && typeof out.progress === "object" && !Array.isArray(out.progress) ? out.progress : {};
+      out.bundled = out.bundled && typeof out.bundled === "object" && !Array.isArray(out.bundled) ? out.bundled : {};
+      out.folders.forEach((f) => {
+        if (f.id === undefined || f.id === null || f.id === "") f.id = uid();
+        f.id = String(f.id);
+        if (typeof f.name !== "string" || !f.name.trim()) f.name = f.name ? String(f.name) : "Untitled folder";
+      });
+      out.cards.forEach((c) => {
+        if (c.id === undefined || c.id === null || c.id === "") c.id = uid();
+        c.id = String(c.id);
+        if (c.folderId !== undefined && c.folderId !== null) c.folderId = String(c.folderId);
+        if (typeof c.front !== "string") c.front = c.front === undefined || c.front === null ? "" : String(c.front);
+      });
+      Object.keys(out.progress).forEach((k) => {
+        const p = out.progress[k];
+        if (!p || typeof p !== "object") { out.progress[k] = { streak: 0, retired: false }; return; }
+        p.streak = Number.isFinite(Number(p.streak)) ? Number(p.streak) : 0;
+        p.retired = !!p.retired;
+      });
+      out.schema = 2;
+      return out;
+    }
+
     function load() {
       try {
         const raw = localStorage.getItem(STORE_KEY);
-        if (!raw) return seed();
+        if (!raw) return migrate(seed());
         const data = JSON.parse(raw);
-        if (!data.folders || !data.cards) return seed();
-        data.progress = data.progress || {};
-        return data;
+        if (!data || !Array.isArray(data.folders) || !Array.isArray(data.cards)) return migrate(seed());
+        return migrate(data);
       } catch {
-        return seed();
+        return migrate(seed());
       }
     }
 
@@ -404,7 +432,7 @@
       };
       document.getElementById("addCardBtn").onclick = () => openCardForm();
       document.getElementById("studyBtn").onclick = startStudy;
-      document.getElementById("quizBtn").onclick = startQuiz;
+      document.getElementById("quizBtn").onclick = () => startQuiz();
       app.querySelectorAll("[data-edit]").forEach((b) => b.onclick = () => openCardForm(state.cards.find((c) => c.id === b.dataset.edit)));
       app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => {
         if (!confirm("Delete this card?")) return;
