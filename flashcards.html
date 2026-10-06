@@ -226,6 +226,30 @@
     .boss-badge { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--bad); }
     .boss-result.pass .boss-badge { color: var(--ok); }
     .boss-score { font-size: 56px; font-weight: 750; color: var(--navy); line-height: 1.1; margin: 6px 0; }
+    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .match-col { display: grid; gap: 8px; align-content: start; }
+    .match-tile {
+      background: #fff; color: var(--ink); border: 1px solid var(--line); text-align: left; line-height: 1.3;
+      min-height: 56px; padding: 10px 12px; font-size: 14px; transition: background .15s, border-color .15s, transform .1s;
+      -webkit-tap-highlight-color: transparent; user-select: none;
+    }
+    .match-tile.term { font-weight: 650; color: var(--navy); }
+    .match-tile.sel { border-color: var(--gold); background: #fbf6ea; box-shadow: inset 0 0 0 2px var(--gold); }
+    .match-tile.matched { background: #e5f4ea; border-color: var(--ok); color: var(--ok); opacity: 1; }
+    .match-tile.wrong { background: #f8eaea; border-color: var(--bad); color: var(--bad); animation: shake .35s; }
+    @keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+    .match-timer { font-size: 26px; font-weight: 750; color: var(--navy); font-variant-numeric: tabular-nums; }
+    .penalty { font-size: 15px; color: var(--bad); opacity: 0; }
+    .penalty.show { animation: pen 1.2s ease; }
+    @keyframes pen { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
+    @media (max-width: 520px) {
+      main { padding: 14px; }
+      .match-tile { font-size: 13px; padding: 8px 9px; min-height: 52px; }
+      .match-grid { gap: 8px; }
+      .flash h2 { font-size: 24px; }
+      .scenario-text { font-size: 17px; }
+      header { flex-wrap: wrap; }
+    }
     .review-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
     .review-item:last-child { border-bottom: 0; }
     .review-q { white-space: pre-line; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
@@ -737,6 +761,7 @@
       const all = cardsIn(folder.id);
       const retired = all.filter((c) => prog(c.id).retired).length;
       const left = all.length - retired;
+      const canMatch = new Set(matchableCards(folder.id).map(cardAnswerText)).size >= 3;
       headerSub.textContent = folder.name;
       headerActions.innerHTML = `
         <button class="secondary" id="backHome">All folders</button>
@@ -778,7 +803,8 @@
           </div>
           <div class="row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
             <button class="gold" id="bossBtn" ${all.length >= 2 ? "" : "disabled"} title="All ${all.length} cards, pass mark ${BOSS_PASS}%">Boss quiz</button>
-            <span class="muted">Every card in this folder, mastered ones included · pass ${BOSS_PASS}% to clear the chapter</span>
+            <button class="secondary" id="matchBtn" ${canMatch ? "" : "disabled"} title="${canMatch ? "Timed term-to-definition matching" : "Needs at least 3 regular (non-scenario) cards"}">Match</button>
+            <span class="muted">Boss: every card, pass ${BOSS_PASS}% to clear the chapter${canMatch ? " · Match: timed term ↔ definition" : " · Match needs at least 3 regular (non-scenario) cards"}</span>
           </div>
         </div>
         <div class="card" style="margin-top:12px">${list || `<div class="empty">No cards in this folder yet.</div>`}</div>
@@ -802,6 +828,7 @@
       document.getElementById("studyBtn").onclick = startStudy;
       document.getElementById("quizBtn").onclick = () => startQuiz();
       document.getElementById("bossBtn").onclick = startBoss;
+      document.getElementById("matchBtn").onclick = startMatch;
       app.querySelectorAll("[data-edit]").forEach((b) => b.onclick = () => openCardForm(state.cards.find((c) => c.id === b.dataset.edit)));
       app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => {
         if (!confirm("Delete this card?")) return;
@@ -1243,6 +1270,129 @@
       document.getElementById("bossRetake").onclick = startBoss;
       const go = document.getElementById("bossNextCh");
       if (go) go.onclick = () => { view.folderId = next.id; view.page = "folder"; render(); };
+    }
+
+    /* ---------- Matching game ---------- */
+    const MATCH_PAIRS = 6;
+    const MATCH_PENALTY_MS = 2000;
+    function matchableCards(folderId) {
+      return cardsIn(folderId).filter((c) => !isScenario(c) && cleanStr(c.front) && cardAnswerText(c));
+    }
+
+    function startMatch() {
+      const picked = [];
+      const seenA = new Set(), seenF = new Set();
+      shuffle(matchableCards(view.folderId)).forEach((c) => {
+        const a = cardAnswerText(c), f = cleanStr(c.front);
+        if (picked.length >= MATCH_PAIRS || seenA.has(a) || seenF.has(f)) return;
+        seenA.add(a); seenF.add(f);
+        picked.push({ id: c.id, term: truncate(f, 70), def: truncate(a, 110), full: a });
+      });
+      if (picked.length < 3) { alert("Matching needs at least 3 regular (non-scenario) cards with different answers."); return; }
+      view.page = "match";
+      view.match = { folderId: view.folderId, pairs: picked, defs: shuffle(picked.map((x) => x.id)), matched: [], selTerm: null, selDef: null, start: Date.now(), penalty: 0, misses: 0, result: null };
+      render();
+    }
+
+    function matchElapsed(m) { return Date.now() - m.start + m.penalty; }
+
+    function renderMatch() {
+      const m = view.match;
+      const folder = folderById(view.folderId);
+      if (!m || !folder) { view.page = "folder"; return render(); }
+      headerSub.textContent = folder.name + " · match";
+      headerActions.innerHTML = `<button class="secondary" id="exitMatch">Back to folder</button>`;
+      document.getElementById("exitMatch").onclick = backToFolder;
+      if (m.result) return renderMatchResult(m, folder);
+      const byId = (id) => m.pairs.find((x) => x.id === id);
+      app.innerHTML = `
+        <div class="study-wrap" style="min-height:0">
+          <div class="row" style="justify-content:space-between">
+            <span class="match-timer"><span id="matchTime">${fmtTime(matchElapsed(m))}</span> <span id="penaltyFlash" class="penalty"></span></span>
+            <span class="muted" id="matchStatus">Matched ${m.matched.length} of ${m.pairs.length}${m.misses ? ` · ${m.misses} miss${m.misses === 1 ? "" : "es"} (+${m.misses * MATCH_PENALTY_MS / 1000}s)` : ""}</span>
+          </div>
+          <div class="muted">Tap a term, then its definition. Wrong pairs add ${MATCH_PENALTY_MS / 1000} seconds.${folder.bestMatch ? ` Best: ${fmtTime(folder.bestMatch.ms)}` : ""}</div>
+          <div class="match-grid">
+            <div class="match-col">${m.pairs.map((x) => `<button class="match-tile term" data-term="${escaped(x.id)}">${escaped(x.term)}</button>`).join("")}</div>
+            <div class="match-col">${m.defs.map((id) => { const x = byId(id); return `<button class="match-tile def" data-def="${escaped(x.id)}" title="${escaped(x.full)}">${escaped(x.def)}</button>`; }).join("")}</div>
+          </div>
+        </div>`;
+      const tiles = (attr) => Array.from(app.querySelectorAll(`[data-${attr}]`));
+      const paint = () => {
+        tiles("term").forEach((el) => el.classList.toggle("sel", el.dataset.term === m.selTerm));
+        tiles("def").forEach((el) => el.classList.toggle("sel", el.dataset.def === m.selDef));
+      };
+      const status = () => {
+        document.getElementById("matchStatus").textContent = `Matched ${m.matched.length} of ${m.pairs.length}` +
+          (m.misses ? ` · ${m.misses} miss${m.misses === 1 ? "" : "es"} (+${m.misses * MATCH_PENALTY_MS / 1000}s)` : "");
+      };
+      const check = () => {
+        if (m.selTerm === null || m.selDef === null) return paint();
+        const t = app.querySelector(`[data-term="${CSS.escape(m.selTerm)}"]`);
+        const d = app.querySelector(`[data-def="${CSS.escape(m.selDef)}"]`);
+        if (m.selTerm === m.selDef) {
+          m.matched.push(m.selTerm);
+          [t, d].forEach((el) => { el.classList.remove("sel"); el.classList.add("matched"); el.disabled = true; });
+        } else {
+          m.misses += 1;
+          m.penalty += MATCH_PENALTY_MS;
+          [t, d].forEach((el) => { el.classList.remove("sel"); el.classList.add("wrong"); setTimeout(() => el.classList.remove("wrong"), 600); });
+          const pf = document.getElementById("penaltyFlash");
+          pf.textContent = `+${MATCH_PENALTY_MS / 1000}s`;
+          pf.classList.remove("show"); void pf.offsetWidth; pf.classList.add("show");
+        }
+        m.selTerm = m.selDef = null;
+        status();
+        paint();
+        if (m.matched.length === m.pairs.length) finishMatch();
+      };
+      tiles("term").forEach((el) => {
+        if (m.matched.includes(el.dataset.term)) { el.classList.add("matched"); el.disabled = true; }
+        el.onclick = () => { if (el.disabled) return; m.selTerm = m.selTerm === el.dataset.term ? null : el.dataset.term; check(); };
+      });
+      tiles("def").forEach((el) => {
+        if (m.matched.includes(el.dataset.def)) { el.classList.add("matched"); el.disabled = true; }
+        el.onclick = () => { if (el.disabled) return; m.selDef = m.selDef === el.dataset.def ? null : el.dataset.def; check(); };
+      });
+      paint();
+      if (matchTimer) clearInterval(matchTimer);
+      matchTimer = setInterval(() => {
+        const el = document.getElementById("matchTime");
+        if (!el || view.page !== "match" || view.match !== m || m.result) { clearInterval(matchTimer); matchTimer = null; return; }
+        el.textContent = fmtTime(matchElapsed(m));
+      }, 100);
+    }
+
+    function finishMatch() {
+      const m = view.match;
+      if (matchTimer) { clearInterval(matchTimer); matchTimer = null; }
+      const folder = folderById(m.folderId);
+      const ms = matchElapsed(m);
+      const prev = folder.bestMatch;
+      const pairs = m.pairs.length;
+      const isBest = !prev || prev.pairs !== pairs || ms < prev.ms;
+      const now = new Date();
+      if (isBest) folder.bestMatch = { ms, pairs, date: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}` };
+      m.result = { ms, isBest: isBest && !!prev && prev.pairs === pairs, first: !prev };
+      save();
+      setTimeout(() => { if (view.page === "match" && view.match === m) render(); }, 450);
+    }
+
+    function renderMatchResult(m, folder) {
+      const r = m.result;
+      app.innerHTML = `
+        <div class="card boss-result pass" id="matchResult">
+          <div class="boss-badge">${r.isBest ? "New best time!" : "All matched"}</div>
+          <div class="boss-score">${fmtTime(r.ms)}</div>
+          <div class="muted">${m.pairs.length} pairs · ${m.misses} miss${m.misses === 1 ? "" : "es"} (+${m.misses * MATCH_PENALTY_MS / 1000}s penalty)</div>
+          <div class="muted" style="margin-top:4px">Best for this folder: <strong id="matchBest">${folder.bestMatch ? fmtTime(folder.bestMatch.ms) : "-"}</strong></div>
+          <div class="row" style="justify-content:center;margin-top:14px">
+            <button class="gold" id="matchAgain">Play again</button>
+            <button class="secondary" id="matchBack">Back to folder</button>
+          </div>
+        </div>`;
+      document.getElementById("matchAgain").onclick = startMatch;
+      document.getElementById("matchBack").onclick = backToFolder;
     }
 
     function markResult(correct) {
