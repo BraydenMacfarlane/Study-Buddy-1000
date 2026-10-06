@@ -1,0 +1,2500 @@
+{
+  "id": "c202-ch04",
+  "folder": "C202 Ch 4: Analyzing Work and HR Planning",
+  "course": "C202",
+  "order": 4,
+  "source": "WGU C202 eText (Phillips, Human Resource Management, 3rd ed.)",
+  "summary": "# C202 Chapter 4 Study Guide: Analyzing Work and HR Planning\n\n*A 15-20 minute read, organized by the chapter's sections in order. Read it before drilling the deck. Each concept covers what it is, why it matters, an example, and how it connects to the rest of the chapter.*\n\n## How this chapter maps to your competencies\n\nThis chapter belongs to **Effective Human Resource Management**: *evaluating strategies, policies, and procedures for effective HRM within an organization*. Effective HRM is the heaviest area on the Objective Assessment (OA), about **52%**, and it covers Chapters 4-8, 12, and 13. Chapter 4 is where it starts, so the planning, job analysis, and policy ideas here come back again and again.\n\nExpect questions framed like: Which forecasting method is this? Is this a shortage or a surplus, and what's the right short-term or long-term response? What is this job analysis data used for? Is this statement a policy, a procedure, or a rule? How does the employee handbook protect both sides? Mission, vision, and values tie back to **Strategic HRM**, the job characteristics model previews **Motivational Concepts**, and job analysis as a legal defense echoes Chapter 3's **Legal and Regulatory** material.\n\nChapter 4 is the last chapter of **Quarter 1** (Chapters 1-4), so the Quarter 1 quiz follows it. WGU's strongest readiness signal for the Pre-Assessment is scoring **80% or higher** on the final e-text quiz.\n\n---\n\n## 4.1-4.3 Why planning and work analysis matter\n\nStructure and workforce planning are the foundation of HR. They're how a company makes sure it has **the right talent in the right place at the right time**. In the book's model, recruiting and staffing shape what employees **can** do.\n\nMany companies just fill openings as they come up. One Cox Communications executive noticed his company spent months on budgets but almost no time on talent. **Strategic workforce planning** fixes that by focusing talent investment where it has the most impact. It helps leaders decide where to put plants or offices, what training to fund, what to outsource, and which **pivotal roles** need star performers (software developers at a tech firm, brand managers where the brand is everything).\n\n*Example:* CNA Financial discovered it would run short of underwriters within two years.\n\n*Opening case:* American Airlines faced a **pilot shortage** driven by retirements, fading interest in the career, global growth in air travel, and costly licensing. Regional airlines, which fly over half of flights, pay much less, so the shortage hit them hardest. The catch is that too many pilots is expensive too. That's the core problem of HR planning: balance supply and demand.\n\n## 4.4 The strategic planning process\n\n**Strategic planning** means deciding an organization's long-term goals and how it will reach them. It rests on three statements:\n\n- **Mission:** the organization's basic purpose and scope of operations, meaning why it exists. Coca-Cola's mission is about refreshing the world and inspiring optimism.\n- **Vision:** the long-term goals, meaning what the organization wants to *become*, its ideal future. Avon's vision was to be the company that best understands and satisfies women's needs worldwide.\n- **Core values:** enduring beliefs that guide everyday decisions, such as \"take care of employees\" or Whole Foods' commitments to quality, team member happiness, and environmental stewardship.\n\n*Memory trick:* mission = purpose now; vision = picture of the future; values = how we behave on the way.\n\nThese feed an external analysis (economy, competitors) and an internal analysis (strengths and weaknesses), which produce the **business strategy**: how the company will compete in its market.\n\n### Human resource planning and the four steps\n\n**Human resource planning** aligns the company's talent with its strategic goals. It forecasts labor needs and reconciles gaps between supply and demand with **action plans**. It's shaped by the firm's **talent philosophy**: whether it promotes from within, how much it values retention, and whether it treats employees as investors or as costs.\n\nThe process has four steps:\n\n1. **Strategic planning** decides the type, quality, and quantity of talent the strategy requires.\n2. **HR planning** aligns talent to those goals.\n3. **Forecast labor demand and labor supply**, and identify short-term and long-term gaps, using sources like the Bureau of Labor Statistics.\n4. **Develop and implement action plans** that fit the talent philosophy: recruiting, retention, compensation, succession, and training. Each plan carries **performance metrics** so you know whether it's working.\n\n### Aligning metrics, action plans, and HR planning\n\nThis is the second checklist item. Managers use **performance metrics** and past results (turnover, time to fill, productivity, staffing ratios) to **forecast future talent needs**, then build **proactive action plans** to close the gaps, and track the same metrics to see whether the plans work. They don't plan only from financial reports, wait for an emergency, or write plans without data. *Example:* a hospital that expects 15% more patients forecasts nurse demand from patient volume, compares it with expected nurse supply after retirements, sets a recruiting and retention plan, and checks hiring and turnover every quarter.\n\n### Responses to a shortage or surplus\n\nThe book's process model sorts responses by gap type and time frame:\n\n- **Shortage, short term:** hiring incentives, retention bonuses, reassigning current staff.\n- **Shortage, long term:** reduce labor demand (automate or redesign work) or use business process outsourcing.\n- **Balance:** no action plan needed.\n- **Surplus, short term:** salary cuts, fewer hours, temporary layoffs.\n- **Surplus, long term:** early retirement incentives, layoffs, and leaving vacated positions unfilled.\n\nForecast as a **range** (low, probable, high) and revise as conditions change. At a minimum, plan for strategy-critical jobs and jobs where top performers far outperform average ones, like sales.\n\n## 4.5-4.7 Forecasting labor demand\n\nThe biggest driver of how many workers a company needs is **demand for its products or services**. Demand falls, fewer workers; demand rises, more workers, unless the firm automates or outsources. Automation cuts routine jobs but raises demand for tech-skilled workers. Nabors' automated drilling rigs went from about 20 workers per site to 5, and the main tool became a laptop.\n\n### Sources for forecasting demand (4.6)\n\n- **Leading Economic Index:** a monthly composite that signals coming peaks and troughs in the business cycle. A downturn signals recession.\n- **Consumer Confidence Index:** a monthly survey of adults about job security and willingness to spend.\n- **Exchange rates:** a stronger home currency makes exports pricier and imports cheaper, which lowers demand for domestic labor. A weaker currency does the opposite.\n- **Interest rates:** higher rates raise borrowing costs and cut demand, especially in housing and construction. Lower rates boost it.\n- Others: GDP, the Purchasing Managers Index, and industry forecasts.\n\nThere's no single best metric. Test which indicators predicted your past activity, use them, and re-check them regularly. *COVID-19 lesson:* in 2020, forecasts of economic decline got worse every few days. Rare shocks break old predictors, so plan for a range of outcomes.\n\n### Forecasting methods (4.7)\n\n- **Trend analysis** uses past employment patterns to project future needs. If the company grew 8% a year for five years, project the same. Valero used five years of records to forecast three years ahead. *Weakness:* it assumes the past continues.\n- **Ratio analysis** converts expected business activity into headcount using a **staffing ratio**. *Example:* if you keep 5 assistants for every 3 accountants and plan to have 6 accountants, you need 10 assistants. Adjust the ratio when productivity changes (new technology, training), and use judgment when there's no history.\n- **Regression** combines several predictors, like mall traffic and seasonality, instead of one ratio.\n- **Judgmental forecasting** relies on managers' expertise. **Top-down:** leaders' predictions become goals for lower levels. **Bottom-up:** lower-level managers' estimates roll up for top managers to review.\n\n*Best practice:* start with quantitative estimates, then adjust them with managers' judgment. Forecasting is harder in small firms, where one hire in a 10-person company is 10% growth.\n\n## 4.8 Forecasting labor supply\n\n**Internal supply** = current employees − expected losses (quits, retirements, promotions or transfers out) + expected gains (transfers or promotions in). *Example:* 50 technicians, minus 6 retiring, 4 quitting, and 3 promoted out, plus 2 transferring in, gives 39.\n\nTools for the internal market:\n\n- A **talent inventory** is a database of each employee's competencies and qualifications, so HR can match people to needs.\n- A **replacement chart** shows each key job's holder, possible successors, and each one's readiness (performance, promotability, development needs).\n- **Succession planning** identifies, develops, and tracks employees so they can move into higher positions.\n\n**Retention** is essential, because every surprise quit shrinks internal supply. Surveys, absenteeism, and complaints help forecast turnover; For **external supply**, watch your own applicant flow (fewer or weaker applicants signal a tight market) and public data from the BLS, the Census Bureau, and the Conference Board.\n\n## 4.9-4.10 Closing the gaps\n\n**Gap analysis** compares forecasted demand with forecasted supply to find a shortage, surplus, or balance. Action plans must fit the business strategy, talent philosophy, and HR strategy. A layoff that cuts skills you'll need next year is a bad plan, and a firm that treats employees as investors might cut everyone's hours instead of laying people off. Tell lasting trends apart from short business-cycle swings, and downsize gradually when you can, since abrupt mass layoffs cost more and drive off top talent.\n\nCompanies can also build future supply, as the American Welding Society did with high school outreach that nearly doubled welding course completions.\n\nTwo kinds of understaffing matter:\n\n- **Manpower understaffing:** too few people for the work, like two servers instead of four. It's manageable briefly, but over time it raises stress, absenteeism, and turnover.\n- **Expertise understaffing:** the group is missing knowledge it needs. It's harmful even short term, because no one can cover. Prevent it with cross-training, proactive planning, and successors already in the pipeline.\n\n*Case:* the FAA's air traffic controllers hit a roughly 30-year low after a 2013 hiring freeze, with no plan for who would retire where. Overworked controllers raise safety risk. The FAA responded with targeted recruiting and by hiring above need, but training takes up to four years and many trainees wash out. If the gap persists, expect more fatigue, delays, and burnout-driven departures.\n\n## 4.11-4.12 Job design: efficiency vs. motivation\n\nJob design involves a trade-off between **efficiency** and **motivation**.\n\n**Scientific management** (Frederick Taylor, the Gilbreths) breaks work into its simplest elements and finds the best method through time-and-motion studies. Taylor's four principles: replace rules of thumb with scientific methods; scientifically select and train workers; supervise closely so methods are followed; and split the work so managers plan and workers perform. It raised productivity but created monotony and was called dehumanizing.\n\nThe **job characteristics model** (Hackman and Oldham) explains what makes work motivating. Its five core characteristics:\n\n1. **Skill variety:** the range of skills used.\n2. **Task identity:** completing a whole, identifiable piece of work.\n3. **Task significance:** impact on others' lives or work.\n4. **Autonomy:** freedom to schedule the work and choose methods.\n5. **Feedback:** the work itself shows how well you're doing.\n\nThese create three **critical psychological states** (experienced meaningfulness, responsibility for outcomes, and knowledge of results), which raise motivation, performance, and satisfaction. **Growth need strength**, a person's desire to grow and develop, moderates the effect: not everyone wants an enriched job.\n\nThree ways to redesign jobs:\n\n- **Job enrichment** (vertical): adds responsibility and autonomy, such as letting a salesperson manage inventory.\n- **Job enlargement** (horizontal): adds more tasks at the same level, such as a receptionist who also sorts mail. It reduces boredom but not responsibility.\n- **Job rotation:** moves people among jobs. It requires cross-training and builds skills.\n\nDon't overload jobs. UPS split loading from driving after finding loading drove turnover.\n\n## 4.13 Job analysis: purpose and uses\n\nThis is the first checklist item. **Job analysis** is the systematic process of identifying a job's key tasks, working conditions, and tools, and the worker characteristics needed to succeed, all in light of the company's strategy and culture.\n\n*How it's used:* setting hiring requirements, planning recruiting, selecting applicants, building training plans, designing compensation systems, and creating performance evaluation tools. It's the first step for staffing, training, performance, and pay. Firms that use job analysis well **financially outperform** their competitors.\n\n*Why it matters:*\n\n- **Strategic fit:** a medical-device retailer needs specialized education and experience, while a low-cost retailer hires efficiency-minded people.\n- **Future-proofing:** analyze what the job will need, not just what it needed.\n- **Legal defense:** documented, job-related requirements defend against failure-to-hire and wrongful discharge claims.\n- **Redesign:** GE found its salespeople spent 80% of their time on non-sales paperwork.\n\n## 4.14-4.15 Job descriptions and person specifications\n\nJob analysis produces two outcomes. The first is the **job description**, a written summary of the job's duties and responsibilities. It typically lists the title, department, salary range, grade, reporting relationships, main and occasional duties, equipment, special conditions like travel, and \"other duties as assigned.\"\n\nDuties are written as **task statements**: specific descriptions of what is done, how, and why. \"Handles inventory\" is weak; \"counts merchandise, compares counts with accounting totals, and corrects errors so the books balance\" is better. For the **ADA**, emphasize *what* must be done rather than *how* (\"moves 50-pound boxes to shelves,\" not \"lifts boxes by hand\"). Job descriptions double as recruiting ads, so make them engaging, and they can promote ethics by naming legal expectations like refusing bribes and protecting people who report concerns.\n\nThe second outcome is the **person specification**: the minimum worker characteristics needed for the core duties, built from the job description. *Key distinction:* the description is about the **job**; the specification is about the **person**.\n\n- **Essential criteria** are required for adequate performance and used to screen.\n- **Desirable criteria** help compare candidates who already meet the essentials.\n\nCharacteristics are described as **KSAOs**:\n\n- **Knowledge:** organized information, like local building codes or Mandarin.\n- **Skill:** applying knowledge to a standard, like driving a truck. A child who knows bike parts but can't ride has knowledge without skill.\n- **Ability:** a stable capacity across tasks, partly innate, like quantitative ability.\n- **Other characteristics:** personality, values, education, and experience.\n\nDecide which KSAOs new hires must already have and which you'll train.\n\n## 4.16-4.17 Job analysis methods\n\nA good analysis is **reliable** (same results across analysts, experts, and times) and **valid** (captures the job accurately, without omissions or irrelevant extras). The five methods:\n\n- **Critical incidents technique:** experts describe examples of very good and very poor performance (situation, action, result). It shows what separates superior from poor work and produces great interview questions, but it focuses on extremes and takes time.\n- **Job elements method:** an expert group lists and weights key worker traits, mostly for industrial and lower-skill jobs. It's efficient and builds expert ownership, but the method is hard to explain.\n- **Structured interview technique:** experts answer set questions. It's quick and cheap, good when experts or time are scarce, but needs a professional to limit bias.\n- **Task inventory approach:** experts list 50-200 tasks grouped into functions. It's objective and reliable, but misses rare tasks and what makes top performers.\n- **Structured questionnaires**, like the **Position Analysis Questionnaire (PAQ)**: standardized, fast, cheap, and comparable across nearly any job, but they need a high reading level and can miss unique aspects.\n\nCombine methods to offset weaknesses. Job experts may emphasize their own strengths, since results affect pay and promotion, so use several sources. **O*NET**, the government's online job database, is a good starting point, but generic downloaded descriptions are a weak legal defense. Follow the *Uniform Guidelines on Employee Selection Procedures*.\n\n## 4.18 Competency modeling and job rewards analysis\n\n**Competency modeling** identifies the broad traits of high performers, tied to strategy and values. **Competencies** (results focus, customer service, leadership, emotional intelligence, communication, teamwork) span many jobs and reinforce culture, while KSAOs are job-specific. Keep 6-12 competencies. Competency models are flexible but less rigorous, so their legal defensibility is uncertain; pair them with traditional job analysis.\n\n*AI caution:* Amazon's résumé tool learned from ten years of mostly male résumés and downgraded women, so it was dropped.\n\n**Job rewards analysis** identifies a job's **intrinsic** rewards (from the work itself, like helping others) and **extrinsic** rewards (pay, bonuses, benefits), together its total rewards. A bonus is extrinsic. Use it in recruiting: stress pay to money-motivated candidates and development to growth-motivated ones.\n\n## 4.19 Organizational structure, policies, procedures, rules, and the handbook\n\n**Organizational design** is the process of choosing and managing structure to reach goals. **Organizational structure** is the formal system of task, power, and reporting relationships. An **organizational chart** diagrams the chain of command. Chart position isn't the same as importance: a FedEx executive said drivers matter more than he does.\n\n### Policies, procedures, and rules\n\nThis is the third checklist item:\n\n- A **policy** is a broad **guiding principle that sets direction**, a decision already made. *Example:* \"We reimburse reasonable business travel to support our clients.\"\n- A **procedure** is the **how-to sequence of steps** for carrying out a task in line with policy. *Example:* \"Photograph the receipt, upload it in the expense app within 30 days, and get manager approval.\"\n- A **rule** is a specific statement of **what employees may or may not do**, with little discretion. *Example:* \"Safety glasses must be worn on the production floor.\"\n\n*Memory trick:* policy = why and what direction; procedure = how; rule = must or must not. Together they're a road map for daily operations that supports compliance and safety.\n\n### The employee handbook\n\nThis is the fourth checklist item. The **employee handbook** collects policies, procedures, and rules in one place, often online. It typically includes discipline rules, the ethics code, an at-will statement, confidentiality agreements, benefits, and complaint procedures. *The notes are thin here, so the following points come from standard HR practice.*\n\n- *It protects the organization* by documenting expectations, proving employees were told (a signed acknowledgment), supporting consistent enforcement that reduces discrimination claims, and recording at-will and confidentiality terms.\n- *It protects the employee* by spelling out rights, benefits, and rules, offering complaint and reporting channels, banning retaliation, and making treatment consistent so no one is judged by rules they never saw.\n\n## 4.20 Characteristics of structure\n\n- **Formalization:** how much is written down. High formalization increases role clarity.\n- **Centralization:** how concentrated decision authority is at the top. It works best in simple, stable settings and new firms. **Decentralization** is flatter, faster, and more innovative, and it suits complex, nonroutine work.\n- **Division of labor:** degree of specialization. It's efficient but can isolate units.\n- **Span of control:** number of direct reports. Narrow spans suit complex work and coaching; wide spans suit routine work. More than about nine is often too many.\n- **Hierarchy:** number of layers, tall or flat. Too many layers slow decisions; too few weaken coordination.\n\nPeople who like predictability fit bureaucracies; people who like flexibility fit less formal, decentralized firms.\n\n## 4.21 Workflow analysis and reengineering\n\n**Workflow analysis** traces how work moves from a customer's request, through the employees who add value, to delivery. It finds steps to cut, simplify, or combine, which makes it incremental. **Business process reengineering (BPR)** is a radical, clean-slate redesign for big gains in speed, cost, service, and quality. Taco Bell moved ingredient prep to central kitchens, which raised quality and morale. BPR can hurt morale and bring layoffs, so it needs a long-term view and attention to people.\n\n## 4.22 American Airlines' response\n\nAmerican raised new-pilot pay and gave current pilots raises over five years, though that partly shifted the shortage to lower-paying regional carriers. Other airlines used signing and retention bonuses and training pipelines like JetBlue's. Then COVID-19 flipped the **shortage into a surplus**, and airlines used pay cuts, early retirements, buyouts, voluntary leaves, and hiring pauses, with furloughs as a last resort. That's the full action plan menu in one case.\n\n## What to be able to explain\n\nThese are WGU's Learning Checklist items for this chapter:\n\n1. Describe the purpose of a job analysis and how it is used.\n2. Describe how managers align performance metrics, organizational action plans, and human resource planning.\n3. Explain the differences between rules, policies, and procedures.\n4. Explain how the employee handbook can protect the organization and the employee.\n\nTo get there, make sure you can also explain:\n\n- Mission vs. vision vs. core values\n- The four steps of HR planning, and the short- and long-term responses to shortages and surpluses\n- Trend, ratio, and judgmental (top-down and bottom-up) forecasting, with a ratio calculation\n- Talent inventory vs. replacement chart vs. succession planning\n- Manpower vs. expertise understaffing\n- The five job characteristics, and enrichment vs. enlargement vs. rotation\n- Job description vs. person specification, and essential vs. desirable criteria\n- Which job analysis method fits a situation\n- Span of control, centralization, and workflow analysis vs. BPR\n",
+  "cards": [
+    {
+      "id": "c202-ch04-001",
+      "front": "Why is workforce planning called the foundation of HR?",
+      "answer": "It anticipates talent challenges so the right people are in the right place at the right time.",
+      "subtitle": "Ch 4.2 · Effective HRM",
+      "note": "Read more: 4.2 Introduction",
+      "points": [
+        "Many firms just fill openings reactively; Cox's Jim Robbins saw months spent on budgets, little on talent",
+        "Small firms create most new jobs but struggle most to attract talent",
+        "Boomer retirements and lower birth rates will make talent harder to find"
+      ]
+    },
+    {
+      "id": "c202-ch04-002",
+      "front": "What decisions can strategic workforce planning inform?",
+      "answer": "Where to locate facilities, what training to fund, what to outsource, and which pivotal roles need star talent.",
+      "subtitle": "Ch 4.2 · Effective HRM",
+      "note": "Read more: 4.2 Introduction",
+      "points": [
+        "Pivotal roles: software developers at tech firms, brand managers where brand matters",
+        "CNA Financial found it would run short of underwriters in 2 years; Valero built its pool ahead of shortages"
+      ]
+    },
+    {
+      "id": "c202-ch04-003",
+      "front": "What drove the pilot shortage at American Airlines?",
+      "answer": "Retirements, fading career interest, global air travel growth, costly licensing, and low pay at regional carriers.",
+      "subtitle": "Ch 4.3 · Effective HRM",
+      "note": "Read more: 4.3 Real World Challenge: Managing a Pilot Shortage at American Airlines; 4.22 Real World Response: Managing a Pilot Shortage at American Airlines",
+      "points": [
+        "Regionals fly half or more of flights but pay much less",
+        "Too many pilots is costly too, so the goal is balance"
+      ]
+    },
+    {
+      "id": "c202-ch04-004",
+      "front": "What is strategic planning?",
+      "answer": "Deciding an organization's long-term goals and how it will achieve them, including how it will compete.",
+      "subtitle": "Ch 4.4 · Strategic HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "Covers vision, mission, values, which businesses to be in, and structure",
+        "HR leaders increasingly help create strategy, not just carry it out"
+      ]
+    },
+    {
+      "id": "c202-ch04-005",
+      "front": "How does a mission differ from a vision?",
+      "answer": "A mission states the basic purpose and scope of operations; a vision describes the ideal future the firm wants.",
+      "subtitle": "Ch 4.4 · Strategic HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "Mission = why we exist now (Coca-Cola: refresh the world, inspire optimism)",
+        "Vision = what we want to become (Avon: best understand and satisfy women's needs globally)"
+      ]
+    },
+    {
+      "id": "c202-ch04-006",
+      "front": "What are core values?",
+      "answer": "Enduring beliefs that guide everyday decisions and behavior, such as 'take care of employees.'",
+      "subtitle": "Ch 4.4 · Strategic HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "Can include social responsibility and sustainability",
+        "Whole Foods: quality products, team member happiness, community, environmental stewardship"
+      ]
+    },
+    {
+      "id": "c202-ch04-007",
+      "front": "What is a business strategy?",
+      "answer": "How the company will compete in its market, built from its mission plus external and internal analysis.",
+      "subtitle": "Ch 4.4 · Strategic HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "External: economy, competitors; internal: strengths and weaknesses",
+        "Novartis: a focused medicines company powered by advanced therapies and data science"
+      ]
+    },
+    {
+      "id": "c202-ch04-008",
+      "front": "What is human resource planning?",
+      "answer": "Aligning the firm's talent with its strategic goals by forecasting needs and closing gaps with action plans.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "Shaped by the talent philosophy (promote from within? retention vs turnover?)",
+        "Reconciles labor supply and demand gaps"
+      ]
+    },
+    {
+      "id": "c202-ch04-009",
+      "front": "What are the four steps of the HR planning process?",
+      "answer": "Strategic planning, HR planning, forecasting labor demand and supply, then building and running action plans.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "1. Strategy sets the type, quality, and quantity of talent needed",
+        "2. HR planning aligns talent to goals",
+        "3. Forecast demand and supply; find short- and long-term gaps (BLS, DOL data)",
+        "4. Action plans: recruiting, retention, compensation, succession, training"
+      ]
+    },
+    {
+      "id": "c202-ch04-010",
+      "front": "How do managers align performance metrics, action plans, and HR planning?",
+      "answer": "They use metrics and past results to forecast talent gaps, then set action plans with targets to close them.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process; 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "points": [
+        "Figure 4.1: forecasts lead to action plans that carry performance metrics",
+        "Metrics (turnover, time to fill, productivity) show whether the plan is working",
+        "Not: planning only from financial reports, without data, or only in emergencies",
+        "Model: a hospital forecasts nurse demand from patient volume, compares supply, sets a hiring plan, checks quarterly"
+      ]
+    },
+    {
+      "id": "c202-ch04-011",
+      "front": "What is a talent philosophy?",
+      "answer": "The firm's stance on people, like promoting from within or treating staff as investors, which limits which fixes fit.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process; 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "points": [
+        "Example: a firm that values employees as investors may cut everyone's hours rather than lay people off"
+      ]
+    },
+    {
+      "id": "c202-ch04-012",
+      "front": "What are short-term responses to a labor shortage?",
+      "answer": "Hiring incentives, retention bonuses, and reassigning current employees.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-013",
+      "front": "What are long-term responses to a labor shortage?",
+      "answer": "Reducing labor demand through automation or redesign, or outsourcing business processes.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "Building a pipeline (schools, training programs) also helps over time"
+      ]
+    },
+    {
+      "id": "c202-ch04-014",
+      "front": "What are short-term responses to a labor surplus?",
+      "answer": "Salary cuts, reduced hours, and temporary layoffs.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-015",
+      "front": "What are long-term responses to a labor surplus?",
+      "answer": "Early retirement incentives, permanent layoffs, and leaving vacated positions unfilled.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-016",
+      "front": "Why should labor forecasts be stated as a range?",
+      "answer": "Conditions change, so low, probable, and high estimates let plans flex as new data arrives.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "Revise forecasts as conditions change; check past forecast accuracy when choosing tools"
+      ]
+    },
+    {
+      "id": "c202-ch04-017",
+      "front": "Which jobs deserve planning attention first?",
+      "answer": "Strategy-critical, high-value jobs and jobs where top performers far outperform average ones, like sales.",
+      "subtitle": "Ch 4.4 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "points": [
+        "Researchers at innovators; customer-facing staff at service firms"
+      ]
+    },
+    {
+      "id": "c202-ch04-018",
+      "front": "What is the best predictor of labor demand?",
+      "answer": "Demand for the company's products or services, adjusted for automation and outsourcing.",
+      "subtitle": "Ch 4.5 · Effective HRM",
+      "note": "Read more: 4.5 Forecasting Labor Demand",
+      "points": [
+        "Kimberly-Clark cut 13% of its workforce and closed 10 plants as demand fell (2018)"
+      ]
+    },
+    {
+      "id": "c202-ch04-019",
+      "front": "How does automation change labor demand?",
+      "answer": "It cuts routine headcount but raises demand for tech-skilled workers.",
+      "subtitle": "Ch 4.5 · Effective HRM",
+      "note": "Read more: 4.5 Forecasting Labor Demand",
+      "points": [
+        "Nabors' automated rigs went from about 20 workers per site to 5; the main tool became a laptop"
+      ]
+    },
+    {
+      "id": "c202-ch04-020",
+      "front": "What does the Leading Economic Index signal?",
+      "answer": "Coming peaks and troughs in the business cycle; a turn down signals recession and a turn up signals growth.",
+      "subtitle": "Ch 4.6 · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
+      "points": [
+        "Monthly composite from the Conference Board with 10 components (factory hours, stock prices, expectations)"
+      ]
+    },
+    {
+      "id": "c202-ch04-021",
+      "front": "What does the Consumer Confidence Index measure?",
+      "answer": "A monthly survey of adults' job security and willingness to spend, which predicts demand for goods and labor.",
+      "subtitle": "Ch 4.6 · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand"
+    },
+    {
+      "id": "c202-ch04-022",
+      "front": "How does a stronger home currency affect labor demand?",
+      "answer": "Exports get pricier and imports cheaper, so domestic demand and hiring tend to fall.",
+      "subtitle": "Ch 4.6 · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
+      "points": [
+        "A weaker currency makes exports cheaper, raising demand for workers",
+        "Volatile rates make forecasting harder"
+      ]
+    },
+    {
+      "id": "c202-ch04-023",
+      "front": "How do rising interest rates affect labor demand?",
+      "answer": "Borrowing costs rise for firms and customers, cutting demand and hiring, especially in housing and the trades.",
+      "subtitle": "Ch 4.6 · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
+      "points": [
+        "Falling rates tend to raise labor demand"
+      ]
+    },
+    {
+      "id": "c202-ch04-024",
+      "front": "How should a company pick its labor demand predictors?",
+      "answer": "Test which indicators predicted its past activity, use them, and re-evaluate and test new ones regularly.",
+      "subtitle": "Ch 4.6 · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
+      "points": [
+        "No single best metric; Whirlpool regularly recalculates its optimal sales force size",
+        "Other indicators: GDP, inventories, Purchasing Managers Index, industry forecasts"
+      ]
+    },
+    {
+      "id": "c202-ch04-025",
+      "front": "What did COVID-19 teach about labor forecasting?",
+      "answer": "Rare shocks break old predictors, so re-check metrics often and plan for a range of outcomes.",
+      "subtitle": "Ch 4.6 · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
+      "points": [
+        "2020 forecasts got worse within days (Goldman's Q2 estimate went from -5% to -24%)",
+        "Jamie Dimon: base, adverse, and extreme cases were all possible"
+      ]
+    },
+    {
+      "id": "c202-ch04-026",
+      "front": "What is trend analysis?",
+      "answer": "Using past employment patterns of the firm, industry, or nation to project future staffing needs.",
+      "subtitle": "Ch 4.7 · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods",
+      "points": [
+        "Valero used 5 years of records to forecast 3 years ahead by location, position, and tenure",
+        "Weakness: assumes the past continues despite competition, economy, technology"
+      ]
+    },
+    {
+      "id": "c202-ch04-027",
+      "front": "What is ratio analysis?",
+      "answer": "Converting expected business activity into headcount using past staffing ratios.",
+      "subtitle": "Ch 4.7 · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods",
+      "points": [
+        "Staffing ratio: headcount indexed to a business metric (support staff per employee, revenue per employee)",
+        "Example: 5 assistants per 3 accountants; 6 accountants means 10 assistants"
+      ]
+    },
+    {
+      "id": "c202-ch04-028",
+      "front": "When does a staffing ratio need adjusting?",
+      "answer": "When productivity changes from new tools, training, or incentives, or when no past ratio exists.",
+      "subtitle": "Ch 4.7 · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods",
+      "points": [
+        "Use managers' judgment to adjust; dramatic change (COVID) breaks trends"
+      ]
+    },
+    {
+      "id": "c202-ch04-029",
+      "front": "How do top-down and bottom-up judgmental forecasts differ?",
+      "answer": "Top-down turns leaders' predictions into unit goals; bottom-up rolls lower managers' estimates up for review.",
+      "subtitle": "Ch 4.7 · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods",
+      "points": [
+        "Judgmental forecasting = managers' expertise predicts needs",
+        "Budgets may set headcount in top-down forecasting"
+      ]
+    },
+    {
+      "id": "c202-ch04-030",
+      "front": "What is the best practice for forecasting labor demand?",
+      "answer": "Start with quantitative estimates such as trends, ratios, or regression, then adjust them with managers' judgment.",
+      "subtitle": "Ch 4.7 · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods",
+      "points": [
+        "Regression combines several predictors (mall traffic, seasonality) instead of one ratio",
+        "Capital One makes 3-year forecasts with proprietary models"
+      ]
+    },
+    {
+      "id": "c202-ch04-031",
+      "front": "Why is labor forecasting harder in small firms?",
+      "answer": "They have less history and more variable trends; one hire in a 10-person firm is 10% growth.",
+      "subtitle": "Ch 4.7 · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+    },
+    {
+      "id": "c202-ch04-032",
+      "front": "How is internal labor supply forecast?",
+      "answer": "Current staff minus expected losses (quits, retirements, moves out) plus expected gains (moves in).",
+      "subtitle": "Ch 4.8 · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply",
+      "points": [
+        "Figure 4.2; managers can estimate retention percentages",
+        "Limitation: relies on history (rising unemployment lowers quits)"
+      ]
+    },
+    {
+      "id": "c202-ch04-033",
+      "front": "What is a talent inventory?",
+      "answer": "A database of each employee's competencies and qualifications, used to match people to staffing needs.",
+      "subtitle": "Ch 4.8 · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply",
+      "points": [
+        "IBM's Workforce Management Initiative gives a real-time view of its labor supply chain"
+      ]
+    },
+    {
+      "id": "c202-ch04-034",
+      "front": "What is a replacement chart?",
+      "answer": "A chart of each key job's holder, possible successors, and each successor's readiness.",
+      "subtitle": "Ch 4.8 · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply",
+      "points": [
+        "Shows strengths, performance, promotability, and development needs (Figure 4.3)"
+      ]
+    },
+    {
+      "id": "c202-ch04-035",
+      "front": "What is succession planning?",
+      "answer": "Identifying, developing, and tracking employees so they can move into higher positions.",
+      "subtitle": "Ch 4.8 · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply"
+    },
+    {
+      "id": "c202-ch04-036",
+      "front": "Why is retention central to forecasting internal supply?",
+      "answer": "Each unexpected quit shrinks internal supply; surveys, absenteeism, and complaints help predict turnover.",
+      "subtitle": "Ch 4.8 · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply",
+      "points": [
+        "Google built an algorithm using reviews, pay history, and promotions to flag likely quitters"
+      ]
+    },
+    {
+      "id": "c202-ch04-037",
+      "front": "How do firms gauge external labor supply?",
+      "answer": "By watching their own applicant flow and public data from sources like the BLS, Census, and Conference Board.",
+      "subtitle": "Ch 4.8 · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply",
+      "points": [
+        "Fewer or weaker applicants signal a tighter market",
+        "BLS National Compensation Survey: wage and benefit data for 400+ occupations"
+      ]
+    },
+    {
+      "id": "c202-ch04-038",
+      "front": "What is gap analysis?",
+      "answer": "Comparing forecasted labor demand with forecasted supply to find a coming shortage, surplus, or balance.",
+      "subtitle": "Ch 4.9 · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+    },
+    {
+      "id": "c202-ch04-039",
+      "front": "Why must gap action plans fit strategy and HR philosophy?",
+      "answer": "A mismatched fix backfires, like layoffs that cut skills the strategy will need next year.",
+      "subtitle": "Ch 4.9 · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "points": [
+        "Plans must reinforce business strategy, talent philosophy, and HR strategy"
+      ]
+    },
+    {
+      "id": "c202-ch04-040",
+      "front": "Why is gradual downsizing usually better than abrupt mass layoffs?",
+      "answer": "It costs less and keeps top talent; also separate lasting trends from short business-cycle swings.",
+      "subtitle": "Ch 4.9 · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+    },
+    {
+      "id": "c202-ch04-041",
+      "front": "How do manpower and expertise understaffing differ?",
+      "answer": "Manpower: too few people for the workload; expertise: the group lacks knowledge it needs for essential tasks.",
+      "subtitle": "Ch 4.9 · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "points": [
+        "Manpower example: 2 servers instead of 4"
+      ]
+    },
+    {
+      "id": "c202-ch04-042",
+      "front": "Why is expertise understaffing so harmful, and how is it prevented?",
+      "answer": "No one can cover the missing know-how, so key work stalls; prevent it with cross-training and ready successors.",
+      "subtitle": "Ch 4.9 · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "points": [
+        "Manpower understaffing is tolerable briefly but long term raises stress, absenteeism, turnover"
+      ]
+    },
+    {
+      "id": "c202-ch04-043",
+      "front": "How can companies build future labor supply?",
+      "answer": "By partnering with schools and training programs to grow skills before they're needed.",
+      "subtitle": "Ch 4.9 · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "points": [
+        "AT&T Aspire ($350M for graduation rates)",
+        "American Welding Society high school outreach nearly doubled course completions in 2 years",
+        "Chicago Women in Trades: 12-week training"
+      ]
+    },
+    {
+      "id": "c202-ch04-044",
+      "front": "What caused the U.S. air traffic controller shortage?",
+      "answer": "A 2013 hiring freeze plus no plan for which controllers would retire where, while traffic kept rising.",
+      "subtitle": "Ch 4.10 · Effective HRM",
+      "note": "Read more: 4.10 Case Study: Addressing a Shortage of U.S. Air Traffic Controllers",
+      "points": [
+        "FAA response: targeted recruiting, better location matching, hiring above need",
+        "Obstacles: up to 4 years to certify, high washout, about $78,000 lost per dropout"
+      ]
+    },
+    {
+      "id": "c202-ch04-045",
+      "front": "What could happen if the controller shortage isn't fixed? (model answer)",
+      "answer": "Fatigue and overtime raise error risk, delays grow, and burnout drives even more departures.",
+      "subtitle": "Ch 4.10 · Effective HRM",
+      "note": "Read more: 4.10 Case Study: Addressing a Shortage of U.S. Air Traffic Controllers",
+      "points": [
+        "Model answer: overworked controllers make more mistakes, safety margins shrink, flights get cut or delayed,",
+        "and the cycle worsens as stressed controllers retire or quit, with trainees taking up to 4 years to replace them"
+      ]
+    },
+    {
+      "id": "c202-ch04-046",
+      "front": "What trade-off sits at the core of job design?",
+      "answer": "Efficiency versus motivation: simplified jobs maximize output, enriched jobs maximize engagement.",
+      "subtitle": "Ch 4.11 · Motivational Concepts",
+      "note": "Read more: 4.11 Job Design",
+      "points": [
+        "Different job features motivate different people (social needs vs independence)"
+      ]
+    },
+    {
+      "id": "c202-ch04-047",
+      "front": "What is scientific management?",
+      "answer": "Taylor's approach: break work into simple elements, find the best method, and train workers to follow it.",
+      "subtitle": "Ch 4.11 · Effective HRM",
+      "note": "Read more: 4.11 Job Design",
+      "points": [
+        "Built on time-and-motion studies (Taylor, Frank and Lillian Gilbreth)"
+      ]
+    },
+    {
+      "id": "c202-ch04-048",
+      "front": "What are Taylor's four principles of scientific management?",
+      "answer": "Scientific methods, scientific selection and training, close supervision, and managers plan while workers do.",
+      "subtitle": "Ch 4.11 · Effective HRM",
+      "note": "Read more: 4.11 Job Design"
+    },
+    {
+      "id": "c202-ch04-049",
+      "front": "What was the main drawback of scientific management?",
+      "answer": "Monotony and no room for initiative; workers called it dehumanizing, prompting a congressional investigation.",
+      "subtitle": "Ch 4.11 · Effective HRM",
+      "note": "Read more: 4.11 Job Design"
+    },
+    {
+      "id": "c202-ch04-050",
+      "front": "What are the five core job characteristics?",
+      "answer": "Skill variety, task identity, task significance, autonomy, and feedback from the job itself.",
+      "subtitle": "Ch 4.12 · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design",
+      "points": [
+        "Task identity = completing a whole, identifiable piece of work",
+        "Task significance = impact on others' lives or work",
+        "Together they give a job its motivating potential"
+      ]
+    },
+    {
+      "id": "c202-ch04-051",
+      "front": "What are the three critical psychological states in the job characteristics model?",
+      "answer": "Experienced meaningfulness, experienced responsibility for outcomes, and knowledge of results.",
+      "subtitle": "Ch 4.12 · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design",
+      "points": [
+        "They lead to higher motivation, performance, and satisfaction (Figure 4.4)"
+      ]
+    },
+    {
+      "id": "c202-ch04-052",
+      "front": "What is growth need strength?",
+      "answer": "A person's desire to grow and develop; people high in it respond best to enriched jobs.",
+      "subtitle": "Ch 4.12 · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design",
+      "points": [
+        "Some people prefer simpler, stable jobs; compare GNS with a job's motivating potential"
+      ]
+    },
+    {
+      "id": "c202-ch04-053",
+      "front": "How do job enrichment and job enlargement differ?",
+      "answer": "Enrichment adds responsibility and autonomy (vertical); enlargement adds more same-level tasks (horizontal).",
+      "subtitle": "Ch 4.12 · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design",
+      "points": [
+        "Enrichment: a salesperson also manages inventory",
+        "Enlargement: a receptionist also types and sorts mail; less boredom, no more responsibility"
+      ]
+    },
+    {
+      "id": "c202-ch04-054",
+      "front": "What is job rotation?",
+      "answer": "Moving employees among different jobs; it requires cross-training and builds skills.",
+      "subtitle": "Ch 4.12 · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design",
+      "points": [
+        "A horizontal form of job enlargement"
+      ]
+    },
+    {
+      "id": "c202-ch04-055",
+      "front": "When is job enrichment most likely to succeed?",
+      "answer": "When workers welcome it, benefits beat lost efficiency, changes aren't too costly, and payoff is expected in 1-3 years.",
+      "subtitle": "Ch 4.12 · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design",
+      "points": [
+        "Also: satisfaction relates to productivity and managers have enrichment experience",
+        "Don't overload: UPS split loading from driving after loading drove turnover"
+      ]
+    },
+    {
+      "id": "c202-ch04-056",
+      "front": "What is job analysis?",
+      "answer": "A systematic study of a job's tasks, conditions, and tools and the worker traits needed to succeed in it.",
+      "subtitle": "Ch 4.13 · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis",
+      "points": [
+        "Judged in light of the company's strategy and culture"
+      ]
+    },
+    {
+      "id": "c202-ch04-057",
+      "front": "How is job analysis data used?",
+      "answer": "To set hiring requirements, plan recruiting, select applicants, and build training, pay, and appraisal systems.",
+      "subtitle": "Ch 4.13 · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis",
+      "points": [
+        "It's the first step for staffing, training, performance management, and pay",
+        "Firms that use it well financially outperform competitors"
+      ]
+    },
+    {
+      "id": "c202-ch04-058",
+      "front": "How does job analysis connect hiring to strategy?",
+      "answer": "It defines requirements in light of strategy and future needs, so firms hire for what the business will need.",
+      "subtitle": "Ch 4.13 · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis",
+      "points": [
+        "Medical-device retailer needs specialized education; a low-cost retailer hires efficiency-minded people",
+        "Future-proofing: a 1990s marketer who couldn't use the Internet was a poor choice"
+      ]
+    },
+    {
+      "id": "c202-ch04-059",
+      "front": "Why does job analysis matter legally?",
+      "answer": "It documents job-related requirements, a defense against failure-to-hire and wrongful discharge claims.",
+      "subtitle": "Ch 4.13 · Legal & Regulatory",
+      "note": "Read more: 4.13 Job Analysis; 4.17 Job Elements Method (and other methods)",
+      "points": [
+        "Ties to Chapter 3: job-related, business-necessary criteria defend against adverse impact claims",
+        "Follow the Uniform Guidelines on Employee Selection Procedures (1978)"
+      ]
+    },
+    {
+      "id": "c202-ch04-060",
+      "front": "How can job analysis improve how a job is designed?",
+      "answer": "It shows where time actually goes so wasted effort can be cut, like GE salespeople's 80% on paperwork.",
+      "subtitle": "Ch 4.13 · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis",
+      "points": [
+        "For fast-changing jobs, focus analysis on key jobs for ROI"
+      ]
+    },
+    {
+      "id": "c202-ch04-061",
+      "front": "What is a job description?",
+      "answer": "A written summary of a job's duties and responsibilities, plus its title, reporting lines, and conditions.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-ch04-062",
+      "front": "What does a typical job description include?",
+      "answer": "Title, department, pay range and grade, reporting lines, main and occasional duties, equipment, special conditions.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Plus a flexibility clause: 'other duties as assigned'"
+      ]
+    },
+    {
+      "id": "c202-ch04-063",
+      "front": "What makes a good task statement?",
+      "answer": "It specifically states what is done, how, and why, and avoids vague verbs like 'handles' or 'prepares.'",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Weak: 'accounts for inventory quarterly'",
+        "Better: counts merchandise, compares counts with accounting totals, corrects errors so books balance"
+      ]
+    },
+    {
+      "id": "c202-ch04-064",
+      "front": "How should task statements be written with the ADA in mind?",
+      "answer": "Emphasize what must be accomplished rather than how, so people with disabilities aren't screened out needlessly.",
+      "subtitle": "Ch 4.14 · Legal & Regulatory",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "'Moves 50-pound boxes to shelves' rather than 'lifts boxes by hand'"
+      ]
+    },
+    {
+      "id": "c202-ch04-065",
+      "front": "How can a job description promote ethical behavior?",
+      "answer": "By stating legal and ethical expectations, like refusing bribes and protecting employees who raise concerns.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Follow U.S. law even where rule of law is weak",
+        "Resist pressure to compromise values to hit sales targets"
+      ]
+    },
+    {
+      "id": "c202-ch04-066",
+      "front": "Why should job descriptions be engaging?",
+      "answer": "They double as recruiting ads, so selling the mission and values attracts better-fit applicants.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Red Lobster weaves its values into lively descriptions of essential functions",
+        "Make titles descriptive, accurate, and interesting"
+      ]
+    },
+    {
+      "id": "c202-ch04-067",
+      "front": "What is a person specification?",
+      "answer": "The minimum worker characteristics needed for a job's core duties, built from the job description.",
+      "subtitle": "Ch 4.15 · Effective HRM",
+      "note": "Read more: 4.15 Person Specification",
+      "points": [
+        "Drives where and how to recruit and which screening criteria to use"
+      ]
+    },
+    {
+      "id": "c202-ch04-068",
+      "front": "How does a job description differ from a person specification?",
+      "answer": "A description lists the job's duties; a specification lists the qualities a person needs to perform them.",
+      "subtitle": "Ch 4.15 · Effective HRM",
+      "note": "Read more: 4.15 Person Specification"
+    },
+    {
+      "id": "c202-ch04-069",
+      "front": "How do essential and desirable criteria differ?",
+      "answer": "Essential criteria are required to perform adequately; desirable ones help compare candidates who meet essentials.",
+      "subtitle": "Ch 4.15 · Effective HRM",
+      "note": "Read more: 4.15 Person Specification",
+      "points": [
+        "Don't describe a mythical perfect employee; prioritize"
+      ]
+    },
+    {
+      "id": "c202-ch04-070",
+      "front": "How do knowledge and skill differ in KSAOs?",
+      "answer": "Knowledge is knowing the information; skill is applying it to perform a task to a standard.",
+      "subtitle": "Ch 4.15 · Effective HRM",
+      "note": "Read more: 4.15 Person Specification",
+      "points": [
+        "A child who knows bike parts but can't ride has knowledge without skill",
+        "Skill examples: truck driving, manual dexterity, folding two shirts a minute"
+      ]
+    },
+    {
+      "id": "c202-ch04-071",
+      "front": "What are abilities and 'other characteristics' in KSAOs?",
+      "answer": "Abilities are stable, partly innate capacities used across tasks; 'other' covers personality, values, and experience.",
+      "subtitle": "Ch 4.15 · Effective HRM",
+      "note": "Read more: 4.15 Person Specification",
+      "points": [
+        "Ability examples: quantitative, sensory, physical capacities",
+        "Other: education, work experience, extraversion"
+      ]
+    },
+    {
+      "id": "c202-ch04-072",
+      "front": "Must new hires already have every KSAO?",
+      "answer": "No; decide which must exist on day one and which can be trained, then hire for ability and motivation to learn.",
+      "subtitle": "Ch 4.15 · Effective HRM",
+      "note": "Read more: 4.15 Person Specification"
+    },
+    {
+      "id": "c202-ch04-073",
+      "front": "What makes a job analysis reliable versus valid?",
+      "answer": "Reliable: the same results across analysts, experts, and times; valid: captures the job without gaps or extras.",
+      "subtitle": "Ch 4.16 · Effective HRM",
+      "note": "Read more: 4.16 Job Analysis Methods"
+    },
+    {
+      "id": "c202-ch04-074",
+      "front": "What is the critical incidents technique?",
+      "answer": "Experts describe examples of very effective and very ineffective behavior: the situation, action, and result.",
+      "subtitle": "Ch 4.16 · Effective HRM",
+      "note": "Read more: 4.16 Job Analysis Methods",
+      "points": [
+        "Strengths: catches rare but important events, separates superior from average, feeds interview questions",
+        "Weaknesses: narrative data, time to collect enough incidents, focuses on extremes so rarely used alone"
+      ]
+    },
+    {
+      "id": "c202-ch04-075",
+      "front": "What is the job elements method?",
+      "answer": "An expert group lists and weights the worker traits needed, mostly for industrial and lower-skill jobs.",
+      "subtitle": "Ch 4.17 · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods); 4.16 Job Analysis Methods",
+      "points": [
+        "Weights: share of barely acceptable workers with it, usefulness for spotting superior workers, problems if ignored, practicality",
+        "Pros: expert ownership, efficient; con: method hard to communicate"
+      ]
+    },
+    {
+      "id": "c202-ch04-076",
+      "front": "What is the structured interview technique for job analysis?",
+      "answer": "Experts answer set questions about duties; quick and cheap, but it needs a skilled interviewer to limit bias.",
+      "subtitle": "Ch 4.17 · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods); 4.16 Job Analysis Methods",
+      "points": [
+        "Good when there are few experts or little time; data can be hard to analyze"
+      ]
+    },
+    {
+      "id": "c202-ch04-077",
+      "front": "What is the task inventory approach?",
+      "answer": "Experts list 50-200 tasks grouped into functions; objective and reliable, but it misses rare tasks and star traits.",
+      "subtitle": "Ch 4.17 · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods); 4.16 Job Analysis Methods",
+      "points": [
+        "Usually collected by survey; combine with other methods"
+      ]
+    },
+    {
+      "id": "c202-ch04-078",
+      "front": "What is the Position Analysis Questionnaire (PAQ)?",
+      "answer": "A standardized questionnaire for almost any job that's fast and comparable but needs a high reading level.",
+      "subtitle": "Ch 4.17 · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods); 4.16 Job Analysis Methods",
+      "points": [
+        "Covers information input, mental processes, work output, job context",
+        "Estimates mental, perceptual, psychomotor, and physical requirements"
+      ]
+    },
+    {
+      "id": "c202-ch04-079",
+      "front": "Why combine job analysis methods?",
+      "answer": "Each method has blind spots, so combining them offsets weaknesses and improves accuracy and legal defense.",
+      "subtitle": "Ch 4.17 · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods)"
+    },
+    {
+      "id": "c202-ch04-080",
+      "front": "Why might job experts give biased job analysis input?",
+      "answer": "Results affect pay and promotion, so experts may stress their own strengths; multiple sources keep it honest.",
+      "subtitle": "Ch 4.17 · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods)",
+      "points": [
+        "A relationship-strong salesperson stresses relationships; a records-strong one stresses recordkeeping"
+      ]
+    },
+    {
+      "id": "c202-ch04-081",
+      "front": "What is O*NET, and how should it be used?",
+      "answer": "The government's online job classification database; a good starting point to adapt, not copy.",
+      "subtitle": "Ch 4.17 · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods); 4.23 Strategic HRM Exercise: Using O*NET",
+      "points": [
+        "Generic downloaded job descriptions are a weak legal defense and a poor strategy fit"
+      ]
+    },
+    {
+      "id": "c202-ch04-082",
+      "front": "What is competency modeling?",
+      "answer": "A job analysis method that identifies broad traits of high performers, tied to strategy and values.",
+      "subtitle": "Ch 4.18 · Effective HRM",
+      "note": "Read more: 4.18 Competency Modeling",
+      "points": [
+        "Common competencies: results focus, customer service, leadership, emotional intelligence, communication, teamwork"
+      ]
+    },
+    {
+      "id": "c202-ch04-083",
+      "front": "How do competencies differ from KSAOs?",
+      "answer": "Competencies are broad, cross-job traits that reinforce culture; KSAOs are specific to a single job.",
+      "subtitle": "Ch 4.18 · Effective HRM",
+      "note": "Read more: 4.18 Competency Modeling",
+      "points": [
+        "Competency-based descriptions last longer and let similar jobs be grouped"
+      ]
+    },
+    {
+      "id": "c202-ch04-084",
+      "front": "How many competencies should a model include?",
+      "answer": "Usually 6-12; too many blur focus, so keep the ones data show matter most.",
+      "subtitle": "Ch 4.18 · Effective HRM",
+      "note": "Read more: 4.18 Competency Modeling",
+      "points": [
+        "Dell's five executive competencies: learn fast, thrive amid change, deliver results, solve problems, build teams"
+      ]
+    },
+    {
+      "id": "c202-ch04-085",
+      "front": "What are the limits of competency modeling?",
+      "answer": "It's less rigorous and documented, so legal defensibility is uncertain; pair it with traditional job analysis.",
+      "subtitle": "Ch 4.18 · Effective HRM",
+      "note": "Read more: 4.18 Competency Modeling",
+      "points": [
+        "Can miss rare-but-important traits"
+      ]
+    },
+    {
+      "id": "c202-ch04-086",
+      "front": "What's the risk of using AI to define an ideal employee profile?",
+      "answer": "It learns patterns from biased past data and can repeat them, as Amazon's résumé tool did against women.",
+      "subtitle": "Ch 4.18 · Effective HRM",
+      "note": "Read more: 4.18 Competency Modeling",
+      "points": [
+        "Amazon trained on 10 years of mostly male résumés, used it only in trial, then dropped it"
+      ]
+    },
+    {
+      "id": "c202-ch04-087",
+      "front": "What is job rewards analysis?",
+      "answer": "Identifying a job's intrinsic rewards (from the work) and extrinsic rewards (pay, bonuses, benefits).",
+      "subtitle": "Ch 4.18 · Motivational Concepts",
+      "note": "Read more: 4.18 Competency Modeling",
+      "points": [
+        "Intrinsic + extrinsic = total rewards; a bonus is extrinsic"
+      ]
+    },
+    {
+      "id": "c202-ch04-088",
+      "front": "How is job rewards information used in recruiting?",
+      "answer": "Match what you highlight to the candidate: pay for money-driven people, growth for development-driven ones.",
+      "subtitle": "Ch 4.18 · Motivational Concepts",
+      "note": "Read more: 4.18 Competency Modeling",
+      "points": [
+        "Barclays touts expert colleagues, facilities, progression, and training"
+      ]
+    },
+    {
+      "id": "c202-ch04-089",
+      "front": "How does organizational design differ from organizational structure?",
+      "answer": "Design is the process of choosing and managing structure; structure is the formal task, power, and reporting system.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Structure coordinates, controls, and motivates; redesign aids survival amid change"
+      ]
+    },
+    {
+      "id": "c202-ch04-090",
+      "front": "What does an organizational chart show?",
+      "answer": "The chain of command: who reports to whom and who is responsible for whom.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Position isn't importance; a FedEx executive said drivers matter more than he does"
+      ]
+    },
+    {
+      "id": "c202-ch04-091",
+      "front": "What is a policy?",
+      "answer": "A broad guiding principle that sets direction; in effect, a decision already made.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Example: 'We reimburse reasonable business travel to serve clients'",
+        "Directs and limits actions toward long-term goals"
+      ]
+    },
+    {
+      "id": "c202-ch04-092",
+      "front": "What is a procedure?",
+      "answer": "A how-to sequence of steps for carrying out a task in line with policy.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Example: photograph the receipt, upload within 30 days, get manager approval"
+      ]
+    },
+    {
+      "id": "c202-ch04-093",
+      "front": "What is a rule?",
+      "answer": "A specific statement of what employees may or may not do, with little room for discretion.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Example: 'Safety glasses must be worn on the production floor'"
+      ]
+    },
+    {
+      "id": "c202-ch04-094",
+      "front": "How do policies, procedures, and rules work together?",
+      "answer": "Policies set direction, procedures say how to do it, and rules set the musts; together they guide daily work.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Memory trick: policy = why/direction, procedure = how, rule = must or must not",
+        "They support vision and goals, compliance, and safety"
+      ]
+    },
+    {
+      "id": "c202-ch04-095",
+      "front": "What is an employee handbook?",
+      "answer": "A document, often online, that collects the organization's policies, procedures, and rules for employees.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Typical contents: discipline rules, ethics code, at-will statement, confidentiality agreement, benefits, complaint steps"
+      ]
+    },
+    {
+      "id": "c202-ch04-096",
+      "front": "How does the employee handbook protect the organization?",
+      "answer": "It documents expectations and notice, supports consistent enforcement, and records at-will and confidentiality terms.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Signed acknowledgments prove employees received the rules",
+        "Consistent enforcement lowers discrimination and wrongful discharge risk",
+        "Standard practice: a disclaimer that the handbook isn't a contract"
+      ]
+    },
+    {
+      "id": "c202-ch04-097",
+      "front": "How does the employee handbook protect employees?",
+      "answer": "It spells out rights, benefits, and complaint channels so everyone is held to the same known rules.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Model answer (remote-work-style policy): protects the firm by setting clear expectations it can enforce;",
+        "protects the employee by defining hours, equipment, and reimbursement so they aren't judged by unwritten rules",
+        "Anti-harassment and anti-retaliation policies give a safe way to report"
+      ]
+    },
+    {
+      "id": "c202-ch04-098",
+      "front": "What is formalization?",
+      "answer": "How much an organization's rules, procedures, and communications are written down.",
+      "subtitle": "Ch 4.20 · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure",
+      "points": [
+        "High formalization: little discretion, more role clarity and commitment"
+      ]
+    },
+    {
+      "id": "c202-ch04-099",
+      "front": "How do centralization and decentralization differ?",
+      "answer": "Centralization keeps decision authority at the top; decentralization pushes it down for speed and innovation.",
+      "subtitle": "Ch 4.20 · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure",
+      "points": [
+        "Centralized: new firms, simple stable environments, clear lines of responsibility",
+        "Decentralized: flatter, fewer middle managers, best for nonroutine work in complex environments"
+      ]
+    },
+    {
+      "id": "c202-ch04-100",
+      "front": "What is division of labor?",
+      "answer": "The degree of specialization in jobs; it boosts efficiency and learning but can isolate units.",
+      "subtitle": "Ch 4.20 · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure",
+      "points": [
+        "Generalists are cheaper but slower to decide"
+      ]
+    },
+    {
+      "id": "c202-ch04-101",
+      "front": "When is a narrow vs. wide span of control best?",
+      "answer": "Narrow suits complex, novel work needing coaching; wide suits routine work and similar jobs, and costs less.",
+      "subtitle": "Ch 4.20 · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure",
+      "points": [
+        "Span of control = number of direct reports; more than about 9 is often too many"
+      ]
+    },
+    {
+      "id": "c202-ch04-102",
+      "front": "What are the risks of too many or too few hierarchy levels?",
+      "answer": "Too many raise cost and slow decisions; too few weaken coordination and control.",
+      "subtitle": "Ch 4.20 · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure",
+      "points": [
+        "Tall = many layers; flat = few. HP ran tens of thousands of people with about 8 levels"
+      ]
+    },
+    {
+      "id": "c202-ch04-103",
+      "front": "How does structure affect career fit?",
+      "answer": "People who like predictability fit bureaucracies; those who like flexibility fit less formal, decentralized firms.",
+      "subtitle": "Ch 4.20 · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-104",
+      "front": "What is workflow analysis?",
+      "answer": "Tracing how work moves from a customer's request through value-adding steps to delivery, to cut or combine steps.",
+      "subtitle": "Ch 4.21 · Effective HRM",
+      "note": "Read more: 4.21 Workflow Analysis",
+      "points": [
+        "Workflow = how work is organized to meet goals; regular analysis boosts efficiency and satisfaction"
+      ]
+    },
+    {
+      "id": "c202-ch04-105",
+      "front": "How does business process reengineering differ from workflow analysis?",
+      "answer": "BPR is a radical, clean-slate redesign for big gains; workflow analysis improves the existing process step by step.",
+      "subtitle": "Ch 4.21 · Effective HRM",
+      "note": "Read more: 4.21 Workflow Analysis",
+      "points": [
+        "Taco Bell centralized ingredient prep: higher quality and morale, fewer injuries, lower cost"
+      ]
+    },
+    {
+      "id": "c202-ch04-106",
+      "front": "What are the risks of business process reengineering?",
+      "answer": "It can hurt morale, often brings layoffs, and may not fix the real problem; it needs a long-term, people-aware view.",
+      "subtitle": "Ch 4.21 · Effective HRM",
+      "note": "Read more: 4.21 Workflow Analysis"
+    },
+    {
+      "id": "c202-ch04-107",
+      "front": "How did airlines respond to the pilot shortage before 2020?",
+      "answer": "Higher pilot pay, signing and retention bonuses, and paid training pipelines such as JetBlue's.",
+      "subtitle": "Ch 4.22 · Effective HRM",
+      "note": "Read more: 4.22 Real World Response: Managing a Pilot Shortage at American Airlines",
+      "points": [
+        "American's average pilot pay: $229K (2018) vs $138K a decade earlier",
+        "Raising pay partly shifted the shortage to lower-paying regional carriers"
+      ]
+    },
+    {
+      "id": "c202-ch04-108",
+      "front": "How did COVID-19 change the pilot labor picture?",
+      "answer": "The shortage became a surplus, met with pay cuts, early retirements, buyouts, leaves, and hiring pauses.",
+      "subtitle": "Ch 4.22 · Effective HRM",
+      "note": "Read more: 4.22 Real World Response: Managing a Pilot Shortage at American Airlines",
+      "points": [
+        "Furloughs were a last resort, to avoid a future shortfall"
+      ]
+    },
+    {
+      "id": "c202-ch04-109",
+      "type": "scenario",
+      "front": "A hospital opening a new wing expects 15% more patients next year. Which approach best aligns its performance metrics, action plans, and HR planning?",
+      "choices": [
+        "Wait until units report vacancies, then post openings and fill them as fast as the budget allows",
+        "Set next year's nurse headcount from the finance budget alone, since labor is the largest cost",
+        "Repeat last year's hiring plan and staffing levels, since turnover was acceptable then",
+        "Forecast nurse need from patient volume and staffing ratios, compare it with supply, and set a hiring plan tracked quarterly"
+      ],
+      "correct": 3,
+      "explanation": "Alignment means using metrics and past results to forecast the gap, then building proactive action plans with targets you keep measuring. Reacting, budget-only planning, and copying old plans skip the data.",
+      "subtitle": "Ch 4.4 Apply · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-110",
+      "type": "scenario",
+      "front": "A retailer's hiring plan for its new distribution center has been running for six months. How should managers judge whether the action plan is working?",
+      "choices": [
+        "Track the plan's own performance metrics, like time to fill, turnover, and productivity, and adjust",
+        "Assume it's working as long as the hiring budget hasn't been exceeded so far",
+        "Wait for the next annual strategic planning cycle before reviewing any results",
+        "Survey new hires about whether they like the building and break rooms"
+      ],
+      "correct": 0,
+      "explanation": "Action plans carry performance metrics so managers can see progress and revise the plan as conditions change.",
+      "subtitle": "Ch 4.4 Apply · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-111",
+      "type": "scenario",
+      "front": "A toy maker needs 30% more warehouse workers for an eight-week holiday rush. Which response fits a short-term shortage?",
+      "choices": [
+        "Early retirement incentives to open spots for seasonal hires",
+        "Salary cuts across the warehouse to fund overtime",
+        "Leaving vacated positions unfilled until the rush ends",
+        "Hiring incentives, retention bonuses, and reassigning staff from slower areas"
+      ],
+      "correct": 3,
+      "explanation": "Short-term shortages call for quick fixes like hiring incentives, retention bonuses, and reassignment. The other options are surplus responses.",
+      "subtitle": "Ch 4.4 Apply · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-112",
+      "type": "scenario",
+      "front": "A manufacturer will phase out a product line over three years, leaving about 80 more workers than it needs. Which response best fits this long-term surplus?",
+      "choices": [
+        "Signing bonuses to bring in workers for the next product line",
+        "Business process outsourcing of the remaining work",
+        "Early retirement incentives, attrition, and not refilling vacated positions",
+        "Retention bonuses so the affected workers stay through the phase-out"
+      ],
+      "correct": 2,
+      "explanation": "Long-term surpluses call for early retirement incentives, leaving positions unfilled, and if needed layoffs. A gradual plan costs less and protects top talent.",
+      "subtitle": "Ch 4.4 Apply · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-113",
+      "type": "scenario",
+      "front": "A firm whose talent philosophy treats employees as long-term investors faces a two-month dip in orders. What response best fits its philosophy?",
+      "choices": [
+        "Temporarily reduce hours for everyone rather than lay people off",
+        "Lay off the newest 20% of staff immediately to protect margins",
+        "Offer permanent early retirement packages to senior staff",
+        "Freeze all training and development permanently"
+      ],
+      "correct": 0,
+      "explanation": "Action plans must fit the talent philosophy. A short-term surplus at a firm that values employees as investors suggests sharing the cut through reduced hours.",
+      "subtitle": "Ch 4.9 Apply · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+    },
+    {
+      "id": "c202-ch04-114",
+      "type": "scenario",
+      "front": "A software firm forecasts a shortage of data engineers lasting at least five years. Which response fits a long-term shortage?",
+      "choices": [
+        "Cut salaries for current engineers to free budget for recruiting",
+        "Lay off staff in other units and fund overtime for current engineers",
+        "Reduce labor demand through automation, outsource some processes, and build a training pipeline",
+        "Pay one-time retention bonuses and wait for the market to loosen"
+      ],
+      "correct": 2,
+      "explanation": "Long-term shortages call for reducing labor demand or business process outsourcing. Pipelines with schools also build supply over time.",
+      "subtitle": "Ch 4.4 Apply · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-115",
+      "type": "scenario",
+      "front": "A utility forecasts demand for 120 line technicians next year and an internal supply of 100. What has gap analysis shown, and what comes next?",
+      "choices": [
+        "Balance, since the gap is small; no action plan needed",
+        "No real gap yet; wait until vacancies appear before acting",
+        "A shortage of 20; build an action plan such as recruiting, training, or retention incentives",
+        "A surplus of 20; plan early retirements and leave openings unfilled"
+      ],
+      "correct": 2,
+      "explanation": "Gap analysis compares forecasted demand with supply. Demand above supply is a shortage, and the next step is an action plan with metrics.",
+      "subtitle": "Ch 4.9 Apply · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+    },
+    {
+      "id": "c202-ch04-116",
+      "type": "scenario",
+      "front": "Only one accountant understands a company's legacy payroll system, and she just gave notice. What risk is this, and what should have prevented it?",
+      "choices": [
+        "Manpower understaffing; hiring more general clerks",
+        "A labor surplus; early retirement offers",
+        "Adverse impact; a four-fifths analysis",
+        "Expertise understaffing; cross-training and a ready successor"
+      ],
+      "correct": 3,
+      "explanation": "Missing knowledge that no one else can cover is expertise understaffing, which hurts even short term. Cross-training and keeping successors in the pipeline prevent it.",
+      "subtitle": "Ch 4.9 Apply · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+    },
+    {
+      "id": "c202-ch04-117",
+      "type": "scenario",
+      "front": "A restaurant has run its dinner shift with two servers instead of four for six months to save money. What is the most likely result?",
+      "choices": [
+        "Higher commitment and morale because each server earns more tips",
+        "An expertise gap, since no one can cover the missing knowledge",
+        "Rising stress, absenteeism, and turnover from long-term manpower understaffing",
+        "No lasting effect, since manpower gaps are harmless if pay is good"
+      ],
+      "correct": 2,
+      "explanation": "Manpower understaffing is manageable briefly, but long term it hurts well-being and commitment and raises absenteeism, stress, and turnover.",
+      "subtitle": "Ch 4.9 Apply · Effective HRM",
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+    },
+    {
+      "id": "c202-ch04-118",
+      "type": "scenario",
+      "front": "A global health crisis suddenly shuts down travel, and every economic forecast changes week to week. How should a hotel chain approach labor planning?",
+      "choices": [
+        "Commit to one optimistic forecast so managers have a single target",
+        "Plan for several scenarios, re-check its predictors often, and revise plans as data arrives",
+        "Stick with last year's trend analysis, since history is the best guide",
+        "Freeze all planning until the crisis ends and data stabilizes"
+      ],
+      "correct": 1,
+      "explanation": "Rare shocks break old predictors. In fast, unfamiliar change, forecasts are close to guesses, so plan for a range of outcomes and revisit often.",
+      "subtitle": "Ch 4.6 Apply · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand"
+    },
+    {
+      "id": "c202-ch04-119",
+      "type": "scenario",
+      "front": "Interest rates are forecast to rise sharply next year. How should a home builder adjust its labor demand forecast?",
+      "choices": [
+        "Lower it, since higher borrowing costs reduce home buying and construction work",
+        "Raise it, since higher rates usually signal a growing economy",
+        "Leave it unchanged; interest rates don't affect labor",
+        "Raise it only for mortgage specialists, who process more loans"
+      ],
+      "correct": 0,
+      "explanation": "Higher rates raise borrowing costs for firms and customers, so demand and labor needs fall, especially in housing and the trades.",
+      "subtitle": "Ch 4.6 Apply · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand"
+    },
+    {
+      "id": "c202-ch04-120",
+      "type": "scenario",
+      "front": "The U.S. dollar strengthens a lot against other currencies. What does that suggest for a U.S. manufacturer that exports most of its products?",
+      "choices": [
+        "Lower labor demand, because its exports become more expensive abroad",
+        "Higher labor demand, because foreign imports become more expensive",
+        "No change, since currency shifts only affect banks and investors",
+        "Higher demand for domestic sales staff only"
+      ],
+      "correct": 0,
+      "explanation": "A stronger home currency makes exports pricier and imports cheaper, which tends to lower demand and labor needs for exporters.",
+      "subtitle": "Ch 4.6 Apply · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand"
+    },
+    {
+      "id": "c202-ch04-121",
+      "type": "scenario",
+      "front": "A forecasting analyst wants a monthly survey of how secure adults feel in their jobs and how willing they are to spend. Which indicator fits?",
+      "choices": [
+        "Consumer Confidence Index",
+        "Leading Economic Index",
+        "Purchasing Managers Index",
+        "Exchange rate trends"
+      ],
+      "correct": 0,
+      "explanation": "The Conference Board's Consumer Confidence Index surveys adults on job security and spending plans, which predicts demand and labor needs.",
+      "subtitle": "Ch 4.6 Apply · Effective HRM",
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand"
+    },
+    {
+      "id": "c202-ch04-122",
+      "type": "scenario",
+      "front": "A call center keeps one supervisor for every 12 agents. It plans to grow to 96 agents. Using ratio analysis, how many supervisors will it need?",
+      "choices": [
+        "6",
+        "10",
+        "8",
+        "12"
+      ],
+      "correct": 2,
+      "explanation": "Ratio analysis applies the staffing ratio to expected activity: 96 ÷ 12 = 8 supervisors. Adjust the ratio if productivity changes.",
+      "subtitle": "Ch 4.7 Apply · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+    },
+    {
+      "id": "c202-ch04-123",
+      "type": "scenario",
+      "front": "A clinic staffs 3 medical assistants for every 2 physicians. It is adding 4 physicians. How many additional medical assistants does the ratio call for?",
+      "choices": [
+        "8",
+        "6",
+        "4",
+        "3"
+      ],
+      "correct": 1,
+      "explanation": "3 assistants per 2 physicians is 1.5 per physician. Four new physicians × 1.5 = 6 more assistants.",
+      "subtitle": "Ch 4.7 Apply · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+    },
+    {
+      "id": "c202-ch04-124",
+      "type": "scenario",
+      "front": "A bank's headcount has grown about 8% a year for five years, and HR projects the same growth for next year. Which method is this?",
+      "choices": [
+        "Trend analysis",
+        "Ratio analysis",
+        "Bottom-up judgmental forecasting",
+        "Gap analysis"
+      ],
+      "correct": 0,
+      "explanation": "Projecting past employment patterns forward is trend analysis. Its weakness is assuming the past will continue.",
+      "subtitle": "Ch 4.7 Apply · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+    },
+    {
+      "id": "c202-ch04-125",
+      "type": "scenario",
+      "front": "Each store manager estimates next year's staffing needs, regional directors combine the estimates, and executives review them. Which forecasting approach is this?",
+      "choices": [
+        "Trend analysis",
+        "Ratio analysis",
+        "Bottom-up judgmental forecasting",
+        "Top-down judgmental forecasting"
+      ],
+      "correct": 2,
+      "explanation": "Bottom-up forecasting consolidates lower-level managers' estimates upward for top managers to review and formalize.",
+      "subtitle": "Ch 4.7 Apply · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+    },
+    {
+      "id": "c202-ch04-126",
+      "type": "scenario",
+      "front": "The CEO announces that headcount will fall 5% next year, and each division receives a target to meet it. Which forecasting approach is this?",
+      "choices": [
+        "Top-down judgmental forecasting",
+        "Bottom-up judgmental forecasting",
+        "Trend analysis",
+        "Regression analysis"
+      ],
+      "correct": 0,
+      "explanation": "In top-down forecasting, leaders' predictions or budgets become the goals for lower levels.",
+      "subtitle": "Ch 4.7 Apply · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+    },
+    {
+      "id": "c202-ch04-127",
+      "type": "scenario",
+      "front": "A warehouse used to need one picker per 400 orders a day. It just installed scanners that make pickers 25% faster. How should HR use its old staffing ratio?",
+      "choices": [
+        "Apply the old ratio unchanged, since ratios are stable over time",
+        "Drop ratio forecasting until a new multiyear trend appears",
+        "Hire extra pickers to be safe while workers learn the scanners",
+        "Adjust the ratio for the productivity gain, using managers' judgment"
+      ],
+      "correct": 3,
+      "explanation": "Staffing ratios assume stable productivity. New technology, training, or incentives mean the ratio should be adjusted.",
+      "subtitle": "Ch 4.7 Apply · Effective HRM",
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+    },
+    {
+      "id": "c202-ch04-128",
+      "type": "scenario",
+      "front": "A plant has 50 technicians. Next year it expects 6 retirements, 4 resignations, and 3 promotions out, plus 2 transfers in. What is its forecasted internal supply?",
+      "choices": [
+        "41",
+        "35",
+        "39",
+        "37"
+      ],
+      "correct": 2,
+      "explanation": "Internal supply = current staff − expected losses + expected gains: 50 − 13 + 2 = 39.",
+      "subtitle": "Ch 4.8 Apply · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply"
+    },
+    {
+      "id": "c202-ch04-129",
+      "type": "scenario",
+      "front": "A VP wants one page showing who could replace each of her directors and how ready each candidate is. Which tool fits?",
+      "choices": [
+        "Talent inventory",
+        "Trend analysis",
+        "Job description",
+        "Replacement chart"
+      ],
+      "correct": 3,
+      "explanation": "A replacement chart shows jobholders, possible successors, and each successor's readiness, performance, and development needs.",
+      "subtitle": "Ch 4.8 Apply · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply"
+    },
+    {
+      "id": "c202-ch04-130",
+      "type": "scenario",
+      "front": "HR needs to find every employee who speaks Portuguese and holds a project management certification for a new Brazil project. Which tool helps most?",
+      "choices": [
+        "Organizational chart",
+        "Ratio analysis",
+        "Talent inventory",
+        "Replacement chart"
+      ],
+      "correct": 2,
+      "explanation": "A talent inventory records each employee's competencies and qualifications so HR can match people to needs quickly.",
+      "subtitle": "Ch 4.8 Apply · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply"
+    },
+    {
+      "id": "c202-ch04-131",
+      "type": "scenario",
+      "front": "A company runs a program that identifies high-potential managers, gives them stretch assignments and mentoring, and tracks their progress toward executive roles. What is this?",
+      "choices": [
+        "Succession planning",
+        "Talent inventory",
+        "Job rotation",
+        "Workflow analysis"
+      ],
+      "correct": 0,
+      "explanation": "Succession planning identifies, develops, and tracks employees so they can move into higher positions.",
+      "subtitle": "Ch 4.8 Apply · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply"
+    },
+    {
+      "id": "c202-ch04-132",
+      "type": "scenario",
+      "front": "A bank lets its tellers resolve fee disputes and approve small refunds on their own instead of calling a supervisor. What redesign is this?",
+      "choices": [
+        "Scientific management",
+        "Job enrichment",
+        "Job enlargement",
+        "Job rotation"
+      ],
+      "correct": 1,
+      "explanation": "Adding responsibility and decision authority is vertical expansion, which is job enrichment.",
+      "subtitle": "Ch 4.12 Apply · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-133",
+      "type": "scenario",
+      "front": "A warehouse packer is now also asked to print labels and scan outgoing boxes, all at the same skill level. What redesign is this?",
+      "choices": [
+        "Job rotation",
+        "Business process reengineering",
+        "Job enlargement",
+        "Job enrichment"
+      ],
+      "correct": 2,
+      "explanation": "Adding more tasks at the same level is horizontal expansion, which is job enlargement. It reduces boredom but not responsibility.",
+      "subtitle": "Ch 4.12 Apply · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-134",
+      "type": "scenario",
+      "front": "New analysts spend three months each in finance, marketing, operations, and sales before choosing a home team. What is this?",
+      "choices": [
+        "Division of labor",
+        "Job rotation",
+        "Job enrichment",
+        "Succession planning"
+      ],
+      "correct": 1,
+      "explanation": "Moving employees among jobs is job rotation. It requires cross-training and builds broad skills.",
+      "subtitle": "Ch 4.12 Apply · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-135",
+      "type": "scenario",
+      "front": "A bike company switches from having each worker attach one part to having small teams build a whole bicycle from start to finish. Which core job characteristic rises most?",
+      "choices": [
+        "Feedback",
+        "Task identity",
+        "Task significance",
+        "Autonomy"
+      ],
+      "correct": 1,
+      "explanation": "Task identity is completing a whole, identifiable piece of work from beginning to end.",
+      "subtitle": "Ch 4.12 Apply · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-136",
+      "type": "scenario",
+      "front": "A hospital lab tech starts receiving notes on how her test results helped doctors save patients. Which job characteristic does this highlight?",
+      "choices": [
+        "Task identity",
+        "Autonomy",
+        "Task significance",
+        "Skill variety"
+      ],
+      "correct": 2,
+      "explanation": "Task significance is the job's impact on other people's lives or work. Seeing that impact raises experienced meaningfulness.",
+      "subtitle": "Ch 4.12 Apply · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-137",
+      "type": "scenario",
+      "front": "A manager plans to enrich every clerk's job. One reliable clerk says she likes her simple, predictable routine. What should the manager consider?",
+      "choices": [
+        "Move her to a job with less pay",
+        "Task identity is the only factor that matters",
+        "Growth need strength; not everyone is motivated by an enriched job",
+        "Enrich it anyway, since complex work motivates everyone"
+      ],
+      "correct": 2,
+      "explanation": "Growth need strength moderates the job characteristics model. People with low growth needs may prefer simpler, stable jobs.",
+      "subtitle": "Ch 4.12 Apply · Motivational Concepts",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-138",
+      "type": "scenario",
+      "front": "A factory films workers packing boxes, finds the fastest set of motions, and trains everyone to use exactly that method. What approach is this, and what's its main risk?",
+      "choices": [
+        "Competency modeling; weak legal defense",
+        "Job rotation; too much cross-training cost",
+        "Scientific management; monotony and loss of initiative",
+        "Job enrichment; too much responsibility"
+      ],
+      "correct": 2,
+      "explanation": "Time-and-motion studies and precise methods are scientific management. It raises efficiency but can feel monotonous and dehumanizing.",
+      "subtitle": "Ch 4.11 Apply · Effective HRM",
+      "note": "Read more: 4.11 Job Design"
+    },
+    {
+      "id": "c202-ch04-139",
+      "type": "scenario",
+      "front": "A manager just finished a job analysis for a lab technician role. Which of these is NOT a typical use of that data?",
+      "choices": [
+        "Setting the minimum qualifications for applicants",
+        "Choosing the colors for the company's new logo",
+        "Writing the technician training plan",
+        "Setting the job's pay grade relative to similar jobs"
+      ],
+      "correct": 1,
+      "explanation": "Job analysis data supports hiring requirements, recruiting, selection, training plans, pay systems, and performance appraisals. Branding decisions aren't based on it.",
+      "subtitle": "Ch 4.13 Apply · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-140",
+      "type": "scenario",
+      "front": "A rejected applicant sues, claiming the company's requirement of two years' forklift experience was arbitrary. What best supports the company's defense?",
+      "choices": [
+        "A documented job analysis showing the requirement is tied to essential job duties",
+        "Evidence that most competitors use the same experience requirement",
+        "A statement that the hiring manager had no intent to discriminate",
+        "Proof that many qualified people applied and were considered"
+      ],
+      "correct": 0,
+      "explanation": "Job analysis documents job-related requirements, which is the legal foundation against failure-to-hire claims (and adverse impact claims from Chapter 3).",
+      "subtitle": "Ch 4.13 Apply · Legal & Regulatory",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-141",
+      "type": "scenario",
+      "front": "A firm is shifting from in-store sales to e-commerce. Before rewriting its customer service job requirements, what should it do?",
+      "choices": [
+        "Analyze the job in light of the new strategy and future skill needs",
+        "Reuse the current job description, since the customers haven't changed",
+        "Download a generic e-commerce job description and use it as is",
+        "Let each manager set requirements from past hiring experience"
+      ],
+      "correct": 0,
+      "explanation": "Job analysis should align requirements with strategy and future needs, so hires fit where the business is going.",
+      "subtitle": "Ch 4.13 Apply · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-142",
+      "type": "scenario",
+      "front": "Sales are flat, and a job analysis reveals that account reps spend 70% of their time on internal paperwork. How should the company use this finding?",
+      "choices": [
+        "Redesign the job to cut paperwork and free time for selling",
+        "Hire more reps without changing anything",
+        "Raise sales quotas",
+        "Ignore it, since job analysis is only for hiring"
+      ],
+      "correct": 0,
+      "explanation": "Job analysis also supports job redesign. GE found its salespeople spent 80% of their time on non-sales work.",
+      "subtitle": "Ch 4.13 Apply · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-143",
+      "type": "scenario",
+      "front": "Which statement belongs in a person specification rather than a job description?",
+      "choices": [
+        "Reports to the operations manager and supervises two helpers",
+        "Plans daily delivery routes, loads the truck, and logs each stop",
+        "Works some weekends and holidays during the peak shipping season",
+        "Holds a commercial driver's license and has two years of delivery experience"
+      ],
+      "correct": 3,
+      "explanation": "A person specification lists the worker characteristics needed. Reporting lines, duties, and conditions belong in the job description.",
+      "subtitle": "Ch 4.15 Apply · Effective HRM",
+      "note": "Read more: 4.15 Person Specification"
+    },
+    {
+      "id": "c202-ch04-144",
+      "type": "scenario",
+      "front": "A posting reads: 'Schedules patient appointments, verifies insurance, and reports to the clinic manager. Some Saturdays required.' What document is this drawn from?",
+      "choices": [
+        "Replacement chart",
+        "Talent inventory",
+        "Job description",
+        "Person specification"
+      ],
+      "correct": 2,
+      "explanation": "Duties, reporting relationships, and special conditions are the content of a job description.",
+      "subtitle": "Ch 4.14 Apply · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-ch04-145",
+      "type": "scenario",
+      "front": "A posting for an accountant lists a CPA license as required and 'fluency in Spanish a plus.' How should the Spanish fluency be treated?",
+      "choices": [
+        "As a job duty to list in the job description",
+        "As an innate ability that can't be assessed before hire",
+        "As a desirable criterion for comparing candidates who meet the essentials",
+        "As an essential criterion used to screen out applicants who lack it"
+      ],
+      "correct": 2,
+      "explanation": "Desirable criteria boost success but aren't required. Screen on essential criteria first, then compare on desirable ones.",
+      "subtitle": "Ch 4.15 Apply · Effective HRM",
+      "note": "Read more: 4.15 Person Specification"
+    },
+    {
+      "id": "c202-ch04-146",
+      "type": "scenario",
+      "front": "A data-entry job requires typing 60 accurate words per minute. In KSAO terms, what is this?",
+      "choices": [
+        "An 'other' characteristic",
+        "A skill",
+        "Knowledge",
+        "An ability"
+      ],
+      "correct": 1,
+      "explanation": "A skill is applying knowledge to perform a task to a measurable standard, like typing speed.",
+      "subtitle": "Ch 4.15 Apply · Effective HRM",
+      "note": "Read more: 4.15 Person Specification"
+    },
+    {
+      "id": "c202-ch04-147",
+      "type": "scenario",
+      "front": "A safety coordinator must know OSHA's recordkeeping requirements. In KSAO terms, what is this?",
+      "choices": [
+        "An 'other' characteristic",
+        "Knowledge",
+        "A skill",
+        "An ability"
+      ],
+      "correct": 1,
+      "explanation": "Knowledge is organized factual or procedural information. State it specifically, such as named regulations rather than 'safety rules.'",
+      "subtitle": "Ch 4.15 Apply · Effective HRM",
+      "note": "Read more: 4.15 Person Specification"
+    },
+    {
+      "id": "c202-ch04-148",
+      "type": "scenario",
+      "front": "Which task statement is written best?",
+      "choices": [
+        "Prepares and conducts inventory on a regular basis",
+        "Counts stock monthly, compares counts with accounting records, and fixes discrepancies",
+        "Handles all inventory matters for the store as needed",
+        "Is responsible for inventory accuracy and other duties as assigned"
+      ],
+      "correct": 1,
+      "explanation": "Good task statements say what is done, how, and why. Vague verbs like 'handles' or 'prepares' tell applicants and analysts little.",
+      "subtitle": "Ch 4.14 Apply · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-ch04-149",
+      "type": "scenario",
+      "front": "With the ADA in mind, which task statement is better for a stock associate?",
+      "choices": [
+        "Lifts 40-pound cartons by hand and carries them up a ladder",
+        "Must be physically strong",
+        "Handles stock",
+        "Moves 40-pound cartons from the loading dock to storage shelves"
+      ],
+      "correct": 3,
+      "explanation": "Under the ADA, task statements should emphasize what must be accomplished, not how, so a person who could do it another way isn't screened out.",
+      "subtitle": "Ch 4.14 Apply · Legal & Regulatory",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-ch04-150",
+      "type": "scenario",
+      "front": "A hiring manager wants job analysis data built from real stories of excellent and poor performance so she can turn them into interview questions. Which method fits best?",
+      "choices": [
+        "Task inventory approach",
+        "Position Analysis Questionnaire",
+        "Ratio analysis",
+        "Critical incidents technique"
+      ],
+      "correct": 3,
+      "explanation": "Critical incidents capture concrete examples of very effective and ineffective behavior, which convert well into behavioral interview questions.",
+      "subtitle": "Ch 4.16 Apply · Effective HRM",
+      "note": "Read more: 4.16 Job Analysis Methods"
+    },
+    {
+      "id": "c202-ch04-151",
+      "type": "scenario",
+      "front": "A small firm has only two experts on a specialized role and needs a job analysis within a week. Which method fits best?",
+      "choices": [
+        "A task inventory survey of 200 tasks sent to all staff",
+        "Competency modeling across every job in the company",
+        "Business process reengineering of the role's workflow",
+        "Structured interview technique with a skilled interviewer"
+      ],
+      "correct": 3,
+      "explanation": "The structured interview technique needs minimal time and resources and suits situations with few experts, but a professional should run it to limit bias.",
+      "subtitle": "Ch 4.17 Apply · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods)"
+    },
+    {
+      "id": "c202-ch04-152",
+      "type": "scenario",
+      "front": "A large employer needs standardized, quantitative data to compare 40 different jobs quickly and cheaply. Which method fits best?",
+      "choices": [
+        "Observation of top performers only",
+        "A structured questionnaire such as the PAQ",
+        "Critical incidents technique",
+        "Structured interviews with each incumbent"
+      ],
+      "correct": 1,
+      "explanation": "Structured questionnaires like the PAQ are fast, cheap, usable for nearly any job, and standardized for comparison.",
+      "subtitle": "Ch 4.17 Apply · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods)"
+    },
+    {
+      "id": "c202-ch04-153",
+      "type": "scenario",
+      "front": "An analyst surveys experts to list and group about 150 tasks for a technician job. What is the main limitation of this approach?",
+      "choices": [
+        "It can miss rare but important tasks and what makes top performers",
+        "It's too subjective to give reliable, repeatable results",
+        "It needs a professional interviewer to limit bias in the data",
+        "It only works for executive and professional jobs"
+      ],
+      "correct": 0,
+      "explanation": "The task inventory approach is objective and reliable but can miss infrequent, important tasks and superior-performer traits, so combine it with other methods.",
+      "subtitle": "Ch 4.17 Apply · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods)"
+    },
+    {
+      "id": "c202-ch04-154",
+      "type": "scenario",
+      "front": "A fast-growing tech company with constantly changing roles wants a list of broad traits shared by its best performers across many jobs. What approach fits, and what's the caution?",
+      "choices": [
+        "Task inventory; it may be too objective for fast-changing roles",
+        "Scientific management; workers may resist the time studies",
+        "Ratio analysis; staffing ratios may shift as the firm grows",
+        "Competency modeling; pair it with traditional job analysis"
+      ],
+      "correct": 3,
+      "explanation": "Competency modeling suits fast-changing jobs and small firms, but it's less rigorous and documented, so combine it with traditional methods.",
+      "subtitle": "Ch 4.18 Apply · Effective HRM",
+      "note": "Read more: 4.18 Competency Modeling"
+    },
+    {
+      "id": "c202-ch04-155",
+      "type": "scenario",
+      "front": "A small business owner downloads a generic job description for 'office manager' and uses it unchanged. What's the main problem?",
+      "choices": [
+        "Generic job descriptions are illegal to use for hiring",
+        "It will make the job too enriched for most applicants",
+        "No problem, since O*NET-style descriptions are meant to be copied",
+        "It may not reflect the actual job or strategy and is a weak legal defense"
+      ],
+      "correct": 3,
+      "explanation": "Generic descriptions are a fine starting point but must be adapted. Unchanged, they fit the strategy poorly and defend weakly against legal claims.",
+      "subtitle": "Ch 4.17 Apply · Effective HRM",
+      "note": "Read more: 4.17 Job Elements Method (and other methods)"
+    },
+    {
+      "id": "c202-ch04-156",
+      "type": "scenario",
+      "front": "A recruiter learns that a top candidate cares most about learning and advancement. Based on job rewards analysis, what should she emphasize?",
+      "choices": [
+        "The job's routine, predictable tasks",
+        "Training, development, and progression opportunities",
+        "The signing bonus and annual cash incentives",
+        "The company's strong stock price and profits"
+      ],
+      "correct": 1,
+      "explanation": "Job rewards analysis identifies intrinsic and extrinsic rewards so recruiters can match what they emphasize to what a candidate values.",
+      "subtitle": "Ch 4.18 Apply · Motivational Concepts",
+      "note": "Read more: 4.18 Competency Modeling"
+    },
+    {
+      "id": "c202-ch04-157",
+      "type": "scenario",
+      "front": "A plant posts this sign: 'Safety glasses must be worn at all times on the production floor.' What type of statement is this?",
+      "choices": [
+        "Procedure",
+        "Mission",
+        "Rule",
+        "Policy"
+      ],
+      "correct": 2,
+      "explanation": "A rule states exactly what employees must or must not do, with no room for discretion.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-158",
+      "type": "scenario",
+      "front": "A company's handbook says: 'We reimburse reasonable business travel expenses so our people can serve clients well.' What type of statement is this?",
+      "choices": [
+        "Rule",
+        "Job description",
+        "Policy",
+        "Procedure"
+      ],
+      "correct": 2,
+      "explanation": "A policy is a broad guiding principle that sets direction and reflects the company's values.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-159",
+      "type": "scenario",
+      "front": "An expense guide reads: '1. Photograph your receipt. 2. Upload it in the app within 30 days. 3. Your manager approves it in the portal.' What type of statement is this?",
+      "choices": [
+        "Rule",
+        "Core value",
+        "Procedure",
+        "Policy"
+      ],
+      "correct": 2,
+      "explanation": "A procedure is the step-by-step sequence for carrying out a task in line with policy.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-160",
+      "type": "scenario",
+      "front": "A company states, 'We offer eight weeks of paid parental leave to support families,' then adds, 'Submit your request in the HR portal at least 30 days before leave begins.' How should these two statements be classified?",
+      "choices": [
+        "The first is a procedure; the second is a policy",
+        "Both are policies",
+        "The first is a policy; the second is a procedure",
+        "Both are rules"
+      ],
+      "correct": 2,
+      "explanation": "The first sets direction (policy). The second gives the how-to steps to use it (procedure).",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-161",
+      "type": "scenario",
+      "front": "An employee fired for sharing confidential client data claims no one ever told her the rule. The company has her signed acknowledgment of the handbook, which includes its confidentiality policy. How did the handbook protect the company?",
+      "choices": [
+        "It doesn't help, since handbooks have no legal value",
+        "It documents that she was told the rule, supporting consistent enforcement",
+        "It makes any firing automatically legal, whatever the reason",
+        "It shifts legal liability for the leak to the client"
+      ],
+      "correct": 1,
+      "explanation": "A handbook with signed acknowledgment proves employees were told the rules, which supports consistent discipline and defends the organization.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-162",
+      "type": "scenario",
+      "front": "An employee is harassed by her supervisor. The handbook gives her a second reporting channel that bypasses the supervisor and promises no retaliation. How does the handbook protect her?",
+      "choices": [
+        "It doesn't; handbooks protect only the company, not employees",
+        "It requires her to resolve it with the supervisor before reporting",
+        "It guarantees her a transfer and a promotion if she reports",
+        "It spells out her rights and a safe way to report without retaliation"
+      ],
+      "correct": 3,
+      "explanation": "Handbooks protect employees by clarifying rights, complaint channels, and protections like anti-retaliation, so treatment is consistent and fair.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-163",
+      "type": "scenario",
+      "front": "A growing company has no handbook, and each manager enforces attendance rules differently. One employee is fired for lateness that others get away with. What's the biggest risk, and what's the fix?",
+      "choices": [
+        "Inconsistent treatment invites discrimination claims; publish a handbook",
+        "No real risk, since managers have full discretion over discipline",
+        "Low morale only; the fix is training managers to be stricter",
+        "Overtime costs; the fix is a new time-tracking system"
+      ],
+      "correct": 0,
+      "explanation": "Without documented rules, enforcement varies by manager. A handbook protects the organization through consistency and employees through clear, shared expectations.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-164",
+      "type": "scenario",
+      "front": "One manager oversees 20 agents handling routine billing calls. Another oversees 4 engineers doing novel research. Is each span of control appropriate?",
+      "choices": [
+        "No; the research team needs the wider span for autonomy",
+        "Yes, but only because wide spans always cost less",
+        "Yes; wide spans suit routine work, and narrow spans suit complex, novel work",
+        "No; both managers should have exactly nine direct reports"
+      ],
+      "correct": 2,
+      "explanation": "Routine, similar work allows wide spans and more autonomy. Complex, novel work needs narrow spans and closer coaching.",
+      "subtitle": "Ch 4.20 Apply · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-165",
+      "type": "scenario",
+      "front": "A startup's founder makes every decision. The company now operates in several complex, fast-changing markets, and decisions are piling up. What structural change fits?",
+      "choices": [
+        "Increase formalization only",
+        "Decentralize so lower-level managers can make decisions faster",
+        "Centralize further so the founder controls everything",
+        "Add more layers of hierarchy"
+      ],
+      "correct": 1,
+      "explanation": "Centralization suits new firms in simple, stable settings. Complex, nonroutine environments favor decentralization, which is faster and more innovative.",
+      "subtitle": "Ch 4.20 Apply · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-166",
+      "type": "scenario",
+      "front": "A request at a firm passes through seven management layers before anyone can approve it, and competitors move faster. What structural problem is most likely?",
+      "choices": [
+        "Too little formalization",
+        "Too little division of labor",
+        "Too much hierarchy",
+        "Too wide a span of control"
+      ],
+      "correct": 2,
+      "explanation": "Each layer adds cost and delay. Organizations should have only as many levels as they need.",
+      "subtitle": "Ch 4.20 Apply · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-167",
+      "type": "scenario",
+      "front": "A lender maps each step a loan application takes from request to approval and removes two duplicate sign-offs. What is this?",
+      "choices": [
+        "Workflow analysis",
+        "Business process reengineering",
+        "Job enrichment",
+        "Trend analysis"
+      ],
+      "correct": 0,
+      "explanation": "Workflow analysis traces how work moves to find steps to cut, simplify, or combine. It improves the existing process incrementally.",
+      "subtitle": "Ch 4.21 Apply · Effective HRM",
+      "note": "Read more: 4.21 Workflow Analysis"
+    },
+    {
+      "id": "c202-ch04-168",
+      "type": "scenario",
+      "front": "A restaurant chain scraps its in-store food prep entirely and moves it to central kitchens, so stores only assemble orders. What is this?",
+      "choices": [
+        "Job rotation",
+        "Ratio analysis",
+        "Business process reengineering",
+        "Workflow analysis"
+      ],
+      "correct": 2,
+      "explanation": "A radical, clean-slate redesign of how work gets done for big gains in cost, quality, and speed is BPR, as Taco Bell did.",
+      "subtitle": "Ch 4.21 Apply · Effective HRM",
+      "note": "Read more: 4.21 Workflow Analysis"
+    },
+    {
+      "id": "c202-ch04-169",
+      "type": "scenario",
+      "front": "A major airline raises new-pilot pay to end its pilot shortage. From an industry-wide view, what's the main limitation of this fix?",
+      "choices": [
+        "It creates an immediate surplus of new pilots",
+        "It violates the Equal Pay Act for senior pilots",
+        "It mostly shifts the shortage to lower-paying regional carriers",
+        "It has no effect, since pilots don't respond to pay"
+      ],
+      "correct": 2,
+      "explanation": "Higher pay helped American recruit, but it pulled pilots from lower-paying carriers. Growing total supply takes pipelines like training programs.",
+      "subtitle": "Ch 4.22 Apply · Effective HRM",
+      "note": "Read more: 4.22 Real World Response: Managing a Pilot Shortage at American Airlines"
+    },
+    {
+      "id": "c202-ch04-170",
+      "type": "scenario",
+      "front": "An organization's long-term goals, describing the ideal future it wants to reach, make up its...",
+      "choices": [
+        "Vision",
+        "Strategy",
+        "Mission",
+        "Values"
+      ],
+      "correct": 0,
+      "explanation": "A vision describes what the organization wants to become. A mission states its current purpose and scope.",
+      "subtitle": "Ch 4.4 Practice · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-171",
+      "type": "scenario",
+      "front": "Which process develops action plans to deal with forecasted labor surpluses and shortages?",
+      "choices": [
+        "Labor supply forecasting",
+        "Human resource planning",
+        "Business strategy development",
+        "Human resource management"
+      ],
+      "correct": 1,
+      "explanation": "HR planning reconciles demand and supply forecasts through action plans. Supply forecasting is only one input.",
+      "subtitle": "Ch 4.4 Practice · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-172",
+      "type": "scenario",
+      "front": "Identifying, developing, and tracking employees so they can move into higher positions is called...",
+      "choices": [
+        "A replacement chart",
+        "Trend analysis",
+        "A talent inventory",
+        "Succession planning"
+      ],
+      "correct": 3,
+      "explanation": "Succession planning is the ongoing process. A replacement chart is one tool it uses.",
+      "subtitle": "Ch 4.8 Practice · Effective HRM",
+      "note": "Read more: 4.8 Forecasting Labor Supply"
+    },
+    {
+      "id": "c202-ch04-173",
+      "type": "scenario",
+      "front": "Which redesign raises a job's complexity to give employees more responsibility and a sense of achievement?",
+      "choices": [
+        "Job enlargement",
+        "Job enrichment",
+        "Job rotation",
+        "Cross-training"
+      ],
+      "correct": 1,
+      "explanation": "Enrichment is vertical expansion that adds responsibility and autonomy.",
+      "subtitle": "Ch 4.12 Practice · Effective HRM",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-174",
+      "type": "scenario",
+      "front": "Adding more tasks at the same level of responsibility is called...",
+      "choices": [
+        "Job rotation",
+        "Worker autonomy",
+        "Job enrichment",
+        "Job enlargement"
+      ],
+      "correct": 3,
+      "explanation": "Enlargement is horizontal: more tasks, same level, same responsibility.",
+      "subtitle": "Ch 4.12 Practice · Effective HRM",
+      "note": "Read more: 4.12 Increasing Motivation Through Job Design"
+    },
+    {
+      "id": "c202-ch04-175",
+      "type": "scenario",
+      "front": "Which process helps align a job's requirements with the company's strategy?",
+      "choices": [
+        "Job analysis",
+        "Job enlargement",
+        "Job rotation",
+        "Job enrichment"
+      ],
+      "correct": 0,
+      "explanation": "Job analysis identifies the tasks and worker traits a job needs in light of strategy and culture.",
+      "subtitle": "Ch 4.13 Practice · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-176",
+      "type": "scenario",
+      "front": "A performance bonus is what kind of reward?",
+      "choices": [
+        "Extrinsic",
+        "Intrinsic",
+        "Total",
+        "Competency"
+      ],
+      "correct": 0,
+      "explanation": "Extrinsic rewards are monetary, like pay and bonuses. Intrinsic rewards come from the work itself.",
+      "subtitle": "Ch 4.18 Practice · Effective HRM",
+      "note": "Read more: 4.18 Competency Modeling"
+    },
+    {
+      "id": "c202-ch04-177",
+      "type": "scenario",
+      "front": "The formal system of task, power, and reporting relationships in a company is its organizational...",
+      "choices": [
+        "Chart",
+        "Structure",
+        "Design",
+        "Style"
+      ],
+      "correct": 1,
+      "explanation": "Structure is the system itself. A chart is the diagram of it, and design is the process of choosing it.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-178",
+      "type": "scenario",
+      "front": "A diagram showing a company's chain of command is an organizational...",
+      "choices": [
+        "Structure",
+        "Style",
+        "Design",
+        "Chart"
+      ],
+      "correct": 3,
+      "explanation": "An organizational chart shows who reports to whom.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-179",
+      "type": "scenario",
+      "front": "Selecting and managing aspects of structure to achieve the company's goals is called organizational...",
+      "choices": [
+        "Policy",
+        "Design",
+        "Procedure",
+        "Chart"
+      ],
+      "correct": 1,
+      "explanation": "Organizational design is the process of choosing and managing structure.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-180",
+      "type": "scenario",
+      "front": "A guiding principle that sets the direction for an organization is a...",
+      "choices": [
+        "Rule",
+        "Procedure",
+        "Process",
+        "Policy"
+      ],
+      "correct": 3,
+      "explanation": "A policy sets direction. Procedures give the steps, and rules state what's allowed.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-181",
+      "type": "scenario",
+      "front": "How concentrated decision-making authority is at the top of an organization is called...",
+      "choices": [
+        "Formalization",
+        "Span of control",
+        "Division of labor",
+        "Centralization"
+      ],
+      "correct": 3,
+      "explanation": "Centralization is concentrated authority. Decentralization pushes decisions down.",
+      "subtitle": "Ch 4.20 Practice · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-182",
+      "type": "scenario",
+      "front": "The number of people who report directly to a manager is the manager's...",
+      "choices": [
+        "Hierarchy",
+        "Span of control",
+        "Centralization",
+        "Formalization"
+      ],
+      "correct": 1,
+      "explanation": "Span of control counts direct reports. Hierarchy is the number of layers.",
+      "subtitle": "Ch 4.20 Practice · Effective HRM",
+      "note": "Read more: 4.20 Characteristics of Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-183",
+      "type": "scenario",
+      "front": "A company's basic purpose and the scope of its operations are captured in its...",
+      "choices": [
+        "Mission",
+        "Vision",
+        "Values",
+        "Strategy"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: a mission states purpose and scope. A vision is the ideal future.",
+      "subtitle": "Ch 4 Quiz Q1 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-184",
+      "type": "scenario",
+      "front": "A guiding belief such as 'always take care of our employees' that shapes decisions is a core...",
+      "choices": [
+        "Value",
+        "Strategy",
+        "Mission",
+        "Vision"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: core values are enduring beliefs that guide decisions.",
+      "subtitle": "Ch 4 Quiz Q2 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-185",
+      "type": "scenario",
+      "front": "Which HR process reconciles gaps between labor supply and demand by creating action plans?",
+      "choices": [
+        "HR forecasting",
+        "HR strategy",
+        "HR management",
+        "HR planning"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: HR planning uses forecasts to build action plans that close gaps.",
+      "subtitle": "Ch 4 Quiz Q3 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-186",
+      "type": "scenario",
+      "front": "The systematic process of describing a job's key aspects and the worker characteristics needed is...",
+      "choices": [
+        "Job enrichment",
+        "Job analysis",
+        "Job rotation",
+        "Job enlargement"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: job analysis identifies tasks, conditions, and required worker traits.",
+      "subtitle": "Ch 4 Quiz Q4 · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-187",
+      "type": "scenario",
+      "front": "Research on companies that use job analysis effectively finds that they...",
+      "choices": [
+        "Financially outperform their competitors",
+        "Find job analysis isn't worth the cost",
+        "Mainly use it to give employees more responsibility",
+        "Use it chiefly to motivate goal attainment"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: firms that use job analysis well outperform competitors financially.",
+      "subtitle": "Ch 4 Quiz Q5 · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-188",
+      "type": "scenario",
+      "front": "A written document listing a job's duties and responsibilities is a...",
+      "choices": [
+        "Job description",
+        "Job task",
+        "Job preview",
+        "Job statement"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: a job description summarizes duties and responsibilities.",
+      "subtitle": "Ch 4 Quiz Q6 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-ch04-189",
+      "type": "scenario",
+      "front": "To build action plans for an imbalance between labor supply and demand, managers use which kind of metrics?",
+      "choices": [
+        "Training metrics",
+        "Performance metrics",
+        "Job metrics",
+        "Business metrics"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: in the HR planning model (Figure 4.1), action plans are built with performance metrics. Moderate confidence; 'business metrics' is the closest distractor.",
+      "subtitle": "Ch 4 Quiz Q7 · Effective HRM",
+      "note": "Read more: 4.4 The Strategic Planning Process"
+    },
+    {
+      "id": "c202-ch04-190",
+      "type": "scenario",
+      "front": "Discipline rules, the code of ethics, an at-will statement, and a confidentiality agreement are usually found in the...",
+      "choices": [
+        "Collective bargaining agreement",
+        "Standard operating procedures",
+        "Job description",
+        "Employee handbook"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: the employee handbook documents policies, procedures, and rules like these.",
+      "subtitle": "Ch 4 Quiz Q8 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-191",
+      "type": "scenario",
+      "front": "An organizational chart depicts the formal system called...",
+      "choices": [
+        "Organizational structure",
+        "Organizational design",
+        "Job design",
+        "Job analysis"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: the chart diagrams the organizational structure (task, power, and reporting relationships).",
+      "subtitle": "Ch 4 Quiz Q9 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-192",
+      "type": "scenario",
+      "front": "A basic guideline that directs and limits actions in pursuit of long-term goals is a...",
+      "choices": [
+        "Procedure",
+        "Process",
+        "Protocol",
+        "Policy"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: a policy is a guiding principle that sets direction.",
+      "subtitle": "Ch 4 Quiz Q10 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-193",
+      "type": "scenario",
+      "front": "A directive that spells out the specific actions to take to reach an objective is a...",
+      "choices": [
+        "Policy",
+        "Procedure",
+        "Protocol",
+        "Process"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: a procedure is the how-to sequence of steps.",
+      "subtitle": "Ch 4 Quiz Q11 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-194",
+      "type": "scenario",
+      "front": "Which of these is a use of job analysis?",
+      "choices": [
+        "Creating employee training plans",
+        "Developing core values",
+        "Studying workflow",
+        "Facilitating goal accomplishment"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: job analysis feeds training plans, along with hiring, selection, pay, and appraisals.",
+      "subtitle": "Ch 4 Quiz Q12 · Effective HRM",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-ch04-195",
+      "type": "scenario",
+      "front": "Where is the most reasonable place to publish company policies, procedures, and rules?",
+      "choices": [
+        "Job description",
+        "Employee handbook",
+        "Code of conduct",
+        "Company website"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: the employee handbook collects policies, procedures, and rules.",
+      "subtitle": "Ch 4 Quiz Q13 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-196",
+      "type": "scenario",
+      "front": "Which best defines a policy?",
+      "choices": [
+        "A sequence of steps",
+        "A statement of what's permitted",
+        "A process for ensuring consistency",
+        "A guiding principle that sets direction"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: a policy is a guiding principle setting direction.",
+      "subtitle": "Ch 4 Quiz Q14 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-197",
+      "type": "scenario",
+      "front": "Which best defines a procedure?",
+      "choices": [
+        "A how-to sequence of steps for applying guidelines to a task",
+        "A guiding principle",
+        "A process for ensuring consistency",
+        "A statement of what's permitted"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: a procedure is a step-by-step sequence for doing a task.",
+      "subtitle": "Ch 4 Quiz Q15 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-198",
+      "type": "scenario",
+      "front": "Which best defines a rule?",
+      "choices": [
+        "A sequence of steps",
+        "A process for ensuring consistency",
+        "A guiding principle",
+        "A statement of what employees may or may not do"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: a rule says what is or isn't permitted.",
+      "subtitle": "Ch 4 Quiz Q16 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-199",
+      "type": "scenario",
+      "front": "Which of the following is a rule?",
+      "choices": [
+        "A commitment to transparent communication",
+        "No personal cell phone use while on the job",
+        "401(k) eligibility after 90 days",
+        "A restroom-cleaning rotation"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: a rule states a must or must-not. Transparency is a value or policy, 401(k) eligibility is a policy, and a rotation is a procedure or schedule.",
+      "subtitle": "Ch 4 Quiz Q17 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-200",
+      "type": "scenario",
+      "front": "Employees accrue 2.15 hours of emergency personal time each pay period, up to 56 hours a year. This statement is a...",
+      "choices": [
+        "Procedure",
+        "Process",
+        "Protocol",
+        "Policy"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: it's a standing decision about a benefit, which makes it a policy. Moderate confidence, since it reads like a rule too, but 'rule' isn't a choice.",
+      "subtitle": "Ch 4 Quiz Q18 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-201",
+      "type": "scenario",
+      "front": "Employees using emergency time must call their supervisor within one hour of their shift start. This statement is a...",
+      "choices": [
+        "Policy",
+        "Protocol",
+        "Procedure",
+        "Process"
+      ],
+      "correct": 2,
+      "explanation": "Likely per text: it tells employees how to carry out the policy, which makes it a procedure.",
+      "subtitle": "Ch 4 Quiz Q19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-ch04-202",
+      "type": "scenario",
+      "front": "Fill in the blanks: a ___ is a decision already made, and a ___ is how to complete an action.",
+      "choices": [
+        "Rule; procedure",
+        "Policy; procedure",
+        "Procedure; policy",
+        "Policy; rule"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: a policy reflects a decision already made; a procedure describes how to act. Moderate confidence, since a rule could also be called a decision made.",
+      "subtitle": "Ch 4 Quiz Q20 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure"
+    }
+  ]
+}
