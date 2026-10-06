@@ -1,0 +1,966 @@
+{
+  "id": "c202-ch01",
+  "folder": "C202 Ch 1: Strategic Human Resource Management",
+  "course": "C202",
+  "order": 1,
+  "cards": [
+    {
+      "id": "c202-ch01-001",
+      "front": "Why does HRM count as a source of competitive advantage?",
+      "answer": "Every edge a firm has, from tech to cost to service, is built by people, and HRM shapes who they are and how they work.",
+      "subtitle": "Ch 1.2",
+      "points": [
+        "Competitive advantage = doing something differently from rivals that lets you outperform them",
+        "Talent matters most in knowledge-based firms, where people ARE the product",
+        "Examples: Patagonia, Apple, Zappos, Marriott"
+      ]
+    },
+    {
+      "id": "c202-ch01-002",
+      "front": "What is human resource management (HRM)?",
+      "answer": "The function that attracts, hires, develops, rewards, and retains talent, and handles people issues and compliance.",
+      "subtitle": "Ch 1.4",
+      "points": [
+        "Also manages people-related risk and builds the overall talent system",
+        "Employee costs are one of the biggest budget items, so this is high stakes",
+        "History: first 'personnel' department at National Cash Register in 1901, after a strike"
+      ]
+    },
+    {
+      "id": "c202-ch01-003",
+      "front": "How do 'should do', 'can do', and 'will do' differ in the HRM performance model?",
+      "answer": "Should = direction (planning, law); can = ability (staffing, training); will = motivation (pay, performance mgmt).",
+      "subtitle": "Ch 1.4",
+      "points": [
+        "All three feed effective work processes, then competitive advantage, then org performance",
+        "Aligning all three maximizes motivation and advantage",
+        "Think: Does the employee know what to do? Are they able? Do they want to?"
+      ]
+    },
+    {
+      "id": "c202-ch01-004",
+      "front": "Why are staffing and training called the foundation of the should/can/will model?",
+      "answer": "Incentives can't create ability; if people lack the talent or skills, no pay plan will fix their performance.",
+      "subtitle": "Ch 1.4",
+      "points": [
+        "Staffing brings in ability and motivation; training builds skills",
+        "Example: a nurse can't run a new machine just because you pay a bonus",
+        "Covered more in Ch 5-7"
+      ]
+    },
+    {
+      "id": "c202-ch01-005",
+      "front": "How can a compensation system backfire on ethics?",
+      "answer": "Rewards tied to narrow targets can push people to cut corners to hit them, so HR must foresee unintended effects.",
+      "subtitle": "Ch 1.4",
+      "points": [
+        "Wells Fargo (2016): 5,000+ fired for opening fake accounts to hit sales quotas",
+        "Subprime mortgage brokers' bonuses rewarded risky loans",
+        "Lesson: design 'will do' systems by asking what behavior they might accidentally reward"
+      ]
+    },
+    {
+      "id": "c202-ch01-006",
+      "front": "What is staffing, and what does it move through the organization?",
+      "answer": "Planning, acquiring, deploying, and retaining people; it moves talent into, through, and out of the firm.",
+      "subtitle": "Ch 1.6",
+      "points": [
+        "Steps: job requirements, sourcing, recruiting, retaining/moving, separations",
+        "Separations (layoffs, quits, terminations) are part of staffing",
+        "Its purpose is to help execute the business strategy",
+        "Caribou Coffee: careful hiring of store managers drove revenue"
+      ]
+    },
+    {
+      "id": "c202-ch01-007",
+      "front": "Why is training wasted if performance management and rewards don't line up with it?",
+      "answer": "If reviews and pay don't recognize the new skills, people have little reason to use them on the job.",
+      "subtitle": "Ch 1.7",
+      "points": [
+        "HRM is a system of mutually reinforcing functions",
+        "Training is also wasted if hires can't succeed or quit before costs are recouped (some retail turnover ~200%)"
+      ]
+    },
+    {
+      "id": "c202-ch01-008",
+      "front": "What is succession planning, and why does it matter?",
+      "answer": "Preparing people ahead of time to fill key roles, so leadership changes don't leave the company adrift.",
+      "subtitle": "Ch 1.7",
+      "points": [
+        "Citigroup started looking only after its CEO left and drifted",
+        "Google groomed Sundar Pichai for years: Google CEO 2015, Alphabet CEO 2019",
+        "CEO succession is often overlooked"
+      ]
+    },
+    {
+      "id": "c202-ch01-009",
+      "front": "What is performance management?",
+      "answer": "Aligning employee goals and behavior with company strategy, appraising performance, and guiding improvement.",
+      "subtitle": "Ch 1.8",
+      "points": [
+        "Depends on staffing (raw talent) and development (fixing gaps)",
+        "Often tied to pay, so biased ratings demotivate people"
+      ]
+    },
+    {
+      "id": "c202-ch01-010",
+      "front": "Why do specific goals and frequent feedback improve performance?",
+      "answer": "Goals show people what to aim for; feedback shows how they're doing so they can adjust before it's too late.",
+      "subtitle": "Ch 1.8",
+      "points": [
+        "No goals: unclear focus, underperformance, quits (which burdens staffing)",
+        "Feedback that feels unfair lowers effort",
+        "Performance feedback also maintains ethical behavior and communicates expectations"
+      ]
+    },
+    {
+      "id": "c202-ch01-011",
+      "front": "What does 'total rewards' include?",
+      "answer": "Everything an employee gets for their time and effort: direct pay, benefits, and nonfinancial rewards.",
+      "subtitle": "Ch 1.9",
+      "points": [
+        "Judge job offers on total rewards, not salary alone",
+        "In the textbook's pie chart, nonfinancial rewards are roughly half"
+      ]
+    },
+    {
+      "id": "c202-ch01-012",
+      "front": "How do direct and indirect financial compensation differ?",
+      "answer": "Direct is cash-type pay like salary, bonuses, and stock options; indirect is benefits like insurance and PTO.",
+      "subtitle": "Ch 1.9",
+      "points": [
+        "Direct: salary, wages, commissions, bonuses, stock options",
+        "Indirect (benefits): health insurance, wellness, paid vacation, free meals, retirement"
+      ]
+    },
+    {
+      "id": "c202-ch01-013",
+      "front": "What is nonfinancial compensation?",
+      "answer": "Intrinsic rewards from the work or its setting, such as feeling successful, valued, or appreciated.",
+      "subtitle": "Ch 1.9",
+      "points": [
+        "Not money and not a benefit, but still a real part of total rewards",
+        "Examples: meaningful work, recognition, a supportive team"
+      ]
+    },
+    {
+      "id": "c202-ch01-014",
+      "front": "How do pay level and staffing influence each other?",
+      "answer": "Premium pay lets you recruit top candidates; low pay may force you to hire less-ready people and train more.",
+      "subtitle": "Ch 1.9",
+      "points": [
+        "Incentive pay also depends on accurate performance management",
+        "Top pay isn't always needed: does every marketer need an MBA?"
+      ]
+    },
+    {
+      "id": "c202-ch01-015",
+      "front": "Why can paying well above market still be cost-effective?",
+      "answer": "Higher pay can cut turnover and raise productivity, so labor cost per sale stays competitive and service improves.",
+      "subtitle": "Ch 1.9",
+      "points": [
+        "Costco pays well above Sam's Club yet gets similar labor returns",
+        "Lower turnover also means lower hiring and training costs"
+      ]
+    },
+    {
+      "id": "c202-ch01-016",
+      "front": "Why does health and safety pay off for the business, not just ethically?",
+      "answer": "Healthier, safer workers are more productive and cut insurance, workers' comp costs, and lost time.",
+      "subtitle": "Ch 1.10",
+      "points": [
+        "Safety = protection from toxins, accidents, injuries; health = physical AND mental",
+        "About half of U.S. worksites offer wellness programs",
+        "Provide gear, train on it, hold people accountable; many federal/state laws apply (Ch 12)"
+      ]
+    },
+    {
+      "id": "c202-ch01-017",
+      "front": "What does employee-management relations cover?",
+      "answer": "The relationship and rights between employees and employer, including union bargaining and employee voice.",
+      "subtitle": "Ch 1.11",
+      "points": [
+        "Tools: participation programs, employee surveys",
+        "In union settings, employers must bargain in good faith; contracts set terms",
+        "2019 union membership: 33.6% public sector vs 6.2% private"
+      ]
+    },
+    {
+      "id": "c202-ch01-018",
+      "front": "What does it mean for HR functions to be 'aligned'?",
+      "answer": "They all reinforce the same behaviors and never undercut each other, so they work as one integrated system.",
+      "subtitle": "Ch 1.11",
+      "points": [
+        "Example of misalignment: training teamwork but paying only for individual results",
+        "SAS: trust-based culture, results-based reviews, and rich benefits all point the same way"
+      ]
+    },
+    {
+      "id": "c202-ch01-019",
+      "front": "What are the two broad ways HRM adds value to an organization?",
+      "answer": "By improving efficiency (getting more from resources) and by contributing to revenue growth.",
+      "subtitle": "Ch 1.12",
+      "points": [
+        "Other effects: clearer responsibilities, better skills use, higher engagement, better change mgmt, less turnover",
+        "Also lowers legal liability",
+        "Good people practices linked to up to 30% higher firm value (Watson Wyatt)"
+      ]
+    },
+    {
+      "id": "c202-ch01-020",
+      "front": "How do strategic and operational HR risk differ?",
+      "answer": "Strategic risk covers talent strategy, culture, and ethics; operational risk is how well you hire, grow, keep people.",
+      "subtitle": "Ch 1.12",
+      "points": [
+        "Strategic: talent strategy, culture, ethics, people investment, change",
+        "Operational: speed and effectiveness of hiring, developing, retaining top performers"
+      ]
+    },
+    {
+      "id": "c202-ch01-021",
+      "front": "How do financial and compliance HR risk differ?",
+      "answer": "Financial risk is about people costs like pay and turnover; compliance risk is legal, like safety and harassment.",
+      "subtitle": "Ch 1.12",
+      "points": [
+        "Financial: pay, benefits, turnover, overtime, time-to-hire, errors, accidents",
+        "Compliance: diversity, safety, unions, whistleblowers, harassment",
+        "Moody's bond ratings even factor in recruiting, retention, and training"
+      ]
+    },
+    {
+      "id": "c202-ch01-022",
+      "front": "What is a business strategy?",
+      "answer": "How a company chooses to compete, based on what customers want and what it can deliver cost-effectively.",
+      "subtitle": "Ch 1.13",
+      "points": [
+        "Can differ across business units",
+        "HRM must fit the strategy, and the strategy must fit the competitive environment"
+      ]
+    },
+    {
+      "id": "c202-ch01-023",
+      "front": "What is a talent philosophy?",
+      "answer": "A company's beliefs about how employees should be treated, e.g., as long-term partners or replaceable inputs.",
+      "subtitle": "Ch 1.13",
+      "points": [
+        "Covers diversity, ethics, short vs career-long tenure, assets vs investors of their time",
+        "Usually shaped by founders",
+        "Goldman Sachs: people are our greatest asset; diverse staff serves diverse clients"
+      ]
+    },
+    {
+      "id": "c202-ch01-024",
+      "front": "How do HR strategy and strategic HRM differ?",
+      "answer": "HR strategy ties HR to business strategy; strategic HRM aligns employee and company goals within each HR function.",
+      "subtitle": "Ch 1.13",
+      "points": [
+        "Strategic HRM shapes the strategy of each HR function",
+        "Aligned functions form an integrated HRM system guided by the talent philosophy"
+      ]
+    },
+    {
+      "id": "c202-ch01-025",
+      "front": "What is a global mindset, and how do you get one?",
+      "answer": "The ability to influence people from very different cultures and systems; it's built through experience.",
+      "subtitle": "Ch 1.14",
+      "points": [
+        "i4cp: cross-cultural influence matters more than basic business skills ('table stakes')",
+        "HSBC sends new managers on long international assignments to build it"
+      ]
+    },
+    {
+      "id": "c202-ch01-026",
+      "front": "How should power distance shape HR practices in another country?",
+      "answer": "In high power-distance cultures, empowering employees can clash with norms, so practices should fit local culture.",
+      "subtitle": "Ch 1.14",
+      "points": [
+        "Small power distance: U.S., Sweden, Germany; large: Japan, Mexico",
+        "Cultures also differ in motivation, communication style, family vs work emphasis"
+      ]
+    },
+    {
+      "id": "c202-ch01-027",
+      "front": "How do operational excellence and product innovation strategies need different HRM?",
+      "answer": "Operational excellence stresses cost control and consistency; innovation needs creative hires and room to experiment.",
+      "subtitle": "Ch 1.15",
+      "points": [
+        "Operational excellence: lean pay/benefits, teamwork, standard procedures",
+        "Innovation (Apple, 3M, pharma): hire for creativity, analysis, teamwork; reward persistence",
+        "Porter: advantage = better product at a premium or good product for less"
+      ]
+    },
+    {
+      "id": "c202-ch01-028",
+      "front": "What HR approach fits a customer intimacy (customization) strategy?",
+      "answer": "Hiring and developing people who learn customers' needs and can flex service, often with heavy HR investment.",
+      "subtitle": "Ch 1.15",
+      "points": [
+        "Common in consulting, retail, banking",
+        "Starbucks: hires active learners with customer skills and emotional resilience"
+      ]
+    },
+    {
+      "id": "c202-ch01-029",
+      "front": "Why do mergers and acquisitions so often fail?",
+      "answer": "The combining firms' cultures, values, or structures clash, more often than any technical or financial issue.",
+      "subtitle": "Ch 1.15",
+      "points": [
+        "M&A is a common route to growth and international expansion",
+        "Failures: DaimlerChrysler, HP-Compaq, AOL-Time Warner",
+        "Check culture fit before the deal"
+      ]
+    },
+    {
+      "id": "c202-ch01-030",
+      "front": "Why is every supervising manager responsible for HRM?",
+      "answer": "HR supplies the tools, but managers use them daily; the system only works if managers apply them well.",
+      "subtitle": "Ch 1.16",
+      "points": [
+        "HR is a support function: interview guides, review forms, etc.",
+        "Mattel made managers true partners in managing talent",
+        "Employees also own pieces: their own development, records, certifications"
+      ]
+    },
+    {
+      "id": "c202-ch01-031",
+      "front": "How does a PEO differ from a shared service center?",
+      "answer": "A PEO is an outside firm that becomes the legal employer; a shared service center is an in-house hub for routine HR.",
+      "subtitle": "Ch 1.16",
+      "points": [
+        "PEO: leases workers for ~2-7% of gross wages; handles payroll, benefits, training, discipline",
+        "Shared service center: centralizes payroll/benefits transactions (Home Depot HR call centers)",
+        "Outsourcing to vendors is a third option, especially for small firms"
+      ]
+    },
+    {
+      "id": "c202-ch01-032",
+      "front": "Why did IBM separate core HR roles from administrative ones?",
+      "answer": "Centralizing routine admin freed HR experts to focus on strategic work like talent, leadership, and upskilling.",
+      "subtitle": "Ch 1.17",
+      "points": [
+        "Admin (payroll, expenses, records) moved to global service centers",
+        "Also replaced annual reviews with frequent feedback via the employee-designed Checkpoint app",
+        "Goal: right talent, right time, right place"
+      ]
+    },
+    {
+      "id": "c202-ch01-033",
+      "front": "What is an HRMS, and how should a firm choose one?",
+      "answer": "A tech platform for employee records, recruiting, and analytics; choose based on real intended use and ease of use.",
+      "subtitle": "Ch 1.19",
+      "points": [
+        "Cloud (Workday, Cornerstone OnDemand) or in-house",
+        "Increasingly integrates apps and supports continuous feedback"
+      ]
+    },
+    {
+      "id": "c202-ch01-034",
+      "front": "How does Patagonia's HR reinforce its business strategy?",
+      "answer": "It hires for mission fit and offers cause-driven benefits, building a loyal workforce with very low turnover.",
+      "subtitle": "Ch 1.20",
+      "points": [
+        "Paid environmental volunteering, bail for peaceful protest, on-site childcare",
+        "Nearly 100% of new mothers return; ~4% turnover; ~9,000 applicants for few openings",
+        "Strategy: high-quality, responsibly made gear; 'do well and do good'"
+      ]
+    },
+    {
+      "id": "c202-ch01-035",
+      "front": "What does SHRM's code ask of HR professionals?",
+      "answer": "Act ethically, obey the law, measure HR's impact, and openly advocate for fair treatment of people.",
+      "subtitle": "Ch 1.18",
+      "points": [
+        "SHRM = largest HR professional association",
+        "Professional responsibility: add value, own your decisions, advocate for the profession"
+      ]
+    },
+    {
+      "id": "c202-ch01-036",
+      "type": "scenario",
+      "front": "Exit interviews show new hires at a call center quit because nobody told them the job requires rotating weekend shifts. HR rewrites job postings and adds a realistic job preview. Which HR function is this?",
+      "choices": [
+        "Training and development",
+        "Employee-management relations",
+        "Staffing",
+        "Performance management"
+      ],
+      "correct": 2,
+      "explanation": "Defining job requirements and recruiting people who will accept and stay in the role is staffing. Fixing the front end of hiring prevents the turnover.",
+      "subtitle": "Ch 1.6 Apply"
+    },
+    {
+      "id": "c202-ch01-037",
+      "type": "scenario",
+      "front": "A firm's new strategy needs reps to cross-sell. The reps know how and would earn commission for it, but no one told them it's a priority and their job descriptions still say 'take orders.' Which element is missing?",
+      "choices": [
+        "Can do",
+        "Should do",
+        "Will do",
+        "None, the system is aligned"
+      ],
+      "correct": 1,
+      "explanation": "They have the ability (can do) and the incentive (will do), but no direction. Planning and job design tell people what they should do.",
+      "subtitle": "Ch 1.4 Apply"
+    },
+    {
+      "id": "c202-ch01-038",
+      "type": "scenario",
+      "front": "A startup's sales reps don't understand the product. The CEO's fix is a huge commission bonus. What's the flaw?",
+      "choices": [
+        "Pay can't supply missing ability; this is a staffing or training gap",
+        "Bonuses are a form of indirect compensation",
+        "The reps should be moved to a PEO",
+        "Nothing; motivation is always the issue"
+      ],
+      "correct": 0,
+      "explanation": "Incentives affect 'will do,' not 'can do.' If people lack knowledge, you need better hiring or training first.",
+      "subtitle": "Ch 1.4 Apply"
+    },
+    {
+      "id": "c202-ch01-039",
+      "type": "scenario",
+      "front": "A company pays bonuses only on the number of new accounts opened. Months later an audit finds many accounts were never authorized by customers. What went wrong?",
+      "choices": [
+        "The reward created an incentive to game the metric",
+        "Training didn't cover sales skills",
+        "Staffing hired too few reps",
+        "The firm lacked an HRMS"
+      ],
+      "correct": 0,
+      "explanation": "A narrow target rewarded volume regardless of how it was reached. Wells Fargo is the real example. Good 'will do' design anticipates unintended consequences.",
+      "subtitle": "Ch 1.4 Apply"
+    },
+    {
+      "id": "c202-ch01-040",
+      "type": "scenario",
+      "front": "A hospital trains nurses on a new safety checklist, but annual reviews and raises are based only on patients seen per shift. Nurses skip the checklist. Best diagnosis?",
+      "choices": [
+        "The nurses lack ability",
+        "The training needed more hours",
+        "Staffing hired the wrong people",
+        "HR functions are misaligned and work against each other"
+      ],
+      "correct": 3,
+      "explanation": "Training teaches one behavior while performance management and pay reward another. Functions must reinforce the same behaviors.",
+      "subtitle": "Ch 1.11 Apply"
+    },
+    {
+      "id": "c202-ch01-041",
+      "type": "scenario",
+      "front": "Offer A: $80K, few benefits. Offer B: $74K plus full health coverage, a 6% retirement match, tuition aid, and flexible hours. How should you compare them?",
+      "choices": [
+        "Pick A; salary is what counts",
+        "Compare total rewards across both offers",
+        "Pick whichever has the bigger bonus",
+        "Ignore benefits since they aren't compensation"
+      ],
+      "correct": 1,
+      "explanation": "Total rewards includes direct pay, benefits (indirect), and nonfinancial rewards. B's benefits may be worth far more than $6K.",
+      "subtitle": "Ch 1.9 Apply"
+    },
+    {
+      "id": "c202-ch01-042",
+      "type": "scenario",
+      "front": "Which of these is indirect financial compensation?",
+      "choices": [
+        "A quarterly sales bonus",
+        "Stock options",
+        "Public recognition at a team meeting",
+        "An employer-paid gym membership"
+      ],
+      "correct": 3,
+      "explanation": "Indirect financial compensation is benefits like wellness, insurance, and PTO. Bonuses and options are direct; recognition is nonfinancial.",
+      "subtitle": "Ch 1.9 Apply"
+    },
+    {
+      "id": "c202-ch01-043",
+      "type": "scenario",
+      "front": "An employee files a harassment complaint, and HR learns that supervisors were never trained on the anti-harassment policy. Which HR risk is most exposed?",
+      "choices": [
+        "Compliance risk",
+        "Strategic risk",
+        "Operational risk",
+        "Financial risk"
+      ],
+      "correct": 0,
+      "explanation": "Harassment, safety, unions, and whistleblowers fall under compliance risk because they involve legal obligations.",
+      "subtitle": "Ch 1.12 Apply"
+    },
+    {
+      "id": "c202-ch01-044",
+      "type": "scenario",
+      "front": "Overtime spending has doubled and payroll errors are causing costly corrections. Which HR risk category is this?",
+      "choices": [
+        "Strategic risk",
+        "Compliance risk",
+        "Financial risk",
+        "Operational risk"
+      ],
+      "correct": 2,
+      "explanation": "Pay, overtime, turnover costs, and costly errors are financial risk: the direct money impact of people practices.",
+      "subtitle": "Ch 1.12 Apply"
+    },
+    {
+      "id": "c202-ch01-045",
+      "type": "scenario",
+      "front": "A budget airline competes on the lowest fares. Which HR approach fits its strategy best?",
+      "choices": [
+        "Premium pay to lure star talent",
+        "Tight cost control, standard procedures, and teamwork",
+        "Hire creative risk-takers and fund experiments",
+        "Deep client knowledge and custom service"
+      ],
+      "correct": 1,
+      "explanation": "Low fares mean an operational excellence strategy: lean costs, consistent procedures, and teamwork on thin margins.",
+      "subtitle": "Ch 1.15 Apply"
+    },
+    {
+      "id": "c202-ch01-046",
+      "type": "scenario",
+      "front": "A biotech wants to beat rivals with breakthrough therapies. Which hiring focus fits?",
+      "choices": [
+        "Analytical and creative people who persist through failure",
+        "The lowest-cost workers available",
+        "Staff who follow rigid scripts",
+        "Short-term contractors only"
+      ],
+      "correct": 0,
+      "explanation": "A product innovation strategy needs an innovative culture and people with analytical and creative ability who keep going through setbacks.",
+      "subtitle": "Ch 1.15 Apply"
+    },
+    {
+      "id": "c202-ch01-047",
+      "type": "scenario",
+      "front": "A boutique wealth-management firm wins clients by tailoring advice to each family's situation. Which competitive strategy is this?",
+      "choices": [
+        "Operational excellence",
+        "Growth through acquisition",
+        "Product innovation",
+        "Customer intimacy (customization)"
+      ],
+      "correct": 3,
+      "explanation": "Customization depends on knowing customers deeply and flexing service, so HR invests in hiring and developing people with strong client skills.",
+      "subtitle": "Ch 1.15 Apply"
+    },
+    {
+      "id": "c202-ch01-048",
+      "type": "scenario",
+      "front": "A manager ignores the structured interview guide HR provided and hires on gut feel. The hire flops. Who is most directly responsible?",
+      "choices": [
+        "The manager, because managers carry out HRM day to day",
+        "The HR department, since it owns hiring",
+        "The recruiting vendor",
+        "Nobody; bad hires are random"
+      ],
+      "correct": 0,
+      "explanation": "HR supplies tools, but they only add value if supervising managers use them. Every manager owns part of HRM.",
+      "subtitle": "Ch 1.16 Apply"
+    },
+    {
+      "id": "c202-ch01-049",
+      "type": "scenario",
+      "front": "A 40-person landscaping company has no HR staff. It wants payroll, benefits, and workers' comp handled, plus the flexibility to shrink its workforce in winter. Best option?",
+      "choices": [
+        "A professional employer organization (PEO)",
+        "A shared service center",
+        "Building an in-house HR department",
+        "An HRMS by itself"
+      ],
+      "correct": 0,
+      "explanation": "A PEO becomes the legal employer, handles payroll, benefits, and admin, and lets the client simply not renew leased workers in a downturn.",
+      "subtitle": "Ch 1.16 Apply"
+    },
+    {
+      "id": "c202-ch01-050",
+      "type": "scenario",
+      "front": "A 30,000-employee retailer has every store handling its own payroll and benefits questions, with inconsistent results. They want to keep the work in-house. Best fix?",
+      "choices": [
+        "Hire a PEO",
+        "Let each store manager decide",
+        "Outsource all of HR",
+        "Create a shared service center"
+      ],
+      "correct": 3,
+      "explanation": "Shared service centers centralize routine HR transactions in-house, cutting redundancy and cost while improving consistency.",
+      "subtitle": "Ch 1.16 Apply"
+    },
+    {
+      "id": "c202-ch01-051",
+      "type": "scenario",
+      "front": "A VP pressures an HR manager to quietly bury an employee's safety complaint. What do SHRM's ethical standards point toward?",
+      "choices": [
+        "Comply, since the VP outranks HR",
+        "Refuse and raise it through proper channels, protecting legal compliance and fair treatment",
+        "Leak it to the media right away",
+        "Drop it, since safety isn't an HR issue"
+      ],
+      "correct": 1,
+      "explanation": "SHRM's code calls for obeying the law, high ethical standards, and openly advocating for proper treatment of people through appropriate forums.",
+      "subtitle": "Ch 1.18 Apply"
+    },
+    {
+      "id": "c202-ch01-052",
+      "type": "scenario",
+      "front": "A U.S. firm opens an office in a high power-distance country and launches a 'challenge your boss' empowerment program. Few employees take part. Likely reason?",
+      "choices": [
+        "Pay is too low",
+        "Employees need more technical training",
+        "The program clashes with local norms about hierarchy",
+        "The office needs an HRMS"
+      ],
+      "correct": 2,
+      "explanation": "In high power-distance cultures, people expect clear hierarchy, so empowerment programs can feel inappropriate. Fit HR practices to the local culture.",
+      "subtitle": "Ch 1.14 Apply"
+    },
+    {
+      "id": "c202-ch01-053",
+      "type": "scenario",
+      "front": "A company is choosing an HRMS. Which factor should matter most?",
+      "choices": [
+        "Whichever has the most features",
+        "Whatever competitors use",
+        "The lowest price",
+        "How the firm will actually use it and how easy it is for managers and employees"
+      ],
+      "correct": 3,
+      "explanation": "Pick an HRMS for its real intended use and ease of use. Unused features add cost without adding value.",
+      "subtitle": "Ch 1.19 Apply"
+    },
+    {
+      "id": "c202-ch01-054",
+      "type": "scenario",
+      "front": "A CEO worries that fast growth has weakened the company's ethics and culture. Which category of HR risk is this?",
+      "choices": [
+        "Operational",
+        "Financial",
+        "Strategic",
+        "Compliance"
+      ],
+      "correct": 2,
+      "explanation": "Talent strategy, culture, ethics awareness, and change all fall under strategic risk.",
+      "subtitle": "Ch 1.12 Practice"
+    },
+    {
+      "id": "c202-ch01-055",
+      "type": "scenario",
+      "front": "For HR functions to support rather than undermine each other, they need to be consistent in...",
+      "choices": [
+        "How much they cost",
+        "What behaviors they reinforce",
+        "How they're applied across countries",
+        "How long they've been in place"
+      ],
+      "correct": 1,
+      "explanation": "Alignment means every function, from hiring and training to pay and reviews, pushes toward the same behaviors.",
+      "subtitle": "Ch 1.11 Practice"
+    },
+    {
+      "id": "c202-ch01-056",
+      "type": "scenario",
+      "front": "Small businesses most often report which two areas as their biggest management problems?",
+      "choices": [
+        "Stress and feedback",
+        "Performance management and rewards",
+        "Recruitment and training",
+        "Compensation and training"
+      ],
+      "correct": 2,
+      "explanation": "Recruitment and training are top problems, especially for small firms with no HR budget. That's why HR is an investment, not just a cost.",
+      "subtitle": "Ch 1.7 Practice"
+    },
+    {
+      "id": "c202-ch01-057",
+      "type": "scenario",
+      "front": "A company is restructuring and downsizing. Which group is usually expected to lead the organizational change?",
+      "choices": [
+        "Front-line supervisors",
+        "HR professionals",
+        "Executive recruiters",
+        "Outside vendors"
+      ],
+      "correct": 1,
+      "explanation": "HR professionals lead organizational change like expansion, restructuring, and downsizing, using communication, influence, and leadership skills.",
+      "subtitle": "Ch 1.16 Practice"
+    },
+    {
+      "id": "c202-ch01-058",
+      "type": "scenario",
+      "front": "When you boil it down, what is HRM ultimately trying to do for a company?",
+      "choices": [
+        "Be the main contact for shareholders",
+        "Reduce people-related risk and keep strong performers",
+        "Make product testing more efficient",
+        "Attract and hold investment capital"
+      ],
+      "correct": 1,
+      "explanation": "HRM manages people risk (legal, financial, strategic) and builds a talent system that keeps great employees. The other options belong to other functions.",
+      "subtitle": "Ch 1 Quiz Q1"
+    },
+    {
+      "id": "c202-ch01-059",
+      "type": "scenario",
+      "front": "A CFO asks how HR actually creates value. What's the best answer?",
+      "choices": [
+        "Leasing employees to cut costs",
+        "Hiring only people with advanced degrees",
+        "Helping the company carry out its business strategy",
+        "Keeping pay as low as possible"
+      ],
+      "correct": 2,
+      "explanation": "HRM creates value by helping execute business strategy, getting the right people with the right skills and motivation in place.",
+      "subtitle": "Ch 1 Quiz Q2"
+    },
+    {
+      "id": "c202-ch01-060",
+      "type": "scenario",
+      "front": "Which sequence best captures HRM's core purpose across the employee life cycle?",
+      "choices": [
+        "Detain, hire, develop, rework, retain",
+        "Attract, hire, develop, reward, retain",
+        "Attract, hire, devise, rework, refresh",
+        "Detain, hire, devise, reward, refresh"
+      ],
+      "correct": 1,
+      "explanation": "HRM attracts, hires, develops, rewards, and retains talent. Each verb maps to an HR function.",
+      "subtitle": "Ch 1 Quiz Q3"
+    },
+    {
+      "id": "c202-ch01-061",
+      "type": "scenario",
+      "front": "A plant switches to a new assembly process, and workers need new skills to run it. Which HR function steps in?",
+      "choices": [
+        "Employee-management relations",
+        "Staffing",
+        "Performance management",
+        "Training and development"
+      ],
+      "correct": 3,
+      "explanation": "Building current employees' skills for new methods is training and development. Staffing would bring in new people instead.",
+      "subtitle": "Ch 1 Quiz Q4"
+    },
+    {
+      "id": "c202-ch01-062",
+      "type": "scenario",
+      "front": "Staffing isn't just filling seats. It exists to help the company carry out its ___ strategy.",
+      "choices": [
+        "management",
+        "executive",
+        "business",
+        "employee"
+      ],
+      "correct": 2,
+      "explanation": "Staffing plans, acquires, deploys, and retains talent so the firm can execute its business strategy.",
+      "subtitle": "Ch 1 Quiz Q5"
+    },
+    {
+      "id": "c202-ch01-063",
+      "type": "scenario",
+      "front": "Layoffs, resignations, and firings for poor performance fall under which HR function?",
+      "choices": [
+        "Staffing",
+        "Training and development",
+        "Employee-management relations",
+        "Performance management"
+      ],
+      "correct": 0,
+      "explanation": "Staffing moves talent into, through, AND out of the organization, so separations are part of it.",
+      "subtitle": "Ch 1 Quiz Q6"
+    },
+    {
+      "id": "c202-ch01-064",
+      "type": "scenario",
+      "front": "A company grooms several high-potential managers years in advance so it's ready if the COO leaves. What is this called?",
+      "choices": [
+        "Strategic planning",
+        "Change planning",
+        "Succession planning",
+        "Performance planning"
+      ],
+      "correct": 2,
+      "explanation": "Succession planning prepares people to fill key positions and reduces disruption during transitions (think Google and Pichai).",
+      "subtitle": "Ch 1 Quiz Q7"
+    },
+    {
+      "id": "c202-ch01-065",
+      "type": "scenario",
+      "front": "Which HR function makes sure what individual employees aim for lines up with what the organization is trying to achieve?",
+      "choices": [
+        "Succession planning",
+        "Compensation and benefits",
+        "Training and development",
+        "Performance management"
+      ],
+      "correct": 3,
+      "explanation": "Performance management aligns employee goals and behavior with organizational goals, then appraises and improves performance.",
+      "subtitle": "Ch 1 Quiz Q8"
+    },
+    {
+      "id": "c202-ch01-066",
+      "type": "scenario",
+      "front": "If staffing brings in the wrong people, which two other functions feel the impact most directly?",
+      "choices": [
+        "Training & development and succession management",
+        "Performance management and strategic management",
+        "Training & development and performance management",
+        "Change management and succession management"
+      ],
+      "correct": 2,
+      "explanation": "Staffing supplies the raw talent. Development has to fill the gaps, and performance management depends on that talent being there.",
+      "subtitle": "Ch 1 Quiz Q9"
+    },
+    {
+      "id": "c202-ch01-067",
+      "type": "scenario",
+      "front": "A manager wants to reinforce ethical conduct day to day. According to the chapter, which kind of feedback serves that purpose?",
+      "choices": [
+        "Strategic feedback",
+        "Performance feedback",
+        "Critical feedback",
+        "Progressive feedback"
+      ],
+      "correct": 1,
+      "explanation": "Performance feedback, part of performance management, tells people how they're doing, communicates expectations, and helps maintain ethical behavior.",
+      "subtitle": "Ch 1 Quiz Q10"
+    },
+    {
+      "id": "c202-ch01-068",
+      "type": "scenario",
+      "front": "A job offer lists base salary, a signing bonus, sales commission, and stock options. Together these are...",
+      "choices": [
+        "Nonfinancial compensation",
+        "Indirect financial compensation",
+        "Direct financial compensation",
+        "Secondary compensation"
+      ],
+      "correct": 2,
+      "explanation": "Salary, wages, commissions, bonuses, and stock options are direct financial compensation, paid directly for work.",
+      "subtitle": "Ch 1 Quiz Q11"
+    },
+    {
+      "id": "c202-ch01-069",
+      "type": "scenario",
+      "front": "Employer-paid health insurance, paid vacation, and a retirement plan are examples of...",
+      "choices": [
+        "Direct financial compensation",
+        "Primary compensation",
+        "Nonfinancial compensation",
+        "Indirect financial compensation"
+      ],
+      "correct": 3,
+      "explanation": "Benefits are indirect financial compensation: they have money value but aren't paid as cash for performance.",
+      "subtitle": "Ch 1 Quiz Q12"
+    },
+    {
+      "id": "c202-ch01-070",
+      "type": "scenario",
+      "front": "An analyst says the best part of her job is the sense of accomplishment and feeling appreciated by her team. Which reward category is that?",
+      "choices": [
+        "Nonfinancial compensation",
+        "Direct compensation",
+        "Indirect compensation",
+        "Secondary compensation"
+      ],
+      "correct": 0,
+      "explanation": "Intrinsic rewards from the work or environment, like feeling successful or valued, are nonfinancial compensation.",
+      "subtitle": "Ch 1 Quiz Q13"
+    },
+    {
+      "id": "c202-ch01-071",
+      "type": "scenario",
+      "front": "One major way effective HRM boosts organizational performance is by building...",
+      "choices": [
+        "Efficient systems and processes",
+        "Better IT infrastructure",
+        "Stronger internal communications",
+        "Faster managerial decisions"
+      ],
+      "correct": 0,
+      "explanation": "HRM adds value by improving efficiency (efficient systems and processes) and by contributing to revenue growth.",
+      "subtitle": "Ch 1 Quiz Q14"
+    },
+    {
+      "id": "c202-ch01-072",
+      "type": "scenario",
+      "front": "Three of these are outcomes of an effective HRM system. Which one is NOT?",
+      "choices": [
+        "Improving how change is managed",
+        "Tying rewards fairly to responsibility and performance",
+        "Reporting ethics violations to the Bureau of Labor Statistics",
+        "Contributing to revenue growth"
+      ],
+      "correct": 2,
+      "explanation": "The BLS is a statistics agency; reporting ethics breaches to it isn't an HRM outcome. The others are listed benefits of effective HRM.",
+      "subtitle": "Ch 1 Quiz Q15"
+    },
+    {
+      "id": "c202-ch01-073",
+      "type": "scenario",
+      "front": "The strategy that defines where and how a company competes in its market is its ___ strategy.",
+      "choices": [
+        "financial",
+        "performance",
+        "business",
+        "management"
+      ],
+      "correct": 2,
+      "explanation": "Business strategy is how a firm competes and positions itself. HR strategy must then fit it.",
+      "subtitle": "Ch 1 Quiz Q16"
+    },
+    {
+      "id": "c202-ch01-074",
+      "type": "scenario",
+      "front": "A founder believes employees are long-term partners worth investing in, not interchangeable parts. This set of beliefs about how people should be treated is the company's...",
+      "choices": [
+        "Strategic philosophy",
+        "Talent philosophy",
+        "Employee philosophy",
+        "Business philosophy"
+      ],
+      "correct": 1,
+      "explanation": "A talent philosophy is the firm's beliefs about how employees should be treated. It guides the integrated HRM system. ('Employee philosophy' is the tempting wrong pick.)",
+      "subtitle": "Ch 1 Quiz Q17"
+    },
+    {
+      "id": "c202-ch01-075",
+      "type": "scenario",
+      "front": "Which approach do firms commonly use to expand quickly into new countries?",
+      "choices": [
+        "Goals and ambiguity",
+        "Mergers and acquisitions",
+        "Values and achievements",
+        "Motivation and performance"
+      ],
+      "correct": 1,
+      "explanation": "Mergers and acquisitions are a common route to growth and international expansion, and a way to acquire talent.",
+      "subtitle": "Ch 1 Quiz Q18"
+    },
+    {
+      "id": "c202-ch01-076",
+      "type": "scenario",
+      "front": "Two companies merge. The deal looks great on paper but falls apart within two years. What's the most common culprit?",
+      "choices": [
+        "Financial issues",
+        "Technical issues",
+        "Culture issues",
+        "Procedural issues"
+      ],
+      "correct": 2,
+      "explanation": "M&A deals most often fail because cultures, values, or structures clash (DaimlerChrysler, AOL-Time Warner).",
+      "subtitle": "Ch 1 Quiz Q19"
+    },
+    {
+      "id": "c202-ch01-077",
+      "type": "scenario",
+      "front": "Which document is the go-to reference that helps employees understand company HR policies?",
+      "choices": [
+        "A union contract",
+        "A values statement",
+        "A code of ethics",
+        "An employee handbook"
+      ],
+      "correct": 3,
+      "explanation": "Employee handbooks, often online, document HR policies and serve as a reference for employees.",
+      "subtitle": "Ch 1 Quiz Q20"
+    }
+  ]
+}
