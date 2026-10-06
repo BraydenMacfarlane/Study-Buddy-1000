@@ -1,0 +1,214 @@
+
+[setup] create real v1 data with the ORIGINAL app
+
+[1] Old v1 data loads unchanged with progress intact
+  ✓ original app recorded progress for 17 cards
+  ✓ all folders preserved with identical fields
+  ✓ all 18 cards preserved with identical fields (incl. legacy year/extra/purpose/protections)
+  ✓ all progress entries identical
+  ✓ migration added schema/bundled defaults
+  ✓ home renders both folders
+  ✓ U.S. Employment Law still shows 17 cards: U.S. Employment Law 17 cards · 0 mastered Boss quiz: not taken yet
+  ✓ study front does not show the note
+  ✓ note shows on the back as a Note line
+  ✓ downgrade: original app still opens data saved by the new app
+
+[2] Merge import / re-import / updated deck / backup merge / restore
+  ✓ deck import: 1 folder, 12 cards added
+  ✓ re-import: no changes (0 folders added · 0 cards added · 0 updated · 12 already up to date)
+  ✓ no duplicate folders/cards after re-import
+  ✓ progress kept after re-import
+  ✓ updated deck: 1 added, 1 updated (0 folders added · 1 card added · 1 updated · 11 already up to date)
+  ✓ card updated in place, progress kept
+  ✓ user's folder rename kept; summary/course/order stored
+  ✓ array-of-decks import works
+  ✓ invalid scenario card is skipped and reported
+  ✓ non-deck file rejected with message
+  ✓ Export downloads a full backup
+  ✓ backup merge: seed folder not duplicated (matched by name)
+  ✓ backup merge: only new cards added (3 folders added · 26 cards added · 0 updated · 17 already up to date)
+  ✓ backup merge: progress carried over
+  ✓ backup merge: local progress kept
+  ✓ restore cancelled at confirm: nothing changed
+  ✓ restore with a deck file is refused
+  ✓ restore (confirmed) replaces everything with the backup
+  ✓ restored data persists after reload
+
+[3] Scenario cards in study, quiz, editor
+  ✓ scenario shows choice buttons instead of flip
+  ✓ no Read more before answering
+  ✓ wrong pick highlighted red, correct green
+  ✓ explanation + Read more shown after answering
+  ✓ wrong answer graded (streak 0)
+  ✓ 3 correct in a row retires the scenario card
+  ✓ regular card front hides the Read more note
+  ✓ Read more appears on the back
+  ✓ quiz: scenario cards use their supplied choices in order
+  ✓ quiz: regular-card distractors come only from regular cards
+  ✓ quizBtn fix: view.quizSource is set (12)
+  ✓ quiz: wrong scenario answer shows explanation + Read more
+  ✓ editor opens scenario with scenario fields
+  ✓ editor shows choices and correct selector
+  ✓ editor creates a scenario card
+  ✓ editor validates choice count
+  ✓ editor converts scenario back to a flash card
+  ✓ folder list shows scenario pills
+
+[4] Boss quiz pass/fail, gating lock/unlock/override
+  ✓ C202 course heading present
+  ✓ chapters sorted by order under course
+  ✓ Ch 2 locked behind Ch 1 boss
+  ✓ Ch 1 is open
+  ✓ locked click asks "Open anyway?"; cancel stays home
+  ✓ override opens the folder
+  ✓ overridden folder shows "Opened early" this session
+  ✓ boss includes all 12 cards (scenarios + regular)
+  ✓ cannot advance without answering (no skip)
+  ✓ no right/wrong feedback during the boss
+  ✓ all wrong: fail at 0%
+  ✓ review lists 12 missed with correct answers + Read more
+  ✓ review shows the correct answer
+  ✓ Practice missed starts a quiz of the missed cards
+  ✓ after reload, Ch 2 still locked after failing
+  ✓ best boss score shown on folder card
+  ✓ pass at 83% unlocks next chapter
+  ✓ review shows 2 missed
+  ✓ bestBoss stored {pct:83, passed, date}
+  ✓ a worse retake keeps the best score and passed flag
+  ✓ after reload Ch 2 unlocked; best 83% shown
+
+[5] Matching game
+  ✓ round uses 6 pairs
+  ✓ only regular cards used
+  ✓ timer is running
+  ✓ wrong pair flashes red
+  ✓ 2-second penalty added
+  ✓ definition-first also works; correct pair locks green
+  ✓ result shown; best time stored (3.5s)
+  ✓ results list the pairs with Read more notes
+  ✓ slower round does not replace best time
+  ✓ best match time shown on folder card
+  ✓ Match disabled with message when < 3 regular cards
+
+[6] Bundled decks build + apply
+  ✓ fresh load: seed + 2 bundled decks (41 cards)
+  ✓ toast announces new material
+  ✓ footer shows build info
+  ✓ reload: no duplicates
+  ✓ deleted bundled deck is not resurrected on reload
+  ✓ changed deck comes back (content hash changed), with new card
+  ✓ updated bundled card changed in place, progress kept
+  ✓ no duplicates in updated deck
+  ✓ build.sh rejects an invalid deck and writes nothing
+
+[7] Suggested path + study filters
+  ✓ fresh folder: step 1 (study guide) is next
+  ✓ next step has the primary button
+  ✓ nudge: "Read the study guide first? (~N min)"
+  ✓ Concept cards mode = regular cards only (8), flip mode
+  ✓ no second nudge after "Skip for now" in this session
+  ✓ Scenarios mode = scenario cards only (4)
+  ✓ guide read -> concept cards next
+  ✓ one full pass through concept cards -> scenarios & quiz next
+  ✓ quiz at 67% does not clear step 3 (needs 70%)
+  ✓ quiz at 83% clears step 3 -> boss next
+  ✓ boss passed -> path complete
+  ✓ folder without a guide skips step 1
+
+[8] Pacing planner
+  ✓ local date at 10:30 PM Denver is Oct 5 (no UTC off-by-one)
+  ✓ home shows a "plan my pace" banner before a plan exists
+  ✓ plan screen shows course start date
+  ✓ defaults: start today, Medium (recommended) selected
+  ✓ Medium: Wk1 Ch1-4, Wk2 Ch5-8, Wk3 Ch9-14 dates
+  ✓ plan stored with pace/startDate/targetDate/createdAt/schedule/history
+  ✓ 4 quarterly quiz milestones
+  ✓ Q1 quiz milestone dated with Ch 4
+  ✓ 12 chapters without decks show "coming soon"
+  ✓ Speedy: Ch1-8 in week 1 (ends Oct 11), Ch9-14 in week 2 (ends Oct 18): 10-05,10-06,10-07,10-08,10-09,10-10,10-11,10-11,10-13,10-14,10-15,10-16,10-17,10-18
+  ✓ Deliberate: one quarter per week (Ch4 Oct 11, Ch8 Oct 18, Ch12 Oct 25, Ch14 Nov 1)
+  ✓ Custom 14 days for 14 chapters = one per day ending on target
+  ✓ Custom 5 days: chapters spread evenly, last on target: 10-05,10-05,10-06,10-06,10-06,10-07,10-07,10-07,10-08,10-08,10-08,10-09,10-09,10-09
+  ✓ Custom target = start: everything due that day
+  ✓ Custom target before start is rejected
+  ✓ Custom across the Nov 1 DST change: no skipped/duplicated day
+  ✓ Medium across New Year: dates roll into 2027 correctly
+  ✓ each pace change is recorded in history (7 replacements)
+  ✓ Oct 12, nothing passed: Behind by 4 chapters (Ch1-4 were due)
+  ✓ banner shows week 2 and overdue chapters
+  ✓ Oct 6 with Ch1+Ch2 passed (only Ch1 due): Ahead by 1 chapter
+  ✓ next suggested chapter without a deck shows "coming soon"
+  ✓ Oct 6 morning, Ch1 due today: On track; next = Ch 1 · Study guide
+  ✓ Go opens the Ch 1 study guide
+  ✓ after reading the guide, next step becomes Concept cards
+  ✓ start date defaults to today when switching
+  ✓ passed chapters keep their old due dates (done)
+  ✓ remaining Ch3-14 replanned from today with Speedy (Ch3-8 wk1 to Oct 16, Ch9-14 wk2 to Oct 23)
+  ✓ history records the switch from medium with 2 passed
+  ✓ plan screen shows passed chapters as done
+  ✓ custom target via UI: 12 remaining chapters spread Oct 10-21
+  ✓ past target date shows an error and keeps the old plan
+  ✓ share text has pace, start/target, course start, generated date
+  ✓ share text lists chapters with due/status, milestones, current chapter
+  ✓ share text mentions pace changes
+      clipboard status: Copied to clipboard. Paste it to your study assistant, or download the file.
+  ✓ copy attempted (clipboard verified)
+  ✓ Download offers c202-plan.txt
+  ✓ downloaded file matches the shared text
+  ✓ plan is included in the Export backup
+
+[9] Real inbox decks in dist/flashcards.html
+  ✓ inbox has c202-ch01 (84 cards), c202-ch02 (101 cards)
+  ✓ dist contains nothing from decks/samples
+  ✓ fresh: c202-ch01 has 84 cards
+  ✓ fresh: c202-ch02 has 101 cards
+  ✓ fresh: both chapters under the C202 heading
+  ✓ fresh: Ch 2 soft-locked until the Ch 1 boss is passed
+  ✓ fresh: study guide opens in reading view (~16 min, 3512 words)
+  ✓ fresh: comfortable column width (601px)
+  ✓ fresh: headings rendered (21 sections)
+  ✓ fresh: reading progress updates (~12 min left · 31%)
+  ✓ fresh: Mark as read stores guideRead date and returns to the chapter
+  ✓ fresh: path shows the guide as read
+  ✓ fresh: no nudge once the guide is read
+  ✓ fresh: scenario in study grades and shows Read more
+  ✓ fresh: quiz uses supplied scenario choices; regular cards get 4 options
+  ✓ fresh: boss has all 84 cards
+  ✓ fresh: Ch 1 boss passes (89%) and unlocks Ch 2
+  ✓ fresh: boss review shows Read more
+  ✓ fresh: matching game completes on Ch 1
+  ✓ fresh: Ch 2 unlocked on home
+  ✓ fresh: Ch 2 nudge shows ~15 min
+  ✓ fresh: matching game completes on Ch 2
+  ✓ v1: c202-ch01 has 84 cards
+  ✓ v1: c202-ch02 has 101 cards
+  ✓ v1: both chapters under the C202 heading
+  ✓ v1: Ch 2 soft-locked until the Ch 1 boss is passed
+  ✓ v1: existing cards and progress intact alongside the decks
+  ✓ v1: study guide opens in reading view (~16 min, 3512 words)
+  ✓ v1: comfortable column width (601px)
+  ✓ v1: headings rendered (21 sections)
+  ✓ v1: reading progress updates (~12 min left · 31%)
+  ✓ v1: Mark as read stores guideRead date and returns to the chapter
+  ✓ v1: path shows the guide as read
+  ✓ v1: no nudge once the guide is read
+  ✓ v1: scenario in study grades and shows Read more
+  ✓ v1: quiz uses supplied scenario choices; regular cards get 4 options
+  ✓ v1: boss has all 84 cards
+  ✓ v1: Ch 1 boss passes (89%) and unlocks Ch 2
+  ✓ v1: boss review shows Read more
+  ✓ v1: matching game completes on Ch 1
+  ✓ v1: Ch 2 unlocked on home
+  ✓ v1: Ch 2 nudge shows ~15 min
+  ✓ v1: matching game completes on Ch 2
+  ✓ previous ch01 build: 77 cards
+  ✓ ch01 updated in place: one folder, 84 cards, no duplicates
+  ✓ progress from the previous ch01 version kept (11 cards with progress)
+  ✓ card content, notes and study guide updated; folder stats kept
+  ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business (108 new, 77 updated cards)
+
+[10] Screenshots
+  ✓ screenshots written to /workspace/flashcards/screens
+  ✓ no console/page errors
+
+189 passed, 0 failed

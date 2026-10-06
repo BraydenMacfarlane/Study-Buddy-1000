@@ -14,5 +14,7 @@
       "choices": ["Legal", "Illegal", "Depends"], "correct": 1, "explanation": "...",
       "answer": "opt", "subtitle": "opt", "note": "opt" } ] }
 ```
+`summary` is shown as the chapter's **Study guide** (read time = words/220). `course` + `order` drive course grouping, chapter gating, the suggested path and the pacing planner (course config lives in `COURSE_CONFIG` in flashcards.html).
+
 Rules: `id` required on decks and cards (stable ids = in-place updates, progress kept). `correct` is 0-based; 2-5 choices.
 Regular cards need `answer` (or `points`). The import in the app also accepts these files directly (merge, never deletes).
