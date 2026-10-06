@@ -213,6 +213,26 @@
     .explain.bad strong { color: var(--bad); }
     .explain p { margin: 6px 0 0; }
     .pill.scen { background: var(--navy); color: #fff; }
+    .path-head { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; margin-bottom: 10px; }
+    .path-head strong { color: var(--navy); font-size: 16px; }
+    .path-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .step { display: flex; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    .step-num { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 14px; background: #efe7d4; color: var(--navy-2); }
+    .step.done .step-num { background: var(--ok); color: #fff; }
+    .step.next { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); background: #fffaf0; }
+    .step.next .step-num { background: var(--gold); color: var(--navy-2); }
+    .step.na { opacity: .55; }
+    .step-title { font-weight: 700; color: var(--navy); font-size: 14.5px; margin-bottom: 2px; }
+    .step .muted { font-size: 12.5px; }
+    .step-actions { margin-top: 8px; gap: 6px; }
+    button.small { padding: 6px 10px; font-size: 13px; border-radius: 8px; }
+    .pill.next-pill { background: var(--gold); color: var(--navy-2); font-weight: 650; margin-left: 4px; }
+    .mode-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 12px; }
+    @media (max-width: 860px) { .mode-grid { grid-template-columns: repeat(3, 1fr); } }
+    .mode-grid button { display: flex; flex-direction: column; align-items: flex-start; text-align: left; font-weight: 650; }
+    .mode-grid button small { font-weight: 400; font-size: 12px; opacity: .8; margin-top: 2px; }
+    @media (max-width: 860px) { .path-steps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .path-steps { grid-template-columns: 1fr; } .mode-grid { grid-template-columns: 1fr 1fr; } }
     .guide-card { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; border-left: 5px solid var(--gold); }
     .ov-title { font-weight: 700; color: var(--navy); font-size: 16px; margin-right: 8px; }
     .ov-status { margin-left: 8px; }
@@ -829,6 +849,8 @@
       const all = cardsIn(folder.id);
       const retired = all.filter((c) => prog(c.id).retired).length;
       const left = all.length - retired;
+      const nReg = all.filter((c) => !isScenario(c)).length, nScen = all.length - nReg;
+      const leftReg = activeStudy(folder.id, "concept").length, leftScen = activeStudy(folder.id, "scenario").length;
       const canMatch = new Set(matchableCards(folder.id).map(cardAnswerText)).size >= 3;
       headerSub.textContent = folder.name;
       headerActions.innerHTML = `
@@ -855,25 +877,21 @@
           </div>`;
       }).join("");
       app.innerHTML = `
-        ${guideCardHtml(folder)}
-        <div class="card">
-          <div class="row" style="justify-content:space-between">
-            <div>
-              <div class="muted">${left} in the mix · ${retired} pulled out after ${RETIRE_AFTER} correct in a row</div>
-              <div class="muted" style="margin-top:4px">${bossLine(folder)}${folder.bestBoss ? ` <span class="muted">(${fmtDate(folder.bestBoss.date)})</span>` : ""}</div>
-              ${lockedBehind(folder) ? `<div class="muted" style="margin-top:4px">🔒 Opened early: ${escaped(chLabel(lockedBehind(folder)))} boss not passed yet</div>` : ""}
-            </div>
-            <div class="row">
-              <button class="secondary" id="resetBtn">Reset progress</button>
-              <button class="secondary" id="addCardBtn">New card</button>
-              <button class="secondary" id="quizBtn" ${left ? "" : "disabled"}>Multiple choice</button>
-              <button class="gold" id="studyBtn" ${left ? "" : "disabled"}>Study shuffled</button>
-            </div>
+        ${pathHtml(folder)}
+        <div class="card" style="margin-top:12px">
+          <div class="muted">${left} in the mix · ${retired} pulled out after ${RETIRE_AFTER} correct in a row · ${bossLine(folder)}${folder.bestBoss ? ` (${fmtDate(folder.bestBoss.date)})` : ""}</div>
+          ${lockedBehind(folder) ? `<div class="muted" style="margin-top:4px">🔒 Opened early: ${escaped(chLabel(lockedBehind(folder)))} boss not passed yet</div>` : ""}
+          <div class="mode-grid">
+            <button class="gold" id="studyBtn" ${left ? "" : "disabled"}>Study shuffled<small>all cards, mixed</small></button>
+            <button class="secondary" id="conceptBtn" ${leftReg ? "" : "disabled"}>Concept cards<small>${nReg} flip cards</small></button>
+            <button class="secondary" id="scenarioBtn" ${leftScen ? "" : "disabled"}>Scenarios<small>${nScen} scenarios</small></button>
+            <button class="secondary" id="quizBtn" ${all.length ? "" : "disabled"}>Multiple choice<small>${folder.quizBest !== undefined ? `best ${folder.quizBest}%` : "whole folder"}</small></button>
+            <button class="secondary" id="matchBtn" ${canMatch ? "" : "disabled"} title="${canMatch ? "Timed term-to-definition matching" : "Needs at least 3 regular (non-scenario) cards"}">Match<small>${canMatch ? (folder.bestMatch ? `best ${fmtTime(folder.bestMatch.ms)}` : "timed pairs") : "needs 3+ regular cards"}</small></button>
+            <button class="secondary" id="bossBtn" ${all.length >= 2 ? "" : "disabled"} title="All ${all.length} cards, pass mark ${BOSS_PASS}%">Boss quiz<small>pass ${BOSS_PASS}%</small></button>
           </div>
-          <div class="row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
-            <button class="gold" id="bossBtn" ${all.length >= 2 ? "" : "disabled"} title="All ${all.length} cards, pass mark ${BOSS_PASS}%">Boss quiz</button>
-            <button class="secondary" id="matchBtn" ${canMatch ? "" : "disabled"} title="${canMatch ? "Timed term-to-definition matching" : "Needs at least 3 regular (non-scenario) cards"}">Match</button>
-            <span class="muted">Boss: every card, pass ${BOSS_PASS}% to clear the chapter${canMatch ? " · Match: timed term ↔ definition" : " · Match needs at least 3 regular (non-scenario) cards"}</span>
+          <div class="row" style="margin-top:10px;justify-content:flex-end">
+            <button class="secondary" id="addCardBtn">New card</button>
+            <button class="secondary" id="resetBtn">Reset progress</button>
           </div>
         </div>
         <div class="card" style="margin-top:12px">${list || `<div class="empty">No cards in this folder yet.</div>`}</div>
@@ -889,17 +907,19 @@
         render();
       };
       document.getElementById("resetBtn").onclick = () => {
+        if (!confirm("Reset mastery progress for every card in this folder?")) return;
         all.forEach((c) => { state.progress[c.id] = { streak: 0, retired: false }; });
         save();
         render();
       };
       document.getElementById("addCardBtn").onclick = () => openCardForm();
-      document.getElementById("studyBtn").onclick = () => withGuideCheck(startStudy);
+      document.getElementById("studyBtn").onclick = () => withGuideCheck(() => startStudy("mixed"));
+      document.getElementById("conceptBtn").onclick = () => withGuideCheck(() => startStudy("concept"));
+      document.getElementById("scenarioBtn").onclick = () => withGuideCheck(() => startStudy("scenario"));
       document.getElementById("quizBtn").onclick = () => withGuideCheck(() => startQuiz());
       document.getElementById("bossBtn").onclick = () => withGuideCheck(startBoss);
       document.getElementById("matchBtn").onclick = () => withGuideCheck(startMatch);
-      const gb = document.getElementById("openGuide");
-      if (gb) gb.onclick = () => openGuide(folder.id);
+      app.querySelectorAll("[data-step]").forEach((b) => { b.onclick = () => runStep(folder.id, b.dataset.step); });
       app.querySelectorAll("[data-edit]").forEach((b) => b.onclick = () => openCardForm(state.cards.find((c) => c.id === b.dataset.edit)));
       app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => {
         if (!confirm("Delete this card?")) return;
@@ -909,6 +929,92 @@
         render();
       });
     }
+
+    /* ---------- Suggested path: guide → concept cards → scenarios & quiz → boss ---------- */
+    const QUIZ_CLEAR = 70;
+
+    function pathSteps(folder) {
+      const all = cardsIn(folder.id);
+      const reg = all.filter((c) => !isScenario(c)), scen = all.filter(isScenario);
+      const hasGuide = !!cleanStr(folder.summary);
+      const regMastered = reg.filter((c) => prog(c.id).retired).length;
+      const scenMastered = scen.filter((c) => prog(c.id).retired).length;
+      const qb = folder.quizBest;
+      const steps = [
+        { key: "guide", title: "Study guide", na: !hasGuide,
+          done: hasGuide ? !!folder.guideRead : true,
+          detail: hasGuide ? (folder.guideRead ? guideStatus(folder) : `~${readMinutes(folder.summary)} min read`) : "No study guide for this folder",
+          actions: hasGuide ? [["guide", folder.guideRead ? "Open guide" : "Read study guide"]] : [] },
+        { key: "concept", title: "Concept cards", na: !reg.length,
+          done: !reg.length || regMastered === reg.length || !!folder.conceptPass,
+          detail: reg.length ? `${reg.length} flip cards · ${regMastered} mastered${folder.conceptPass ? " · full pass ✓" : " · do one full pass"}` : "No concept cards",
+          actions: reg.length ? [["concept", "Concept cards"]] : [] },
+        { key: "practice", title: scen.length ? "Scenarios & quiz" : "Quiz", na: !all.length,
+          done: (typeof qb === "number" && qb >= QUIZ_CLEAR) || (scen.length > 0 && scenMastered === scen.length),
+          detail: `${scen.length ? `${scen.length} scenarios · ${scenMastered} mastered · ` : ""}${typeof qb === "number" ? `best quiz ${qb}%` : "no quiz yet"} (${QUIZ_CLEAR}%+ clears)`,
+          actions: (scen.length ? [["scenario", "Scenarios"]] : []).concat(all.length ? [["quiz", "Multiple choice"]] : []) },
+        { key: "boss", title: "Boss quiz", na: all.length < 2,
+          done: !!(folder.bestBoss && folder.bestBoss.passed),
+          detail: folder.bestBoss ? `best ${Math.round(folder.bestBoss.pct)}%${folder.bestBoss.passed ? " · passed ✓" : ` · ${BOSS_PASS}% to pass`}` : `${all.length} questions · ${BOSS_PASS}% to pass`,
+          actions: all.length >= 2 ? [["boss", "Boss quiz"]] : [] }
+      ];
+      const next = steps.find((s) => !s.done && !s.na);
+      steps.forEach((s) => { s.next = s === next; });
+      return { steps, next: next || null };
+    }
+
+    function pathHtml(folder) {
+      const { steps, next } = pathSteps(folder);
+      return `
+        <div class="card path" id="pathCard">
+          <div class="path-head">
+            <strong>Suggested path</strong>
+            <span class="muted">${next ? `Next up: ${escaped(next.title)}` : "Chapter complete 🎉"} · a suggestion, every mode stays open</span>
+          </div>
+          <div class="path-steps">
+            ${steps.map((s, i) => `
+              <div class="step ${s.done ? "done" : ""} ${s.next ? "next" : ""} ${s.na ? "na" : ""}" data-stepkey="${s.key}">
+                <div class="step-num">${s.done && !s.na ? "✓" : i + 1}</div>
+                <div class="step-body">
+                  <div class="step-title">${escaped(s.title)}${s.next ? ` <span class="pill next-pill">next</span>` : ""}</div>
+                  <div class="muted">${s.detail}</div>
+                  ${s.actions.length ? `<div class="row step-actions">${s.actions.map(([k, label]) => `<button class="${s.next ? "gold" : "secondary"} small" data-step="${k}">${escaped(label)}</button>`).join("")}</div>` : ""}
+                </div>
+              </div>`).join("")}
+          </div>
+          ${cleanStr(folder.source) ? `<div class="muted" style="margin-top:10px">📚 Source: ${escaped(folder.source)}</div>` : ""}
+        </div>`;
+    }
+
+    // Run a path step for a folder (used by the folder path and the home plan banner).
+
+    function runStep(folderId, key) {
+      const folder = folderById(folderId);
+      if (!folder) return;
+      view.folderId = folderId;
+      view.page = "folder";
+      if (key === "guide") return openGuide(folderId);
+      if (key === "practice") key = cardsIn(folderId).some(isScenario) ? "scenario" : "quiz";
+      const go = {
+        concept: () => startStudy("concept"),
+        scenario: () => startStudy("scenario"),
+        quiz: () => startQuiz(),
+        boss: () => startBoss()
+      }[key];
+      if (!go) return render();
+      render();
+      withGuideCheck(go);
+    }
+
+    function studyPool(folderId, mode) {
+      const all = cardsIn(folderId);
+      if (mode === "concept") return all.filter((c) => !isScenario(c));
+      if (mode === "scenario") return all.filter(isScenario);
+      return all;
+    }
+
+    function activeStudy(folderId, mode) { return studyPool(folderId, mode).filter((c) => !prog(c.id).retired); }
+    const MODE_LABEL = { mixed: "Study shuffled", concept: "Concept cards", scenario: "Scenarios" };
 
     /* ---------- Study guide (markdown `summary` on deck folders) ---------- */
     function guideWords(md) { return cleanStr(md).split(/\s+/).filter(Boolean).length; }
@@ -962,21 +1068,6 @@
 
     function guideStatus(folder) {
       return folder.guideRead ? `✓ Read${typeof folder.guideRead === "string" ? " " + escaped(fmtDate(folder.guideRead)) : ""}` : "Not read yet";
-    }
-
-    function guideCardHtml(folder) {
-      if (!cleanStr(folder.summary)) return "";
-      const read = !!folder.guideRead;
-      return `
-        <div class="card guide-card" id="guideCard">
-          <div>
-            <span class="ov-title">📘 Study guide</span>
-            <span class="muted">~${readMinutes(folder.summary)} min read</span>
-            <span class="muted ov-status ${read ? "" : "unread"}">${guideStatus(folder)}</span>
-            ${cleanStr(folder.source) ? `<div class="muted" style="margin-top:4px">📚 ${escaped(folder.source)}</div>` : ""}
-          </div>
-          <button class="${read ? "secondary" : "gold"}" id="openGuide">${read ? "Open study guide" : "Read study guide"}</button>
-        </div>`;
     }
 
     function openGuide(folderId) {
@@ -1060,9 +1151,14 @@
       document.getElementById("ovGo").onclick = () => openGuide(f.id);
     }
 
-    function startStudy() {
-      const queue = shuffle(activeCards(view.folderId));
+    function startStudy(mode) {
+      mode = MODE_LABEL[mode] ? mode : "mixed";
+      const queue = shuffle(activeStudy(view.folderId, mode));
       if (!queue.length) return;
+      view.studyMode = mode;
+      // Track a "full pass" over the concept (regular) cards that were still active at the start.
+      view.studyTargets = queue.filter((c) => !isScenario(c)).map((c) => c.id);
+      view.studySeen = [];
       view.page = "study";
       view.queue = queue.map((c) => c.id);
       view.index = 0;
@@ -1133,6 +1229,7 @@
         view.quizFolder = view.folderId;
       }
       view.quizTotal = view.queue.length;
+      view.quizFull = view.queue.length === cardsIn(view.folderId).length;
       view.index = 0;
       view.picked = null;
       view.score = 0;
@@ -1179,11 +1276,12 @@
 
     function renderStudy() {
       const folder = folderById(view.folderId);
-      const all = cardsIn(view.folderId);
-      const left = activeCards(view.folderId).length;
+      const mode = view.studyMode || "mixed";
+      const all = studyPool(view.folderId, mode);
+      const left = activeStudy(view.folderId, mode).length;
       const retired = all.length - left;
       const pendingScenario = view.studyPicked !== null && view.studyPicked !== undefined;
-      headerSub.textContent = folder ? folder.name : "Study";
+      headerSub.textContent = folder ? `${folder.name} · ${MODE_LABEL[mode]}` : "Study";
       headerActions.innerHTML = `
         <button class="secondary" id="exitStudy">Back to folder</button>
         <button class="secondary" id="resetStudy">Reset progress</button>
@@ -1192,8 +1290,8 @@
       if ((!view.queue.length || left === 0) && !pendingScenario) {
         app.innerHTML = `
           <div class="empty card">
-            <h2>This folder is clear</h2>
-            <p>Every card has been answered correctly ${RETIRE_AFTER} times in a row.</p>
+            <h2>${mode === "concept" ? "Concept cards are clear" : mode === "scenario" ? "Scenarios are clear" : "This folder is clear"}</h2>
+            <p>Every ${mode === "concept" ? "concept card" : mode === "scenario" ? "scenario" : "card"} has been answered correctly ${RETIRE_AFTER} times in a row.</p>
             <div class="row" style="justify-content:center;margin-top:12px">
               <button class="gold" id="resetDone">Reset and study again</button>
               <button class="secondary" id="backDone">Back to folder</button>
@@ -1207,7 +1305,7 @@
       }
 
       const card = currentCard();
-      if (!card) { startStudy(); return; }
+      if (!card) { startStudy(view.studyMode); return; }
       const p = prog(card.id);
       const pct = all.length ? Math.round((retired / all.length) * 100) : 0;
       const top = `
@@ -1371,6 +1469,11 @@
     function nextQuiz() {
       view.index += 1;
       view.picked = null;
+      if (view.index >= view.quizTotal && view.quizFull && view.asked) {
+        const folder = folderById(view.folderId);
+        const pct = Math.round((view.score / view.asked) * 100);
+        if (folder && (typeof folder.quizBest !== "number" || pct > folder.quizBest)) { folder.quizBest = pct; save(); }
+      }
       if (view.index < view.quizTotal) {
         const card = currentCard();
         view.choices = card ? makeChoices(card) : [];
@@ -1649,14 +1752,27 @@
     }
 
     function grade(correct) {
+      const card = currentCard();
       markResult(correct);
+      if (card && !isScenario(card)) noteConceptSeen(card.id);
       advanceStudy();
+    }
+
+    function noteConceptSeen(id) {
+      const folder = folderById(view.folderId);
+      if (!folder || !view.studyTargets || !view.studyTargets.length) return;
+      if (!view.studySeen.includes(id)) view.studySeen.push(id);
+      if (!folder.conceptPass && view.studyTargets.every((t) => view.studySeen.includes(t) || !state.cards.some((c) => c.id === t))) {
+        folder.conceptPass = todayISO();
+        save();
+        toast("Full pass through the concept cards ✓");
+      }
     }
 
     function advanceStudy() {
       const remainingIds = view.queue.filter((id, i) => i !== view.index && !prog(id).retired);
       if (!remainingIds.length) {
-        view.queue = shuffle(activeCards(view.folderId)).map((c) => c.id);
+        view.queue = shuffle(activeStudy(view.folderId, view.studyMode || "mixed")).map((c) => c.id);
         view.index = 0;
       } else {
         view.queue = remainingIds;
@@ -1672,9 +1788,9 @@
       render();
     }
     function resetAndStay() {
-      cardsIn(view.folderId).forEach((c) => { state.progress[c.id] = { streak: 0, retired: false }; });
+      studyPool(view.folderId, view.studyMode || "mixed").forEach((c) => { state.progress[c.id] = { streak: 0, retired: false }; });
       save();
-      startStudy();
+      startStudy(view.studyMode);
     }
 
     function openFolderForm(folder) {
