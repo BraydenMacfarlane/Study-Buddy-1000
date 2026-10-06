@@ -158,7 +158,7 @@
   ✓ plan is included in the Export backup
 
 [9] Real inbox decks in dist/flashcards.html
-  ✓ inbox has c202-ch01 (84 cards), c202-ch02 (101 cards), c202-ch03 (172 cards), c202-ch04 (202 cards), c202-ch05 (150 cards)
+  ✓ inbox has c202-ch01 (84 cards), c202-ch02 (101 cards), c202-ch03 (172 cards), c202-ch04 (202 cards), c202-ch05 (150 cards), c202-ch06 (189 cards), c202-ch07 (164 cards), c202-ch08 (191 cards)
   ✓ dist contains nothing from decks/samples
   ✓ fresh: c202-ch01 has 84 cards
   ✓ fresh: c202-ch02 has 101 cards
@@ -207,7 +207,7 @@
   ✓ ch01 updated in place: one folder, 84 cards, no duplicates
   ✓ progress from the previous ch01 version kept (11 cards with progress)
   ✓ card content, notes and study guide updated; folder stats kept
-  ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting (632 new, 77 updated cards)
+  ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management (1176 new, 77 updated cards)
 
 [10] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
