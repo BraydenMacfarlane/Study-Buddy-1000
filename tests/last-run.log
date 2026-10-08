@@ -84,7 +84,7 @@
   ✓ wrong pair flashes red
   ✓ 2-second penalty added
   ✓ definition-first also works; correct pair locks green
-  ✓ result shown; best time stored (3.5s)
+  ✓ result shown; best time stored (3.4s)
   ✓ results list the pairs with Read more notes
   ✓ slower round does not replace best time
   ✓ best match time shown on folder card
@@ -157,7 +157,29 @@
   ✓ downloaded file matches the shared text
   ✓ plan is included in the Export backup
 
-[9] Real inbox decks in dist/flashcards.html
+[9] Resume mid-session + Quick quiz
+  ✓ mid-quiz exit button says Save & leave
+  ✓ full quiz has 12 questions
+  ✓ after 2 correct: index=2 score=2
+  ✓ Save & leave returns to folder
+  ✓ folder shows Resume quiz button
+  ✓ Resume label shows progress: Resume quizQuestion 3 of 12 · 2 correct
+  ✓ Quick quiz button present
+  ✓ resume restores exact quiz state
+  ✓ resumed mid-quiz still shows Save & leave
+  ✓ quiz completed
+  ✓ completing clears Resume quiz
+  ✓ quick quiz: kind=quick, length=10, not full
+  ✓ quick quiz mid: Save & leave
+  ✓ Resume quick shows after leave
+  ✓ quick results note Quick · N cards + Retake quick
+  ✓ quick quiz does not replace quizBest from full quiz (still 100)
+  ✓ completing quick clears resume
+  ✓ Start fresh with saved session asks discard; cancel keeps resume
+  ✓ confirm discard starts fresh full quiz and clears resume
+  ✓ Export backup includes sessions keyed by folder:mode
+
+[10] Real inbox decks in dist/flashcards.html
   ✓ inbox has c202-ch01 (84 cards), c202-ch02 (101 cards), c202-ch03 (172 cards), c202-ch04 (202 cards), c202-ch05 (150 cards), c202-ch06 (189 cards), c202-ch07 (164 cards), c202-ch08 (191 cards), c202-ch09 (172 cards), c202-ch10 (163 cards), c202-ch11 (200 cards), c202-ch12 (191 cards), c202-ch13 (191 cards), c202-ch14 (210 cards)
   ✓ dist contains nothing from decks/samples
   ✓ fresh: c202-ch01 has 84 cards
@@ -209,8 +231,8 @@
   ✓ card content, notes and study guide updated; folder stats kept
   ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management, C202 Ch 9: Base Compensation, C202 Ch 10: Incentives, C202 Ch 11: Benefits, C202 Ch 12: Creating a Healthy Work Environment, C202 Ch 13: Creating Positive Employee-Management Relations, C202 Ch 14: Managing Engagement and Turnover (2303 new, 77 updated cards)
 
-[10] Screenshots
+[11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-191 passed, 0 failed
+211 passed, 0 failed

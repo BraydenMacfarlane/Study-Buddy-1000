@@ -620,7 +620,7 @@ async function testReal(raw) {
   const { ctx, p } = await page();
   await p.goto(PREV);
   ok((await S(p, () => state.cards.filter((c) => c.folderId === 'deck-c202-ch01').length)) === 77, 'previous ch01 build: 77 cards');
-  await p.click('[data-open="deck-c202-ch01"]'); await p.click('#studyBtn');
+  await p.click('[data-open="deck-c202-ch01"]'); await p.click('#studyBtn'); await skipNudge(p);
   for (let i = 0; i < 10; i++) {
     if (await p.locator('[data-spick]').count()) { const c = await S(p, () => currentCard().correct); await p.click(`[data-spick="${c}"]`); await p.click('#nextStudy'); }
     else { await p.click('#flipBtn'); await p.click('#gotBtn'); }
@@ -689,7 +689,9 @@ async function screenshots() {
 }
 
 (async () => {
+  fs.mkdirSync(T, { recursive: true });
   execSync(`cd ${ROOT} && git show 0066785:flashcards.html > ${T}/original.html`);
+  execSync(`cd ${ROOT} && git show 2186ee7:decks/inbox/c202-ch01.json > ${T}/ch01-prev.json`);
   fs.rmSync(T + '/inbox', { recursive: true, force: true }); fs.mkdirSync(T + '/inbox', { recursive: true });
   for (const f of fs.readdirSync(ROOT + '/decks/samples')) fs.copyFileSync(ROOT + '/decks/samples/' + f, T + '/inbox/' + f);
   execSync(`${ROOT}/build.sh --inbox ${T}/inbox --out ${T}/dist-samples.html`);
