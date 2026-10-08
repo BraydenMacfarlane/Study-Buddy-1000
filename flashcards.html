@@ -820,7 +820,9 @@
         return `Question ${Math.min((s.boss.index || 0) + 1, (s.boss.ids || []).length)} of ${(s.boss.ids || []).length}`;
       }
       if (mode === "study") {
-        return `Card ${Math.min((s.index || 0) + 1, (s.queue || []).length)} of ${(s.queue || []).length}` + (s.studyMode && MODE_LABEL[s.studyMode] ? ` · ${MODE_LABEL[s.studyMode]}` : "");
+        const total = s.roundTotal || (s.queue || []).length;
+        const pos = s.roundPos || Math.min((s.index || 0) + 1, total || 1);
+        return `Card ${pos} of ${total}` + (s.studyMode && MODE_LABEL[s.studyMode] ? ` · ${MODE_LABEL[s.studyMode]}` : "");
       }
       if (mode === "match" && s.match) {
         return `${(s.match.matched || []).length} of ${(s.match.pairs || []).length} pairs · ${fmtElapsed(s.match.elapsed || 0)}`;
@@ -876,7 +878,9 @@
           flipped: !!view.flipped,
           studyPicked: view.studyPicked === undefined ? null : view.studyPicked,
           studyTargets: (view.studyTargets || []).slice(),
-          studySeen: (view.studySeen || []).slice()
+          studySeen: (view.studySeen || []).slice(),
+          roundTotal: view.roundTotal || view.queue.length,
+          roundPos: view.roundPos || (view.index + 1)
         });
       } else if (view.page === "match" && view.match && !view.match.result) {
         const m = view.match;
@@ -945,6 +949,8 @@
         view.studyPicked = s.studyPicked === undefined ? null : s.studyPicked;
         view.studyTargets = (s.studyTargets || []).slice();
         view.studySeen = (s.studySeen || []).slice();
+        view.roundTotal = s.roundTotal || view.queue.length;
+        view.roundPos = s.roundPos || (view.index + 1);
         render();
         return;
       }
@@ -1839,6 +1845,8 @@
       view.page = "study";
       view.queue = queue.map((c) => c.id);
       view.index = 0;
+      view.roundTotal = view.queue.length;
+      view.roundPos = 1;
       view.flipped = false;
       view.studyPicked = null;
       render();
@@ -2003,7 +2011,7 @@
       const top = `
           <div>
             <div class="row" style="justify-content:space-between">
-              <span class="muted">Card ${view.index + 1} of ${view.queue.length} in this shuffle</span>
+              <span class="muted">Card ${view.roundPos || (view.index + 1)} of ${view.roundTotal || view.queue.length}</span>
               <span class="muted">${left} still in the mix · streak ${p.streak}/${RETIRE_AFTER}</span>
             </div>
             <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
@@ -2481,9 +2489,12 @@
       if (!remainingIds.length) {
         view.queue = shuffle(activeStudy(view.folderId, view.studyMode || "mixed")).map((c) => c.id);
         view.index = 0;
+        view.roundTotal = view.queue.length;
+        view.roundPos = 1;
       } else {
         view.queue = remainingIds;
         view.index = view.index >= view.queue.length ? 0 : view.index;
+        view.roundPos = (view.roundPos || view.index) + 1;
       }
       view.flipped = false;
       view.studyPicked = null;
