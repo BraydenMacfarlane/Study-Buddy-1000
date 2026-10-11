@@ -84,7 +84,7 @@
   ✓ wrong pair flashes red
   ✓ 2-second penalty added
   ✓ definition-first also works; correct pair locks green
-  ✓ result shown; best time stored (3.4s)
+  ✓ result shown; best time stored (3.5s)
   ✓ results list the pairs with Read more notes
   ✓ slower round does not replace best time
   ✓ best match time shown on folder card
@@ -231,8 +231,66 @@
   ✓ card content, notes and study guide updated; folder stats kept
   ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management, C202 Ch 9: Base Compensation, C202 Ch 10: Incentives, C202 Ch 11: Benefits, C202 Ch 12: Creating a Healthy Work Environment, C202 Ch 13: Creating Positive Employee-Management Relations, C202 Ch 14: Managing Engagement and Turnover (2303 new, 77 updated cards)
 
+[12] Study counter keeps the shuffle total fixed
+  ✓ starts at Card 1 of 84
+  ✓ after a correct answer: Card 2 of 84 (total unchanged)
+  ✓ after a miss: Card 3 of 84
+  ✓ saved session label keeps the same position and total
+
+[13] Cross-device sync via a secret GitHub Gist (GitHub API mocked)
+  ✓ no GitHub calls before connecting
+  ✓ Sync screen says Not connected at first
+  ✓ how-to links to the new fine-grained token page
+  ✓ how-to names the Gists: Read and write permission
+  ✓ device A status after connect: Synced just now
+  ✓ first connect created exactly one gist
+  ✓ gist is secret with the fixed description
+  ✓ gist has study-buddy-sync.json and c202-plan.txt
+  ✓ Sync ID shown on the Sync screen matches the gist id
+  ✓ payload carries device A progress (5 studied cards)
+  ✓ payload is compact (15.0 KB) with no bundled card text or study guides
+  ✓ token is never written to the gist
+  ✓ payload has a 14-chapter progress summary for the helper
+  ✓ app fine after connect
+  ✓ device B starts with no progress
+  ✓ device B connected to the SAME gist (no second gist created)
+  ✓ device B shows the same Sync ID
+  ✓ device B received device A progress (mastered card)
+  ✓ device B has every card studied on A
+  ✓ starter folder seeded on both devices is not duplicated (17 cards, one folder)
+  ✓ home footer shows the sync status
+  ✓ device A got B's progress, guide-read flag and plan
+  ✓ device B got A's progress and user-made folder + card
+  ✓ boss best keeps the better score on both
+  ✓ same card changed on both: the most recent answer wins on both devices
+  ✓ nothing from the first round was lost
+  ✓ c202-plan.txt in the gist holds the Share-plan text
+  ✓ c202-plan.txt matches Share plan output exactly
+  ✓ folder deleted on A is gone on both and stays gone
+  ✓ built-in card deleted on B is gone on A too
+  ✓ deleted items stay gone after a reload + sync
+  ✓ a saved mid-session reaches the other device
+  ✓ finishing / discarding a session on one device clears it on the other
+  ✓ a study answer is pushed automatically ~6s later
+  ✓ switching away from the app pushes pending changes immediately
+  ✓ offline: status says Offline, will retry (changes are safe on this device)
+  ✓ offline: local change kept, app not broken
+  ✓ offline: change survives a reload while still offline
+  ✓ GitHub 5xx: will retry, local data intact
+  ✓ rate limit: friendly status with retry time
+  ✓ back online: the offline change reached the gist
+  ✓ wrong token: "Token problem" and the token box stays
+  ✓ wrong token: no gist created, local progress intact
+  ✓ Export backup does not contain the token
+  ✓ Disconnect removes the token from this device
+  ✓ Disconnect keeps all local progress
+  ✓ reconnecting finds the same gist
+  ✓ tools/read-plan.sh prints the pacing plan
+  ✓ tools/read-plan.sh prints a progress summary
+  ✓ helper output has no token and sends no auth header
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-211 passed, 0 failed
+265 passed, 0 failed

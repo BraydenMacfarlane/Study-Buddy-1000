@@ -637,6 +637,277 @@ async function testReal(raw) {
   await ctx.close();
 }
 
+/* ---------- Study counter (roundTotal / roundPos) ---------- */
+async function answerCard(p, right = true) {
+  if (await p.locator('#flipBtn').count()) { await p.click('#flipBtn'); await p.click(right ? '#gotBtn' : '#missBtn'); return; }
+  const idx = await S(p, (right) => { const c = state.cards.find((x) => x.id === view.queue[view.index]); return right ? c.correct : (c.correct + 1) % c.choices.length; }, right);
+  await p.click(`[data-spick="${idx}"]`); await p.click('#nextStudy');
+}
+
+async function testCounter() {
+  console.log('\n[12] Study counter keeps the shuffle total fixed');
+  const { ctx, p } = await page();
+  await p.goto(REAL);
+  await p.click('[data-open="deck-c202-ch01"]'); await skipNudge(p);
+  await p.click('#studyBtn'); await skipNudge(p);
+  const label = async () => (await p.textContent('.study-wrap')).match(/Card (\d+) of (\d+)/);
+  const m1 = await label();
+  ok(m1 && m1[1] === '1', 'starts at Card 1 of ' + (m1 && m1[2]));
+  await answerCard(p, true);
+  const m2 = await label();
+  ok(m2 && m2[1] === '2' && m2[2] === m1[2], `after a correct answer: Card ${m2 && m2[1]} of ${m2 && m2[2]} (total unchanged)`);
+  await answerCard(p, false);
+  const m3 = await label();
+  ok(m3 && m3[1] === '3' && m3[2] === m1[2], `after a miss: Card ${m3 && m3[1]} of ${m3 && m3[2]}`);
+  await p.click('#exitStudy');
+  const resume = await p.textContent('body');
+  ok(new RegExp(`Card 3 of ${m1[2]}`).test(resume), 'saved session label keeps the same position and total');
+  await ctx.close();
+}
+
+/* ---------- Cross-device sync through a mocked GitHub Gist API ---------- */
+const GOOD_TOKEN = 'github_pat_11TESTTOKENabcdefghijklmnopqrstuvwxyz';
+function makeGistStore() {
+  return { gists: {}, calls: [], fail: null, nextId: 1 };
+}
+async function mockGitHub(ctx, store) {
+  await ctx.route('https://api.github.com/**', async (route) => {
+    const req = route.request(), url = new URL(req.url()), method = req.method();
+    const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'Authorization, Content-Type, Accept, X-GitHub-Api-Version',
+      'access-control-allow-methods': 'GET, POST, PATCH, OPTIONS', 'access-control-expose-headers': 'X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After' };
+    if (method === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+    store.calls.push(`${method} ${url.pathname}`);
+    if (store.fail === 'offline') return route.abort('internetdisconnected');
+    const json = (status, body, headers = {}) => route.fulfill({ status, contentType: 'application/json', headers: { ...cors, ...headers }, body: JSON.stringify(body) });
+    if (store.fail === 'rate') return json(403, { message: 'API rate limit exceeded' }, { 'x-ratelimit-remaining': '0', 'x-ratelimit-reset': String(Math.floor(Date.now() / 1000) + 600) });
+    if (store.fail === '502') return json(502, { message: 'Bad gateway' });
+    if (req.headers()['authorization'] !== 'Bearer ' + GOOD_TOKEN) return json(401, { message: 'Bad credentials' });
+    const full = (g) => ({ ...g, files: Object.fromEntries(Object.entries(g.files).map(([n, f]) => [n, { filename: n, raw_url: `https://gist.githubusercontent.com/x/${g.id}/raw/${n}`, size: f.content.length, truncated: false, content: f.content }])) });
+    if (method === 'GET' && url.pathname === '/gists') {
+      const page = Number(url.searchParams.get('page') || 1);
+      const list = page === 1 ? Object.values(store.gists).map((g) => { const f = full(g); Object.values(f.files).forEach((x) => delete x.content); return f; }) : [];
+      return json(200, list);
+    }
+    if (method === 'POST' && url.pathname === '/gists') {
+      const body = JSON.parse(req.postData());
+      const id = 'a1b2c3d4e5f6a7b8c9d0' + String(store.nextId++).padStart(4, '0');
+      store.gists[id] = { id, description: body.description, public: body.public, owner: { login: 'BraydenMacfarlane' }, files: Object.fromEntries(Object.entries(body.files).map(([n, f]) => [n, { content: f.content }])) };
+      store.lastBody = req.postData();
+      return json(201, full(store.gists[id]));
+    }
+    const m = url.pathname.match(/^\/gists\/([0-9a-f]+)$/);
+    if (m && store.gists[m[1]]) {
+      const g = store.gists[m[1]];
+      if (method === 'GET') return json(200, full(g));
+      if (method === 'PATCH') {
+        store.lastBody = req.postData();
+        const body = JSON.parse(req.postData());
+        Object.entries(body.files || {}).forEach(([n, f]) => { if (f === null) delete g.files[n]; else g.files[n] = { content: f.content }; });
+        store.patches = (store.patches || 0) + 1;
+        return json(200, full(g));
+      }
+    }
+    return json(404, { message: 'Not Found' });
+  });
+}
+function remotePayload(store) { const g = Object.values(store.gists)[0]; return g ? JSON.parse(g.files['study-buddy-sync.json'].content) : null; }
+async function syncDevice(opts = {}) {
+  const d = await page(opts);
+  await mockGitHub(d.ctx, opts.store);
+  await d.p.goto(REAL);
+  return d;
+}
+async function openSync(p) { await p.click('#syncBtn'); await p.waitForSelector('#syncStatus'); }
+async function waitStatus(p, re, timeout = 8000) {
+  await p.waitForFunction((src) => { const el = document.querySelector('[data-sync-status]'); return el && new RegExp(src).test(el.textContent); }, re.source, { timeout }).catch(() => {});
+  return (await p.textContent('[data-sync-status]')) || '';
+}
+async function syncNowAndWait(p) { return S(p, () => syncNow('test')); }
+async function setProg(p, ids, streak, retired = false) { await S(p, ([ids, streak, retired]) => { ids.forEach((id) => { state.progress[id] = { streak, retired }; }); save(); }, [ids, streak, retired]); }
+async function getProg(p, id) { return S(p, (id) => state.progress[id] || null, id); }
+
+async function testSync() {
+  console.log('\n[13] Cross-device sync via a secret GitHub Gist (GitHub API mocked)');
+  const errStart = errors.length;
+  const store = makeGistStore();
+  const A = await syncDevice({ store });
+  const ch1 = await S(A.p, () => cardsIn('deck-c202-ch01').map((c) => c.id));
+  const ch2 = await S(A.p, () => cardsIn('deck-c202-ch02').map((c) => c.id));
+  // Real study on device A (UI), plus a couple of mastered cards.
+  await A.p.click('[data-open="deck-c202-ch01"]'); await skipNudge(A.p); await A.p.click('#studyBtn'); await skipNudge(A.p);
+  for (let i = 0; i < 3; i++) await answerCard(A.p, true);
+  await A.p.click('#exitStudy'); await A.p.click('#backHome');
+  await setProg(A.p, ch1.slice(0, 2), 3, true);
+  const aStudied = await S(A.p, () => Object.keys(state.progress).filter((k) => state.progress[k].streak > 0));
+  ok(store.calls.length === 0, 'no GitHub calls before connecting');
+
+  // ---- Device A: first connect creates the secret gist.
+  await openSync(A.p);
+  ok(/Not connected/.test(await A.p.textContent('#syncStatus')), 'Sync screen says Not connected at first');
+  ok(await A.p.locator('a[href="https://github.com/settings/personal-access-tokens/new"]').count() === 1, 'how-to links to the new fine-grained token page');
+  ok(/Gists/.test(await A.p.textContent('.sync-steps')) && /Read and write/.test(await A.p.textContent('.sync-steps')), 'how-to names the Gists: Read and write permission');
+  await A.p.fill('#syncToken', GOOD_TOKEN); await A.p.click('#syncConnect');
+  let st = await waitStatus(A.p, /Synced/);
+  ok(/Synced just now/.test(st), 'device A status after connect: ' + st);
+  const gids = Object.keys(store.gists);
+  ok(gids.length === 1 && store.calls.includes('POST /gists'), 'first connect created exactly one gist');
+  const g = store.gists[gids[0]];
+  ok(g.public === false && g.description === 'Study-Buddy-1000 sync', 'gist is secret with the fixed description');
+  ok(g.files['study-buddy-sync.json'] && g.files['c202-plan.txt'], 'gist has study-buddy-sync.json and c202-plan.txt');
+  ok((await A.p.textContent('#syncId')).trim() === gids[0], 'Sync ID shown on the Sync screen matches the gist id');
+  let R = remotePayload(store);
+  ok(aStudied.every((id) => R.p[id] && R.p[id][0] > 0) && R.p[ch1[0]][1] === 1, `payload carries device A progress (${aStudied.length} studied cards)`);
+  const sizeKB = g.files['study-buddy-sync.json'].content.length / 1024;
+  const bundledFront = await S(A.p, () => state.cards.find((c) => c.folderId === 'deck-c202-ch03').front);
+  ok(sizeKB < 40 && !g.files['study-buddy-sync.json'].content.includes(bundledFront) && !/"summary":"#/.test(g.files['study-buddy-sync.json'].content), `payload is compact (${sizeKB.toFixed(1)} KB) with no bundled card text or study guides`);
+  ok(!JSON.stringify(store.gists).includes(GOOD_TOKEN) && !(store.lastBody || '').includes(GOOD_TOKEN), 'token is never written to the gist');
+  ok(R.summary && R.summary.courses && R.summary.courses.C202 && R.summary.courses.C202.length === 14, 'payload has a 14-chapter progress summary for the helper');
+  ok(await noBroke(A.p), 'app fine after connect');
+
+  // ---- Device B: fresh context (iPhone-sized), same token, finds the same gist and gets A's progress.
+  const B = await syncDevice({ store, device: 'iPhone 13' });
+  ok(!((await getProg(B.p, ch1[0])) || {}).streak, 'device B starts with no progress');
+  await B.p.tap('#syncBtn'); await B.p.waitForSelector('#syncToken');
+  await hideToast(B.p); await B.p.screenshot({ path: `${SHOTS}/sync-phone-connect.png`, fullPage: true });
+  await B.p.fill('#syncToken', GOOD_TOKEN); await B.p.tap('#syncConnect');
+  st = await waitStatus(B.p, /Synced/);
+  ok(/Synced/.test(st) && Object.keys(store.gists).length === 1, 'device B connected to the SAME gist (no second gist created)');
+  ok((await B.p.textContent('#syncId')).trim() === gids[0], 'device B shows the same Sync ID');
+  const bp = await getProg(B.p, ch1[0]);
+  ok(bp && bp.retired && bp.streak === 3, 'device B received device A progress (mastered card)');
+  ok(aStudied.every((id) => true) && (await S(B.p, (ids) => ids.every((id) => state.progress[id] && state.progress[id].streak > 0), aStudied)), 'device B has every card studied on A');
+  const empCount = async (p) => S(p, () => state.folders.filter((f) => f.name === 'U.S. Employment Law').length);
+  ok(await empCount(B.p) === 1 && (await S(B.p, () => cardsIn(state.folders.find((f) => f.name === 'U.S. Employment Law').id).length)) === 17, 'starter folder seeded on both devices is not duplicated (17 cards, one folder)');
+  await hideToast(B.p); await B.p.screenshot({ path: `${SHOTS}/sync-phone-connected.png`, fullPage: true });
+  await B.p.tap('#syncBack');
+  ok(/Synced/.test(await B.p.textContent('footer.note')), 'home footer shows the sync status');
+
+  // ---- Concurrent changes on both devices merge without loss.
+  await setProg(A.p, [ch1[10]], 2);
+  await S(A.p, () => { state.folders.push({ id: 'user-f1', name: 'My Phone-Free Notes' }); state.cards.push({ id: 'user-c1', folderId: 'user-f1', front: 'Own term', answer: 'Own answer', subtitle: '', note: '', points: [] }); save(); });
+  await setProg(B.p, [ch2[5]], 2);
+  await S(B.p, () => { folderById('deck-c202-ch02').guideRead = '2026-10-10'; makePlan('C202', 'speedy', '2026-10-05'); save(); });
+  await S(B.p, () => { const f = folderById('deck-c202-ch01'); f.bestBoss = { pct: 70, passed: false, date: '2026-10-10' }; save(); });
+  await S(A.p, () => { const f = folderById('deck-c202-ch01'); f.bestBoss = { pct: 90, passed: true, date: '2026-10-11' }; save(); });
+  // Same card changed on both: the later change wins (B answers it wrong after A mastered it).
+  await setProg(A.p, [ch1[20]], 1); await syncNowAndWait(A.p); await syncNowAndWait(B.p);
+  await setProg(A.p, [ch1[20]], 2);
+  await A.p.waitForTimeout(20);
+  await setProg(B.p, [ch1[20]], 0);
+  await syncNowAndWait(A.p); await syncNowAndWait(B.p); await syncNowAndWait(A.p);
+  const a = await S(A.p, ([c1, c2]) => ({ p10: state.progress[c1[10]], p5: state.progress[c2[5]], p20: state.progress[c1[20]], guide: folderById('deck-c202-ch02').guideRead, plan: state.plans.C202 && state.plans.C202.pace, boss: folderById('deck-c202-ch01').bestBoss, uf: !!folderById('user-f1') }), [ch1, ch2]);
+  const b = await S(B.p, ([c1, c2]) => ({ p10: state.progress[c1[10]], p5: state.progress[c2[5]], p20: state.progress[c1[20]], guide: folderById('deck-c202-ch02').guideRead, plan: state.plans.C202 && state.plans.C202.pace, boss: folderById('deck-c202-ch01').bestBoss, uf: !!folderById('user-f1'), uc: state.cards.find((c) => c.id === 'user-c1') }), [ch1, ch2]);
+  ok(a.p5 && a.p5.streak === 2 && a.guide === '2026-10-10' && a.plan === 'speedy', 'device A got B\'s progress, guide-read flag and plan');
+  ok(b.p10 && b.p10.streak === 2 && b.uf && b.uc && b.uc.answer === 'Own answer', 'device B got A\'s progress and user-made folder + card');
+  ok(a.boss.pct === 90 && a.boss.passed && b.boss.pct === 90 && b.boss.passed, 'boss best keeps the better score on both');
+  ok(a.p20 && a.p20.streak === 0 && b.p20 && b.p20.streak === 0, 'same card changed on both: the most recent answer wins on both devices');
+  ok(aStudied.every((id) => true) && (await S(A.p, (ids) => ids.every((id) => state.progress[id] && state.progress[id].streak > 0), aStudied)), 'nothing from the first round was lost');
+  ok(/C202 .*study plan/.test(store.gists[gids[0]].files['c202-plan.txt'].content) && /Pace: /.test(store.gists[gids[0]].files['c202-plan.txt'].content), 'c202-plan.txt in the gist holds the Share-plan text');
+  ok(store.gists[gids[0]].files['c202-plan.txt'].content === await S(B.p, () => planText('C202')), 'c202-plan.txt matches Share plan output exactly');
+
+  // ---- Deletions stick (tombstones) and don't come back.
+  await S(A.p, () => { state.cards = state.cards.filter((c) => c.folderId !== 'user-f1'); state.folders = state.folders.filter((f) => f.id !== 'user-f1'); save(); });
+  await S(B.p, () => { const id = cardsIn('deck-c202-ch14')[0].id; window.__delCard = id; state.cards = state.cards.filter((c) => c.id !== id); delete state.progress[id]; save(); });
+  const delCard = await S(B.p, () => window.__delCard);
+  await syncNowAndWait(A.p); await syncNowAndWait(B.p); await syncNowAndWait(A.p); await syncNowAndWait(B.p);
+  ok(!(await S(B.p, () => !!folderById('user-f1'))) && !(await S(A.p, () => !!folderById('user-f1'))), 'folder deleted on A is gone on both and stays gone');
+  ok(!(await S(A.p, (id) => state.cards.some((c) => c.id === id), delCard)), 'built-in card deleted on B is gone on A too');
+  await A.p.reload(); await syncNowAndWait(A.p);
+  ok(!(await S(A.p, () => !!folderById('user-f1'))) && !(await S(A.p, (id) => state.cards.some((c) => c.id === id), delCard)), 'deleted items stay gone after a reload + sync');
+  // Sessions: a mid-session save syncs, and clearing it syncs too.
+  await S(A.p, () => setSession('deck-c202-ch03', 'quiz', { ids: ['x'], index: 0, quizTotal: 5, score: 0 }));
+  await syncNowAndWait(A.p); await syncNowAndWait(B.p);
+  ok(await S(B.p, () => !!getSession('deck-c202-ch03', 'quiz')), 'a saved mid-session reaches the other device');
+  await S(B.p, () => clearSession('deck-c202-ch03', 'quiz'));
+  await syncNowAndWait(B.p); await syncNowAndWait(A.p);
+  ok(!(await S(A.p, () => !!getSession('deck-c202-ch03', 'quiz'))), 'finishing / discarding a session on one device clears it on the other');
+
+  // ---- Debounced automatic push after a change (no manual sync).
+  const before = store.patches || 0;
+  await A.p.click('[data-open="deck-c202-ch04"]'); await skipNudge(A.p); await A.p.click('#studyBtn'); await skipNudge(A.p);
+  const cur = await S(A.p, () => view.queue[view.index]);
+  await answerCard(A.p, true);
+  await A.p.waitForTimeout(7500);
+  R = remotePayload(store);
+  ok((store.patches || 0) > before && R.p[cur] && R.p[cur][0] === 1, 'a study answer is pushed automatically ~6s later');
+  // Hidden page flushes pending changes right away.
+  await answerCard(A.p, true);
+  const cur2 = await S(A.p, () => view.queue[view.index - 1] || null);
+  await S(A.p, () => { Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange')); });
+  await A.p.waitForTimeout(800);
+  const pushedHidden = remotePayload(store);
+  ok(Object.keys(pushedHidden.p).length >= Object.keys(R.p).length && store.lastBody && (await S(A.p, () => !SYNC.dirty)), 'switching away from the app pushes pending changes immediately');
+  await S(A.p, () => { delete document.visibilityState; Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); });
+  await A.p.click('#exitStudy'); await A.p.click('#backHome');
+
+  // ---- Offline / failed push leaves local data intact.
+  store.fail = 'offline';
+  await setProg(A.p, [ch2[30]], 2, false);
+  await syncNowAndWait(A.p);
+  st = await A.p.textContent('[data-sync-status]');
+  ok(/Offline, will retry/.test(st), 'offline: status says ' + st);
+  ok((await getProg(A.p, ch2[30])).streak === 2 && await noBroke(A.p), 'offline: local change kept, app not broken');
+  await A.p.reload();
+  await A.p.waitForTimeout(500);
+  ok((await getProg(A.p, ch2[30])).streak === 2 && await noBroke(A.p), 'offline: change survives a reload while still offline');
+  store.fail = '502';
+  await syncNowAndWait(A.p);
+  ok(/will retry/.test(await A.p.textContent('[data-sync-status]')) && (await getProg(A.p, ch2[30])).streak === 2, 'GitHub 5xx: will retry, local data intact');
+  store.fail = 'rate';
+  await syncNowAndWait(A.p);
+  ok(/GitHub is busy, will retry at/.test(await A.p.textContent('[data-sync-status]')), 'rate limit: friendly status with retry time');
+  store.fail = null;
+  await syncNowAndWait(A.p);
+  ok(remotePayload(store).p[ch2[30]][0] === 2 && /Synced/.test(await A.p.textContent('[data-sync-status]')), 'back online: the offline change reached the gist');
+
+  // ---- Bad token: clear message, nothing created, local data untouched.
+  const C = await syncDevice({ store, device: 'iPhone 13' });
+  await setProg(C.p, [ch1[50]], 1);
+  await C.p.tap('#syncBtn'); await C.p.fill('#syncToken', 'ghp_wrongtoken'); await C.p.tap('#syncConnect');
+  st = await waitStatus(C.p, /Token problem/);
+  ok(/Token problem/.test(st) && await C.p.locator('#syncToken').count() === 1, 'wrong token: "Token problem" and the token box stays');
+  ok(Object.keys(store.gists).length === 1 && (await getProg(C.p, ch1[50])).streak === 1, 'wrong token: no gist created, local progress intact');
+  await C.ctx.close();
+
+  // ---- Export never contains the token.
+  await A.p.click('#syncBtn'); await A.p.click('#syncBack');
+  const [dl] = await Promise.all([A.p.waitForEvent('download'), A.p.click('#exportBtn')]);
+  const exported = fs.readFileSync(await dl.path(), 'utf8');
+  ok(!exported.includes(GOOD_TOKEN) && !exported.includes('flashcards.sync') && exported.includes('"progress"'), 'Export backup does not contain the token');
+
+  // ---- Disconnect keeps local data; reconnecting finds the same gist.
+  await openSync(A.p);
+  await A.p.click('#syncDisconnect');
+  ok(/Not connected/.test(await A.p.textContent('#syncStatus')) && !(await S(A.p, () => localStorage.getItem('flashcards.sync.token'))), 'Disconnect removes the token from this device');
+  ok((await getProg(A.p, ch1[0])).retired && (await getProg(A.p, ch2[30])).streak === 2, 'Disconnect keeps all local progress');
+  await A.p.fill('#syncToken', GOOD_TOKEN); await A.p.click('#syncConnect');
+  await waitStatus(A.p, /Synced/);
+  ok(Object.keys(store.gists).length === 1 && (await A.p.textContent('#syncId')).trim() === gids[0], 'reconnecting finds the same gist');
+
+  // ---- Box helper reads the plan anonymously.
+  const http = require('http');
+  const srv = http.createServer((req, res) => {
+    const m = req.url.match(/^\/gists\/([0-9a-f]+)$/);
+    const gg = m && store.gists[m[1]];
+    if (req.headers.authorization) { res.writeHead(500); return res.end('auth header sent'); }
+    if (!gg) { res.writeHead(404); return res.end('{}'); }
+    res.writeHead(200, { 'content-type': 'application/json' });
+    res.end(JSON.stringify({ ...gg, files: Object.fromEntries(Object.entries(gg.files).map(([n, f]) => [n, { filename: n, content: f.content, truncated: false }])) }));
+  });
+  await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+  let out = '';
+  out = await new Promise((res) => require('child_process').exec(`${ROOT}/tools/read-plan.sh ${gids[0]}`, { env: { ...process.env, GIST_API_BASE: `http://127.0.0.1:${srv.address().port}`, GH_TOKEN: 'ghp_shouldNeverBeUsed' } }, (e, so, se) => res(e ? 'ERR ' + e.message + so + se : so)));
+  srv.close();
+  ok(/C202 .*study plan/.test(out) && /Pace: /.test(out) && out.includes(store.gists[gids[0]].files['c202-plan.txt'].content), 'tools/read-plan.sh prints the pacing plan');
+  ok(/C202: \d+\/23\d\d cards mastered/.test(out) && /Ch 1 /.test(out) && /boss best 90% passed/.test(out), 'tools/read-plan.sh prints a progress summary');
+  ok(!out.includes(GOOD_TOKEN) && !out.includes('ghp_') && !out.startsWith('ERR'), 'helper output has no token and sends no auth header');
+
+  await A.ctx.close(); await B.ctx.close();
+  // Expected network noise from the offline / 401 / 5xx / rate-limit cases above.
+  const noise = /Failed to load resource|net::ERR_|api\.github\.com/;
+  for (let i = errors.length - 1; i >= errStart; i--) if (noise.test(errors[i])) errors.splice(i, 1);
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -711,6 +982,8 @@ async function screenshots() {
     await testPlanner();
     await testResumeAndQuick();
     await testReal(raw);
+    await testCounter();
+    await testSync();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

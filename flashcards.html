@@ -381,6 +381,30 @@
       opacity: 0; pointer-events: none; transition: all .25s ease; max-width: 92vw; z-index: 50; font-size: 14px;
     }
     #toast.show { opacity: 1; transform: translate(-50%, 0); }
+    /* Sync */
+    .sync-btn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--line); vertical-align: 1px; }
+    .sync-btn[data-tone="ok"] .dot { background: var(--ok); }
+    .sync-btn[data-tone="busy"] .dot { background: var(--accent); }
+    .sync-btn[data-tone="warn"] .dot { background: var(--accent-ink); }
+    .sync-btn[data-tone="bad"] .dot { background: var(--bad); }
+    .sync-wrap { display: grid; gap: 14px; max-width: 620px; margin: 0 auto; }
+    .sync-card h2.sync-title { margin: 0 0 8px; font-size: 20px; color: var(--primary); }
+    .sync-card h3 { margin: 4px 0 6px; font-size: 15px; color: var(--primary); }
+    .sync-card p { margin: 0 0 10px; line-height: 1.5; font-size: 14px; }
+    .sync-status { padding: 10px 12px; border-radius: 10px; background: var(--teal-tint); color: var(--primary-dark); font-size: 14px; }
+    .sync-status[data-tone="ok"] { background: var(--ok-tint); color: var(--ok); }
+    .sync-status[data-tone="busy"], .sync-status[data-tone="warn"] { background: var(--accent-tint); color: var(--accent-ink); }
+    .sync-status[data-tone="bad"] { background: var(--bad-tint); color: var(--bad); }
+    .sync-id-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 10px; }
+    .sync-id-row code { font-size: 13px; word-break: break-all; color: var(--primary-dark); }
+    .sync-label { display: block; margin: 14px 0 6px; font-weight: 600; font-size: 14px; }
+    #syncToken { width: 100%; padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 16px; }
+    #syncToken:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+    .sync-actions { margin-top: 12px; }
+    .sync-steps { margin: 0 0 10px; padding-left: 20px; font-size: 14px; line-height: 1.55; }
+    .sync-steps li { margin-bottom: 4px; }
+    .sync-card a { color: var(--primary); font-weight: 600; }
+    a.sync-foot { color: var(--primary); }
   </style>
 </head>
 <body>
@@ -509,6 +533,7 @@
 
     function save() {
       localStorage.setItem(STORE_KEY, JSON.stringify(state));
+      try { syncNoteSave(); } catch (e) { console.warn("sync bookkeeping failed", e); }
     }
 
     /* ---------- Merge engine (used by Import and by bundled decks) ---------- */
@@ -755,6 +780,539 @@
       });
       if (sum.decks.length) save();
       return sum;
+    }
+
+    /* ---------- Cross-device sync (one secret GitHub Gist, personal access token per device) ----------
+       Only user state is synced (progress, sessions, plans, folder scores/flags, user-made folders/cards),
+       never the bundled deck text. Every synced item carries a "last changed" stamp; deletions leave a
+       tombstone. Merging never wipes the other device: newest stamp wins per item, ties keep the better
+       progress / score, and scores (boss, match, quiz) always keep the best of both. The token lives
+       only under SYNC_TOKEN_KEY on this device: it is never exported and never written to the gist. */
+    const SYNC_TOKEN_KEY = "flashcards.sync.token";
+    const SYNC_CFG_KEY = "flashcards.sync.v1";
+    const SYNC_META_KEY = "flashcards.syncmeta.v1";
+    const SYNC_DESC = "Study-Buddy-1000 sync";
+    const SYNC_FILE = "study-buddy-sync.json";
+    const SYNC_PLAN_FILE = "c202-plan.txt";
+    const SYNC_PLAN_COURSE = "C202";
+    const SYNC_API = "https://api.github.com";
+    const SYNC_DEBOUNCE_MS = 6000;
+    const TOMB_MAX_AGE = 400 * 86400000;
+    const DECK_FIELDS = ["deckFolderName", "course", "order", "summary", "source"];
+    const BUNDLED_DECK_IDS = new Set();
+    const BUNDLED_CARD_IDS = new Set();
+    (Array.isArray(BUNDLED_DECKS) ? BUNDLED_DECKS : []).forEach((d) => {
+      if (!d || !Array.isArray(d.cards)) return;
+      const did = cleanStr(d.id);
+      if (did) BUNDLED_DECK_IDS.add(did);
+      const deckKey = did || slugify(cleanStr(d.folder) || cleanStr(d.name) || "Imported deck");
+      d.cards.forEach((c, i) => BUNDLED_CARD_IDS.add(cleanStr(c && c.id) || `${deckKey}-${String(i + 1).padStart(3, "0")}`));
+    });
+
+    function readJsonKey(k, dflt) { try { const v = JSON.parse(localStorage.getItem(k) || "null"); return v && typeof v === "object" ? v : dflt; } catch { return dflt; } }
+    function writeJsonKey(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { console.warn("sync: could not save", k, e); } }
+    function isBundledFolder(f) { return !!(f && f.deckId && BUNDLED_DECK_IDS.has(f.deckId)); }
+    function isBundledCard(c) { return BUNDLED_CARD_IDS.has(c.id) && isBundledFolder(folderById(c.folderId)); }
+    function folderSyncObj(f) {
+      const o = {};
+      Object.keys(f).sort().forEach((k) => { if (k !== "id" && !(isBundledFolder(f) && DECK_FIELDS.includes(k))) o[k] = f[k]; });
+      return o;
+    }
+    function cardSyncObj(c) { const o = {}; Object.keys(c).sort().forEach((k) => { if (k !== "id") o[k] = c[k]; }); return o; }
+    function progFp(p) { return p ? `${Number(p.streak) || 0}|${p.retired ? 1 : 0}` : "0|0"; }
+
+    // Fingerprint of every syncable item, so save() can tell what changed and stamp it.
+    function syncFingerprints() {
+      const fp = {};
+      const cardIds = new Set(state.cards.map((c) => c.id));
+      Object.keys(state.progress).forEach((id) => { const v = progFp(state.progress[id]); if (v !== "0|0" && cardIds.has(id)) fp["p:" + id] = v; });
+      Object.keys(state.sessions || {}).forEach((k) => { fp["s:" + k] = hashString(JSON.stringify(state.sessions[k])); });
+      Object.keys(state.plans || {}).forEach((k) => { fp["pl:" + k] = hashString(JSON.stringify(state.plans[k])); });
+      state.folders.forEach((f) => { fp["f:" + f.id] = hashString(JSON.stringify(folderSyncObj(f))); });
+      state.cards.forEach((c) => { fp["c:" + c.id] = isBundledCard(c) ? "b:" + c.folderId : hashString(JSON.stringify(cardSyncObj(c))); });
+      return fp;
+    }
+
+    var SYNC = null;
+    function syncInit() {
+      const cfg = readJsonKey(SYNC_CFG_KEY, {});
+      const meta = readJsonKey(SYNC_META_KEY, {});
+      let token = "";
+      try { token = localStorage.getItem(SYNC_TOKEN_KEY) || ""; } catch {}
+      SYNC = {
+        token, gistId: cfg.gistId || "", owner: cfg.owner || "", lastOk: cfg.lastOk || 0,
+        st: meta.st && typeof meta.st === "object" ? meta.st : {}, x: meta.x && typeof meta.x === "object" ? meta.x : {},
+        fp: syncFingerprints(), status: token ? "idle" : "off", msg: "", dirty: !!cfg.dirty, busy: null, again: false,
+        timer: null, retryTimer: null, backoff: 0, lastPull: 0, lastRemote: null, retryAt: 0
+      };
+    }
+    function syncSaveCfg() { writeJsonKey(SYNC_CFG_KEY, { gistId: SYNC.gistId, owner: SYNC.owner, lastOk: SYNC.lastOk, dirty: SYNC.dirty }); }
+    function syncSaveMeta() { writeJsonKey(SYNC_META_KEY, { st: SYNC.st, x: SYNC.x }); }
+
+    // Called from save(): stamp whatever changed since the last save.
+    function syncNoteSave() {
+      if (!SYNC || SYNC.applying) return;
+      const now = Date.now(), fp = syncFingerprints(), old = SYNC.fp;
+      let changed = false;
+      Object.keys(fp).forEach((k) => {
+        if (old[k] !== fp[k]) { SYNC.st[k] = now; delete SYNC.x[k]; changed = true; }
+      });
+      const goneFolders = new Set(Object.keys(old).filter((k) => k.startsWith("f:") && !(k in fp)).map((k) => k.slice(2)));
+      Object.keys(old).forEach((k) => {
+        if (k in fp) return;
+        changed = true;
+        if (k.startsWith("p:")) { if (state.cards.some((c) => "p:" + c.id === k)) SYNC.st[k] = now; else delete SYNC.st[k]; return; }
+        delete SYNC.st[k];
+        if (k.startsWith("c:") && old[k].startsWith("b:") && goneFolders.has(old[k].slice(2))) return; // folder tombstone covers it
+        SYNC.x[k] = now;
+      });
+      SYNC.fp = fp;
+      if (!changed) return;
+      syncSaveMeta();
+      SYNC.rev = (SYNC.rev || 0) + 1;
+      if (SYNC.token) { SYNC.dirty = true; syncSaveCfg(); syncSchedule(SYNC_DEBOUNCE_MS); renderSyncStatus(); }
+    }
+    // Re-baseline without stamping (after a full restore), so a restore never deletes things elsewhere.
+    function syncRebase() { if (SYNC) { SYNC.fp = syncFingerprints(); } }
+
+    function sortedObj(o) { const r = {}; Object.keys(o).sort().forEach((k) => { r[k] = o[k]; }); return r; }
+
+    // Build the compact payload that goes into the gist.
+    function buildSyncPayload() {
+      const st = SYNC.st, t = (k) => Number(st[k]) || 0;
+      const p = {}, s = {}, pl = {}, f = {}, c = {}, x = {};
+      const cutoff = Date.now() - TOMB_MAX_AGE;
+      state.cards.forEach((card) => {
+        const pr = state.progress[card.id], k = "p:" + card.id;
+        if (progFp(pr) !== "0|0" || t(k)) p[card.id] = [Number(pr && pr.streak) || 0, pr && pr.retired ? 1 : 0, t(k)];
+        if (!isBundledCard(card)) c[card.id] = [t("c:" + card.id), cardSyncObj(card)];
+      });
+      Object.keys(state.sessions || {}).forEach((k) => { s[k] = [t("s:" + k), state.sessions[k]]; });
+      Object.keys(state.plans || {}).forEach((k) => { pl[k] = [t("pl:" + k), state.plans[k]]; });
+      state.folders.forEach((fo) => { f[fo.id] = [t("f:" + fo.id), folderSyncObj(fo)]; });
+      Object.keys(SYNC.x).forEach((k) => { if (SYNC.x[k] >= cutoff) x[k] = SYNC.x[k]; });
+      return { v: 1, app: "Study-Buddy-1000", p: sortedObj(p), s: sortedObj(s), pl: sortedObj(pl), f: sortedObj(f), c: sortedObj(c), x: sortedObj(x) };
+    }
+    function payloadCore(pl) { return pl ? JSON.stringify({ p: pl.p, s: pl.s, pl: pl.pl, f: pl.f, c: pl.c, x: pl.x }) : ""; }
+
+    function syncSummary() {
+      const courses = {};
+      state.folders.forEach((f) => {
+        const cards = cardsIn(f.id);
+        const key = f.course || "Other";
+        (courses[key] = courses[key] || []).push({
+          ch: hasOrder(f) ? f.order : null, name: f.name, cards: cards.length,
+          mastered: cards.filter((c) => state.progress[c.id] && state.progress[c.id].retired).length,
+          boss: f.bestBoss ? Math.round(f.bestBoss.pct) : null, passed: !!(f.bestBoss && f.bestBoss.passed),
+          guide: f.guideRead ? String(f.guideRead) : (cleanStr(f.summary) ? false : null),
+          quiz: typeof f.quizBest === "number" ? f.quizBest : null
+        });
+      });
+      Object.values(courses).forEach((list) => list.sort((a, b) => (a.ch ?? 1e9) - (b.ch ?? 1e9)));
+      return { generated: new Date().toISOString(), courses };
+    }
+
+    // Merge two payloads. Pure: no state access.
+    function mergeSyncPayloads(L, R) {
+      L = L || {}; R = R || {};
+      const M = { v: 1, app: "Study-Buddy-1000", p: {}, s: {}, pl: {}, f: {}, c: {}, x: {} };
+      const keys = (a, b) => Array.from(new Set(Object.keys(a || {}).concat(Object.keys(b || {})))).sort();
+      ["x"].forEach(() => keys(L.x, R.x).forEach((k) => { M.x[k] = Math.max(Number((L.x || {})[k]) || 0, Number((R.x || {})[k]) || 0); }));
+      keys(L.p, R.p).forEach((k) => {
+        const a = (L.p || {})[k], b = (R.p || {})[k];
+        if (!a || !b) { M.p[k] = a || b; return; }
+        if ((a[2] || 0) !== (b[2] || 0)) { M.p[k] = (a[2] || 0) > (b[2] || 0) ? a : b; return; }
+        const bp = betterProgress({ streak: a[0], retired: !!a[1] }, { streak: b[0], retired: !!b[1] });
+        M.p[k] = [Number(bp.streak) || 0, bp.retired ? 1 : 0, a[2] || 0];
+      });
+      const tieJson = (a, b) => (JSON.stringify(a[1]) >= JSON.stringify(b[1]) ? a : b);
+      const pick = (sec, tie) => keys(L[sec], R[sec]).forEach((k) => {
+        const a = (L[sec] || {})[k], b = (R[sec] || {})[k];
+        if (!a || !b) { M[sec][k] = a || b; return; }
+        if ((a[0] || 0) !== (b[0] || 0)) { M[sec][k] = (a[0] || 0) > (b[0] || 0) ? a : b; return; }
+        M[sec][k] = tie(a, b);
+      });
+      pick("s", (a, b) => ((a[1] && a[1].savedAt) || 0) !== ((b[1] && b[1].savedAt) || 0) ? (((a[1] && a[1].savedAt) || 0) > ((b[1] && b[1].savedAt) || 0) ? a : b) : tieJson(a, b));
+      pick("pl", tieJson);
+      pick("c", tieJson);
+      keys(L.f, R.f).forEach((k) => {
+        const a = (L.f || {})[k], b = (R.f || {})[k];
+        if (!a || !b) { M.f[k] = a || b; return; }
+        const newer = (a[0] || 0) !== (b[0] || 0) ? ((a[0] || 0) > (b[0] || 0) ? a : b) : tieJson(a, b);
+        const older = newer === a ? b : a;
+        const o = { ...newer[1] };
+        if ((a[0] || 0) === (b[0] || 0)) Object.keys(older[1]).forEach((f) => { if (o[f] === undefined) o[f] = older[1][f]; });
+        const bb = betterBoss(a[1].bestBoss, b[1].bestBoss); if (bb) o.bestBoss = bb;
+        const bm = betterMatch(a[1].bestMatch, b[1].bestMatch); if (bm) o.bestMatch = bm;
+        const qs = [a[1].quizBest, b[1].quizBest].filter((q) => typeof q === "number");
+        if (qs.length) o.quizBest = Math.max(...qs);
+        M.f[k] = [Math.max(a[0] || 0, b[0] || 0), sortedObj(o)];
+      });
+      // Tombstones: a deletion beats anything not changed after it; a later re-create clears the tombstone.
+      Object.keys(M.x).forEach((tk) => {
+        const i = tk.indexOf(":"), pre = tk.slice(0, i), id = tk.slice(i + 1);
+        const sec = { f: "f", c: "c", s: "s", pl: "pl" }[pre];
+        if (!sec) { delete M.x[tk]; return; }
+        const e = M[sec][id];
+        if (e && (e[0] || 0) > M.x[tk]) delete M.x[tk];
+        else delete M[sec][id];
+      });
+      // Cards inside a deleted folder go too.
+      Object.keys(M.c).forEach((id) => { const fid = M.c[id][1] && M.c[id][1].folderId; if (fid && M.x["f:" + fid] && !M.f[fid]) delete M.c[id]; });
+      return M;
+    }
+
+    // Apply a merged payload to local state. Returns true if anything visible changed.
+    function applySyncPayload(M) {
+      const before = payloadCore(buildSyncPayload());
+      const removeFolder = (fid) => {
+        const ids = new Set(cardsIn(fid).map((c) => c.id));
+        state.cards = state.cards.filter((c) => !ids.has(c.id));
+        ids.forEach((id) => delete state.progress[id]);
+        state.folders = state.folders.filter((f) => f.id !== fid);
+        Object.keys(state.sessions || {}).forEach((k) => { if (k.startsWith(fid + ":")) delete state.sessions[k]; });
+      };
+      Object.keys(M.f).forEach((fid) => {
+        const obj = M.f[fid][1] || {};
+        let local = folderById(fid);
+        if (!local && obj.deckId && BUNDLED_DECK_IDS.has(obj.deckId)) {
+          const deck = BUNDLED_DECKS.find((d) => cleanStr(d.id) === obj.deckId);
+          if (deck) {
+            const nf = mergeDeck(deck, newSummary()), oid = nf.id;
+            if (oid !== fid) { nf.id = fid; state.cards.forEach((c) => { if (c.folderId === oid) c.folderId = fid; }); }
+            local = folderById(fid);
+          }
+        }
+        if (!local) { local = { id: fid }; state.folders.push(local); }
+        const keep = isBundledFolder(local) ? DECK_FIELDS : [];
+        Object.keys(local).forEach((k) => { if (k !== "id" && !keep.includes(k) && !(k in obj)) delete local[k]; });
+        Object.keys(obj).forEach((k) => { if (k !== "id" && !keep.includes(k)) local[k] = obj[k]; });
+      });
+      state.folders.slice().forEach((f) => { if (!M.f[f.id] && M.x["f:" + f.id]) removeFolder(f.id); });
+      Object.keys(M.c).forEach((cid) => {
+        const obj = M.c[cid][1];
+        if (!obj || !folderById(obj.folderId)) return;
+        let local = state.cards.find((c) => c.id === cid);
+        if (!local) { local = { id: cid }; state.cards.push(local); }
+        Object.keys(local).forEach((k) => { if (k !== "id" && !(k in obj)) delete local[k]; });
+        Object.assign(local, obj, { id: cid });
+      });
+      const tombC = new Set(Object.keys(M.x).filter((k) => k.startsWith("c:")).map((k) => k.slice(2)));
+      if (tombC.size) {
+        state.cards = state.cards.filter((c) => !(tombC.has(c.id) && !M.c[c.id]));
+        tombC.forEach((id) => { if (!M.c[id]) delete state.progress[id]; });
+      }
+      const cardIds = new Set(state.cards.map((c) => c.id));
+      Object.keys(M.p).forEach((cid) => { if (cardIds.has(cid)) state.progress[cid] = { streak: Number(M.p[cid][0]) || 0, retired: !!M.p[cid][1] }; });
+      ["s", "pl"].forEach((sec) => {
+        const target = sec === "s" ? (state.sessions = state.sessions || {}) : state.plans;
+        Object.keys(M[sec]).forEach((k) => { target[k] = JSON.parse(JSON.stringify(M[sec][k][1])); });
+        Object.keys(target).forEach((k) => { if (!M[sec][k] && M.x[sec + ":" + k]) delete target[k]; });
+      });
+      // Adopt the merged stamps / tombstones, then re-baseline fingerprints without stamping.
+      const st = {};
+      Object.keys(M.p).forEach((k) => { if (M.p[k][2]) st["p:" + k] = M.p[k][2]; });
+      ["s", "pl", "f", "c"].forEach((sec) => Object.keys(M[sec]).forEach((k) => { if (M[sec][k][0]) st[sec + ":" + k] = M[sec][k][0]; }));
+      Object.keys(SYNC.st).forEach((k) => { if (!(k in st) && !M.x[k]) st[k] = SYNC.st[k]; });
+      SYNC.st = st;
+      SYNC.x = { ...M.x };
+      SYNC.applying = true;
+      try { save(); } finally { SYNC.applying = false; }
+      SYNC.fp = syncFingerprints();
+      syncSaveMeta();
+      return payloadCore(buildSyncPayload()) !== before;
+    }
+
+    // A fresh device seeds its own copy of the starter folder with random ids. Before merging, adopt the
+    // remote ids for a local non-deck folder / card with the same name / front, so they don't duplicate.
+    function reconcileSyncIds(R) {
+      const rf = R.f || {}, rc = R.c || {}, rx = R.x || {};
+      const renameKey = (oldK, newK) => {
+        if (SYNC.st[oldK] !== undefined) { SYNC.st[newK] = Math.max(SYNC.st[newK] || 0, SYNC.st[oldK]); delete SYNC.st[oldK]; }
+        if (SYNC.fp[oldK] !== undefined) { SYNC.fp[newK] = SYNC.fp[oldK]; delete SYNC.fp[oldK]; }
+      };
+      Object.keys(rf).forEach((rid) => {
+        const r = rf[rid][1] || {};
+        if (folderById(rid) || r.deckId) return;
+        const local = state.folders.find((f) => !f.deckId && f.name === r.name && !rf[f.id] && !rx["f:" + f.id]);
+        if (!local) return;
+        const oid = local.id;
+        local.id = rid;
+        state.cards.forEach((c) => { if (c.folderId === oid) c.folderId = rid; });
+        Object.keys(state.sessions || {}).forEach((k) => { if (k.startsWith(oid + ":")) { const nk = rid + k.slice(oid.length); state.sessions[nk] = state.sessions[k]; delete state.sessions[k]; renameKey("s:" + k, "s:" + nk); } });
+        renameKey("f:" + oid, "f:" + rid);
+      });
+      Object.keys(rc).forEach((rid) => {
+        const r = rc[rid][1] || {};
+        if (state.cards.some((c) => c.id === rid) || !folderById(r.folderId)) return;
+        const local = state.cards.find((c) => c.folderId === r.folderId && !BUNDLED_CARD_IDS.has(c.id) && !rc[c.id] && !rx["c:" + c.id] && cleanStr(c.front) === cleanStr(r.front) && (c.type || "") === (r.type || ""));
+        if (!local) return;
+        const oid = local.id;
+        local.id = rid;
+        if (state.progress[oid]) { state.progress[rid] = betterProgress(state.progress[rid], state.progress[oid]); delete state.progress[oid]; }
+        renameKey("c:" + oid, "c:" + rid); renameKey("p:" + oid, "p:" + rid);
+      });
+    }
+
+    /* ----- GitHub API ----- */
+    class SyncError extends Error { constructor(kind, msg, extra) { super(msg || kind); this.kind = kind; Object.assign(this, extra || {}); } }
+    async function ghApi(method, path, body, opts = {}) {
+      if (!SYNC.token) throw new SyncError("auth", "No token on this device");
+      const ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timer = ctl ? setTimeout(() => ctl.abort(), 20000) : null;
+      let res;
+      try {
+        res = await fetch(SYNC_API + path, {
+          method, cache: "no-store", keepalive: !!opts.keepalive, signal: ctl ? ctl.signal : undefined,
+          headers: Object.assign({ Accept: "application/vnd.github+json", Authorization: "Bearer " + SYNC.token, "X-GitHub-Api-Version": "2022-11-28" }, body ? { "Content-Type": "application/json" } : {}),
+          body: body ? JSON.stringify(body) : undefined
+        });
+      } catch (e) {
+        throw new SyncError("offline", "Can't reach GitHub");
+      } finally { if (timer) clearTimeout(timer); }
+      if (res.ok) { try { return await res.json(); } catch { return {}; } }
+      const h = (n) => res.headers.get(n);
+      if (res.status === 401) throw new SyncError("auth", "GitHub didn't accept this token (it may be mistyped, revoked or expired)");
+      if (res.status === 429 || (res.status === 403 && (h("x-ratelimit-remaining") === "0" || h("retry-after")))) {
+        const reset = h("retry-after") ? Date.now() + Number(h("retry-after")) * 1000 : (Number(h("x-ratelimit-reset")) || 0) * 1000;
+        throw new SyncError("rate", "GitHub is rate-limiting requests", { retryAt: Math.max(reset, Date.now() + 60000) });
+      }
+      if (res.status === 403) throw new SyncError("auth", "This token can't use gists. Give it Gists: Read and write (or the classic gist scope)");
+      if (res.status === 404) throw new SyncError("notfound", "Not found", { status: 404 });
+      if (res.status === 422) throw new SyncError("error", "GitHub rejected the update (422)");
+      throw new SyncError(res.status >= 500 ? "offline" : "error", `GitHub error ${res.status}`);
+    }
+    async function readGistPayload(g) {
+      const file = g && g.files && g.files[SYNC_FILE];
+      if (!file) return null;
+      let text = file.content;
+      if (file.truncated && file.raw_url) { try { text = await (await fetch(file.raw_url, { cache: "no-store" })).text(); } catch { throw new SyncError("offline", "Can't reach GitHub"); } }
+      try {
+        const data = JSON.parse(text || "null");
+        if (!data || typeof data !== "object") return null;
+        if (Number(data.v) > 1) throw new SyncError("error", "The synced data was made by a newer version of the app. Refresh this page.");
+        return data;
+      } catch (e) { if (e instanceof SyncError) throw e; return null; }
+    }
+    function gistFiles(payload) {
+      const body = Object.assign({}, payload, { updatedAt: new Date().toISOString(), summary: syncSummary() });
+      return {
+        [SYNC_FILE]: { content: JSON.stringify(body) },
+        [SYNC_PLAN_FILE]: { content: planText(SYNC_PLAN_COURSE) || `No ${SYNC_PLAN_COURSE} study plan yet. Set one up from Plan on the Study-Buddy-1000 home screen.` }
+      };
+    }
+    async function findOrCreateGist() {
+      for (let page = 1; page <= 10; page++) {
+        const list = await ghApi("GET", `/gists?per_page=100&page=${page}`);
+        if (!Array.isArray(list) || !list.length) break;
+        const hit = list.find((g) => g && g.files && g.files[SYNC_FILE] && g.description === SYNC_DESC) || list.find((g) => g && g.files && g.files[SYNC_FILE]);
+        if (hit) return { gist: await ghApi("GET", `/gists/${hit.id}`), created: false };
+        if (list.length < 100) break;
+      }
+      const g = await ghApi("POST", "/gists", { description: SYNC_DESC, public: false, files: gistFiles(buildSyncPayload()) });
+      return { gist: g, created: true };
+    }
+
+    /* ----- Sync loop ----- */
+    function syncSchedule(ms) {
+      if (!SYNC || !SYNC.token) return;
+      clearTimeout(SYNC.timer);
+      SYNC.timer = setTimeout(() => syncNow("auto"), ms);
+    }
+    function syncRetryLater(err) {
+      clearTimeout(SYNC.retryTimer);
+      if (err.kind === "auth") return; // wait for a new token
+      let wait;
+      if (err.kind === "rate") wait = Math.max(60000, (err.retryAt || 0) - Date.now());
+      else { SYNC.backoff = Math.min(SYNC.backoff ? SYNC.backoff * 2 : 15000, 300000); wait = SYNC.backoff; }
+      SYNC.retryAt = Date.now() + wait;
+      SYNC.retryTimer = setTimeout(() => syncNow("retry"), wait);
+    }
+    // Pull, merge, push. Never throws; errors only change the status line.
+    function syncNow(reason, opts = {}) {
+      if (!SYNC || !SYNC.token) return Promise.resolve(false);
+      if (SYNC.busy) { SYNC.again = true; return SYNC.busy; }
+      clearTimeout(SYNC.timer);
+      SYNC.status = "syncing"; renderSyncStatus();
+      SYNC.busy = (async () => {
+        try {
+          let gist = null, created = false;
+          if (SYNC.gistId) {
+            try { gist = await ghApi("GET", `/gists/${SYNC.gistId}`); }
+            catch (e) { if (e.kind !== "notfound") throw e; SYNC.gistId = ""; }
+          }
+          if (!gist) ({ gist, created } = await findOrCreateGist());
+          SYNC.gistId = gist.id; SYNC.owner = (gist.owner && gist.owner.login) || SYNC.owner;
+          const R = (await readGistPayload(gist)) || {};
+          reconcileSyncIds(R);
+          const M = mergeSyncPayloads(buildSyncPayload(), R);
+          const changed = applySyncPayload(M);
+          const rev = SYNC.rev || 0;
+          const L2 = buildSyncPayload();
+          const plan = gistFiles(L2);
+          const remotePlan = gist.files && gist.files[SYNC_PLAN_FILE] ? gist.files[SYNC_PLAN_FILE].content : null;
+          if (created === false && (payloadCore(L2) !== payloadCore(R) || remotePlan !== plan[SYNC_PLAN_FILE].content)) {
+            await ghApi("PATCH", `/gists/${SYNC.gistId}`, { files: plan });
+          }
+          SYNC.lastRemote = L2;
+          SYNC.lastOk = SYNC.lastPull = Date.now();
+          SYNC.dirty = (SYNC.rev || 0) !== rev; SYNC.backoff = 0; SYNC.status = "ok"; SYNC.msg = "";
+          clearTimeout(SYNC.retryTimer);
+          syncSaveCfg();
+          if (changed && ["home", "folder", "plan", "guide"].includes(view.page) && !modal.open) render();
+          return true;
+        } catch (err) {
+          let e = err instanceof SyncError ? err : new SyncError("error", String(err && err.message || err));
+          if (e.kind === "notfound") { SYNC.gistId = ""; e = new SyncError("error", "The sync gist went missing; will look for it again"); }
+          if (e.kind !== "offline" && e.kind !== "rate" && e.kind !== "auth") console.warn("sync failed:", e.message);
+          SYNC.status = e.kind; SYNC.msg = e.message;
+          syncSaveCfg();
+          syncRetryLater(e);
+          return false;
+        } finally {
+          SYNC.busy = null;
+          renderSyncStatus();
+          if (view.page === "sync" && SYNC.sig !== syncSig()) render();
+          if (SYNC.again) { SYNC.again = false; syncSchedule(500); }
+        }
+      })();
+      return SYNC.busy;
+    }
+    // Page is being hidden / closed: push right away (no pull), using keepalive so it survives the unload.
+    function syncFlush() {
+      if (!SYNC || !SYNC.token || !SYNC.gistId || !SYNC.dirty || SYNC.busy || SYNC.status === "auth") return;
+      try {
+        const files = gistFiles(buildSyncPayload());
+        const small = JSON.stringify({ files }).length < 60000;
+        ghApi("PATCH", `/gists/${SYNC.gistId}`, { files }, { keepalive: small }).then(() => {
+          SYNC.dirty = false; SYNC.lastOk = Date.now(); SYNC.status = "ok"; syncSaveCfg(); renderSyncStatus();
+        }, () => {});
+      } catch {}
+    }
+    function syncConnect(token) {
+      token = cleanStr(token).replace(/^bearer\s+/i, "");
+      if (!token) { toast("Paste your GitHub token first."); return Promise.resolve(false); }
+      try { localStorage.setItem(SYNC_TOKEN_KEY, token); } catch {}
+      SYNC.token = token; SYNC.backoff = 0;
+      if (SYNC.status === "auth" || SYNC.status === "off") SYNC.gistId = SYNC.gistId || "";
+      return syncNow("connect").then((ok) => { if (ok) toast("Sync is on. Progress now syncs across your devices."); return ok; });
+    }
+    function syncDisconnect() {
+      try { localStorage.removeItem(SYNC_TOKEN_KEY); } catch {}
+      clearTimeout(SYNC.timer); clearTimeout(SYNC.retryTimer);
+      SYNC.token = ""; SYNC.gistId = ""; SYNC.owner = ""; SYNC.status = "off"; SYNC.msg = ""; SYNC.dirty = false; SYNC.lastOk = 0;
+      syncSaveCfg();
+    }
+    function fmtAgo(ms) {
+      const s = Math.max(0, Math.round((Date.now() - ms) / 1000));
+      if (s < 45) return "just now";
+      const m = Math.round(s / 60);
+      if (m < 60) return `${m} min ago`;
+      const h = Math.round(m / 60);
+      if (h < 24) return `${h} hr ago`;
+      return new Date(ms).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    }
+    function syncStatusText() {
+      if (!SYNC || !SYNC.token) return "Not connected. Progress stays on this device.";
+      switch (SYNC.status) {
+        case "syncing": return "Syncing…";
+        case "offline": return "Offline, will retry" + (SYNC.dirty ? " (changes are safe on this device)" : "");
+        case "auth": return "Token problem: " + (SYNC.msg || "check or replace your token");
+        case "rate": return "GitHub is busy, will retry at " + new Date(SYNC.retryAt || Date.now()).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+        case "error": return "Sync error, will retry" + (SYNC.msg ? ` (${SYNC.msg})` : "");
+        default:
+          if (SYNC.dirty) return "Changes waiting to sync…";
+          return SYNC.lastOk ? `Synced ${fmtAgo(SYNC.lastOk)}` : "Connected, waiting for first sync";
+      }
+    }
+    function syncTone() {
+      if (!SYNC || !SYNC.token) return "off";
+      return { ok: "ok", idle: "ok", syncing: "busy", offline: "warn", rate: "warn", error: "warn", auth: "bad" }[SYNC.status] || "ok";
+    }
+    function renderSyncStatus() {
+      document.querySelectorAll("[data-sync-status]").forEach((el) => {
+        el.textContent = syncStatusText();
+        el.dataset.tone = syncTone();
+      });
+      document.querySelectorAll("[data-sync-status-dot]").forEach((el) => { el.dataset.tone = syncTone(); });
+    }
+
+    function syncSig() { return `${!!SYNC.token}|${SYNC.gistId}|${SYNC.status === "auth"}|${!!view.syncReplace}`; }
+    function renderSync() {
+      if (!SYNC) { view.page = "home"; return render(); }
+      SYNC.sig = syncSig();
+      headerSub.textContent = "Sync across your devices";
+      headerActions.innerHTML = `<button class="secondary" id="syncBack">All folders</button>`;
+      const on = !!SYNC.token, needToken = !on || SYNC.status === "auth" || view.syncReplace;
+      app.innerHTML = `
+        <div class="sync-wrap">
+          <div class="card sync-card">
+            <h2 class="sync-title">☁ Sync</h2>
+            <div class="sync-status" data-sync-status id="syncStatus"></div>
+            ${on && SYNC.gistId ? `
+              <div class="sync-id-row">
+                <div><div class="muted">Sync ID</div><code id="syncId">${escaped(SYNC.gistId)}</code></div>
+                <button class="secondary small" id="syncCopyId">Copy</button>
+              </div>` : ""}
+            ${needToken ? `
+              <label class="sync-label" for="syncToken">${on ? "Replace token" : "GitHub token"}</label>
+              <input id="syncToken" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_… or ghp_…" />
+              <div class="row sync-actions">
+                <button class="gold" id="syncConnect">${on ? "Save token & sync" : "Connect"}</button>
+                ${on ? `<button class="secondary" id="syncCancelReplace">Cancel</button>` : ""}
+              </div>` : `
+              <div class="row sync-actions">
+                <button class="gold" id="syncNowBtn">Sync now</button>
+                <button class="secondary" id="syncReplace">Replace token</button>
+                <button class="danger" id="syncDisconnect">Disconnect</button>
+              </div>`}
+          </div>
+          <div class="card sync-card">
+            <h3>How it works</h3>
+            <p>Your progress, plan, scores and mid-session saves are kept in one secret gist on your GitHub account (unlisted: only someone with its Sync ID can open it). Each device merges instead of overwriting, so studying on your phone and your computer never wipes either one. Disconnect keeps everything on this device.</p>
+            <h3>Make a token (once)</h3>
+            <ol class="sync-steps">
+              <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> and sign in.</li>
+              <li>Name it <em>Study-Buddy-1000 sync</em>. Set Expiration to <em>No expiration</em> so you never have to redo this.</li>
+              <li>Repository access: leave the default (<em>Public repositories</em>). Under <strong>Permissions → Account</strong>, add <strong>Gists</strong> and set it to <strong>Read and write</strong>. Nothing else.</li>
+              <li>Generate it, copy it, and paste it above. Paste the same token on each device.</li>
+            </ol>
+            <p class="muted">A classic token with only the <code>gist</code> scope works too. The token stays on this device only. It isn't in Export backups or in the gist.</p>
+          </div>
+        </div>`;
+      renderSyncStatus();
+      document.getElementById("syncBack").onclick = () => { view.syncReplace = false; view.page = "home"; render(); };
+      const tokenEl = document.getElementById("syncToken");
+      const connectBtn = document.getElementById("syncConnect");
+      if (connectBtn) connectBtn.onclick = () => { const v = tokenEl.value; tokenEl.value = ""; view.syncReplace = false; syncConnect(v).then(() => { if (view.page === "sync") render(); }); };
+      if (tokenEl) tokenEl.onkeydown = (e) => { if (e.key === "Enter") connectBtn.click(); };
+      const cancel = document.getElementById("syncCancelReplace");
+      if (cancel) cancel.onclick = () => { view.syncReplace = false; render(); };
+      const nowBtn = document.getElementById("syncNowBtn");
+      if (nowBtn) nowBtn.onclick = () => syncNow("manual");
+      const rep = document.getElementById("syncReplace");
+      if (rep) rep.onclick = () => { view.syncReplace = true; render(); };
+      const dis = document.getElementById("syncDisconnect");
+      if (dis) dis.onclick = () => {
+        if (!confirm("Disconnect this device from sync?\n\nEverything stays on this device. Other devices keep syncing.")) return;
+        syncDisconnect(); toast("Sync is off on this device. Your data is still here."); render();
+      };
+      const cp = document.getElementById("syncCopyId");
+      if (cp) cp.onclick = () => copyText(SYNC.gistId).then((ok) => toast(ok ? "Sync ID copied" : "Select the Sync ID to copy it"));
+    }
+
+    function syncStart() {
+      try { syncInit(); } catch (e) { console.warn("sync init failed", e); SYNC = null; return; }
+      document.addEventListener("visibilitychange", () => {
+        if (!SYNC || !SYNC.token) return;
+        if (document.visibilityState === "hidden") syncFlush();
+        else if (Date.now() - SYNC.lastPull > 10000) syncNow("visible");
+        else renderSyncStatus();
+      });
+      window.addEventListener("pagehide", () => syncFlush());
+      window.addEventListener("online", () => { if (SYNC && SYNC.token && SYNC.status !== "auth") syncNow("online"); });
+      setInterval(() => renderSyncStatus(), 30000);
+      if (SYNC.token) setTimeout(() => syncNow("load"), 200);
     }
 
     let state = load();
@@ -1010,6 +1568,7 @@
       else if (view.page === "match") renderMatch();
       else if (view.page === "guide") renderGuide();
       else if (view.page === "plan") renderPlan();
+      else if (view.page === "sync") renderSync();
       else renderStudy();
     }
 
@@ -1080,6 +1639,7 @@
       headerSub.textContent = "Pick a folder or make a new set";
       headerActions.innerHTML = `
         ${plannableCourses().length ? `<button class="secondary" id="planBtn">Plan</button>` : ""}
+        ${SYNC ? `<button class="secondary sync-btn" id="syncBtn" data-sync-status-dot data-tone="${syncTone()}"><span class="dot"></span>Sync</button>` : ""}
         <button class="secondary" id="exportBtn">Export</button>
         <button class="secondary" id="importBtn">Import</button>
         <button class="gold" id="newFolderBtn">New folder</button>
@@ -1109,7 +1669,7 @@
       app.innerHTML = `
         ${banners}
         ${html || `<div class="empty">No folders yet.</div>`}
-        <footer class="note">Cards are saved in this browser only. Export a backup if you study on more than one computer.${BUILD_INFO && BUILD_INFO.decks ? ` · Includes ${BUILD_INFO.decks} built-in deck${BUILD_INFO.decks === 1 ? "" : "s"} (updated ${escaped(BUILD_INFO.date)})` : ""}</footer>
+        <footer class="note">${SYNC && SYNC.token ? `☁ Progress syncs across your devices · <a href="#" id="syncFooter" class="sync-foot" data-sync-status></a>` : `Cards are saved in this browser only. Turn on <a href="#" id="syncFooter">Sync</a> to share progress across devices, or Export a backup.`}${BUILD_INFO && BUILD_INFO.decks ? ` · Includes ${BUILD_INFO.decks} built-in deck${BUILD_INFO.decks === 1 ? "" : "s"} (updated ${escaped(BUILD_INFO.date)})` : ""}</footer>
       `;
       document.getElementById("newFolderBtn").onclick = () => openFolderForm();
       const pb = document.getElementById("planBtn");
@@ -1118,6 +1678,10 @@
       app.querySelectorAll("[data-plan-go]").forEach((b) => { b.onclick = () => runStep(b.dataset.planGo, b.dataset.stepKey); });
       document.getElementById("exportBtn").onclick = exportData;
       document.getElementById("importBtn").onclick = openImportDialog;
+      const openSync = (e) => { if (e) e.preventDefault(); view.page = "sync"; view.syncReplace = false; render(); window.scrollTo(0, 0); };
+      const sb = document.getElementById("syncBtn"); if (sb) sb.onclick = () => openSync();
+      const sf = document.getElementById("syncFooter"); if (sf) sf.onclick = openSync;
+      if (SYNC) renderSyncStatus();
       app.querySelectorAll("[data-open]").forEach((el) => {
         el.onclick = (e) => {
           const wantGuide = !!(e.target.closest && e.target.closest("[data-guide]"));
@@ -2701,6 +3265,7 @@
       }
       if (!confirm("Replace ALL folders, cards and progress in this browser with this backup?\n\nThis can't be undone. Tip: Export first if you might want your current data.")) return;
       state = migrate(JSON.parse(JSON.stringify(data)));
+      syncRebase(); // a restore merges with synced data; it never deletes things on other devices
       applyBundledDecks();
       save();
       modal.close();
@@ -2745,6 +3310,7 @@
       const app = document.getElementById("app");
       if (app) app.innerHTML = "<div class=\"card\"><strong>Something broke.</strong><div class=\"muted\">"+String(msg)+"</div></div>";
     };
+    syncStart();
     try { render(); } catch (err) { window.onerror(err && err.message ? err.message : err); }
     if (bundledSummary && (bundledSummary.foldersAdded || bundledSummary.cardsAdded || bundledSummary.cardsUpdated)) {
       toast(`New study material: ${bundledSummary.decks.join(", ")} (${bundledSummary.cardsAdded} new, ${bundledSummary.cardsUpdated} updated cards)`);
