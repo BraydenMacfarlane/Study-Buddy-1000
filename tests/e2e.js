@@ -5,6 +5,7 @@ const APP = 'file://' + ROOT + '/flashcards.html', ORIG = 'file://' + T + '/orig
 const SAMPLES = 'file://' + T + '/dist-samples.html', REAL = 'file://' + ROOT + '/dist/flashcards.html';
 const PREV = 'file://' + T + '/dist-prev.html';
 const GOOGLE = 'file://' + T + '/dist-google.html';
+const GIST = 'file://' + T + '/dist-gist.html'; // real decks, no Firebase config (gist-only UI)
 const S1 = ROOT + '/decks/samples/sample-c202-ch01.json', S2 = ROOT + '/decks/samples/sample-c202-ch02.json';
 let browser, pass = 0, fail = 0; const errors = [];
 function ok(cond, msg) { if (cond) { pass++; console.log('  ✓', msg); } else { fail++; console.log('  ✗ FAIL:', msg); } }
@@ -301,7 +302,7 @@ async function testBundled() {
   const inbox2 = path.join(T, 'inbox2'); fs.rmSync(inbox2, { recursive: true, force: true }); fs.mkdirSync(inbox2);
   const d1 = JSON.parse(fs.readFileSync(S1, 'utf8')); d1.cards[1].answer = 'Changed HRM answer'; fs.writeFileSync(path.join(inbox2, 'a.json'), JSON.stringify(d1));
   const d2 = JSON.parse(fs.readFileSync(S2, 'utf8')); d2.cards.push({ id: 'c202-ch02-050', front: 'New ch2 card', answer: 'x' }); fs.writeFileSync(path.join(inbox2, 'b.json'), JSON.stringify(d2));
-  execSync(`${ROOT}/build.sh --inbox ${inbox2} --out ${T}/dist-v2.html`);
+  execSync(`${ROOT}/build.sh --firebase-config none --inbox ${inbox2} --out ${T}/dist-v2.html`);
   await p.goto('file://' + T + '/dist-v2.html');
   st = await S(p, () => state);
   ok(st.folders.length === 3 && st.cards.filter((c) => c.folderId === 'deck-c202-ch02').length === 13, 'changed deck comes back (content hash changed), with new card');
@@ -311,7 +312,7 @@ async function testBundled() {
   // build validation rejects bad decks
   const bad = path.join(T, 'inbox-bad'); fs.rmSync(bad, { recursive: true, force: true }); fs.mkdirSync(bad);
   fs.writeFileSync(path.join(bad, 'x.json'), JSON.stringify({ id: 'x', folder: 'X', cards: [{ id: '1', type: 'scenario', front: 'q', choices: ['a', 'b'], correct: 5 }] }));
-  let failed = false; try { execSync(`${ROOT}/build.sh --inbox ${bad} --out ${T}/bad.html`, { stdio: 'pipe' }); } catch (e) { failed = /correct/.test(String(e.stderr)); }
+  let failed = false; try { execSync(`${ROOT}/build.sh --firebase-config none --inbox ${bad} --out ${T}/bad.html`, { stdio: 'pipe' }); } catch (e) { failed = /correct/.test(String(e.stderr)); }
   ok(failed && !fs.existsSync(T + '/bad.html'), 'build.sh rejects an invalid deck and writes nothing');
 }
 
@@ -715,7 +716,7 @@ function remotePayload(store) { const g = Object.values(store.gists)[0]; return 
 async function syncDevice(opts = {}) {
   const d = await page(opts);
   await mockGitHub(d.ctx, opts.store);
-  await d.p.goto(REAL);
+  await d.p.goto(GIST);
   return d;
 }
 async function openSync(p) { await p.click('#syncBtn'); await p.waitForSelector('#syncStatus'); }
@@ -1062,10 +1063,10 @@ async function testDistractors() {
     { id: 'b6', type: 'scenario', front: 'f', choices: ['a', 'b'], correct: 0, explanation: 'e', distractors: ['p', 'q'] } ] };
   fs.writeFileSync(path.join(dir, 'bad.json'), JSON.stringify(bad));
   let out = '';
-  try { execSync(`${ROOT}/build.sh --inbox ${dir} --out ${T}/bad.html 2>&1`); out = 'BUILT'; } catch (e) { out = String(e.stdout || ''); }
+  try { execSync(`${ROOT}/build.sh --firebase-config none --inbox ${dir} --out ${T}/bad.html 2>&1`); out = 'BUILT'; } catch (e) { out = String(e.stdout || ''); }
   ok(out !== 'BUILT' && /card 1: "distractors" must be a list of 2-5/.test(out) && /card 2: distractors must be unique/.test(out) && /card 3: a distractor matches the answer/.test(out) && /card 4: every distractor must be a non-empty string/.test(out) && /card 5: "distractors" must be a list of 2-5/.test(out) && /card 6: "distractors" is only for concept cards/.test(out), 'build.sh rejects each bad distractors case with a clear error');
   fs.writeFileSync(path.join(dir, 'bad.json'), JSON.stringify({ id: 'good', folder: 'Good', cards: [{ id: 'g1', front: 'f', answer: 'Ans', distractors: ['p', 'q', 'r'] }, { id: 'g2', front: 'f', answer: 'Ans2' }] }));
-  try { execSync(`${ROOT}/build.sh --inbox ${dir} --out ${T}/good.html 2>&1`); out = 'BUILT'; } catch (e) { out = String(e.stdout || ''); }
+  try { execSync(`${ROOT}/build.sh --firebase-config none --inbox ${dir} --out ${T}/good.html 2>&1`); out = 'BUILT'; } catch (e) { out = String(e.stdout || ''); }
   ok(out === 'BUILT' && fs.readFileSync(`${T}/good.html`, 'utf8').includes('"distractors":["p","q","r"]'), 'build.sh accepts valid distractors and bakes them in');
 }
 
@@ -1145,7 +1146,7 @@ async function testGoogleSync() {
   const fb = makeFbStore();
   // Without a Firebase config the app keeps the gist-only screen.
   {
-    const { ctx, p } = await page(); await p.goto(REAL); await p.click('#syncBtn');
+    const { ctx, p } = await page(); await p.goto(GIST); await p.click('#syncBtn');
     ok(await p.locator('#googleSignIn').count() === 0 && await p.locator('#syncToken').count() === 1, 'no Firebase config: Sync screen is the gist screen, no Google button');
     await ctx.close();
   }
@@ -1318,12 +1319,13 @@ async function screenshots() {
   execSync(`cd ${ROOT} && git show 2186ee7:decks/inbox/c202-ch01.json > ${T}/ch01-prev.json`);
   fs.rmSync(T + '/inbox', { recursive: true, force: true }); fs.mkdirSync(T + '/inbox', { recursive: true });
   for (const f of fs.readdirSync(ROOT + '/decks/samples')) fs.copyFileSync(ROOT + '/decks/samples/' + f, T + '/inbox/' + f);
-  execSync(`${ROOT}/build.sh --inbox ${T}/inbox --out ${T}/dist-samples.html`);
+  execSync(`${ROOT}/build.sh --firebase-config none --inbox ${T}/inbox --out ${T}/dist-samples.html`);
   fs.rmSync(T + '/inbox-prev', { recursive: true, force: true }); fs.mkdirSync(T + '/inbox-prev');
   fs.copyFileSync(T + '/ch01-prev.json', T + '/inbox-prev/c202-ch01.json');
-  execSync(`${ROOT}/build.sh --inbox ${T}/inbox-prev --out ${T}/dist-prev.html`);
+  execSync(`${ROOT}/build.sh --firebase-config none --inbox ${T}/inbox-prev --out ${T}/dist-prev.html`);
   fs.writeFileSync(T + '/fbcfg.json', JSON.stringify({ apiKey: 'fake-api-key', authDomain: 'study-buddy-1000.firebaseapp.com', projectId: 'study-buddy-1000', appId: '1:123:web:abc', messagingSenderId: '123' }));
   execSync(`${ROOT}/build.sh --firebase-config ${T}/fbcfg.json --out ${T}/dist-google.html`);
+  execSync(`${ROOT}/build.sh --firebase-config none --out ${T}/dist-gist.html`);
   browser = await chromium.launch();
   try {
     const raw = await makeV1Data();

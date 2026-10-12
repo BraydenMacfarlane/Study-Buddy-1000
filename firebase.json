@@ -1,8 +1,31 @@
 {
-  "firestore": { "rules": "firebase/firestore.rules" },
+  "firestore": {
+    "rules": "firebase/firestore.rules"
+  },
   "hosting": {
     "public": "docs",
-    "ignore": ["firebase.json", "**/.*"],
-    "headers": [{ "source": "**/*.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }]
+    "ignore": [
+      "firebase.json",
+      "**/.*"
+    ],
+    "headers": [
+      {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  },
+  "auth": {
+    "providers": {
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Study-Buddy-1000",
+        "supportEmail": "macfarlane.brayden@gmail.com"
+      }
+    }
   }
 }
