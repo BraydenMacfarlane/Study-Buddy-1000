@@ -84,7 +84,7 @@
   ✓ wrong pair flashes red
   ✓ 2-second penalty added
   ✓ definition-first also works; correct pair locks green
-  ✓ result shown; best time stored (3.5s)
+  ✓ result shown; best time stored (3.4s)
   ✓ results list the pairs with Read more notes
   ✓ slower round does not replace best time
   ✓ best match time shown on folder card
@@ -289,8 +289,38 @@
   ✓ tools/read-plan.sh prints a progress summary
   ✓ helper output has no token and sends no auth header
 
+[14] Every study method has its own saved session; "I know this"; retire after 2
+  ✓ #scenarioBtn after other saves: no discard prompt (none)
+  ✓ saved into its own slot study-scenario
+  ✓ #conceptBtn after other saves: no discard prompt (none)
+  ✓ saved into its own slot study-concept
+  ✓ #studyBtn after other saves: no discard prompt (none)
+  ✓ saved into its own slot study-mixed
+  ✓ quick, boss and match start without prompting about other saves
+  ✓ all 7 saves coexist: boss, match, quick, quiz, study-concept, study-mixed, study-scenario
+  ✓ resume row has one labelled button per mode
+  ✓ resume labels show the study method
+  ✓ Continue scenarios resumes the scenario session
+  ✓ restarting Scenarios asks only about the saved scenario session
+  ✓ restarting Scenarios leaves every other save untouched
+  ✓ an old shared "study" save moves into its mode slot on load
+  ✓ the migrated old save still resumes
+  ✓ existing streak 2 counts as retired; streak 1 does not
+  ✓ folder copy says 2 correct in a row
+  ✓ study shows streak out of 2
+  ✓ two correct in a row retires a card
+  ✓ "I know this" is available before revealing the answer
+  ✓ "I know this" retires the card and removes it from the round
+  ✓ "I know this" also shows after revealing
+  ✓ "I know this" works on a scenario after answering
+  ✓ a known card stays out of later rounds
+  ✓ Reset progress brings known cards back
+  ✓ app fine
+  ✓ a card marked known on desktop is retired on the phone after sync
+  ✓ both study-method saves sync as separate slots
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-265 passed, 0 failed
+293 passed, 0 failed

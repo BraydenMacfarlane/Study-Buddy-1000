@@ -908,6 +908,99 @@ async function testSync() {
   for (let i = errors.length - 1; i >= errStart; i--) if (noise.test(errors[i])) errors.splice(i, 1);
 }
 
+/* ---------- Per-mode session slots + "I know this" + retire after 2 ---------- */
+async function skipVis(p) { const l = p.locator('#ovSkip'); if (await l.count() && await l.isVisible()) await l.click(); }
+async function testSlotsAndKnow() {
+  console.log('\n[14] Every study method has its own saved session; "I know this"; retire after 2');
+  const { ctx, p } = await page();
+  await p.goto(REAL);
+  await p.click('[data-open="deck-c202-ch01"]'); await skipVis(p);
+  await p.click('#quizBtn'); await skipVis(p);
+  await p.click('[data-choice="0"]');
+  await p.click('#exitStudy');
+  const starts = [['#scenarioBtn', 'study-scenario'], ['#conceptBtn', 'study-concept'], ['#studyBtn', 'study-mixed']];
+  for (const [btn, slot] of starts) {
+    p.dialogLog.length = 0;
+    await p.click(btn); await skipVis(p);
+    ok(p.dialogLog.length === 0, `${btn} after other saves: no discard prompt (${p.dialogLog.join(' | ') || 'none'})`);
+    await answerCard(p, true);
+    await p.click('#exitStudy');
+    ok(await S(p, (k) => !!state.sessions['deck-c202-ch01:' + k], slot), `saved into its own slot ${slot}`);
+  }
+  p.dialogLog.length = 0;
+  await p.click('#quickBtn'); await skipVis(p); await p.click('[data-choice="0"]'); await p.click('#exitStudy');
+  await p.click('#bossBtn'); await skipVis(p); await p.click('[data-bpick="0"]'); await p.click('#exitBoss');
+  await p.click('#matchBtn'); await skipVis(p); await p.click('#exitMatch');
+  ok(p.dialogLog.length === 0, 'quick, boss and match start without prompting about other saves');
+  const keys = await S(p, () => Object.keys(state.sessions).filter((k) => k.startsWith('deck-c202-ch01:')).map((k) => k.split(':')[1]).sort());
+  ok(['boss', 'match', 'quick', 'quiz', 'study-concept', 'study-mixed', 'study-scenario'].every((k) => keys.includes(k)), 'all 7 saves coexist: ' + keys.join(', '));
+  const row = await p.textContent('#resumeRow');
+  ok(['Resume quiz', 'Resume quick', 'Resume boss', 'Continue shuffled', 'Continue concept cards', 'Continue scenarios', 'Resume match'].every((t) => row.includes(t)), 'resume row has one labelled button per mode');
+  ok(/Scenarios/.test(await p.textContent('[data-resume="study-scenario"]')) && /Concept cards/.test(await p.textContent('[data-resume="study-concept"]')), 'resume labels show the study method');
+  await p.click('[data-resume="study-scenario"]');
+  ok(await S(p, () => view.page === 'study' && view.studyMode === 'scenario'), 'Continue scenarios resumes the scenario session');
+  await p.click('#exitStudy');
+  p.dialogLog.length = 0; p.dialogAnswers.push(true);
+  await p.click('#scenarioBtn'); await skipVis(p);
+  ok(p.dialogLog.length === 1 && /saved scenario session/.test(p.dialogLog[0]), 'restarting Scenarios asks only about the saved scenario session');
+  await p.click('#exitStudy');
+  ok(await S(p, () => ['quiz', 'quick', 'boss', 'match', 'study-concept', 'study-mixed'].every((k) => !!state.sessions['deck-c202-ch01:' + k])), 'restarting Scenarios leaves every other save untouched');
+
+  const legacy = await S(p, () => { const st = JSON.parse(localStorage.getItem('flashcards.v1')); const s = st.sessions['deck-c202-ch01:study-concept']; delete st.sessions['deck-c202-ch01:study-concept']; st.sessions['deck-c202-ch01:study'] = s; localStorage.setItem('flashcards.v1', JSON.stringify(st)); return s.studyMode; });
+  await p.reload();
+  ok(legacy === 'concept' && await S(p, () => !state.sessions['deck-c202-ch01:study'] && !!state.sessions['deck-c202-ch01:study-concept']), 'an old shared "study" save moves into its mode slot on load');
+  await p.click('[data-open="deck-c202-ch01"]'); await skipVis(p);
+  await p.click('[data-resume="study-concept"]');
+  ok(await S(p, () => view.page === 'study' && view.studyMode === 'concept'), 'the migrated old save still resumes');
+  await p.click('#exitStudy'); await p.click('#backHome');
+
+  const ids = await S(p, () => cardsIn('deck-c202-ch02').filter((c) => !isScenario(c)).map((c) => c.id));
+  await S(p, (ids) => { const st = JSON.parse(localStorage.getItem('flashcards.v1')); st.progress[ids[0]] = { streak: 2, retired: false }; st.progress[ids[1]] = { streak: 1, retired: false }; localStorage.setItem('flashcards.v1', JSON.stringify(st)); }, ids);
+  await p.reload();
+  ok(await S(p, (ids) => state.progress[ids[0]].retired && !state.progress[ids[1]].retired && RETIRE_AFTER === 2, ids), 'existing streak 2 counts as retired; streak 1 does not');
+  await p.click('[data-open="deck-c202-ch02"]'); await skipVis(p);
+  ok(/after 2 correct in a row/.test(await p.textContent('body')), 'folder copy says 2 correct in a row');
+  await p.click('#conceptBtn'); await skipVis(p);
+  ok(/streak \d\/2/.test(await p.textContent('.study-wrap')), 'study shows streak out of 2');
+  const c1 = await S(p, () => view.queue[view.index]);
+  await answerCard(p, true);
+  await S(p, (id) => { view.queue = [id, ...view.queue.filter((x) => x !== id)]; view.index = 0; render(); }, c1);
+  await answerCard(p, true);
+  ok(await S(p, (id) => state.progress[id].retired, c1), 'two correct in a row retires a card');
+  const k1 = await S(p, () => view.queue[view.index]);
+  const left0 = await S(p, () => activeStudy(view.folderId, 'concept').length);
+  ok(await p.locator('#knowBtn').count() === 1 && !(await S(p, () => view.flipped)), '"I know this" is available before revealing the answer');
+  await p.click('#knowBtn');
+  ok(await S(p, ([id, l]) => state.progress[id].retired && !view.queue.includes(id) && activeStudy(view.folderId, 'concept').length === l - 1, [k1, left0]), '"I know this" retires the card and removes it from the round');
+  await p.click('#flipBtn');
+  ok(await p.locator('#knowBtn').count() === 1, '"I know this" also shows after revealing');
+  await p.click('#exitStudy');
+  await p.click('#scenarioBtn'); await skipVis(p);
+  const sc = await S(p, () => view.queue[view.index]);
+  await p.click(`[data-spick="${await S(p, (id) => state.cards.find((c) => c.id === id).correct, sc)}"]`);
+  await p.click('#knowBtn');
+  ok(await S(p, (id) => state.progress[id].retired && !view.queue.includes(id), sc), '"I know this" works on a scenario after answering');
+  await S(p, () => startStudy('scenario'));
+  ok(await S(p, (id) => !view.queue.includes(id), sc), 'a known card stays out of later rounds');
+  await p.click('#resetStudy');
+  ok(await S(p, (id) => !state.progress[id].retired && view.queue.includes(id), sc), 'Reset progress brings known cards back');
+  await p.click('#exitStudy');
+  ok(await noBroke(p), 'app fine');
+  await ctx.close();
+
+  const store = makeGistStore();
+  const A = await syncDevice({ store }), B = await syncDevice({ store, device: 'iPhone 13' });
+  for (const d of [A, B]) { await d.p.click('#syncBtn'); await d.p.fill('#syncToken', GOOD_TOKEN); await d.p.click('#syncConnect'); await waitStatus(d.p, /Synced/); await d.p.click('#syncBack'); }
+  await A.p.click('[data-open="deck-c202-ch03"]'); await skipVis(A.p); await A.p.click('#conceptBtn'); await skipVis(A.p);
+  const kA = await S(A.p, () => view.queue[view.index]);
+  await A.p.click('#knowBtn'); await answerCard(A.p, true); await A.p.click('#exitStudy');
+  await A.p.click('#scenarioBtn'); await skipVis(A.p); await answerCard(A.p, true); await A.p.click('#exitStudy');
+  await syncNowAndWait(A.p); await syncNowAndWait(B.p);
+  ok(await S(B.p, (id) => state.progress[id] && state.progress[id].retired, kA), 'a card marked known on desktop is retired on the phone after sync');
+  ok(await S(B.p, () => !!state.sessions['deck-c202-ch03:study-concept'] && !!state.sessions['deck-c202-ch03:study-scenario']), 'both study-method saves sync as separate slots');
+  await A.ctx.close(); await B.ctx.close();
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -984,6 +1077,7 @@ async function screenshots() {
     await testReal(raw);
     await testCounter();
     await testSync();
+    await testSlotsAndKnow();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

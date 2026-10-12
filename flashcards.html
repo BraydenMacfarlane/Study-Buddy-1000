@@ -381,6 +381,7 @@
       opacity: 0; pointer-events: none; transition: all .25s ease; max-width: 92vw; z-index: 50; font-size: 14px;
     }
     #toast.show { opacity: 1; transform: translate(-50%, 0); }
+    button.know { color: var(--ok); border-color: #b9d8c6; font-size: 14px; padding: 8px 14px; }
     /* Sync */
     .sync-btn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--line); vertical-align: 1px; }
     .sync-btn[data-tone="ok"] .dot { background: var(--ok); }
@@ -420,7 +421,7 @@
 
   <script>
     const STORE_KEY = "flashcards.v1";
-    const RETIRE_AFTER = 3;
+    const RETIRE_AFTER = 2;
 
     const DEFAULT_CARDS = [
       { front: "National Labor Relations Act (NLRA)", year: "1935", extra: "Wagner Act", purpose: "Protects private-sector employees’ rights to organize, form or join unions, bargain collectively, and engage in concerted activity.", protections: ["Right to unionize and bargain collectively", "Right to strike and take other concerted action", "Prohibits employer unfair labor practices (firing for union activity, interference, refusal to bargain)", "Created the National Labor Relations Board (NLRB)"] },
@@ -508,10 +509,29 @@
         const p = out.progress[k];
         if (!p || typeof p !== "object") { out.progress[k] = { streak: 0, retired: false }; return; }
         p.streak = Number.isFinite(Number(p.streak)) ? Number(p.streak) : 0;
-        p.retired = !!p.retired;
+        p.retired = !!p.retired || p.streak >= RETIRE_AFTER;
       });
+      migrateStudySlots(out.sessions);
       out.schema = 2;
       return out;
+    }
+
+    // Each study method has its own resume slot: "<folder>:study-mixed|study-concept|study-scenario".
+    // Older saves used one shared "<folder>:study" slot; move it into the slot of the mode it was saved from.
+    const STUDY_MODES = ["mixed", "concept", "scenario"];
+    function studySlot(mode) { return "study-" + (STUDY_MODES.includes(mode) ? mode : "mixed"); }
+    function migrateStudySlots(sessions) {
+      if (!sessions || typeof sessions !== "object") return false;
+      let moved = false;
+      Object.keys(sessions).forEach((k) => {
+        if (!k.endsWith(":study")) return;
+        const s = sessions[k];
+        const nk = k.slice(0, -"study".length) + studySlot(s && s.studyMode);
+        if (s && typeof s === "object" && !sessions[nk]) sessions[nk] = s;
+        delete sessions[k];
+        moved = true;
+      });
+      return moved;
     }
 
     function load() {
@@ -1003,12 +1023,13 @@
         tombC.forEach((id) => { if (!M.c[id]) delete state.progress[id]; });
       }
       const cardIds = new Set(state.cards.map((c) => c.id));
-      Object.keys(M.p).forEach((cid) => { if (cardIds.has(cid)) state.progress[cid] = { streak: Number(M.p[cid][0]) || 0, retired: !!M.p[cid][1] }; });
+      Object.keys(M.p).forEach((cid) => { if (cardIds.has(cid)) state.progress[cid] = { streak: Number(M.p[cid][0]) || 0, retired: !!M.p[cid][1] || (Number(M.p[cid][0]) || 0) >= RETIRE_AFTER }; });
       ["s", "pl"].forEach((sec) => {
         const target = sec === "s" ? (state.sessions = state.sessions || {}) : state.plans;
         Object.keys(M[sec]).forEach((k) => { target[k] = JSON.parse(JSON.stringify(M[sec][k][1])); });
         Object.keys(target).forEach((k) => { if (!M[sec][k] && M.x[sec + ":" + k]) delete target[k]; });
       });
+      migrateStudySlots(state.sessions); // a legacy shared study slot from an older device
       // Adopt the merged stamps / tombstones, then re-baseline fingerprints without stamping.
       const st = {};
       Object.keys(M.p).forEach((k) => { if (M.p[k][2]) st["p:" + k] = M.p[k][2]; });
@@ -1377,7 +1398,7 @@
       if (mode === "boss" && s.boss) {
         return `Question ${Math.min((s.boss.index || 0) + 1, (s.boss.ids || []).length)} of ${(s.boss.ids || []).length}`;
       }
-      if (mode === "study") {
+      if (String(mode).startsWith("study")) {
         const total = s.roundTotal || (s.queue || []).length;
         const pos = s.roundPos || Math.min((s.index || 0) + 1, total || 1);
         return `Card ${pos} of ${total}` + (s.studyMode && MODE_LABEL[s.studyMode] ? ` · ${MODE_LABEL[s.studyMode]}` : "");
@@ -1429,7 +1450,7 @@
         // Still unfinished if there are active cards or a pending scenario answer
         const pending = view.studyPicked !== null && view.studyPicked !== undefined;
         if (!pending && !activeStudy(fid, mode).length) return;
-        setSession(fid, "study", {
+        setSession(fid, studySlot(mode), {
           studyMode: mode,
           queue: view.queue.slice(),
           index: view.index,
@@ -1498,9 +1519,9 @@
         render();
         return;
       }
-      if (mode === "study") {
+      if (String(mode).startsWith("study")) {
         view.page = "study";
-        view.studyMode = s.studyMode || "mixed";
+        view.studyMode = STUDY_MODES.includes(s.studyMode) ? s.studyMode : (mode.slice(6) || "mixed");
         view.queue = (s.queue || []).slice();
         view.index = s.index || 0;
         view.flipped = !!s.flipped;
@@ -1527,7 +1548,9 @@
         ["quiz", "Resume quiz"],
         ["quick", "Resume quick"],
         ["boss", "Resume boss"],
-        ["study", "Continue studying"],
+        ["study-mixed", "Continue shuffled"],
+        ["study-concept", "Continue concept cards"],
+        ["study-scenario", "Continue scenarios"],
         ["match", "Resume match"]
       ];
       const btns = items.map(([mode, label]) => {
@@ -1772,9 +1795,9 @@
         render();
       };
       document.getElementById("addCardBtn").onclick = () => openCardForm();
-      document.getElementById("studyBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "study", "study session")) return; clearSession(folder.id, "study"); startStudy("mixed"); });
-      document.getElementById("conceptBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "study", "study session")) return; clearSession(folder.id, "study"); startStudy("concept"); });
-      document.getElementById("scenarioBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "study", "study session")) return; clearSession(folder.id, "study"); startStudy("scenario"); });
+      document.getElementById("studyBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, studySlot("mixed"), "study session")) return; clearSession(folder.id, studySlot("mixed")); startStudy("mixed"); });
+      document.getElementById("conceptBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, studySlot("concept"), "concept-card session")) return; clearSession(folder.id, studySlot("concept")); startStudy("concept"); });
+      document.getElementById("scenarioBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, studySlot("scenario"), "scenario session")) return; clearSession(folder.id, studySlot("scenario")); startStudy("scenario"); });
       document.getElementById("quizBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "quiz", "quiz")) return; clearSession(folder.id, "quiz"); startQuiz(); });
       document.getElementById("quickBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "quick", "quick quiz")) return; clearSession(folder.id, "quick"); startQuickQuiz(); });
       document.getElementById("bossBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "boss", "boss quiz")) return; clearSession(folder.id, "boss"); startBoss(); });
@@ -1857,8 +1880,8 @@
       if (key === "guide") return openGuide(folderId);
       if (key === "practice") key = cardsIn(folderId).some(isScenario) ? "scenario" : "quiz";
       const go = {
-        concept: () => { if (!confirmDiscardSession(folderId, "study", "study session")) return; clearSession(folderId, "study"); startStudy("concept"); },
-        scenario: () => { if (!confirmDiscardSession(folderId, "study", "study session")) return; clearSession(folderId, "study"); startStudy("scenario"); },
+        concept: () => { if (!confirmDiscardSession(folderId, studySlot("concept"), "concept-card session")) return; clearSession(folderId, studySlot("concept")); startStudy("concept"); },
+        scenario: () => { if (!confirmDiscardSession(folderId, studySlot("scenario"), "scenario session")) return; clearSession(folderId, studySlot("scenario")); startStudy("scenario"); },
         quiz: () => { if (!confirmDiscardSession(folderId, "quiz", "quiz")) return; clearSession(folderId, "quiz"); startQuiz(); },
         boss: () => { if (!confirmDiscardSession(folderId, "boss", "boss quiz")) return; clearSession(folderId, "boss"); startBoss(); }
       }[key];
@@ -2551,7 +2574,7 @@
       `;
 
       if (studyDone) {
-        clearSession(view.folderId, "study");
+        clearSession(view.folderId, studySlot(mode));
         app.innerHTML = `
           <div class="empty card">
             <h2>${mode === "concept" ? "Concept cards are clear" : mode === "scenario" ? "Scenarios are clear" : "This folder is clear"}</h2>
@@ -2598,6 +2621,7 @@
             ${locked ? feedbackBox(card, view.studyPicked === Number(card.correct)) : ""}
             <div class="row" style="justify-content:center">
               ${locked ? `<button class="gold" id="nextStudy">Next</button>` : `<span class="muted">Pick an answer, it's graded automatically</span>`}
+              ${p.retired ? "" : `<button class="secondary know" id="knowBtn" title="Mark mastered and take it out of the mix">✓ I know this</button>`}
             </div>
           </div>`;
         document.getElementById("exitStudy").onclick = saveAndLeave;
@@ -2612,6 +2636,8 @@
         });
         const next = document.getElementById("nextStudy");
         if (next) next.onclick = () => { view.studyPicked = null; advanceStudy(); };
+        const know = document.getElementById("knowBtn");
+        if (know) know.onclick = knowCard;
         return;
       }
 
@@ -2639,6 +2665,9 @@
             <button class="bad" id="missBtn" ${view.flipped ? "" : "disabled"}>Missed it</button>
             <button class="ok" id="gotBtn" ${view.flipped ? "" : "disabled"}>Got it</button>
           </div>
+          <div class="row" style="justify-content:center">
+            <button class="secondary know" id="knowBtn" title="Mark mastered and take it out of the mix">✓ I know this</button>
+          </div>
         </div>
       `;
       document.getElementById("exitStudy").onclick = saveAndLeave;
@@ -2647,6 +2676,7 @@
       document.getElementById("flipBtn").onclick = () => { view.flipped = !view.flipped; render(); };
       document.getElementById("gotBtn").onclick = () => grade(true);
       document.getElementById("missBtn").onclick = () => grade(false);
+      document.getElementById("knowBtn").onclick = knowCard;
     }
 
     function renderQuiz() {
@@ -3030,6 +3060,20 @@
       save();
     }
 
+    // "I know this": retire the current card now (it leaves this and later rounds). Reset brings it back.
+    function knowCard() {
+      const card = currentCard();
+      if (!card) return;
+      const p = prog(card.id);
+      p.retired = true;
+      p.streak = Math.max(Number(p.streak) || 0, RETIRE_AFTER);
+      save();
+      if (!isScenario(card)) noteConceptSeen(card.id);
+      toast("Marked as known. Reset progress brings it back.");
+      view.studyPicked = null;
+      advanceStudy();
+    }
+
     function grade(correct) {
       const card = currentCard();
       markResult(correct);
@@ -3071,7 +3115,7 @@
     }
     function resetAndStay() {
       studyPool(view.folderId, view.studyMode || "mixed").forEach((c) => { state.progress[c.id] = { streak: 0, retired: false }; });
-      clearSession(view.folderId, "study");
+      clearSession(view.folderId, studySlot(view.studyMode));
       save();
       startStudy(view.studyMode);
     }
