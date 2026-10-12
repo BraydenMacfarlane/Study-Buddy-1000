@@ -226,6 +226,8 @@
     .flash.scenario { align-items: stretch; text-align: left; justify-content: center; }
     .flash.scenario .hint { text-align: center; }
     .scenario-text { font-size: 19px; line-height: 1.5; white-space: pre-line; margin-top: 18px; }
+    .round-score { font-size: 46px; font-weight: 800; letter-spacing: -1px; margin: 6px 0 4px; color: var(--gold, #c9a227); }
+    .round-summary p { margin: 6px 0; }
     .explain {
       border-radius: 12px; padding: 12px 14px; line-height: 1.45; border: 1px solid var(--line); background: var(--card);
     }
@@ -536,6 +538,29 @@
         moved = true;
       });
       return moved;
+    }
+
+    /* ---------- Rounds (study / scenarios / multiple choice) ----------
+       A round is at most ROUND_SIZE cards. Study rounds pull not-yet-retired cards, with up to
+       ROUND_MISSED recently missed ones mixed in (progress.missedAt, a local-only hint that sync and
+       older versions simply ignore). Multiple choice works through the whole chapter as a "pass" of
+       rounds; quizBest is the cumulative accuracy of a completed pass. */
+    const ROUND_SIZE = 20, ROUND_MISSED = 4;
+    function recentMissedIds(cards, n = ROUND_MISSED) {
+      return cards.filter((c) => Number(prog(c.id).missedAt) > 0)
+        .sort((a, b) => prog(b.id).missedAt - prog(a.id).missedAt).slice(0, n).map((c) => c.id);
+    }
+    function noteMiss(id) { prog(id).missedAt = Date.now(); }
+    // Older study saves kept the whole remaining pile in one endless queue. Turn one into a round:
+    // the current card first (so a revealed/answered card stays put), then the next cards in order.
+    function upgradeStudySession(s) {
+      if (!s || s.rounds) return s;
+      const q = Array.isArray(s.queue) ? s.queue.map(String) : [];
+      const i = Math.min(Math.max(0, Number(s.index) || 0), Math.max(0, q.length - 1));
+      const cur = q[i];
+      const rest = q.slice(i + 1).concat(q.slice(0, i)).filter((id) => state.cards.some((c) => c.id === id) && !(state.progress[id] && state.progress[id].retired));
+      const ids = (cur !== undefined ? [cur] : []).concat(rest.filter((id) => id !== cur)).slice(0, ROUND_SIZE);
+      return Object.assign({}, s, { rounds: 1, queue: ids, index: 0, roundTotal: ids.length, roundPos: 1, roundNo: 1, roundResults: {} });
     }
 
     function load() {
@@ -1047,7 +1072,7 @@
         tombC.forEach((id) => { if (!M.c[id]) delete state.progress[id]; });
       }
       const cardIds = new Set(state.cards.map((c) => c.id));
-      Object.keys(M.p).forEach((cid) => { if (cardIds.has(cid)) state.progress[cid] = { streak: Number(M.p[cid][0]) || 0, retired: !!M.p[cid][1] || (Number(M.p[cid][0]) || 0) >= RETIRE_AFTER }; });
+      Object.keys(M.p).forEach((cid) => { if (cardIds.has(cid)) state.progress[cid] = { ...(state.progress[cid] || {}), streak: Number(M.p[cid][0]) || 0, retired: !!M.p[cid][1] || (Number(M.p[cid][0]) || 0) >= RETIRE_AFTER }; });
       ["s", "pl"].forEach((sec) => {
         const target = sec === "s" ? (state.sessions = state.sessions || {}) : state.plans;
         Object.keys(M[sec]).forEach((k) => { target[k] = JSON.parse(JSON.stringify(M[sec][k][1])); });
@@ -1646,6 +1671,16 @@
     }
     function sessionProgressLabel(mode, s) {
       if (!s) return "";
+      if (mode === "quiz" && typeof s.roundEnd !== "number" && (s.quizTotal || 0) > ROUND_SIZE) {
+        // Older save: shown the way it will resume (the rest continues as rounds of 20).
+        const idx = s.index || 0;
+        s = Object.assign({}, s, { roundStart: idx, roundEnd: Math.min(idx + ROUND_SIZE, s.quizTotal), roundNo: Math.floor((s.asked || 0) / ROUND_SIZE) + 1 });
+      }
+      if ((mode === "quiz" || mode === "quick") && typeof s.roundEnd === "number" && s.roundEnd < (s.quizTotal || 0)) {
+        const idx = s.index || 0, rn = s.roundNo || 1;
+        if (idx >= s.roundEnd) return `Round ${rn} done · ${s.asked || 0} of ${s.quizTotal} answered · ${s.score || 0} correct`;
+        return `Round ${rn}: question ${idx - (s.roundStart || 0) + 1} of ${s.roundEnd - (s.roundStart || 0)} · ${s.asked || 0} of ${s.quizTotal} answered`;
+      }
       if (mode === "quiz" || mode === "quick") {
         return `Question ${Math.min((s.index || 0) + 1, s.quizTotal || 0)} of ${s.quizTotal || 0} · ${s.score || 0} correct`;
       }
@@ -1653,6 +1688,7 @@
         return `Question ${Math.min((s.boss.index || 0) + 1, (s.boss.ids || []).length)} of ${(s.boss.ids || []).length}`;
       }
       if (String(mode).startsWith("study")) {
+        s = upgradeStudySession(s);
         const total = s.roundTotal || (s.queue || []).length;
         const pos = s.roundPos || Math.min((s.index || 0) + 1, total || 1);
         return `Card ${pos} of ${total}` + (s.studyMode && MODE_LABEL[s.studyMode] ? ` · ${MODE_LABEL[s.studyMode]}` : "");
@@ -1685,7 +1721,11 @@
           quizSource: (view.quizSource || []).slice(),
           quizFull: !!view.quizFull,
           quizFolder: view.quizFolder,
-          quizKind: view.quizKind || "full"
+          quizKind: view.quizKind || "full",
+          roundStart: view.roundStart || 0,
+          roundEnd: typeof view.roundEnd === "number" ? view.roundEnd : view.quizTotal,
+          roundScore: view.roundScore || 0,
+          roundNo: view.roundNo || 1
         });
       } else if (view.page === "boss" && view.boss && !view.boss.result) {
         setSession(fid, "boss", {
@@ -1700,7 +1740,7 @@
         });
       } else if (view.page === "study") {
         const mode = view.studyMode || "mixed";
-        if (!view.queue.length) return;
+        if (!view.queue.length || view.index >= view.queue.length) return; // round summary
         // Still unfinished if there are active cards or a pending scenario answer
         const pending = view.studyPicked !== null && view.studyPicked !== undefined;
         if (!pending && !activeStudy(fid, mode).length) return;
@@ -1713,7 +1753,10 @@
           studyTargets: (view.studyTargets || []).slice(),
           studySeen: (view.studySeen || []).slice(),
           roundTotal: view.roundTotal || view.queue.length,
-          roundPos: view.roundPos || (view.index + 1)
+          roundPos: view.roundPos || (view.index + 1),
+          rounds: 1,
+          roundNo: view.roundNo || 1,
+          roundResults: Object.assign({}, view.roundResults || {})
         });
       } else if (view.page === "match" && view.match && !view.match.result) {
         const m = view.match;
@@ -1740,7 +1783,7 @@
       render();
     }
     function resumeSession(folderId, mode) {
-      const s = getSession(folderId, mode);
+      let s = getSession(folderId, mode);
       if (!s) return;
       view.folderId = folderId;
       if (mode === "quiz" || mode === "quick") {
@@ -1758,6 +1801,17 @@
         view.quizFull = !!s.quizFull;
         view.quizFolder = s.quizFolder || folderId;
         view.quizKind = s.quizKind || (mode === "quick" ? "quick" : "full");
+        if (typeof s.roundEnd === "number") {
+          view.roundStart = s.roundStart || 0; view.roundEnd = s.roundEnd; view.roundScore = s.roundScore || 0; view.roundNo = s.roundNo || 1;
+        } else {
+          // Older save: the rest of that quiz continues as rounds from here (totals carry over).
+          const answered = view.picked !== null && view.picked !== undefined;
+          view.roundStart = view.index;
+          view.roundEnd = view.quizKind === "quick" ? view.quizTotal : Math.min(view.index + ROUND_SIZE, view.quizTotal);
+          view.roundScore = answered && view.choices[view.picked] && view.choices[view.picked].correct ? 1 : 0;
+          view.roundNo = Math.floor((view.asked - (answered ? 1 : 0)) / ROUND_SIZE) + 1;
+        }
+        if (view.index >= view.roundEnd && view.index < view.quizTotal) { beginQuizRound(); return; }
         // Rebuild choices if missing (older/corrupt save)
         if ((!view.choices || !view.choices.length) && view.index < view.quizTotal) {
           const card = state.cards.find((c) => c.id === view.queue[view.index]);
@@ -1774,6 +1828,7 @@
         return;
       }
       if (String(mode).startsWith("study")) {
+        s = upgradeStudySession(s);
         view.page = "study";
         view.studyMode = STUDY_MODES.includes(s.studyMode) ? s.studyMode : (mode.slice(6) || "mixed");
         view.queue = (s.queue || []).slice();
@@ -1784,6 +1839,9 @@
         view.studySeen = (s.studySeen || []).slice();
         view.roundTotal = s.roundTotal || view.queue.length;
         view.roundPos = s.roundPos || (view.index + 1);
+        view.roundNo = s.roundNo || 1;
+        view.roundResults = Object.assign({}, s.roundResults || {});
+        skipRetiredInRound();
         render();
         return;
       }
@@ -2675,16 +2733,29 @@
       document.getElementById("closeShare").onclick = () => modal.close();
     }
 
-    function startStudy(mode) {
+    function buildStudyRound(folderId, mode, avoid) {
+      avoid = avoid || [];
+      const active = activeStudy(folderId, mode);
+      const missed = recentMissedIds(active);
+      const rest = shuffle(active.filter((c) => !missed.includes(c.id)));
+      rest.sort((a, b) => (avoid.includes(a.id) ? 1 : 0) - (avoid.includes(b.id) ? 1 : 0)); // fresh cards before last round's
+      return shuffle(missed.concat(rest.map((c) => c.id)).slice(0, ROUND_SIZE));
+    }
+    // next = true continues the sitting (round N+1) and keeps the full-pass bookkeeping.
+    function startStudy(mode, next) {
       mode = MODE_LABEL[mode] ? mode : "mixed";
-      const queue = shuffle(activeStudy(view.folderId, mode));
-      if (!queue.length) return;
+      const ids = buildStudyRound(view.folderId, mode, next ? view.queue : []);
+      if (!ids.length) return;
       view.studyMode = mode;
-      // Track a "full pass" over the concept (regular) cards that were still active at the start.
-      view.studyTargets = queue.filter((c) => !isScenario(c)).map((c) => c.id);
-      view.studySeen = [];
+      if (!next) {
+        // Track a "full pass" over the concept (regular) cards that were still active at the start.
+        view.studyTargets = activeStudy(view.folderId, mode).filter((c) => !isScenario(c)).map((c) => c.id);
+        view.studySeen = [];
+      }
+      view.roundNo = next ? (view.roundNo || 1) + 1 : 1;
+      view.roundResults = {};
       view.page = "study";
-      view.queue = queue.map((c) => c.id);
+      view.queue = ids;
       view.index = 0;
       view.roundTotal = view.queue.length;
       view.roundPos = 1;
@@ -2753,8 +2824,16 @@
       opts = opts || {};
       const kind = opts.kind || (ids && ids.length ? "practice" : "full");
       const source = ids && ids.length ? ids : cardsIn(view.folderId).map((c) => c.id);
-      const queue = shuffle(source.map((id) => state.cards.find((c) => c.id === id)).filter(Boolean));
+      let queue = shuffle(source.map((id) => state.cards.find((c) => c.id === id)).filter(Boolean));
       if (!queue.length) return;
+      if (kind === "full") {
+        // Pass order: a few recently missed, then not-yet-mastered, then mastered cards (they still
+        // count toward full-chapter accuracy). Each round of 20 is shuffled again below.
+        const missed = recentMissedIds(queue);
+        const pri = (c) => missed.includes(c.id) ? 0 : prog(c.id).retired ? 2 : 1;
+        queue.sort((a, b) => pri(a) - pri(b));
+        for (let i = 0; i < queue.length; i += ROUND_SIZE) queue.splice(i, ROUND_SIZE, ...shuffle(queue.slice(i, i + ROUND_SIZE)));
+      }
       if (queue.some((c) => !isScenario(c) && (distractorPool(c).length < 1 && !cleanDistractors(c.distractors, cardAnswerText(c)).length))) {
         alert("Add at least 2 regular (non-scenario) cards in this folder so the quiz can invent wrong answers.");
         return;
@@ -2778,7 +2857,22 @@
       view.asked = 0;
       view.run = 0;
       view.missed = [];
+      view.roundStart = 0;
+      view.roundEnd = kind === "quick" ? view.quizTotal : Math.min(ROUND_SIZE, view.quizTotal);
+      view.roundScore = 0;
+      view.roundNo = 1;
       view.choices = makeChoices(queue[0]);
+      render();
+    }
+    function beginQuizRound() {
+      view.page = "quiz";
+      view.roundStart = view.index;
+      view.roundEnd = Math.min(view.index + ROUND_SIZE, view.quizTotal);
+      view.roundScore = 0;
+      view.roundNo = (view.roundNo || 1) + 1;
+      view.picked = null;
+      const card = currentCard();
+      view.choices = card ? makeChoices(card) : [];
       render();
     }
 
@@ -2830,6 +2924,7 @@
       const retired = all.length - left;
       const pendingScenario = view.studyPicked !== null && view.studyPicked !== undefined;
       headerSub.textContent = folder ? `${folder.name} · ${MODE_LABEL[mode]}` : "Study";
+      if (view.queue.length && view.index >= view.queue.length && !pendingScenario) { renderStudyRoundSummary(); return; }
       const studyDone = (!view.queue.length || left === 0) && !pendingScenario;
       headerActions.innerHTML = `
         <button class="secondary" id="exitStudy">${studyDone ? "Back to folder" : "Back to folder"}</button>
@@ -2855,14 +2950,14 @@
       }
 
       const card = currentCard();
-      if (!card) { startStudy(view.studyMode); return; }
+      if (!card) { startStudy(view.studyMode, true); return; }
       const p = prog(card.id);
       const pct = all.length ? Math.round((retired / all.length) * 100) : 0;
       const top = `
           <div>
             <div class="row" style="justify-content:space-between">
-              <span class="muted">Card ${view.roundPos || (view.index + 1)} of ${view.roundTotal || view.queue.length}</span>
-              <span class="muted">${left} still in the mix · streak ${p.streak}/${RETIRE_AFTER}</span>
+              <span class="muted" id="roundCounter">Card ${view.roundPos || (view.index + 1)} of ${view.roundTotal || view.queue.length}</span>
+              <span class="muted">${left} left to master · streak ${p.streak}/${RETIRE_AFTER}</span>
             </div>
             <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
           </div>`;
@@ -2945,13 +3040,20 @@
     function renderQuiz() {
       const folder = folderById(view.folderId);
       const isQuick = view.quizKind === "quick";
-      const midQuiz = view.index < view.quizTotal;
+      const roundEnd = typeof view.roundEnd === "number" ? view.roundEnd : view.quizTotal;
+      const midQuiz = view.index < roundEnd;
       headerSub.textContent = folder ? folder.name + (isQuick ? " · quick quiz" : " · quiz") : (isQuick ? "Quick quiz" : "Quiz");
       headerActions.innerHTML = `
         <button class="secondary" id="exitStudy">${midQuiz ? "Save & leave" : "Back to folder"}</button>
       `;
       document.getElementById("exitStudy").onclick = midQuiz ? saveAndLeave : backToFolder;
 
+      if (view.index < view.quizTotal && view.index >= roundEnd) { renderQuizRoundSummary(false); return; }
+      if (view.index >= view.quizTotal && !isQuick && view.quizTotal > (roundEnd - (view.roundStart || 0))) {
+        clearSession(view.folderId, "quiz");
+        renderQuizRoundSummary(true);
+        return;
+      }
       if (view.index >= view.quizTotal) {
         // Completed: drop the resume for this mode
         clearSession(view.folderId, isQuick ? "quick" : "quiz");
@@ -2986,7 +3088,8 @@
         else if (locked) cls += " idle";
         return `<button class="${cls}" data-choice="${i}" ${locked ? "disabled" : ""}>${escaped(choice.text)}</button>`;
       }).join("");
-      const pct = view.quizTotal ? Math.round((view.asked / view.quizTotal) * 100) : 0;
+      const rStart = view.roundStart || 0, rTotal = roundEnd - rStart, multi = rTotal < view.quizTotal;
+      const pct = rTotal ? Math.round(((view.index - rStart + (locked ? 1 : 0)) / rTotal) * 100) : 0;
       const prompt = isScenario(card) ? scenarioPrompt(card, "Scenario · choose the best answer") : `
           <div class="flash quiz">
             <div class="hint">Choose the best answer</div>
@@ -2998,15 +3101,16 @@
         <div class="study-wrap">
           <div>
             <div class="row" style="justify-content:space-between">
-              <span class="muted">Question ${view.index + 1} of ${view.quizTotal}</span>
-              <span class="muted">${view.score} correct · ${view.run} in a row</span>
+              <span class="muted" id="roundCounter">Question ${view.index - rStart + 1} of ${rTotal}</span>
+              <span class="muted">${multi ? view.roundScore || 0 : view.score} correct · ${view.run} in a row</span>
             </div>
+            ${multi ? `<div class="muted" style="font-size:13px;margin-top:2px">Round ${view.roundNo || 1} · ${view.asked} of ${view.quizTotal} in this chapter quiz answered · ${roundLeftText()}</div>` : ""}
             <div class="progress-bar" style="margin-top:8px"><span style="width:${pct}%"></span></div>
           </div>
           ${prompt}
           <div class="choices">${choiceHtml}</div>
           ${locked ? feedbackBox(card, !!view.choices[view.picked].correct) : ""}
-          ${locked ? `<div class="row" style="justify-content:center"><button class="gold" id="nextQuiz">${view.index + 1 >= view.quizTotal ? "See results" : "Next"}</button></div>` : ""}
+          ${locked ? `<div class="row" style="justify-content:center"><button class="gold" id="nextQuiz">${view.index + 1 >= roundEnd ? "See results" : "Next"}</button></div>` : ""}
         </div>
       `;
       app.querySelectorAll("[data-choice]").forEach((btn) => {
@@ -3018,10 +3122,13 @@
           const correct = view.choices[i].correct;
           if (correct) {
             view.score += 1;
+            view.roundScore = (view.roundScore || 0) + 1;
             view.run += 1;
           } else {
             view.run = 0;
             if (!view.missed.includes(card.id)) view.missed.push(card.id);
+            noteMiss(card.id);
+            save();
           }
           render();
         };
@@ -3039,10 +3146,43 @@
         if (folder && (typeof folder.quizBest !== "number" || pct > folder.quizBest)) { folder.quizBest = pct; save(); }
       }
       if (view.index < view.quizTotal) {
+        // Also at a round boundary, so a saved between-rounds quiz has the next question ready.
         const card = currentCard();
         view.choices = card ? makeChoices(card) : [];
       }
       render();
+    }
+    function roundLeftText() {
+      const n = cardsIn(view.folderId).filter((c) => !prog(c.id).retired).length;
+      return n ? `${n} left to master` : "all mastered";
+    }
+    function renderQuizRoundSummary(final) {
+      const rStart = view.roundStart || 0, rTotal = Math.min(view.roundEnd, view.quizTotal) - rStart;
+      const left = view.quizTotal - view.index;
+      const pct = view.asked ? Math.round((view.score / view.asked) * 100) : 0;
+      const folder = folderById(view.folderId);
+      headerActions.innerHTML = `<button class="secondary" id="exitStudy">Back to chapter</button>`;
+      app.innerHTML = `
+        <div class="empty card round-summary" id="roundSummary">
+          <h2>${final ? "Chapter quiz complete" : `Round ${view.roundNo || 1} complete`}</h2>
+          <div class="round-score" id="roundScore">${view.roundScore || 0} / ${rTotal}</div>
+          <p>${final ? `Whole chapter: <strong>${view.score} of ${view.asked} (${pct}%)</strong>${view.quizFull ? ` · counts toward the ${QUIZ_CLEAR}% path step${folder && typeof folder.quizBest === "number" ? ` (best ${folder.quizBest}%)` : ""}` : ""}`
+            : `${view.index} of ${view.quizTotal} answered · ${pct}% so far · ${left} to go`}</p>
+          <p class="muted" id="roundLeft">${roundLeftText()} in this chapter</p>
+          <div class="row" style="justify-content:center;margin-top:12px">
+            ${final ? `<button class="gold" id="quizAgain">Retake full quiz</button>
+              <button class="secondary" id="quizMissed" ${view.missed.length ? "" : "disabled"}>Practice missed</button>`
+              : `<button class="gold" id="nextRound">Next ${Math.min(ROUND_SIZE, left)}</button>`}
+            <button class="secondary" id="backChapter">Back to chapter</button>
+          </div>
+        </div>`;
+      const back = () => { if (final) backToFolder(); else saveAndLeave(); };
+      document.getElementById("exitStudy").onclick = back;
+      document.getElementById("backChapter").onclick = back;
+      if (final) {
+        document.getElementById("quizAgain").onclick = () => startQuiz(view.quizKind === "full" ? null : view.quizSource);
+        document.getElementById("quizMissed").onclick = () => startQuiz(view.missed.slice());
+      } else document.getElementById("nextRound").onclick = beginQuizRound;
     }
 
     function startBoss() {
@@ -3319,7 +3459,10 @@
       } else {
         p.streak = 0;
         p.retired = false;
+        p.missedAt = Date.now();
       }
+      if (!view.roundResults) view.roundResults = {};
+      view.roundResults[card.id] = correct ? 1 : 0;
       save();
     }
 
@@ -3330,6 +3473,8 @@
       const p = prog(card.id);
       p.retired = true;
       p.streak = Math.max(Number(p.streak) || 0, RETIRE_AFTER);
+      if (!view.roundResults) view.roundResults = {};
+      view.roundResults[card.id] = 1;
       save();
       if (!isScenario(card)) noteConceptSeen(card.id);
       toast("Marked as known. Reset progress brings it back.");
@@ -3355,21 +3500,47 @@
       }
     }
 
+    // Rounds are fixed lists: each card comes up once, then the round summary. Missed cards stay in
+    // the pool (and get mixed into the next rounds); mastered ones drop out of later rounds.
     function advanceStudy() {
-      const remainingIds = view.queue.filter((id, i) => i !== view.index && !prog(id).retired);
-      if (!remainingIds.length) {
-        view.queue = shuffle(activeStudy(view.folderId, view.studyMode || "mixed")).map((c) => c.id);
-        view.index = 0;
-        view.roundTotal = view.queue.length;
-        view.roundPos = 1;
-      } else {
-        view.queue = remainingIds;
-        view.index = view.index >= view.queue.length ? 0 : view.index;
-        view.roundPos = (view.roundPos || view.index) + 1;
-      }
+      view.index += 1;
+      skipRetiredInRound();
       view.flipped = false;
       view.studyPicked = null;
       render();
+    }
+    // Cards retired elsewhere (another device via sync, or a reset elsewhere) are skipped, not shown.
+    function skipRetiredInRound() {
+      const pending = view.studyPicked !== null && view.studyPicked !== undefined;
+      if (pending && view.index < view.queue.length) return;
+      while (view.index < view.queue.length && (!state.cards.some((c) => c.id === view.queue[view.index]) || (prog(view.queue[view.index]).retired && !(view.queue[view.index] in (view.roundResults || {}))))) view.index += 1;
+      view.roundPos = Math.min(view.index + 1, view.queue.length);
+    }
+    function renderStudyRoundSummary() {
+      const mode = view.studyMode || "mixed";
+      clearSession(view.folderId, studySlot(mode));
+      const all = studyPool(view.folderId, mode), left = activeStudy(view.folderId, mode).length;
+      const res = view.roundResults || {}, right = Object.values(res).filter((v) => v).length;
+      const total = view.roundTotal || view.queue.length;
+      const noun = mode === "concept" ? "concept cards" : mode === "scenario" ? "scenarios" : "cards";
+      headerActions.innerHTML = `<button class="secondary" id="exitStudy">Back to chapter</button>`;
+      app.innerHTML = `
+        <div class="empty card round-summary" id="roundSummary">
+          <h2>Round ${view.roundNo || 1} complete</h2>
+          <div class="round-score" id="roundScore">${right} / ${total}</div>
+          <p id="roundLeft">${left ? `<strong>${left}</strong> ${noun} left to master` : `All ${noun} mastered 🎉`} · ${all.length - left} of ${all.length} mastered</p>
+          <div class="progress-bar" style="margin:8px auto 0;max-width:320px"><span style="width:${all.length ? Math.round(((all.length - left) / all.length) * 100) : 0}%"></span></div>
+          <div class="row" style="justify-content:center;margin-top:14px">
+            ${left ? `<button class="gold" id="nextRound">Next ${Math.min(ROUND_SIZE, left)}</button>` : `<button class="gold" id="resetDone">Reset and study again</button>`}
+            <button class="secondary" id="backChapter">Back to chapter</button>
+          </div>
+        </div>`;
+      document.getElementById("exitStudy").onclick = backToFolder;
+      document.getElementById("backChapter").onclick = backToFolder;
+      const nx = document.getElementById("nextRound");
+      if (nx) nx.onclick = () => startStudy(mode, true);
+      const rs = document.getElementById("resetDone");
+      if (rs) rs.onclick = resetAndStay;
     }
 
     function backToFolder() {

@@ -232,9 +232,9 @@
   ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management, C202 Ch 9: Base Compensation, C202 Ch 10: Incentives, C202 Ch 11: Benefits, C202 Ch 12: Creating a Healthy Work Environment, C202 Ch 13: Creating Positive Employee-Management Relations, C202 Ch 14: Managing Engagement and Turnover (2303 new, 77 updated cards)
 
 [12] Study counter keeps the shuffle total fixed
-  ✓ starts at Card 1 of 84
-  ✓ after a correct answer: Card 2 of 84 (total unchanged)
-  ✓ after a miss: Card 3 of 84
+  ✓ starts at Card 1 of 20
+  ✓ after a correct answer: Card 2 of 20 (total unchanged)
+  ✓ after a miss: Card 3 of 20
   ✓ saved session label keeps the same position and total
 
 [13] Cross-device sync via a secret GitHub Gist (GitHub API mocked)
@@ -248,7 +248,7 @@
   ✓ gist has study-buddy-sync.json and c202-plan.txt
   ✓ Sync ID shown on the Sync screen matches the gist id
   ✓ payload carries device A progress (5 studied cards)
-  ✓ payload is compact (15.0 KB) with no bundled card text or study guides
+  ✓ payload is compact (14.1 KB) with no bundled card text or study guides
   ✓ token is never written to the gist
   ✓ payload has a 14-chapter progress summary for the helper
   ✓ app fine after connect
@@ -341,7 +341,7 @@
   ✓ one click: signed in as brayden@example.com and synced
   ✓ users/{uid} doc holds the progress (same payload format as the gist)
   ✓ shares/{id} mirrors the C202 plan text for Study Buddy
-  ✓ Sync screen shows the plan link: fs:study-buddy-1000/ffacc30207c45c8672b04c66bc4e50a3
+  ✓ Sync screen shows the plan link: fs:study-buddy-1000/346ac6f5ffb97e0ed609885daa4b116b
   ✓ no Google token stored in Firestore
   ✓ phone gets the desktop progress after one tap
   ✓ phone reuses the same plan link
@@ -360,8 +360,42 @@
   ✓ Sync screen shows the gist as still connected
   ✓ tools/read-plan.sh fs:… prints the plan and progress summary without credentials
 
+[17] Rounds of 20, round summary, migration of old (pre-rounds) saves
+  ✓ chapter 2 is big enough for several rounds (41 concept, 60 scenarios)
+  ✓ every old streak / retired flag is kept on load
+  ✓ quizBest and all old saves survive (shared "study" slot moved to study-scenario)
+  ✓ old concept save is offered as a round: "Card 1 of 20"
+  ✓ old quiz save shows its place: Resume quizRound 2: question 1 of 20 · 30 of 101 answered
+  ✓ old concept save resumes on the same (revealed) card in a round of 20 active cards
+  ✓ counter "Card 1 of 20" and remaining-to-master shown
+  ✓ Save & leave mid-round resumes at Card 5 of 20
+  ✓ after 20 cards the round summary shows
+  ✓ score screen shows X / 20 (17 / 20, "I know this" counts as right): 17 / 20
+  ✓ summary shows remaining-to-master, "Next 20" and "Back to chapter"
+  ✓ a finished round leaves no stale save
+  ✓ round 2 has 20 unmastered cards and mixes in the 3 just-missed ones
+  ✓ only a few missed cards are mixed in
+  ✓ old scenario save resumes on the answered scenario with its feedback
+  ✓ scenario rounds count "Card N of M"
+  ✓ old quiz save resumes at question 31 as "Question 1 of 20" with its 25/30 kept
+  ✓ quiz round summary: 19 / 20 and chapter progress
+  ✓ Back to chapter keeps the chapter quiz: "Round 2 done · ..."
+  ✓ quizBest untouched until the whole chapter has been answered
+  ✓ resuming between rounds starts round 3
+  ✓ full pass done: quizBest is cumulative chapter accuracy (95/101 = 94%)
+  ✓ completed chapter quiz clears its save
+  ✓ new full quiz: first round is 20 questions
+  ✓ round 1 of the chapter quiz pulls unmastered cards first
+  ✓ Quick quiz is unchanged (10 questions, one go)
+  ✓ Boss quiz is still the full chapter
+  ✓ app fine
+  ✓ a round save syncs to the other device
+  ✓ progress syncs and the local missed hint survives a pull
+  ✓ the other device resumes the synced round at Card 4 of 20
+  ✓ an old device's synced quiz save resumes as rounds
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-330 passed, 0 failed
+362 passed, 0 failed

@@ -973,7 +973,7 @@ async function testSlotsAndKnow() {
   const left0 = await S(p, () => activeStudy(view.folderId, 'concept').length);
   ok(await p.locator('#knowBtn').count() === 1 && !(await S(p, () => view.flipped)), '"I know this" is available before revealing the answer');
   await p.click('#knowBtn');
-  ok(await S(p, ([id, l]) => state.progress[id].retired && !view.queue.includes(id) && activeStudy(view.folderId, 'concept').length === l - 1, [k1, left0]), '"I know this" retires the card and removes it from the round');
+  ok(await S(p, ([id, l]) => state.progress[id].retired && !view.queue.slice(view.index).includes(id) && activeStudy(view.folderId, 'concept').length === l - 1, [k1, left0]), '"I know this" retires the card and removes it from the round');
   await p.click('#flipBtn');
   ok(await p.locator('#knowBtn').count() === 1, '"I know this" also shows after revealing');
   await p.click('#exitStudy');
@@ -981,11 +981,11 @@ async function testSlotsAndKnow() {
   const sc = await S(p, () => view.queue[view.index]);
   await p.click(`[data-spick="${await S(p, (id) => state.cards.find((c) => c.id === id).correct, sc)}"]`);
   await p.click('#knowBtn');
-  ok(await S(p, (id) => state.progress[id].retired && !view.queue.includes(id), sc), '"I know this" works on a scenario after answering');
+  ok(await S(p, (id) => state.progress[id].retired && !view.queue.slice(view.index).includes(id), sc), '"I know this" works on a scenario after answering');
   await S(p, () => startStudy('scenario'));
   ok(await S(p, (id) => !view.queue.includes(id), sc), 'a known card stays out of later rounds');
   await p.click('#resetStudy');
-  ok(await S(p, (id) => !state.progress[id].retired && view.queue.includes(id), sc), 'Reset progress brings known cards back');
+  ok(await S(p, (id) => !state.progress[id].retired && activeStudy(view.folderId, 'scenario').some((c) => c.id === id), sc), 'Reset progress brings known cards back');
   await p.click('#exitStudy');
   ok(await noBroke(p), 'app fine');
   await ctx.close();
@@ -1262,6 +1262,134 @@ async function testGoogleSync() {
   for (let i = errors.length - 1; i >= errStart; i--) if (noise.test(errors[i])) errors.splice(i, 1);
 }
 
+/* ---------- Rounds of 20 (study / scenarios / multiple choice) + migration of old saves ---------- */
+async function answerQuiz(p, right = true) {
+  const idx = await S(p, (r) => view.choices.findIndex((c) => r ? c.correct : !c.correct), right);
+  await p.click(`[data-choice="${idx}"]`); await p.click('#nextQuiz');
+}
+async function testRounds() {
+  console.log('\n[17] Rounds of 20, round summary, migration of old (pre-rounds) saves');
+  const F = 'deck-c202-ch02';
+  let { ctx, p } = await page({ device: 'iPhone 13' });
+  await p.goto(GIST); await hideToast(p);
+  // A realistic old state: progress mid-chapter, a best quiz score, and pre-rounds saves in every slot style.
+  const old = await S(p, (F) => {
+    const st = JSON.parse(localStorage.getItem('flashcards.v1'));
+    const all = cardsIn(F), con = all.filter((c) => !isScenario(c)), scn = all.filter(isScenario);
+    con.slice(0, 12).forEach((c) => { st.progress[c.id] = { streak: 2, retired: true }; });
+    con.slice(12, 20).forEach((c) => { st.progress[c.id] = { streak: 1, retired: false }; });
+    con.slice(20, 23).forEach((c) => { st.progress[c.id] = { streak: 0, retired: false }; });
+    scn.slice(0, 3).forEach((c) => { st.progress[c.id] = { streak: 3, retired: false }; }); // old rule leftovers: streak>=2 counts as retired
+    const f = st.folders.find((x) => x.id === F); f.quizBest = 65; f.conceptPass = null;
+    const activeCon = con.slice(12).map((c) => c.id);
+    st.sessions = st.sessions || {};
+    st.sessions[F + ':study-concept'] = { studyMode: 'concept', queue: activeCon, index: 5, flipped: true, studyPicked: null, studyTargets: activeCon, studySeen: activeCon.slice(0, 5), roundTotal: activeCon.length + 5, roundPos: 6, savedAt: Date.now() - 86400000 };
+    const sq = scn.slice(3).map((c) => c.id);
+    st.sessions[F + ':study'] = { studyMode: 'scenario', queue: sq, index: 2, flipped: false, studyPicked: (scn[5].correct + 1) % scn[5].choices.length, studyTargets: [], studySeen: [], roundTotal: sq.length, roundPos: 3, savedAt: Date.now() - 3600000 };
+    const qids = all.map((c) => c.id);
+    st.sessions[F + ':quiz'] = { queue: qids, index: 30, score: 25, asked: 30, run: 2, missed: qids.slice(0, 5), choices: [], picked: null, quizTotal: qids.length, quizSource: qids, quizFull: true, quizFolder: F, quizKind: 'full', savedAt: Date.now() - 7200000 };
+    localStorage.setItem('flashcards.v1', JSON.stringify(st));
+    return { total: all.length, con: con.length, scn: scn.length, current: activeCon[5], scen: sq[2], prog: st.progress, activeCon };
+  }, F);
+  await p.reload(); await hideToast(p);
+  ok(old.con > 40 && old.scn >= 6, `chapter 2 is big enough for several rounds (${old.con} concept, ${old.scn} scenarios)`);
+  const after = await S(p, () => state.progress);
+  ok(Object.keys(old.prog).every((id) => after[id] && after[id].streak === old.prog[id].streak && (after[id].retired === (old.prog[id].retired || old.prog[id].streak >= 2))), 'every old streak / retired flag is kept on load');
+  ok(await S(p, (F) => folderById(F).quizBest === 65 && !!state.sessions[F + ':study-scenario'] && !state.sessions[F + ':study'] && !!state.sessions[F + ':quiz'] && !!state.sessions[F + ':study-concept'], F), 'quizBest and all old saves survive (shared "study" slot moved to study-scenario)');
+  await p.click(`[data-open="${F}"]`); await skipVis(p);
+  ok(/Card 1 of 20/.test(await p.textContent('[data-resume="study-concept"]')), 'old concept save is offered as a round: "Card 1 of 20"');
+  ok(/Round 2: question 1 of 20 · 30 of/.test(await p.textContent('[data-resume="quiz"]')), 'old quiz save shows its place: ' + await p.textContent('[data-resume="quiz"]'));
+
+  // --- old concept save resumes on the same revealed card, as a round of 20
+  await p.click('[data-resume="study-concept"]');
+  let st = await S(p, () => ({ id: view.queue[view.index], flipped: view.flipped, total: view.roundTotal, q: view.queue.slice(), active: view.queue.every((id) => !prog(id).retired) }));
+  ok(st.id === old.current && st.flipped && st.total === 20 && st.q.length === 20 && st.active, 'old concept save resumes on the same (revealed) card in a round of 20 active cards');
+  ok((await p.textContent('#roundCounter')).trim() === 'Card 1 of 20' && /left to master/.test(await p.textContent('.study-wrap')), 'counter "Card 1 of 20" and remaining-to-master shown');
+  await p.click('#gotBtn');
+  const missedR1 = [];
+  for (let i = 1; i < 20; i++) {
+    if (i === 4) { await p.click('#exitStudy'); await p.click('[data-resume="study-concept"]'); ok((await p.textContent('#roundCounter')).trim() === 'Card 5 of 20', 'Save & leave mid-round resumes at Card 5 of 20'); }
+    const right = i % 5 !== 0;
+    if (!right) missedR1.push(await S(p, () => view.queue[view.index]));
+    if (i === 7) { await p.click('#knowBtn'); continue; }
+    await answerCard(p, right);
+  }
+  ok(await p.locator('#roundSummary').count() === 1, 'after 20 cards the round summary shows');
+  ok((await p.textContent('#roundScore')).trim() === '17 / 20', 'score screen shows X / 20 (17 / 20, "I know this" counts as right): ' + await p.textContent('#roundScore'));
+  ok(/\d+ concept cards left to master/.test(await p.textContent('#roundLeft')) && /Next 20/.test(await p.textContent('#nextRound')) && /Back to chapter/.test(await p.textContent('#backChapter')), 'summary shows remaining-to-master, "Next 20" and "Back to chapter"');
+  ok(await S(p, (F) => !state.sessions[F + ':study-concept'], F), 'a finished round leaves no stale save');
+  await hideToast(p); await p.screenshot({ path: `${SHOTS}/round-summary-concept-phone.png`, fullPage: true });
+  await p.click('#nextRound');
+  st = await S(p, () => ({ q: view.queue.slice(), no: view.roundNo, active: view.queue.every((id) => !prog(id).retired) }));
+  ok(st.no === 2 && st.q.length === 20 && st.active && missedR1.every((id) => st.q.includes(id)), `round 2 has 20 unmastered cards and mixes in the ${missedR1.length} just-missed ones`);
+  ok(await S(p, () => view.queue.filter((id) => prog(id).missedAt).length) <= 6, 'only a few missed cards are mixed in');
+  await p.click('#exitStudy');
+
+  // --- old scenario save (from the shared "study" slot): answered-but-not-advanced scenario is kept
+  await p.click('[data-resume="study-scenario"]');
+  st = await S(p, () => ({ id: view.queue[view.index], picked: view.studyPicked, total: view.roundTotal }));
+  ok(st.id === old.scen && st.picked !== null && st.total === Math.min(20, old.scn - 3) && await p.locator('#explainBox').count() === 1, 'old scenario save resumes on the answered scenario with its feedback');
+  await p.click('#nextStudy');
+  ok(/Card 2 of/.test(await p.textContent('#roundCounter')), 'scenario rounds count "Card N of M"');
+  await p.click('#exitStudy');
+
+  // --- old quiz save continues as rounds; totals carry over
+  await p.click('[data-resume="quiz"]');
+  ok((await p.textContent('#roundCounter')).trim() === 'Question 1 of 20' && await S(p, () => view.asked === 30 && view.score === 25 && view.index === 30), 'old quiz save resumes at question 31 as "Question 1 of 20" with its 25/30 kept');
+  for (let i = 0; i < 20; i++) await answerQuiz(p, i !== 3);
+  ok((await p.textContent('#roundScore')).trim() === '19 / 20' && /50 of \d+ answered/.test(await p.textContent('#roundSummary')), 'quiz round summary: 19 / 20 and chapter progress');
+  await hideToast(p); await p.screenshot({ path: `${SHOTS}/round-summary-quiz-phone.png`, fullPage: true });
+  await p.click('#backChapter');
+  ok(/Round 2 done/.test(await p.textContent('[data-resume="quiz"]')), 'Back to chapter keeps the chapter quiz: "Round 2 done · ..."');
+  ok(await S(p, (F) => folderById(F).quizBest === 65, F), 'quizBest untouched until the whole chapter has been answered');
+  await p.click('[data-resume="quiz"]');
+  ok((await p.textContent('#roundCounter')).trim() === 'Question 1 of 20' && await S(p, () => view.roundNo === 3 && view.index === 50), 'resuming between rounds starts round 3');
+  while (!(await p.locator('#roundSummary').count()) || await p.locator('#nextRound').count()) {
+    if (await p.locator('#nextRound').count()) await p.click('#nextRound');
+    await answerQuiz(p, true);
+  }
+  const fin = await S(p, (F) => ({ best: folderById(F).quizBest, score: view.score, asked: view.asked, total: view.quizTotal }), F);
+  ok(fin.asked === fin.total && fin.best === Math.round(fin.score / fin.asked * 100) && /Chapter quiz complete/.test(await p.textContent('#roundSummary')), `full pass done: quizBest is cumulative chapter accuracy (${fin.score}/${fin.asked} = ${fin.best}%)`);
+  ok(await S(p, (F) => !state.sessions[F + ':quiz'], F), 'completed chapter quiz clears its save');
+  await p.click('#backChapter');
+
+  // --- a fresh full quiz: rounds of 20, unmastered first
+  await p.click('#quizBtn'); await skipVis(p);
+  const r1 = await S(p, () => ({ end: view.roundEnd, ids: view.queue.slice(0, 20) }));
+  ok(r1.end === 20 && (await p.textContent('#roundCounter')).trim() === 'Question 1 of 20', 'new full quiz: first round is 20 questions');
+  ok(await S(p, (ids) => ids.filter((id) => prog(id).retired).length, r1.ids) === 0, 'round 1 of the chapter quiz pulls unmastered cards first');
+  await p.click('#exitStudy');
+  // Quick quiz and boss stay as they were
+  await p.click('#quickBtn'); await skipVis(p);
+  ok((await p.textContent('#roundCounter')).trim() === 'Question 1 of 10' && await S(p, () => view.roundEnd === view.quizTotal), 'Quick quiz is unchanged (10 questions, one go)');
+  await p.click('#exitStudy');
+  await p.click('#bossBtn'); await skipVis(p);
+  ok(await S(p, (F) => view.boss.ids.length === cardsIn(F).length, F), 'Boss quiz is still the full chapter');
+  await p.click('#exitBoss');
+  ok(await noBroke(p), 'app fine');
+  await ctx.close();
+
+  // --- sync: round saves + an old-format save from an old device merge and resume fine
+  const store = makeGistStore();
+  const A = await syncDevice({ store }), B = await syncDevice({ store, device: 'iPhone 13' });
+  for (const d of [A, B]) { await d.p.click('#syncBtn'); await d.p.fill('#syncToken', GOOD_TOKEN); await d.p.click('#syncConnect'); await waitStatus(d.p, /Synced/); await d.p.click('#syncBack'); }
+  await A.p.click(`[data-open="${F}"]`); await skipVis(A.p); await A.p.click('#conceptBtn'); await skipVis(A.p);
+  await answerCard(A.p, false); await answerCard(A.p, true); await answerCard(A.p, true);
+  const missA = await S(A.p, () => view.queue[0]);
+  await A.p.click('#exitStudy');
+  // B behaves like an old device: writes a pre-rounds quiz save.
+  await S(B.p, (F) => { const ids = cardsIn(F).map((c) => c.id); state.sessions[F + ':quiz'] = { queue: ids, index: 7, score: 6, asked: 7, run: 1, missed: [], choices: [], picked: null, quizTotal: ids.length, quizSource: ids, quizFull: true, quizFolder: F, quizKind: 'full', savedAt: Date.now() }; save(); }, F);
+  await syncNowAndWait(B.p); await syncNowAndWait(A.p); await syncNowAndWait(B.p);
+  ok(await S(B.p, (F) => { const s = state.sessions[F + ':study-concept']; return !!s && s.rounds === 1 && s.index === 3 && s.roundTotal === 20; }, F), 'a round save syncs to the other device');
+  ok(await S(A.p, (id) => state.progress[id].streak === 0 && prog(id).missedAt > 0, missA), 'progress syncs and the local missed hint survives a pull');
+  await B.p.click(`[data-open="${F}"]`); await skipVis(B.p); await B.p.click('[data-resume="study-concept"]');
+  ok((await B.p.textContent('#roundCounter')).trim() === 'Card 4 of 20', 'the other device resumes the synced round at Card 4 of 20');
+  await B.p.click('#exitStudy');
+  await A.p.click('#backHome'); await A.p.click(`[data-open="${F}"]`); await skipVis(A.p); await A.p.click('[data-resume="quiz"]');
+  ok((await A.p.textContent('#roundCounter')).trim() === 'Question 1 of 20' && await S(A.p, () => view.index === 7 && view.score === 6), "an old device's synced quiz save resumes as rounds");
+  await A.ctx.close(); await B.ctx.close();
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -1344,6 +1472,7 @@ async function screenshots() {
     await testSlotsAndKnow();
     await testDistractors();
     await testGoogleSync();
+    await testRounds();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));
