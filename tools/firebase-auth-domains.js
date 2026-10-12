@@ -8,7 +8,8 @@ const lib = (p) => require(path.join(root, 'firebase-tools', 'lib', p));
   const [project, ...domains] = process.argv.slice(2);
   if (!project || !domains.length) { console.error('usage: firebase-auth-domains.js PROJECT DOMAIN...'); process.exit(2); }
   const { requireAuth } = lib('requireAuth');
-  await requireAuth({});
+  const { configstore } = lib('configstore');
+  await requireAuth({ user: configstore.get('user'), tokens: configstore.get('tokens') });
   const auth = lib('gcp/auth');
   const current = await auth.getAuthDomains(project);
   const next = Array.from(new Set([...current, ...domains]));
