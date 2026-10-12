@@ -4,6 +4,7 @@ const ROOT = '/workspace/flashcards', T = '/tmp/fc-test', SHOTS = ROOT + '/scree
 const APP = 'file://' + ROOT + '/flashcards.html', ORIG = 'file://' + T + '/original.html';
 const SAMPLES = 'file://' + T + '/dist-samples.html', REAL = 'file://' + ROOT + '/dist/flashcards.html';
 const PREV = 'file://' + T + '/dist-prev.html';
+const GOOGLE = 'file://' + T + '/dist-google.html';
 const S1 = ROOT + '/decks/samples/sample-c202-ch01.json', S2 = ROOT + '/decks/samples/sample-c202-ch02.json';
 let browser, pass = 0, fail = 0; const errors = [];
 function ok(cond, msg) { if (cond) { pass++; console.log('  ✓', msg); } else { fail++; console.log('  ✗ FAIL:', msg); } }
@@ -1068,6 +1069,198 @@ async function testDistractors() {
   ok(out === 'BUILT' && fs.readFileSync(`${T}/good.html`, 'utf8').includes('"distractors":["p","q","r"]'), 'build.sh accepts valid distractors and bakes them in');
 }
 
+/* ---------- Google sign-in sync (Firebase SDK + Firestore mocked) ---------- */
+const FAKE_ID_TOKEN = 'FAKE-GOOGLE-ID-TOKEN-0123456789';
+const FAKE_FB = {
+  'firebase-app.js': `export function initializeApp(options) { return { options }; }`,
+  'firebase-auth.js': `
+    const KEY = 'fakeAuth.user'; const listeners = [];
+    export const indexedDBLocalPersistence = {}, browserLocalPersistence = {}, browserPopupRedirectResolver = {};
+    export function initializeAuth(app) { return { app, currentUser: JSON.parse(localStorage.getItem(KEY) || 'null'), authStateReady: async () => {} }; }
+    export class GoogleAuthProvider { setCustomParameters() {} }
+    const behaviour = async () => (await fetch('https://fake-firebase.test/auth/behaviour')).json();
+    const err = (code) => Object.assign(new Error(code), { code });
+    function setUser(a, u) { a.currentUser = u; if (u) localStorage.setItem(KEY, JSON.stringify(u)); else localStorage.removeItem(KEY); listeners.forEach((f) => f(u)); }
+    export async function signInWithPopup(a) { const b = await behaviour(); if (b.mode === 'popup-unsupported') throw err('auth/operation-not-supported-in-this-environment'); if (b.mode === 'closed') throw err('auth/popup-closed-by-user'); setUser(a, b.user); return { user: b.user }; }
+    export async function signInWithRedirect(a) { const b = await behaviour(); localStorage.setItem('fakeAuth.redirect', JSON.stringify(b.user)); window.__redirected = (window.__redirected || 0) + 1; setTimeout(() => location.reload(), 10); return new Promise(() => {}); }
+    export async function getRedirectResult(a) { const u = localStorage.getItem('fakeAuth.redirect'); if (!u) return null; localStorage.removeItem('fakeAuth.redirect'); setUser(a, JSON.parse(u)); return { user: JSON.parse(u) }; }
+    export function onAuthStateChanged(a, f) { listeners.push(f); setTimeout(() => f(a.currentUser), 0); return () => {}; }
+    export async function signOut(a) { setUser(a, null); }`,
+  'firebase-firestore-lite.js': `
+    export function getFirestore(app) { return { app }; }
+    export function doc(db, ...p) { return { path: p.join('/') }; }
+    export function serverTimestamp() { return { __ts: true }; }
+    const err = (code) => Object.assign(new Error(code), { code });
+    async function call(method, ref, data) {
+      const u = JSON.parse(localStorage.getItem('fakeAuth.user') || 'null');
+      let r;
+      try { r = await fetch('https://fake-firebase.test/fs/' + ref.path, { method, headers: { 'x-uid': u ? u.uid : '', 'content-type': 'application/json' }, body: data ? JSON.stringify(data) : undefined }); }
+      catch (e) { throw err('unavailable'); }
+      if (r.status === 403) throw err('permission-denied');
+      if (!r.ok) throw err('unavailable');
+      return r.json();
+    }
+    export async function getDoc(ref) { const j = await call('GET', ref); return { exists: () => j.exists, data: () => j.data }; }
+    export async function setDoc(ref, data) { await call('POST', ref, data); }`
+};
+function makeFbStore() { return { docs: {}, calls: [], fail: null, mode: 'ok', user: { uid: 'uid-brayden', email: 'brayden@example.com', displayName: 'Brayden', accessToken: FAKE_ID_TOKEN } }; }
+async function mockFirebase(ctx, fb) {
+  await ctx.route('https://www.gstatic.com/firebasejs/**', (route) => {
+    const name = route.request().url().split('/').pop();
+    route.fulfill({ status: 200, contentType: 'application/javascript', headers: { 'access-control-allow-origin': '*' }, body: FAKE_FB[name] || 'export {}' });
+  });
+  await ctx.route('https://fake-firebase.test/**', async (route) => {
+    const req = route.request(), url = new URL(req.url()), m = req.method();
+    const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'x-uid, content-type', 'access-control-allow-methods': 'GET, POST, OPTIONS' };
+    if (m === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+    const json = (status, body) => route.fulfill({ status, contentType: 'application/json', headers: cors, body: JSON.stringify(body) });
+    if (url.pathname === '/auth/behaviour') return json(200, { mode: fb.mode, user: fb.user });
+    const p = url.pathname.replace(/^\/fs\//, ''), uid = req.headers()['x-uid'] || '';
+    fb.calls.push(`${m} ${p}`);
+    if (fb.fail === 'offline') return route.abort('internetdisconnected');
+    if (fb.fail === 'denied') return json(403, { error: 'PERMISSION_DENIED' });
+    const [col, id] = p.split('/');
+    // Mirror firebase/firestore.rules.
+    if (col === 'users' && uid !== id) return json(403, {});
+    if (m === 'GET') return json(200, { exists: !!fb.docs[p], data: fb.docs[p] || null });
+    const body = JSON.parse(req.postData());
+    if (col === 'shares' && (!/^[0-9a-f]{32}$/.test(id) || body.owner !== uid || (fb.docs[p] && fb.docs[p].owner !== uid) || Object.keys(body).some((k) => !['owner', 'plan', 'summary', 'updatedAt'].includes(k)))) return json(403, {});
+    fb.docs[p] = { ...body, updatedAt: new Date().toISOString() };
+    fb.writes = (fb.writes || 0) + 1;
+    return json(200, {});
+  });
+}
+async function googleDevice(fb, opts = {}) {
+  const d = await page(opts);
+  await mockFirebase(d.ctx, fb);
+  if (opts.gist) await mockGitHub(d.ctx, opts.gist);
+  await d.p.goto(GOOGLE);
+  return d;
+}
+function userDoc(fb) { const d = fb.docs['users/uid-brayden']; return d ? JSON.parse(d.payload) : null; }
+
+async function testGoogleSync() {
+  console.log('\n[16] Google sign-in sync (Firebase Auth + Firestore mocked)');
+  const errStart = errors.length;
+  const fb = makeFbStore();
+  // Without a Firebase config the app keeps the gist-only screen.
+  {
+    const { ctx, p } = await page(); await p.goto(REAL); await p.click('#syncBtn');
+    ok(await p.locator('#googleSignIn').count() === 0 && await p.locator('#syncToken').count() === 1, 'no Firebase config: Sync screen is the gist screen, no Google button');
+    await ctx.close();
+  }
+  const A = await googleDevice(fb);
+  const ch1 = await S(A.p, () => cardsIn('deck-c202-ch01').map((c) => c.id));
+  const ch2 = await S(A.p, () => cardsIn('deck-c202-ch02').map((c) => c.id));
+  ok(!(await S(A.p, () => !!FB)), 'Firebase SDK is not loaded until sign-in is used');
+  await setProg(A.p, ch1.slice(0, 3), 2, true);
+  await S(A.p, () => { makePlan('C202', 'speedy', '2026-10-05'); });
+  await A.p.click('#syncBtn');
+  ok(await A.p.locator('#googleSignIn').count() === 1 && !(await A.p.getAttribute('#gistDetails', 'open') !== null), 'Sync screen offers Sign in with Google; gist option tucked away');
+  await hideToast(A.p);
+  await A.p.screenshot({ path: `${SHOTS}/sync-google-desktop-signed-out.png`, fullPage: true });
+  await A.p.click('#googleSignIn');
+  let st = await waitStatus(A.p, /Synced/);
+  ok(/Synced/.test(st) && /brayden@example.com/.test(await A.p.textContent('#googleEmail')), 'one click: signed in as brayden@example.com and synced');
+  let D = userDoc(fb);
+  ok(D && ch1.slice(0, 3).every((id) => D.p[id] && D.p[id][1] === 1), 'users/{uid} doc holds the progress (same payload format as the gist)');
+  const share = Object.keys(fb.docs).find((k) => k.startsWith('shares/'));
+  ok(share && fb.docs[share].owner === 'uid-brayden' && /study plan/.test(fb.docs[share].plan) && fb.docs[share].plan === await S(A.p, () => planText('C202')), 'shares/{id} mirrors the C202 plan text for Study Buddy');
+  const planId = (await A.p.textContent('#planId')).trim();
+  ok(planId === 'fs:study-buddy-1000/' + share.split('/')[1], 'Sync screen shows the plan link: ' + planId);
+  ok(!JSON.stringify(fb.docs).includes(FAKE_ID_TOKEN), 'no Google token stored in Firestore');
+
+  // Second device (phone), same Google account.
+  const B = await googleDevice(fb, { device: 'iPhone 13' });
+  await B.p.tap('#syncBtn'); await B.p.tap('#googleSignIn');
+  await waitStatus(B.p, /Synced/);
+  ok(await S(B.p, (ids) => ids.every((id) => state.progress[id] && state.progress[id].retired), ch1.slice(0, 3)), 'phone gets the desktop progress after one tap');
+  ok((await B.p.textContent('#planId')).trim() === planId, 'phone reuses the same plan link');
+  await hideToast(B.p);
+  await B.p.screenshot({ path: `${SHOTS}/sync-google-phone-signed-in.png`, fullPage: true });
+
+  // Concurrent changes merge.
+  await setProg(A.p, [ch2[1]], 1); await setProg(B.p, [ch2[2]], 1);
+  await S(B.p, () => { folderById('deck-c202-ch03').guideRead = '2026-10-12'; save(); });
+  await syncNowAndWait(A.p); await syncNowAndWait(B.p); await syncNowAndWait(A.p);
+  ok(await S(A.p, (id) => state.progress[id].streak === 1 && folderById('deck-c202-ch03').guideRead === '2026-10-12', ch2[2]) && await S(B.p, (id) => state.progress[id].streak === 1, ch2[1]), 'changes on both devices merge both ways');
+
+  // Reload: still signed in, pulls on load.
+  await setProg(B.p, [ch2[3]], 1); await syncNowAndWait(B.p);
+  await A.p.reload();
+  await A.p.waitForFunction((id) => state.progress[id] && state.progress[id].streak === 1, ch2[3], { timeout: 8000 }).catch(() => {});
+  ok(await S(A.p, (id) => state.progress[id] && state.progress[id].streak === 1, ch2[3]), 'after a reload the device is still signed in and pulls the latest');
+
+  // Offline and permission problems never lose local data.
+  fb.fail = 'offline'; await setProg(A.p, [ch2[4]], 1); await syncNowAndWait(A.p);
+  ok(/Offline, will retry/.test(await A.p.textContent('[data-sync-status]')) && (await getProg(A.p, ch2[4])).streak === 1 && await noBroke(A.p), 'offline: status says so, local change kept');
+  fb.fail = 'denied'; await syncNowAndWait(A.p);
+  ok(/Sign-in problem/.test(await A.p.textContent('[data-sync-status]')) && (await getProg(A.p, ch2[4])).streak === 1, 'permission denied: "Sign-in problem", local data intact');
+  fb.fail = null; await syncNowAndWait(A.p);
+  ok(userDoc(fb).p[ch2[4]][0] === 1, 'recovered: the offline change reached Firestore');
+
+  // Export and sign-out.
+  if (await A.p.locator('#syncBack').count()) await A.p.click('#syncBack');
+  const [dl] = await Promise.all([A.p.waitForEvent('download'), A.p.click('#exportBtn')]);
+  const exported = fs.readFileSync(await dl.path(), 'utf8');
+  ok(!exported.includes(FAKE_ID_TOKEN) && !exported.includes('fakeAuth'), 'Export contains no Google credential');
+  await A.p.click('#syncBtn'); await A.p.click('#googleSignOut');
+  ok(await A.p.locator('#googleSignIn').count() === 1 && /Not connected/.test(await A.p.textContent('#syncStatus')) && (await getProg(A.p, ch2[4])).streak === 1, 'Sign out: back to the Sign in button, local progress kept');
+  await A.ctx.close(); await B.ctx.close();
+
+  // Redirect fallback when popups aren't supported (e.g. some home-screen apps).
+  fb.mode = 'popup-unsupported';
+  const C = await googleDevice(fb, { device: 'iPhone 13' });
+  await C.p.tap('#syncBtn'); await C.p.tap('#googleSignIn');
+  await C.p.waitForEvent('load', { timeout: 8000 }).catch(() => {});
+  await C.p.waitForFunction(() => SYNC && SYNC.status === 'ok', null, { timeout: 8000 }).catch(() => {});
+  ok(await S(C.p, (id) => !!(SYNC.user && state.progress[id] && state.progress[id].retired), ch1[0]), 'popup unsupported: falls back to redirect, comes back signed in and synced');
+  await C.ctx.close();
+  fb.mode = 'closed';
+  const C2 = await googleDevice(fb);
+  await C2.p.click('#syncBtn'); await C2.p.click('#googleSignIn'); await C2.p.waitForTimeout(300);
+  ok(await C2.p.locator('#googleSignIn').count() === 1 && await noBroke(C2.p), 'closing the Google window just leaves you signed out');
+  await C2.ctx.close();
+  fb.mode = 'ok';
+
+  // Migration: a device already on gist sync signs in with Google.
+  const gist = makeGistStore();
+  const G = await googleDevice(fb, { gist });
+  await G.p.click('#syncBtn'); await G.p.click('#gistDetails summary');
+  await G.p.fill('#syncToken', GOOD_TOKEN); await G.p.click('#syncConnect');
+  await waitStatus(G.p, /Synced/);
+  const gid = Object.keys(gist.gists)[0];
+  // Older phone wrote something to the gist only.
+  const R = remotePayload(gist); R.p[ch2[50]] = [1, 0, Date.now()]; gist.gists[gid].files['study-buddy-sync.json'].content = JSON.stringify(R);
+  const t0 = Date.now();
+  await G.p.click('#googleSignIn');
+  await G.p.waitForFunction((t0) => SYNC.user && SYNC.status === 'ok' && !SYNC.busy && SYNC.lastOk > t0, t0, { timeout: 10000 }).catch(() => {});
+  ok(userDoc(fb).p[ch2[50]] && userDoc(fb).p[ch2[50]][0] === 1, 'first Google sign-in on a gist device: gist progress merged into Firestore');
+  ok(remotePayload(gist).p[ch2[4]] && remotePayload(gist).p[ch2[4]][0] === 1, 'and the gist receives what was only in Firestore');
+  ok(gist.gists[gid].files['c202-plan.txt'].content === await S(G.p, () => planText('C202')), 'gist keeps getting c202-plan.txt while its token is connected');
+  ok(await G.p.getAttribute('#gistDetails', 'open') !== null && /Still connected/.test(await G.p.textContent('#gistNote')), 'Sync screen shows the gist as still connected');
+  await G.ctx.close();
+
+  // Box helper reads the plan link anonymously over the Firestore REST format.
+  const http = require('http');
+  const sid = planId.split('/')[1];
+  const srv = http.createServer((req, res) => {
+    if (req.headers.authorization) { res.writeHead(500); return res.end('auth sent'); }
+    const ok2 = req.url === `/v1/projects/study-buddy-1000/databases/(default)/documents/shares/${sid}` || req.url === `/v1/projects/study-buddy-1000/databases/%28default%29/documents/shares/${sid}`;
+    if (!ok2) { res.writeHead(404); return res.end('{}'); }
+    const d = fb.docs['shares/' + sid];
+    res.writeHead(200, { 'content-type': 'application/json' });
+    res.end(JSON.stringify({ name: 'x', fields: { owner: { stringValue: d.owner }, plan: { stringValue: d.plan }, summary: { stringValue: d.summary }, updatedAt: { timestampValue: d.updatedAt } } }));
+  });
+  await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+  const out = await new Promise((res) => require('child_process').exec(`${ROOT}/tools/read-plan.sh ${planId}`, { env: { ...process.env, FIRESTORE_API_BASE: `http://127.0.0.1:${srv.address().port}` } }, (e, so, se) => res(e ? 'ERR ' + e.message + so + se : so)));
+  srv.close();
+  ok(/study plan/.test(out) && out.includes(fb.docs['shares/' + sid].plan) && /C202: \d+\/23\d\d cards mastered/.test(out), 'tools/read-plan.sh fs:… prints the plan and progress summary without credentials');
+
+  const noise = /Failed to load resource|net::ERR_|api\.github\.com|fake-firebase/;
+  for (let i = errors.length - 1; i >= errStart; i--) if (noise.test(errors[i])) errors.splice(i, 1);
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -1129,6 +1322,8 @@ async function screenshots() {
   fs.rmSync(T + '/inbox-prev', { recursive: true, force: true }); fs.mkdirSync(T + '/inbox-prev');
   fs.copyFileSync(T + '/ch01-prev.json', T + '/inbox-prev/c202-ch01.json');
   execSync(`${ROOT}/build.sh --inbox ${T}/inbox-prev --out ${T}/dist-prev.html`);
+  fs.writeFileSync(T + '/fbcfg.json', JSON.stringify({ apiKey: 'fake-api-key', authDomain: 'study-buddy-1000.firebaseapp.com', projectId: 'study-buddy-1000', appId: '1:123:web:abc', messagingSenderId: '123' }));
+  execSync(`${ROOT}/build.sh --firebase-config ${T}/fbcfg.json --out ${T}/dist-google.html`);
   browser = await chromium.launch();
   try {
     const raw = await makeV1Data();
@@ -1146,6 +1341,7 @@ async function screenshots() {
     await testSync();
     await testSlotsAndKnow();
     await testDistractors();
+    await testGoogleSync();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

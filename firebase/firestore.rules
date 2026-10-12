@@ -1,0 +1,32 @@
+rules_version = '2';
+// Study-Buddy-1000: one private doc per Google account, plus an optional public-by-id plan mirror.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // users/{uid}: only the signed-in owner can read or write their own sync doc.
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+    // shares/{shareId}: the C202 plan text + progress summary for Study Buddy's box helper.
+    // Readable by anyone who knows the 32-hex-char random id (like a secret gist), never listable.
+    // Only the owner can create/update/delete it, and only with the expected small shape.
+    match /shares/{shareId} {
+      allow get: if shareId.matches('^[0-9a-f]{32}$');
+      allow list: if false;
+      allow create: if request.auth != null && shareId.matches('^[0-9a-f]{32}$')
+        && request.resource.data.owner == request.auth.uid
+        && request.resource.data.keys().hasOnly(['owner', 'plan', 'summary', 'updatedAt'])
+        && request.resource.data.plan is string && request.resource.data.plan.size() < 200000
+        && request.resource.data.summary is string && request.resource.data.summary.size() < 200000;
+      allow update: if request.auth != null && resource.data.owner == request.auth.uid
+        && request.resource.data.owner == request.auth.uid
+        && request.resource.data.keys().hasOnly(['owner', 'plan', 'summary', 'updatedAt'])
+        && request.resource.data.plan is string && request.resource.data.plan.size() < 200000
+        && request.resource.data.summary is string && request.resource.data.summary.size() < 200000;
+      allow delete: if request.auth != null && resource.data.owner == request.auth.uid;
+    }
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

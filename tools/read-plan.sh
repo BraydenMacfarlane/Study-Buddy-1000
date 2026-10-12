@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Print Brayden's Study-Buddy-1000 pacing plan + a progress summary from the secret sync gist.
 #
-#   tools/read-plan.sh [SYNC_ID]     # Sync ID (gist id or gist URL); default: $SYNC_ID or ./.sync-id
+#   tools/read-plan.sh [SYNC_ID]     # gist id/URL, or fs:PROJECT/SHAREID (Google sync "Plan link");
+#                                    # default: $SYNC_ID or ./.sync-id
 #   tools/read-plan.sh --json [ID]   # raw summary JSON instead of text
 #
 # Reads the gist anonymously over the public API (secret gists are readable by id). It never sends
@@ -12,6 +13,23 @@ MODE=text
 if [[ "${1:-}" == "--json" ]]; then MODE=json; shift; fi
 ID="${1:-${SYNC_ID:-}}"
 if [[ -z "$ID" && -f .sync-id ]]; then ID="$(tr -d '[:space:]' < .sync-id)"; fi
+if [[ "$ID" =~ ^fs:([a-z0-9-]+)/([0-9a-f]{32})$ ]]; then
+  # Google sync: public-by-id shares/{id} doc over the Firestore REST API (no credential).
+  FS="${FIRESTORE_API_BASE:-https://firestore.googleapis.com}"
+  TMP="$(mktemp)"; trap 'rm -f "$TMP"' EXIT
+  CODE=$(env -u GH_TOKEN -u GITHUB_TOKEN curl -sS -o "$TMP" -w '%{http_code}' --max-time 20 \
+    "$FS/v1/projects/${BASH_REMATCH[1]}/databases/(default)/documents/shares/${BASH_REMATCH[2]}") || { echo "Couldn't reach Firestore." >&2; exit 3; }
+  case "$CODE" in 200) ;; 404) echo "Plan link not found (wrong link, or Brayden hasn't synced yet)." >&2; exit 4 ;; 403) echo "Firestore refused the read (check the security rules)." >&2; exit 5 ;; *) echo "Firestore returned HTTP $CODE." >&2; exit 3 ;; esac
+  python3 - "$TMP" > "$TMP.gist" <<'PY2'
+import json, sys
+doc = json.load(open(sys.argv[1], encoding="utf-8")).get("fields", {})
+s = lambda k: (doc.get(k) or {}).get("stringValue")
+summary = json.loads(s("summary") or "{}")
+payload = {"updatedAt": (doc.get("updatedAt") or {}).get("timestampValue"), "summary": summary}
+print(json.dumps({"files": {"study-buddy-sync.json": {"content": json.dumps(payload)}, "c202-plan.txt": {"content": s("plan") or ""}}}))
+PY2
+  mv "$TMP.gist" "$TMP"; FROM_FS=1
+else
 ID="${ID##*/}"; ID="${ID%%#*}"
 if [[ ! "$ID" =~ ^[0-9a-fA-F]{20,40}$ ]]; then
   echo "No valid Sync ID. Pass it as an argument or save it in /workspace/flashcards/.sync-id" >&2
@@ -28,6 +46,7 @@ case "$CODE" in
   403|429) echo "GitHub rate limit for anonymous requests reached (60/hour). Try again later." >&2; exit 5 ;;
   *) echo "GitHub returned HTTP $CODE." >&2; exit 3 ;;
 esac
+fi
 python3 - "$TMP" "$MODE" <<'PY'
 import json, sys, urllib.request, datetime
 path, mode = sys.argv[1:3]

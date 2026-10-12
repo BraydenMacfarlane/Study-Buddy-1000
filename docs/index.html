@@ -381,6 +381,10 @@
       opacity: 0; pointer-events: none; transition: all .25s ease; max-width: 92vw; z-index: 50; font-size: 14px;
     }
     #toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .google-btn { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; padding: 12px 18px; }
+    .google-btn .g-mark { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--primary); font-weight: 800; }
+    details.sync-card summary { cursor: pointer; padding: 2px 0; }
+    details.sync-card[open] summary { margin-bottom: 8px; }
     button.know { color: var(--ok); border-color: #b9d8c6; font-size: 14px; padding: 8px 14px; }
     /* Sync */
     .sync-btn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: var(--line); vertical-align: 1px; }
@@ -880,13 +884,13 @@
       let token = "";
       try { token = localStorage.getItem(SYNC_TOKEN_KEY) || ""; } catch {}
       SYNC = {
-        token, gistId: cfg.gistId || "", owner: cfg.owner || "", lastOk: cfg.lastOk || 0,
+        token, gistId: cfg.gistId || "", owner: cfg.owner || "", lastOk: cfg.lastOk || 0, shareId: cfg.shareId || "", user: null,
         st: meta.st && typeof meta.st === "object" ? meta.st : {}, x: meta.x && typeof meta.x === "object" ? meta.x : {},
         fp: syncFingerprints(), status: token ? "idle" : "off", msg: "", dirty: !!cfg.dirty, busy: null, again: false,
         timer: null, retryTimer: null, backoff: 0, lastPull: 0, lastRemote: null, retryAt: 0
       };
     }
-    function syncSaveCfg() { writeJsonKey(SYNC_CFG_KEY, { gistId: SYNC.gistId, owner: SYNC.owner, lastOk: SYNC.lastOk, dirty: SYNC.dirty }); }
+    function syncSaveCfg() { writeJsonKey(SYNC_CFG_KEY, { gistId: SYNC.gistId, owner: SYNC.owner, lastOk: SYNC.lastOk, dirty: SYNC.dirty, shareId: SYNC.shareId || "" }); }
     function syncSaveMeta() { writeJsonKey(SYNC_META_KEY, { st: SYNC.st, x: SYNC.x }); }
 
     // Called from save(): stamp whatever changed since the last save.
@@ -910,7 +914,7 @@
       if (!changed) return;
       syncSaveMeta();
       SYNC.rev = (SYNC.rev || 0) + 1;
-      if (SYNC.token) { SYNC.dirty = true; syncSaveCfg(); syncSchedule(SYNC_DEBOUNCE_MS); renderSyncStatus(); }
+      if (syncOn()) { SYNC.dirty = true; syncSaveCfg(); syncSchedule(SYNC_DEBOUNCE_MS); renderSyncStatus(); }
     }
     // Re-baseline without stamping (after a full restore), so a restore never deletes things elsewhere.
     function syncRebase() { if (SYNC) { SYNC.fp = syncFingerprints(); } }
@@ -1156,7 +1160,7 @@
 
     /* ----- Sync loop ----- */
     function syncSchedule(ms) {
-      if (!SYNC || !SYNC.token) return;
+      if (!syncOn()) return;
       clearTimeout(SYNC.timer);
       SYNC.timer = setTimeout(() => syncNow("auto"), ms);
     }
@@ -1169,42 +1173,196 @@
       SYNC.retryAt = Date.now() + wait;
       SYNC.retryTimer = setTimeout(() => syncNow("retry"), wait);
     }
-    // Pull, merge, push. Never throws; errors only change the status line.
+    /* ----- Google sign-in sync (Firebase Auth + Firestore, loaded from the gstatic CDN on demand) -----
+       One doc per Google account at users/{uid}: { v, payload (JSON string of the same sync payload the
+       gist uses), plan (c202-plan.txt text), summary, shareId, updatedAt }. The plan + summary are also
+       mirrored to shares/{shareId} (readable by anyone who knows the long random id, never listable) so
+       the box helper can read the pacing plan without any credential. */
+    const FIREBASE_CONFIG = /*FIREBASE_CONFIG_START*/null/*FIREBASE_CONFIG_END*/;
+    const FIREBASE_SDK = "https://www.gstatic.com/firebasejs/13.0.0";
+    const GOOGLE_HINT_KEY = "flashcards.google.v1";
+    let FB = null, fbLoading = null;
+    function googleOn() { return !!(SYNC && SYNC.user); }
+    function syncOn() { return !!(SYNC && (SYNC.user || SYNC.token)); }
+    function isStandaloneApp() {
+      try { return window.navigator.standalone === true || window.matchMedia("(display-mode: standalone)").matches; } catch { return false; }
+    }
+    function authSameOrigin() { return !!(FIREBASE_CONFIG && location.hostname === FIREBASE_CONFIG.authDomain); }
+    function fbInit() {
+      if (!FIREBASE_CONFIG) return Promise.resolve(null);
+      if (FB) return Promise.resolve(FB);
+      if (fbLoading) return fbLoading;
+      fbLoading = (async () => {
+        const [appM, authM, fsM] = await Promise.all([
+          import(FIREBASE_SDK + "/firebase-app.js"), import(FIREBASE_SDK + "/firebase-auth.js"), import(FIREBASE_SDK + "/firebase-firestore-lite.js")
+        ]);
+        const app = appM.initializeApp(FIREBASE_CONFIG);
+        const auth = authM.initializeAuth(app, {
+          persistence: [authM.indexedDBLocalPersistence, authM.browserLocalPersistence],
+          popupRedirectResolver: authM.browserPopupRedirectResolver
+        });
+        FB = { app, auth, db: fsM.getFirestore(app), authM, fsM };
+        try { if (auth.authStateReady) await auth.authStateReady(); } catch {}
+        try { await authM.getRedirectResult(auth); }
+        catch (e) { if (e && e.code !== "auth/no-auth-event") toast("Google sign-in didn't finish: " + fbErrText(e)); }
+        try { localStorage.removeItem(GOOGLE_HINT_KEY + ".pending"); } catch {}
+        authM.onAuthStateChanged(auth, (u) => googleUserChanged(u));
+        return FB;
+      })().catch((e) => { fbLoading = null; throw e; });
+      return fbLoading;
+    }
+    function fbErrText(e) {
+      const c = String(e && e.code || "");
+      if (c.includes("popup-closed") || c.includes("cancelled-popup")) return "the sign-in window was closed";
+      if (c.includes("unauthorized-domain")) return "this web address isn't on the Firebase authorized domains list";
+      if (c.includes("network")) return "no connection";
+      return (e && e.message) || c || "unknown error";
+    }
+    function googleUserChanged(u) {
+      if (!SYNC) return;
+      const was = SYNC.user && SYNC.user.uid;
+      if (u) {
+        SYNC.user = { uid: u.uid, email: u.email || "", name: u.displayName || "" };
+        writeJsonKey(GOOGLE_HINT_KEY, SYNC.user);
+        if (was !== u.uid || !SYNC.fbReady) { if (SYNC.status === "off" || SYNC.status === "auth") SYNC.status = "idle"; SYNC.fbReady = true; syncNow("google"); }
+      } else if (was) {
+        SYNC.user = null;
+        try { localStorage.removeItem(GOOGLE_HINT_KEY); } catch {}
+        if (!SYNC.token) SYNC.status = "off";
+      }
+      renderSyncStatus();
+      if (view.page === "sync") render();
+    }
+    async function googleSignIn() {
+      let fb;
+      try { fb = await fbInit(); } catch (e) { toast("Couldn't load Google sign-in. Check your connection."); return false; }
+      if (!fb) return false;
+      const { authM, auth } = fb;
+      const provider = new authM.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+      // iOS home-screen apps: popups don't reliably hand the result back, so use a full-page redirect.
+      // Redirect is only dependable when the app is served from the authDomain itself (Firebase Hosting).
+      const redirect = () => { try { localStorage.setItem(GOOGLE_HINT_KEY + ".pending", "1"); } catch {} return authM.signInWithRedirect(auth, provider); };
+      if (isStandaloneApp() && authSameOrigin()) { await redirect(); return false; }
+      try {
+        await authM.signInWithPopup(auth, provider);
+        return true;
+      } catch (e) {
+        const c = String(e && e.code || "");
+        if (/popup-blocked|operation-not-supported|web-storage-unsupported|internal-error/.test(c)) {
+          try { await redirect(); } catch (e2) { toast("Google sign-in failed: " + fbErrText(e2)); }
+          return false;
+        }
+        if (!/popup-closed|cancelled-popup/.test(c)) toast("Google sign-in failed: " + fbErrText(e));
+        return false;
+      }
+    }
+    async function googleSignOut() {
+      try { if (FB) await FB.authM.signOut(FB.auth); } catch {}
+      SYNC.user = null;
+      try { localStorage.removeItem(GOOGLE_HINT_KEY); } catch {}
+      if (!SYNC.token) { SYNC.status = "off"; SYNC.lastOk = 0; }
+      syncSaveCfg();
+    }
+    function fsError(e) {
+      const c = String(e && e.code || "");
+      if (/permission-denied|unauthenticated/.test(c)) return new SyncError("auth", "Google sign-in expired or isn't allowed. Sign in again.");
+      if (/resource-exhausted/.test(c)) return new SyncError("rate", "Daily free quota reached", { retryAt: Date.now() + 3600000 });
+      if (/unavailable|deadline|network/.test(c) || e instanceof TypeError) return new SyncError("offline", "Can't reach Google");
+      return new SyncError("error", (e && e.message) || c || "Firestore error");
+    }
+    function newShareId() { const a = new Uint8Array(16); crypto.getRandomValues(a); return Array.from(a, (b) => b.toString(16).padStart(2, "0")).join(""); }
+    const FS_TRANSPORT = {
+      name: "google",
+      async pull() {
+        const { fsM, db, auth } = await fbInit();
+        if (!auth.currentUser) { googleUserChanged(null); throw new SyncError("auth", "Signed out of Google. Sign in again."); }
+        try {
+          const snap = await fsM.getDoc(fsM.doc(db, "users", SYNC.user.uid));
+          const data = snap.exists() ? snap.data() : null;
+          let R = {};
+          if (data && typeof data.payload === "string") { try { R = JSON.parse(data.payload) || {}; } catch {} }
+          if (Number(R.v) > 1) throw new SyncError("error", "The synced data was made by a newer version of the app. Refresh this page.");
+          if (data && data.shareId) SYNC.shareId = data.shareId;
+          return { R, data };
+        } catch (e) { throw e instanceof SyncError ? e : fsError(e); }
+      },
+      async push(L2, pulled, force) {
+        const { fsM, db } = await fbInit();
+        const files = gistFiles(L2);
+        const plan = files[SYNC_PLAN_FILE].content;
+        const data = pulled && pulled.data;
+        if (!SYNC.shareId) SYNC.shareId = newShareId();
+        const needUser = force || !data || payloadCore(L2) !== payloadCore(pulled.R) || data.plan !== plan || data.shareId !== SYNC.shareId;
+        if (!needUser) return;
+        const summary = JSON.stringify(syncSummary());
+        try {
+          await fsM.setDoc(fsM.doc(db, "users", SYNC.user.uid), { v: 1, payload: files[SYNC_FILE].content, plan, summary, shareId: SYNC.shareId, updatedAt: fsM.serverTimestamp() });
+          await fsM.setDoc(fsM.doc(db, "shares", SYNC.shareId), { owner: SYNC.user.uid, plan, summary, updatedAt: fsM.serverTimestamp() });
+        } catch (e) { throw fsError(e); }
+      }
+    };
+    const GIST_TRANSPORT = {
+      name: "gist",
+      async pull() {
+        let gist = null, created = false;
+        if (SYNC.gistId) {
+          try { gist = await ghApi("GET", `/gists/${SYNC.gistId}`); }
+          catch (e) { if (e.kind !== "notfound") throw e; SYNC.gistId = ""; }
+        }
+        if (!gist) ({ gist, created } = await findOrCreateGist());
+        SYNC.gistId = gist.id; SYNC.owner = (gist.owner && gist.owner.login) || SYNC.owner;
+        return { R: (await readGistPayload(gist)) || {}, gist, created };
+      },
+      async push(L2, pulled, force, opts = {}) {
+        const files = gistFiles(L2);
+        if (!force) {
+          if (!pulled || pulled.created) return;
+          const remotePlan = pulled.gist.files && pulled.gist.files[SYNC_PLAN_FILE] ? pulled.gist.files[SYNC_PLAN_FILE].content : null;
+          if (payloadCore(L2) === payloadCore(pulled.R) && remotePlan === files[SYNC_PLAN_FILE].content) return;
+        }
+        const small = JSON.stringify({ files }).length < 60000;
+        await ghApi("PATCH", `/gists/${SYNC.gistId}`, { files }, { keepalive: !!opts.keepalive && small });
+      }
+    };
+    function syncTransports() { const t = []; if (googleOn()) t.push(FS_TRANSPORT); if (SYNC.token) t.push(GIST_TRANSPORT); return t; }
+    // Pull from every connected transport (Google first, then the gist), merge everything, push back
+    // wherever the copy differs. Never throws; errors only change the status line.
     function syncNow(reason, opts = {}) {
-      if (!SYNC || !SYNC.token) return Promise.resolve(false);
+      if (!syncOn()) return Promise.resolve(false);
       if (SYNC.busy) { SYNC.again = true; return SYNC.busy; }
       clearTimeout(SYNC.timer);
       SYNC.status = "syncing"; renderSyncStatus();
       SYNC.busy = (async () => {
+        const ts = syncTransports(), pulled = new Map(), errs = new Map();
+        const asErr = (err) => {
+          let e = err instanceof SyncError ? err : new SyncError("error", String(err && err.message || err));
+          if (e.kind === "notfound") { SYNC.gistId = ""; e = new SyncError("error", "The sync gist went missing; will look for it again"); }
+          return e;
+        };
         try {
-          let gist = null, created = false;
-          if (SYNC.gistId) {
-            try { gist = await ghApi("GET", `/gists/${SYNC.gistId}`); }
-            catch (e) { if (e.kind !== "notfound") throw e; SYNC.gistId = ""; }
-          }
-          if (!gist) ({ gist, created } = await findOrCreateGist());
-          SYNC.gistId = gist.id; SYNC.owner = (gist.owner && gist.owner.login) || SYNC.owner;
-          const R = (await readGistPayload(gist)) || {};
-          reconcileSyncIds(R);
-          const M = mergeSyncPayloads(buildSyncPayload(), R);
+          for (const t of ts) { try { pulled.set(t, await t.pull()); } catch (e) { errs.set(t, asErr(e)); } }
+          if (!pulled.size) throw errs.get(ts[0]);
+          let M = buildSyncPayload();
+          pulled.forEach((p) => { reconcileSyncIds(p.R); });
+          M = buildSyncPayload();
+          pulled.forEach((p) => { M = mergeSyncPayloads(M, p.R); });
           const changed = applySyncPayload(M);
           const rev = SYNC.rev || 0;
           const L2 = buildSyncPayload();
-          const plan = gistFiles(L2);
-          const remotePlan = gist.files && gist.files[SYNC_PLAN_FILE] ? gist.files[SYNC_PLAN_FILE].content : null;
-          if (created === false && (payloadCore(L2) !== payloadCore(R) || remotePlan !== plan[SYNC_PLAN_FILE].content)) {
-            await ghApi("PATCH", `/gists/${SYNC.gistId}`, { files: plan });
-          }
+          for (const [t, p] of pulled) { try { await t.push(L2, p, false); } catch (e) { errs.set(t, asErr(e)); } }
+          if (errs.has(ts[0])) throw errs.get(ts[0]);
           SYNC.lastRemote = L2;
           SYNC.lastOk = SYNC.lastPull = Date.now();
           SYNC.dirty = (SYNC.rev || 0) !== rev; SYNC.backoff = 0; SYNC.status = "ok"; SYNC.msg = "";
+          SYNC.gistMsg = ts.length > 1 && errs.has(GIST_TRANSPORT) ? errs.get(GIST_TRANSPORT).message : "";
           clearTimeout(SYNC.retryTimer);
+          if (SYNC.gistMsg) syncRetryLater(errs.get(GIST_TRANSPORT));
           syncSaveCfg();
           if (changed && ["home", "folder", "plan", "guide"].includes(view.page) && !modal.open) render();
           return true;
         } catch (err) {
-          let e = err instanceof SyncError ? err : new SyncError("error", String(err && err.message || err));
-          if (e.kind === "notfound") { SYNC.gistId = ""; e = new SyncError("error", "The sync gist went missing; will look for it again"); }
+          const e = asErr(err);
           if (e.kind !== "offline" && e.kind !== "rate" && e.kind !== "auth") console.warn("sync failed:", e.message);
           SYNC.status = e.kind; SYNC.msg = e.message;
           syncSaveCfg();
@@ -1219,15 +1377,14 @@
       })();
       return SYNC.busy;
     }
-    // Page is being hidden / closed: push right away (no pull), using keepalive so it survives the unload.
+    // Page is being hidden / closed: push right away (no pull) so the latest answers aren't stranded.
     function syncFlush() {
-      if (!SYNC || !SYNC.token || !SYNC.gistId || !SYNC.dirty || SYNC.busy || SYNC.status === "auth") return;
+      if (!syncOn() || !SYNC.dirty || SYNC.busy || SYNC.status === "auth") return;
       try {
-        const files = gistFiles(buildSyncPayload());
-        const small = JSON.stringify({ files }).length < 60000;
-        ghApi("PATCH", `/gists/${SYNC.gistId}`, { files }, { keepalive: small }).then(() => {
-          SYNC.dirty = false; SYNC.lastOk = Date.now(); SYNC.status = "ok"; syncSaveCfg(); renderSyncStatus();
-        }, () => {});
+        const L = buildSyncPayload();
+        const done = () => { SYNC.dirty = false; SYNC.lastOk = Date.now(); SYNC.status = "ok"; syncSaveCfg(); renderSyncStatus(); };
+        if (googleOn() && FB) FS_TRANSPORT.push(L, null, true).then(done, () => {});
+        if (SYNC.token && SYNC.gistId) GIST_TRANSPORT.push(L, null, true, { keepalive: true }).then(googleOn() ? () => {} : done, () => {});
       } catch {}
     }
     function syncConnect(token) {
@@ -1241,7 +1398,8 @@
     function syncDisconnect() {
       try { localStorage.removeItem(SYNC_TOKEN_KEY); } catch {}
       clearTimeout(SYNC.timer); clearTimeout(SYNC.retryTimer);
-      SYNC.token = ""; SYNC.gistId = ""; SYNC.owner = ""; SYNC.status = "off"; SYNC.msg = ""; SYNC.dirty = false; SYNC.lastOk = 0;
+      SYNC.token = ""; SYNC.gistId = ""; SYNC.owner = ""; SYNC.gistMsg = "";
+      if (!googleOn()) { SYNC.status = "off"; SYNC.msg = ""; SYNC.dirty = false; SYNC.lastOk = 0; }
       syncSaveCfg();
     }
     function fmtAgo(ms) {
@@ -1254,12 +1412,12 @@
       return new Date(ms).toLocaleDateString(undefined, { month: "short", day: "numeric" });
     }
     function syncStatusText() {
-      if (!SYNC || !SYNC.token) return "Not connected. Progress stays on this device.";
+      if (!syncOn()) return "Not connected. Progress stays on this device.";
       switch (SYNC.status) {
         case "syncing": return "Syncing…";
         case "offline": return "Offline, will retry" + (SYNC.dirty ? " (changes are safe on this device)" : "");
-        case "auth": return "Token problem: " + (SYNC.msg || "check or replace your token");
-        case "rate": return "GitHub is busy, will retry at " + new Date(SYNC.retryAt || Date.now()).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+        case "auth": return googleOn() ? "Sign-in problem: " + (SYNC.msg || "sign in with Google again") : "Token problem: " + (SYNC.msg || "check or replace your token");
+        case "rate": return (googleOn() ? "Google sync is paused" : "GitHub is busy") + ", will retry at " + new Date(SYNC.retryAt || Date.now()).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
         case "error": return "Sync error, will retry" + (SYNC.msg ? ` (${SYNC.msg})` : "");
         default:
           if (SYNC.dirty) return "Changes waiting to sync…";
@@ -1267,7 +1425,7 @@
       }
     }
     function syncTone() {
-      if (!SYNC || !SYNC.token) return "off";
+      if (!syncOn()) return "off";
       return { ok: "ok", idle: "ok", syncing: "busy", offline: "warn", rate: "warn", error: "warn", auth: "bad" }[SYNC.status] || "ok";
     }
     function renderSyncStatus() {
@@ -1278,8 +1436,73 @@
       document.querySelectorAll("[data-sync-status-dot]").forEach((el) => { el.dataset.tone = syncTone(); });
     }
 
-    function syncSig() { return `${!!SYNC.token}|${SYNC.gistId}|${SYNC.status === "auth"}|${!!view.syncReplace}`; }
+    function syncSig() { return `${!!SYNC.token}|${SYNC.gistId}|${SYNC.status === "auth"}|${!!view.syncReplace}|${SYNC.user ? SYNC.user.uid : ""}|${SYNC.shareId || ""}|${SYNC.gistMsg || ""}`; }
     function renderSync() {
+      if (!SYNC) { view.page = "home"; return render(); }
+      if (!FIREBASE_CONFIG) return renderGistSync();
+      SYNC.sig = syncSig();
+      headerSub.textContent = "Sync across your devices";
+      headerActions.innerHTML = `<button class="secondary" id="syncBack">All folders</button>`;
+      const g = SYNC.user, tok = !!SYNC.token, needToken = view.syncReplace || (tok && SYNC.status === "auth" && !g);
+      const iosHint = isStandaloneApp() && !authSameOrigin() && /iPhone|iPad|iPod/.test(navigator.userAgent);
+      const hostUrl = `https://${FIREBASE_CONFIG.authDomain}/`;
+      app.innerHTML = `
+        <div class="sync-wrap">
+          <div class="card sync-card">
+            <h2 class="sync-title">☁ Sync</h2>
+            <div class="sync-status" data-sync-status id="syncStatus"></div>
+            ${g ? `
+              <div class="sync-id-row">
+                <div><div class="muted">Signed in with Google</div><strong id="googleEmail">${escaped(g.email || g.name || "Google account")}</strong></div>
+              </div>
+              ${SYNC.shareId ? `<div class="sync-id-row">
+                <div><div class="muted">Plan link for Study Buddy</div><code id="planId">fs:${escaped(FIREBASE_CONFIG.projectId)}/${escaped(SYNC.shareId)}</code></div>
+                <button class="secondary small" id="planIdCopy">Copy</button>
+              </div>` : ""}
+              <div class="row sync-actions">
+                <button class="gold" id="syncNowBtn">Sync now</button>
+                <button class="danger" id="googleSignOut">Sign out</button>
+              </div>` : `
+              <p style="margin-top:12px">One tap on each device: sign in with the same Google account on your computer and your phone, and your progress follows you.</p>
+              <div class="row sync-actions"><button class="gold google-btn" id="googleSignIn"><span class="g-mark">G</span>Sign in with Google</button></div>
+              ${iosHint ? `<p class="muted" id="iosHint">On the iPhone home-screen app, sign-in works best from <a href="${escaped(hostUrl)}">${escaped(hostUrl)}</a>. Open it in Safari, tap Share → Add to Home Screen, then sign in there.</p>` : ""}`}
+          </div>
+          <div class="card sync-card">
+            <h3>How it works</h3>
+            <p>Your progress, plan, scores and mid-session saves are kept in your own private record in Google's Firebase, which only your Google account can read. Each device merges instead of overwriting, so studying on your phone and your computer never wipes either one. Signing out keeps everything on this device.</p>
+          </div>
+          <details class="card sync-card" id="gistDetails" ${tok ? "open" : ""}>
+            <summary><strong>GitHub gist sync</strong> <span class="muted">(older option${tok ? ", connected" : ""})</span></summary>
+            ${tok ? `
+              <p class="muted" id="gistNote">${g ? "Still connected: it keeps receiving your progress and the C202 plan, and anything on it was merged into your Google sync." : "Connected with a GitHub token on this device."}${SYNC.gistMsg ? ` <span style="color:var(--bad)">Gist: ${escaped(SYNC.gistMsg)}</span>` : ""}</p>
+              ${SYNC.gistId ? `<div class="sync-id-row"><div><div class="muted">Sync ID</div><code id="syncId">${escaped(SYNC.gistId)}</code></div><button class="secondary small" id="syncCopyId">Copy</button></div>` : ""}` : `<p class="muted">Not needed with Google sign-in. Devices that already use a GitHub token keep working.</p>`}
+            ${needToken || !tok ? `
+              <label class="sync-label" for="syncToken">${tok ? "Replace token" : "GitHub token"}</label>
+              <input id="syncToken" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_… or ghp_…" />
+              <div class="row sync-actions">
+                <button class="secondary" id="syncConnect">${tok ? "Save token & sync" : "Connect gist"}</button>
+                ${tok ? `<button class="secondary" id="syncCancelReplace">Cancel</button>` : ""}
+              </div>` : `
+              <div class="row sync-actions">
+                <button class="secondary" id="syncReplace">Replace token</button>
+                <button class="danger" id="syncDisconnect">Disconnect gist</button>
+              </div>`}
+          </details>
+        </div>`;
+      renderSyncStatus();
+      document.getElementById("syncBack").onclick = () => { view.syncReplace = false; view.page = "home"; render(); };
+      const si = document.getElementById("googleSignIn");
+      if (si) si.onclick = () => { si.disabled = true; googleSignIn().finally(() => { if (view.page === "sync") render(); }); };
+      const so = document.getElementById("googleSignOut");
+      if (so) so.onclick = () => {
+        if (!confirm("Sign out of Google sync on this device?\n\nEverything stays on this device. Other devices keep syncing.")) return;
+        googleSignOut().then(() => { toast("Signed out. Your data is still on this device."); render(); });
+      };
+      const pc = document.getElementById("planIdCopy");
+      if (pc) pc.onclick = () => copyText(document.getElementById("planId").textContent).then((ok) => toast(ok ? "Plan link copied" : "Select the plan link to copy it"));
+      wireGistControls();
+    }
+    function renderGistSync() {
       if (!SYNC) { view.page = "home"; return render(); }
       SYNC.sig = syncSig();
       headerSub.textContent = "Sync across your devices";
@@ -1323,6 +1546,10 @@
         </div>`;
       renderSyncStatus();
       document.getElementById("syncBack").onclick = () => { view.syncReplace = false; view.page = "home"; render(); };
+      wireGistControls();
+    }
+
+    function wireGistControls() {
       const tokenEl = document.getElementById("syncToken");
       const connectBtn = document.getElementById("syncConnect");
       if (connectBtn) connectBtn.onclick = () => { const v = tokenEl.value; tokenEl.value = ""; view.syncReplace = false; syncConnect(v).then(() => { if (view.page === "sync") render(); }); };
@@ -1341,19 +1568,26 @@
       const cp = document.getElementById("syncCopyId");
       if (cp) cp.onclick = () => copyText(SYNC.gistId).then((ok) => toast(ok ? "Sync ID copied" : "Select the Sync ID to copy it"));
     }
-
     function syncStart() {
       try { syncInit(); } catch (e) { console.warn("sync init failed", e); SYNC = null; return; }
       document.addEventListener("visibilitychange", () => {
-        if (!SYNC || !SYNC.token) return;
+        if (!syncOn()) return;
         if (document.visibilityState === "hidden") syncFlush();
         else if (Date.now() - SYNC.lastPull > 10000) syncNow("visible");
         else renderSyncStatus();
       });
       window.addEventListener("pagehide", () => syncFlush());
-      window.addEventListener("online", () => { if (SYNC && SYNC.token && SYNC.status !== "auth") syncNow("online"); });
+      window.addEventListener("online", () => { if (syncOn() && SYNC.status !== "auth") syncNow("online"); });
       setInterval(() => renderSyncStatus(), 30000);
-      if (SYNC.token) setTimeout(() => syncNow("load"), 200);
+      // Signed in with Google before (or coming back from a sign-in redirect)? Boot Firebase now;
+      // its auth listener starts the first sync. Otherwise the SDK only loads when Sign in is tapped.
+      const hint = FIREBASE_CONFIG ? readJsonKey(GOOGLE_HINT_KEY, null) : null;
+      if (hint && hint.uid) { SYNC.user = { uid: hint.uid, email: hint.email || "", name: hint.name || "" }; SYNC.status = "idle"; }
+      let pending = false; try { pending = !!localStorage.getItem(GOOGLE_HINT_KEY + ".pending"); } catch {}
+      if (FIREBASE_CONFIG && (hint || pending)) {
+        fbInit().catch(() => { if (SYNC.user) { SYNC.status = "offline"; SYNC.msg = "Can't reach Google"; renderSyncStatus(); syncRetryLater(new SyncError("offline")); } });
+      }
+      if (SYNC.token && !(hint && hint.uid)) setTimeout(() => syncNow("load"), 200);
     }
 
     let state = load();
@@ -1712,7 +1946,7 @@
       app.innerHTML = `
         ${banners}
         ${html || `<div class="empty">No folders yet.</div>`}
-        <footer class="note">${SYNC && SYNC.token ? `☁ Progress syncs across your devices · <a href="#" id="syncFooter" class="sync-foot" data-sync-status></a>` : `Cards are saved in this browser only. Turn on <a href="#" id="syncFooter">Sync</a> to share progress across devices, or Export a backup.`}${BUILD_INFO && BUILD_INFO.decks ? ` · Includes ${BUILD_INFO.decks} built-in deck${BUILD_INFO.decks === 1 ? "" : "s"} (updated ${escaped(BUILD_INFO.date)})` : ""}</footer>
+        <footer class="note">${syncOn() ? `☁ Progress syncs across your devices · <a href="#" id="syncFooter" class="sync-foot" data-sync-status></a>` : `Cards are saved in this browser only. Turn on <a href="#" id="syncFooter">Sync</a> to share progress across devices, or Export a backup.`}${BUILD_INFO && BUILD_INFO.decks ? ` · Includes ${BUILD_INFO.decks} built-in deck${BUILD_INFO.decks === 1 ? "" : "s"} (updated ${escaped(BUILD_INFO.date)})` : ""}</footer>
       `;
       document.getElementById("newFolderBtn").onclick = () => openFolderForm();
       const pb = document.getElementById("planBtn");

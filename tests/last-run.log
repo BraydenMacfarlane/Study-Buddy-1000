@@ -334,8 +334,34 @@
   ✓ build.sh rejects each bad distractors case with a clear error
   ✓ build.sh accepts valid distractors and bakes them in
 
+[16] Google sign-in sync (Firebase Auth + Firestore mocked)
+  ✓ no Firebase config: Sync screen is the gist screen, no Google button
+  ✓ Firebase SDK is not loaded until sign-in is used
+  ✓ Sync screen offers Sign in with Google; gist option tucked away
+  ✓ one click: signed in as brayden@example.com and synced
+  ✓ users/{uid} doc holds the progress (same payload format as the gist)
+  ✓ shares/{id} mirrors the C202 plan text for Study Buddy
+  ✓ Sync screen shows the plan link: fs:study-buddy-1000/ffacc30207c45c8672b04c66bc4e50a3
+  ✓ no Google token stored in Firestore
+  ✓ phone gets the desktop progress after one tap
+  ✓ phone reuses the same plan link
+  ✓ changes on both devices merge both ways
+  ✓ after a reload the device is still signed in and pulls the latest
+  ✓ offline: status says so, local change kept
+  ✓ permission denied: "Sign-in problem", local data intact
+  ✓ recovered: the offline change reached Firestore
+  ✓ Export contains no Google credential
+  ✓ Sign out: back to the Sign in button, local progress kept
+  ✓ popup unsupported: falls back to redirect, comes back signed in and synced
+  ✓ closing the Google window just leaves you signed out
+  ✓ first Google sign-in on a gist device: gist progress merged into Firestore
+  ✓ and the gist receives what was only in Firestore
+  ✓ gist keeps getting c202-plan.txt while its token is connected
+  ✓ Sync screen shows the gist as still connected
+  ✓ tools/read-plan.sh fs:… prints the plan and progress summary without credentials
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-306 passed, 0 failed
+330 passed, 0 failed

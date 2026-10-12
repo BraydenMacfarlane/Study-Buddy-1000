@@ -1,2 +1,5 @@
 node_modules/
 .sync-id
+.firebase/
+firebase-debug.log
+firestore-debug.log

@@ -10,18 +10,20 @@ cd "$(dirname "$0")"
 INBOX="decks/inbox"
 OUT="dist/flashcards.html"
 SRC="flashcards.html"
+FBCFG="firebase/config.json"
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --inbox) INBOX="$2"; shift 2 ;;
     --out) OUT="$2"; shift 2 ;;
     --src) SRC="$2"; shift 2 ;;
+    --firebase-config) FBCFG="$2"; shift 2 ;;
     -h|--help) sed -n '2,8p' "$0"; exit 0 ;;
     *) echo "Unknown option: $1" >&2; exit 2 ;;
   esac
 done
-python3 - "$SRC" "$INBOX" "$OUT" <<'PY'
+python3 - "$SRC" "$INBOX" "$OUT" "$FBCFG" <<'PY'
 import json, sys, os, re, glob, datetime
-src, inbox, out = sys.argv[1:4]
+src, inbox, out, fbcfg = sys.argv[1:5]
 errors, warnings, decks = [], [], []
 files = sorted(glob.glob(os.path.join(inbox, "*.json")))
 for path in files:
@@ -96,7 +98,18 @@ def embed(obj):
     s = json.dumps(obj, ensure_ascii=False, separators=(",", ":"))
     return s.replace("</", "<\\/").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
 info = {"date": datetime.date.today().isoformat(), "decks": len(decks), "ids": [d.get("id") for d in decks]}
-for marker, value in (("BUNDLED_DECKS", embed(decks)), ("BUILD_INFO", embed(info))):
+fb = None
+if fbcfg and os.path.exists(fbcfg):
+    try:
+        fb = json.load(open(fbcfg, encoding="utf-8"))
+        missing = [k for k in ("apiKey", "authDomain", "projectId", "appId") if not fb.get(k)]
+        if missing:
+            print(f"ERROR: {fbcfg} is missing {', '.join(missing)}", file=sys.stderr); sys.exit(1)
+        fb = {k: fb[k] for k in ("apiKey", "authDomain", "projectId", "appId", "messagingSenderId", "storageBucket") if fb.get(k)}
+        print(f"  Google sign-in: Firebase project {fb['projectId']}")
+    except json.JSONDecodeError as e:
+        print(f"ERROR: {fbcfg} is not valid JSON ({e})", file=sys.stderr); sys.exit(1)
+for marker, value in (("BUNDLED_DECKS", embed(decks)), ("BUILD_INFO", embed(info)), ("FIREBASE_CONFIG", embed(fb))):
     pat = re.compile(r"/\*%s_START\*/.*?/\*%s_END\*/" % (marker, marker), re.S)
     if len(pat.findall(html)) != 1:
         print(f"ERROR: marker {marker} not found exactly once in {src}", file=sys.stderr); sys.exit(1)
