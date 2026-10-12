@@ -32,6 +32,11 @@ if [[ -z "$PROJECT" ]]; then
   for cand in "$WANT" "$WANT-sb1" "$WANT-sb2" "$WANT-sb3"; do
     echo "Creating project $cand ..."
     if firebase projects:create "$cand" --display-name "Study-Buddy-1000"; then PROJECT="$cand"; break; fi
+    if grep -q "Callers must accept Terms of Service" firebase-debug.log 2>/dev/null; then
+      echo "Google Cloud Terms of Service not accepted yet for $EMAIL." >&2
+      echo "Open https://console.cloud.google.com/ signed in as $EMAIL, accept the Terms of Service, then re-run." >&2
+      exit 4
+    fi
     echo "  (could not create $cand; trying the next id)"
   done
 fi
