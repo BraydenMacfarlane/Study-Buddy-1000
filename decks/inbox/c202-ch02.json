@@ -17,6 +17,11 @@
         "Indirectly: shapes culture and how work gets done",
         "Firms with best practices (selective hiring, training, job security) show 50%+ higher market value",
         "Without accurate metrics and data, leaders can't make good people decisions"
+      ],
+      "distractors": [
+        "It centralizes all decisions in HR, enforces compliance audits, and replaces line managers' judgment on staffing.",
+        "It handles payroll and benefits paperwork so leaders can stay focused on strategy, finance, and daily operations.",
+        "It sets executive pay, approves budgets, and limits employee input so leadership decisions move faster and cleaner."
       ]
     },
     {
@@ -28,6 +33,11 @@
       "points": [
         "Nike's Phil Knight credits Nike's people and how they collaborate",
         "IBM's Thomas Watson Jr.: success depends on drawing out people's energy and talent"
+      ],
+      "distractors": [
+        "Directly by shaping culture and the work environment; indirectly by building skills, aligning goals, and motivating.",
+        "Directly through legal compliance and payroll accuracy; indirectly through customer pricing and product design.",
+        "Directly by cutting labor costs each quarter; indirectly by raising the company's share price over the long term."
       ]
     },
     {
@@ -40,6 +50,11 @@
         "The firm's 'personality': 'the way we do things around here'",
         "Signaled by logos, ceremonies, dress codes, office design",
         "Guides behavior where no rule exists"
+      ],
+      "distractors": [
+        "The formal rules, policies, and procedures written in a company's handbook and enforced by HR and managers.",
+        "The mix of demographics, job titles, and pay grades that describes who works at a company at a point in time.",
+        "The official mission statement and strategic plan that executives publish to guide the company's direction."
       ]
     },
     {
@@ -52,6 +67,11 @@
         "Four Seasons: great service comes from treating employees as you want guests treated",
         "Rigid bureaucracy hampers innovation (Nokia's risk-averse culture contributed to its decline)",
         "Culture is linked to financial performance and customer satisfaction"
+      ],
+      "distractors": [
+        "Culture is set by law and regulation, so a firm must match its strategy to whatever culture regulators require.",
+        "Strategy guides behavior where culture can't reach, so a weak strategy quietly undermines an otherwise strong culture.",
+        "Culture only matters for recruiting brand, so a mismatch hurts hiring ads but rarely affects how strategy plays out."
       ]
     },
     {
@@ -64,6 +84,11 @@
         "Entrepreneurial: EA, IDEO",
         "Bureaucratic: GSK, Merck; common in regulated industries",
         "Most firms mix types, with one dominant"
+      ],
+      "distractors": [
+        "Entrepreneurial cultures prize formal rules and consistency; bureaucratic ones prize creativity, speed, and risk.",
+        "Entrepreneurial cultures value loyalty, tradition, and tenure; bureaucratic ones value winning and market dominance.",
+        "Entrepreneurial cultures base all decisions on performance data; bureaucratic ones base them on seniority and rank."
       ]
     },
     {
@@ -75,6 +100,11 @@
       "points": [
         "Consensual: law firms, military; promote from within",
         "Competitive: brokerages, currency trading; often stressful"
+      ],
+      "distractors": [
+        "Consensual cultures value winning and market dominance; competitive ones value loyalty, tradition, and long tenure.",
+        "Consensual cultures prize creativity and risk taking; competitive ones prize formal rules, procedure, and consistency.",
+        "Consensual cultures run decisions on performance data; competitive ones rely on intuition and personal relationships."
       ]
     },
     {
@@ -86,6 +116,11 @@
       "points": [
         "Example: putting the best servers on the busiest shifts",
         "Sports teams like the Yankees and Steelers"
+      ],
+      "distractors": [
+        "One where hiring, development, pay, and assignments are all driven by seniority and tenure.",
+        "One where formal rules, procedures, and consistency are valued above creativity or risk.",
+        "One where front-line teams manage their own work with little or no direct supervision."
       ]
     },
     {
@@ -98,6 +133,11 @@
         "HRM has the most immediate effect on behavior; culture fills the gaps",
         "Starbucks: above-minimum pay and benefits for part-timers send a people-first signal",
         "Pixar University trains everyone together to build a collaborative creative culture"
+      ],
+      "distractors": [
+        "Mainly through the mission statement and posters, since employees adopt whatever values leaders announce publicly.",
+        "Mainly through office layout and perks, since physical space and benefits define culture more than HR practices.",
+        "Mainly through annual surveys, since measuring engagement is what creates and reinforces a company's culture."
       ]
     },
     {
@@ -110,6 +150,11 @@
         "Volkswagen: a fear-of-failure culture plus aggressive goals led to emissions-cheating software",
         "Wells Fargo fired some hotline callers, which killed trust in reporting",
         "Charles Schwab's switch from team to individual incentives sent mixed messages"
+      ],
+      "distractors": [
+        "A strong HR system lets each department build its own culture, so employees see many distinct, local cultures.",
+        "Strong HR systems matter for legal compliance, but culture is set by founders and isn't affected by HR signals.",
+        "Inconsistent HR signals keep employees adaptable; a strong system creates rigid sameness that hurts innovation."
       ]
     },
     {
@@ -122,6 +167,11 @@
         "Also called high-involvement or high-commitment organizations",
         "Built on sharing power, rewards, information, and training (Pfeffer: about 40% performance gains)",
         "Southwest Airlines is a classic example"
+      ],
+      "distractors": [
+        "A workplace where managers closely supervise front-line staff and set methods, so work is consistent and efficient.",
+        "A workplace that ties all pay to output quotas and ranks employees against each other to drive individual results.",
+        "A set of advanced HR software tools that automate scheduling, payroll, and performance tracking across a company."
       ]
     },
     {
@@ -134,6 +184,11 @@
         "Self-managed teams also means decentralized decision-making",
         "Fewer status distinctions: dress, language, offices, pay gaps",
         "Practices must be internally consistent and reinforce each other"
+      ],
+      "distractors": [
+        "At-will employment, broad hiring, top-down teams, seniority pay, training, clear status ranks, need-to-know info.",
+        "Job security, selective hiring, self-managed teams, seniority-based pay, outsourcing, strict hierarchy, open books.",
+        "Competitive pay, referral hiring, matrix teams, stock options, mentoring, executive perks, quarterly town halls."
       ]
     },
     {
@@ -146,6 +201,11 @@
         "Employee benefits: development, engagement, involvement, quality of life",
         "Org benefits: productivity, flexibility, customer satisfaction, quality, lower turnover",
         "Some employees find the added responsibility stressful"
+      ],
+      "distractors": [
+        "HPWS is low cost to run, so practices can conflict freely as long as turnover stays near the industry average.",
+        "HPWS works best with high turnover, since a steady flow of new hires keeps ideas fresh and labor costs low.",
+        "HPWS relies on tight supervision, so alignment matters for managers but employee retention barely affects it."
       ]
     },
     {
@@ -158,6 +218,11 @@
         "Help managers move from control-oriented styles to high-involvement (HPWS) organizations",
         "Recommend decentralized decisions and self-managed teams",
         "Employees then have the power, information, knowledge, and rewards to perform"
+      ],
+      "distractors": [
+        "They take over discipline and hiring decisions so line managers don't have to deal with people problems at all.",
+        "They audit managers for legal violations and report findings to executives instead of coaching or advising them.",
+        "They process payroll and benefits requests for each team, freeing line managers from administrative paperwork."
       ]
     },
     {
@@ -170,6 +235,11 @@
         "Base values: honesty, tolerance, responsibility",
         "Lapses: Madoff, faked executive degrees, McLaren spying on Ferrari",
         "Because unethical isn't always illegal, firms must define and reinforce values"
+      ],
+      "distractors": [
+        "Ethics is the set of laws a society enforces; anything that is legal is automatically ethical as well.",
+        "Ethics is a personal preference with no shared standard; legality is the only objective test of right.",
+        "Ethics and legality are the same; an act that is unethical is always illegal under employment law too."
       ]
     },
     {
@@ -181,6 +251,11 @@
       "points": [
         "Figure 2.1 in the text",
         "Stress and pressure erode ethics, so all three pieces matter"
+      ],
+      "distractors": [
+        "Ethical values + a written code alone = ethical behavior, since clear rules make enforcement unnecessary.",
+        "Strict monitoring + harsh punishment for violations = ethical behavior, regardless of stated values.",
+        "Ethical hiring + high pay + job security = ethical behavior, because satisfied people don't break rules."
       ]
     },
     {
@@ -192,6 +267,11 @@
       "points": [
         "Utilitarian example: cutting everyone's pay instead of laying some people off",
         "Rights example: refusing hazardous work without protective gear"
+      ],
+      "distractors": [
+        "Utilitarian protects each person's rights, like privacy and safety; rights seeks the most good and least harm overall.",
+        "Utilitarian treats everyone equally under a defensible rule; rights asks how an ideal, virtuous person would act.",
+        "Utilitarian maximizes shareholder profit above all; rights follows whatever the law requires and nothing more."
       ]
     },
     {
@@ -205,6 +285,11 @@
         "Common good example: refusing suppliers that use child labor",
         "Virtue example: promptly recalling a dangerous product",
         "The five standards can conflict; each is a lens for evaluating a decision"
+      ],
+      "distractors": [
+        "Fairness: care for the vulnerable; common good: equal treatment by a defensible rule; virtue: maximize overall good.",
+        "Fairness: maximize total benefit; common good: protect each person's rights; virtue: obey the law as written.",
+        "Fairness: reward seniority equally; common good: serve shareholders first; virtue: follow the code of conduct."
       ]
     },
     {
@@ -217,6 +302,11 @@
         "Unethical acts come from individuals AND the organizational context",
         "Top cause of ethical compromise: pressure to hit unrealistic goals or deadlines",
         "Strong predictor: an emphasis on self-gain"
+      ],
+      "distractors": [
+        "Omission: pressure to act unethically; remission: no written rules; commission: ignoring sound established practices.",
+        "Omission: ignoring sound practices; remission: no written rules; commission: pressure from leaders to act unethically.",
+        "Omission: no ethics training; remission: no anonymous hotline; commission: no discipline for rule violators at all."
       ]
     },
     {
@@ -228,6 +318,11 @@
       "points": [
         "Common HR ethics areas: privacy, staffing, layoffs, rewards, safety, appraisals, labor practices",
         "Example: pressure to hire a friend, inflate a job grade, or rate someone on non-performance factors"
+      ],
+      "distractors": [
+        "Any decision that disappoints someone or is unpopular with employees is an ethical dilemma that HR must escalate.",
+        "A decision becomes an ethical dilemma only when it is clearly illegal; lawful but harmful acts are just hard calls.",
+        "Any choice involving money or pay is an ethical dilemma, while staffing and scheduling choices never are ones."
       ]
     },
     {
@@ -239,6 +334,11 @@
       "points": [
         "Codes alone aren't enough: need fair treatment, aligned HR systems, ethical leaders, real consequences",
         "Good codes correlate with better reputation and citizenship rankings"
+      ],
+      "distractors": [
+        "A code of conduct states ideal values to guide choices; a code of ethics lists specific required and banned actions.",
+        "A code of conduct is legally required by federal law; a code of ethics is optional and only used by nonprofits.",
+        "A code of conduct covers executives only; a code of ethics covers front-line staff and their daily behavior."
       ]
     },
     {
@@ -250,6 +350,11 @@
       "points": [
         "Back it with HR systems: code of conduct, training, anonymous reporting, prompt discipline, rewards for ethics",
         "Ask: Which option produces the most good? Respects rights? Treats people by a fair, job-related rule?"
+      ],
+      "distractors": [
+        "Follow whatever the most senior leader prefers, since accountability for the outcome rests with that leader anyway.",
+        "Choose the option that is legal and cheapest, then keep the reasoning confidential to avoid later challenges.",
+        "Pick the choice that keeps the most employees happy, since popularity is the best sign of an ethical decision."
       ]
     },
     {
@@ -263,6 +368,11 @@
         "Promoting on loyalty alone signals that results don't matter and can feel like favoritism",
         "Recognize loyalty in other ways: development, a retention bonus, or a mentoring role",
         "Either way, explain the job-related criteria openly"
+      ],
+      "distractors": [
+        "Recommend the longest-tenured employee: the fairness standard requires rewarding loyalty and years of service first.",
+        "Recommend whoever the team likes most: the common good standard puts group harmony ahead of individual results.",
+        "Recommend both for a shared role: the rights standard bars choosing one employee over another for promotion."
       ]
     },
     {
@@ -274,6 +384,11 @@
       "points": [
         "Federal Sentencing Guidelines for Organizations",
         "HR also hires ethical people and acts fast on violations"
+      ],
+      "distractors": [
+        "Written standards, a compliance officer, drug testing, background checks, union review, and annual audits.",
+        "Training, profit-sharing, an ethics hotline, executive bonuses, legal review, and a public CSR report each year.",
+        "Written standards, training, open-door policy, peer review, outside auditing, and ethics bonuses for managers."
       ]
     },
     {
@@ -286,6 +401,11 @@
         "Mars Ambassadors: up to 6 weeks on partner projects",
         "Marriott: compostable containers, green ambassadors",
         "How a firm treats its own employees is part of CSR"
+      ],
+      "distractors": [
+        "A company's legal duty to follow employment, tax, and safety laws in every country where it operates and hires.",
+        "A company's focus on maximizing shareholder returns, which it treats as its main responsibility to society.",
+        "A company's internal code of conduct listing specific required and banned actions for employees and managers."
       ]
     },
     {
@@ -297,6 +417,11 @@
       "points": [
         "Four CSR categories: environment, ethics, employee and product safety, corporate governance",
         "Serving shareholders and stakeholders isn't mutually exclusive"
+      ],
+      "distractors": [
+        "It puts owners' returns first and treats other groups as costs, which leads to sharper, quarter-to-quarter decisions.",
+        "It weighs only customers' interests, not employees or the community, which leads to faster product decisions.",
+        "It focuses on government regulators and legal compliance rather than owners, so decisions become more cautious."
       ]
     },
     {
@@ -308,6 +433,11 @@
       "points": [
         "HR tools: CSR goals in reviews and merit pay, CSR training, human rights in HR policy, vetting contractors",
         "Obstacles: short-term earnings focus, cost, hard-to-measure ROI, unsupportive culture"
+      ],
+      "distractors": [
+        "CSR lasts best as a separate PR program, since mixing it into HR practices distracts employees from their real jobs.",
+        "CSR lasts only if it's required by law, so building it into hiring or pay has little effect once budgets tighten.",
+        "CSR lasts when executives announce it yearly; HR practices like pay and reviews have no real effect on it."
       ]
     },
     {
@@ -320,6 +450,11 @@
         "Boeing rushed the MAX to answer Airbus, pushed for lighter certification, required no new pilot training",
         "Over 300 deaths",
         "HR fixes: written safety standards, anonymous reporting, a stakeholder perspective"
+      ],
+      "distractors": [
+        "Employees ignored a strong, well-funded safety program, and managers had no way of knowing problems existed.",
+        "Regulators forced unsafe shortcuts on Boeing, and the company's stated values played no part in the outcome.",
+        "Too much employee speaking up slowed decisions, so safety reviews were skipped to avoid endless debate."
       ]
     },
     {
@@ -330,6 +465,11 @@
       "note": "Read more: 2.10 Case Study: Boeing 737 MAX",
       "points": [
         "Amy Edmondson called Boeing a textbook absence of psychological safety"
+      ],
+      "distractors": [
+        "Being protected from layoffs and pay cuts; without it, employees leave and ethical standards collapse as a result.",
+        "Having strong physical safety rules on the job; without them, injuries rise and ethical lapses are hidden by fear.",
+        "Feeling free to break rules when results demand it; without it, people freeze and problems explode later on."
       ]
     },
     {
@@ -342,6 +482,11 @@
         "HR-managed changes: new processes, locations, benefits programs, HRIS, international expansion",
         "Focus on developing and keeping people critical to the new strategy",
         "Lockheed Martin: candid communication and removing obstacles"
+      ],
+      "distractors": [
+        "It announces the change first, then trains people later, and adjusts goals and rewards only if resistance appears.",
+        "It keeps the change confidential until rollout, then uses discipline to secure compliance with new behaviors.",
+        "It hands change entirely to outside consultants and focuses HR only on payroll and benefits during the transition."
       ]
     },
     {
@@ -354,6 +499,11 @@
         "Trust is 'the glue' during change",
         "Coercion only fits fast, radical change; otherwise consult and collaborate",
         "HP: personal and professional goals for each employee improved retention with no productivity loss"
+      ],
+      "distractors": [
+        "Change removes uncertainty; trust mainly speeds up paperwork and approvals so the rollout finishes on schedule.",
+        "Trust matters most after change ends; during change, clear discipline matters more for keeping people in line.",
+        "Change is driven by incentives alone; trust has little effect once the new pay plan rewards new behaviors."
       ]
     },
     {
@@ -365,6 +515,11 @@
       "points": [
         "High: Philippines, Guatemala, Malaysia (big authority and pay gaps)",
         "Low: Austria, Israel, Denmark"
+      ],
+      "distractors": [
+        "How loose community ties are; high favors individual rewards, low favors group harmony and shared rewards.",
+        "How uneasy people feel with the unknown; high means detailed rules, low means tolerance for risk and change.",
+        "How much a society values assertiveness and achievement vs. modesty, cooperation, and quality of life."
       ]
     },
     {
@@ -376,6 +531,11 @@
       "points": [
         "High: U.S., Australia, New Zealand",
         "Low: Guatemala, Ecuador, Bangladesh (harmony over blunt honesty)"
+      ],
+      "distractors": [
+        "How much a society accepts unequal power; high favors steep hierarchy, low favors flatter, more equal workplaces.",
+        "A preference for assertiveness and material reward vs. modesty, cooperation, and quality of life at work overall.",
+        "How uneasy people feel in unfamiliar situations; high favors detailed rules, low tolerates risk and ambiguity."
       ]
     },
     {
@@ -387,6 +547,11 @@
       "points": [
         "High: Japan, Hungary, Slovakia (distinct 'men's' and 'women's' work)",
         "Low: Denmark, Sweden, Norway (equal opportunity, often legislated)"
+      ],
+      "distractors": [
+        "How much a society accepts unequal power, with steep hierarchy vs. flatter, more equal workplaces overall.",
+        "How loose community ties are, favoring individual rewards vs. group harmony and shared team rewards.",
+        "A focus on long-range planning and obligations, prizing education, training, and a steady work ethic."
       ]
     },
     {
@@ -398,6 +563,11 @@
       "points": [
         "High: Greece, Portugal, Uruguay -> detailed written policies",
         "Low: Singapore, Jamaica, Hong Kong -> informal, risk-accepting"
+      ],
+      "distractors": [
+        "How much a society accepts unequal power; high favors steep hierarchy, low favors flatter workplaces.",
+        "A focus on long-range planning; long-term cultures prize education, training, and a strong work ethic.",
+        "How loose community ties are; high favors individual rewards, low favors group harmony and sharing."
       ]
     },
     {
@@ -410,6 +580,11 @@
         "Long: China, Taiwan",
         "Short: West Africa, Canada (individualism, creativity, faster change)",
         "Individuals don't always match their national culture, and values shift over time"
+      ],
+      "distractors": [
+        "How uneasy people feel in unfamiliar settings; high-scoring cultures favor detailed rules and structure.",
+        "A preference for assertiveness and material reward over modesty, cooperation, and quality of life.",
+        "How loose community ties are; high scorers favor individual rewards, low favor shared group rewards."
       ]
     },
     {
@@ -422,6 +597,11 @@
         "Due diligence: assess cultural compatibility; start talent planning and retention early",
         "Integration: decide who stays or goes; retain key people; create a common culture",
         "Post-close: address stakeholder satisfaction; strengthen the new culture; roll out development plans"
+      ],
+      "distractors": [
+        "Due diligence: pick who stays, unify culture; integration: check culture fit, plan talent; post-close: cut costs.",
+        "Due diligence: review finances only; integration: run payroll conversion; post-close: survey employee morale.",
+        "HR waits for closing, then handles benefits enrollment, layoffs, and policy handbook updates for the new firm."
       ]
     },
     {
@@ -434,6 +614,11 @@
         "Up to 85% of mergers miss their goals (DaimlerChrysler split after a culture clash)",
         "If a deal was for talent and the talent leaves, it's futile (Oracle-PeopleSoft exodus)",
         "HR acts as facilitator and coach and treats leavers and survivors fairly"
+      ],
+      "distractors": [
+        "Most deals fail on bad valuations and debt, and HR's role is mostly processing benefits and payroll changes.",
+        "Most deals fail on regulatory review, and HR is the function that handles antitrust filings before closing.",
+        "Most deals fail on technology integration, so HR mainly supports IT by retraining staff after the deal closes."
       ]
     },
     {
@@ -446,6 +631,11 @@
         "Don't measure everything; focus on what drives strategy execution",
         "Differentiation strategy -> innovation metrics; low-cost strategy -> efficiency metrics",
         "Innovation metric = % of sales from products launched in the last 5 years"
+      ],
+      "distractors": [
+        "It's easy to collect, benchmarks well against peers, and looks good in reports, even if no one acts on it.",
+        "It measures HR activity volume, such as forms processed and trainings held, rather than business outcomes.",
+        "It's tracked by every competitor, so following industry practice matters more than linking it to goals."
       ]
     },
     {
@@ -457,6 +647,11 @@
       "points": [
         "Example: 18 leavers ÷ 120 average employees = 15%",
         "Related: tenure = average years of service"
+      ],
+      "distractors": [
+        "Number of employees who left in a period ÷ number of employees at the start of the following year.",
+        "Average number of employees in a period ÷ number of employees who left during that same period.",
+        "Number of new hires in a period ÷ average number of employees in that period, as a percentage."
       ]
     },
     {
@@ -467,6 +662,11 @@
       "note": "Read more: 2.14 HRM Metrics",
       "points": [
         "Example: 60 absence days ÷ (25 employees × 20 days) = 12%"
+      ],
+      "distractors": [
+        "Total absence days ÷ (employees who missed work × calendar days in year).",
+        "(Average number of employees × workdays in the period) ÷ absence days.",
+        "Total absence days ÷ total workdays in the period, not adjusted for staff."
       ]
     },
     {
@@ -479,6 +679,11 @@
         "Example: $90K benefit on a $60K program = 50% ROI",
         "Other ratios: revenue or profit per employee = revenue (or profit) ÷ employees",
         "Job offer acceptance rate = offers accepted ÷ offers extended"
+      ],
+      "distractors": [
+        "Program benefits ÷ (program benefits − total program cost), times 100.",
+        "(Total program cost − program benefits) ÷ total program cost, times 100.",
+        "(Program benefits − total program cost) ÷ program benefits, times 100."
       ]
     },
     {

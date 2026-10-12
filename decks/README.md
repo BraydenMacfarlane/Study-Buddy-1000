@@ -9,7 +9,8 @@
   "source": "optional string, e.g. textbook + chapter",
   "summary": "optional markdown chapter overview (# ## ### headings, **bold**, *italic*, - / 1. lists, --- rule)",
   "cards": [
-    { "id": "c202-ch01-001", "front": "...", "answer": "...", "subtitle": "opt", "note": "opt, e.g. Read more: 1.13 Page", "points": ["opt"] },
+    { "id": "c202-ch01-001", "front": "...", "answer": "...", "subtitle": "opt", "note": "opt, e.g. Read more: 1.13 Page", "points": ["opt"],
+      "distractors": ["opt: 2-5 plausible wrong answers"] },
     { "id": "c202-ch01-014", "type": "scenario", "front": "scenario text (newlines kept)",
       "choices": ["Legal", "Illegal", "Depends"], "correct": 1, "explanation": "...",
       "answer": "opt", "subtitle": "opt", "note": "opt" } ] }
@@ -18,3 +19,13 @@
 
 Rules: `id` required on decks and cards (stable ids = in-place updates, progress kept). `correct` is 0-based; 2-5 choices.
 Regular cards need `answer` (or `points`). The import in the app also accepts these files directly (merge, never deletes).
+
+### Wrong answers for multiple choice (quiz, quick quiz, boss)
+Concept cards get 3 wrong answers. Optional `distractors` (2-5 strings) on a concept card are used first
+(3 picked at random if more are given); if fewer than 3, the rest are filled with random answers from other
+concept cards in the folder (then the course), as before. Cards without `distractors` work exactly as before.
+Duplicates and anything matching the correct answer are never used.
+build.sh rejects `distractors` that aren't 2-5 unique non-empty strings, that repeat the answer, or that sit
+on a scenario card. The in-app import is lenient: bad entries are dropped silently.
+Write distractors in the same style and length as the real answer, plausible but clearly wrong.
+

@@ -319,8 +319,23 @@
   ✓ a card marked known on desktop is retired on the phone after sync
   ✓ both study-method saves sync as separate slots
 
+[15] Optional per-card "distractors" for concept cards
+  ✓ lenient import accepts a deck with messy distractors: 1 folder added · 6 cards added · 0 updated
+  ✓ valid distractors kept as written
+  ✓ import drops blanks, duplicates and the answer itself: ["Only wrong","7"]
+  ✓ no distractors field on cards without one or on scenarios
+  ✓ card with 5 distractors: 3 of its own are used every time
+  ✓ all 5 authored distractors rotate in over several quizzes
+  ✓ fewer than 3: authored ones first, filled from other cards, no duplicates or answer
+  ✓ card without distractors keeps random picks from other cards
+  ✓ quiz runs on the deck
+  ✓ built app: 1121 of 2380 cards carry 3 distractors (Ch 1: 0)
+  ✓ Ch 2 quiz shows the card's own 3 distractors plus the answer
+  ✓ build.sh rejects each bad distractors case with a clear error
+  ✓ build.sh accepts valid distractors and bakes them in
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-293 passed, 0 failed
+306 passed, 0 failed

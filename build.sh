@@ -66,6 +66,19 @@ for path in files:
                 errors.append(f"{where}: unknown type {c.get('type')!r}")
             elif not str(c.get("answer") or "").strip() and not c.get("points"):
                 errors.append(f"{where}: needs an \"answer\"")
+            if "distractors" in c:
+                ds = c["distractors"]
+                norm = lambda s: " ".join(str(s).lower().split()).rstrip(".;:,!")
+                if c.get("type") == "scenario":
+                    errors.append(f"{where}: \"distractors\" is only for concept cards (scenarios use \"choices\")")
+                elif not isinstance(ds, list) or not (2 <= len(ds) <= 5):
+                    errors.append(f"{where}: \"distractors\" must be a list of 2-5 strings")
+                elif not all(isinstance(x, str) and x.strip() for x in ds):
+                    errors.append(f"{where}: every distractor must be a non-empty string")
+                elif len({norm(x) for x in ds}) != len(ds):
+                    errors.append(f"{where}: distractors must be unique")
+                elif norm(c.get("answer") or "") in {norm(x) for x in ds}:
+                    errors.append(f"{where}: a distractor matches the answer")
         decks.append(d)
         print(f"  + {did or '?'}: {d.get('folder', '')} ({len(d['cards'])} cards, {scen} scenario)")
 seen = {}

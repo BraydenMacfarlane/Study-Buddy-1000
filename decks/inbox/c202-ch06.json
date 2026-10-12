@@ -16,6 +16,11 @@
         "The weaker the applicant pool, the stronger assessment must be",
         "Then: combine information, choose who gets the offer, set offer terms, negotiate",
         "Like recruiting, it shapes what employees CAN do"
+      ],
+      "distractors": [
+        "Identifying qualified people and the labor markets to recruit them from.",
+        "Persuading qualified people to apply for and accept job offers at the firm.",
+        "Preparing new hires to succeed through orientation and early training."
       ]
     },
     {
@@ -27,6 +32,11 @@
       "points": [
         "Steve Jobs: a great programmer is worth 25 average ones",
         "Jack Welch: hiring great people is brutally hard, and nothing matters more"
+      ],
+      "distractors": [
+        "Google's structured interviewers hired people who stayed up to 71% longer than those hired by unstructured ones.",
+        "Time Warner's bottom-quartile scorers on a sales assessment sold about the same as top-quartile scorers.",
+        "Zappos' new hires who rejected the $3,000 offer to quit sold up to 71% more than those who took the offer."
       ]
     },
     {
@@ -38,6 +48,11 @@
       "points": [
         "Screening out bad hires can matter more than finding good ones",
         "Quiz wording: not hiring a poor fit can be worth more than hiring good performers"
+      ],
+      "distractors": [
+        "Fill open roles as fast and as cheaply as possible, since speed and cost per hire are the main goals.",
+        "Build the largest possible applicant pool so the firm has the widest choice of candidates for each job.",
+        "Satisfy the hiring manager's personal preferences, since that manager will supervise the new hire."
       ]
     },
     {
@@ -48,6 +63,11 @@
       "note": "Read more: 6.4 Assessment Goals",
       "points": [
         "The wider the range of talent in the pool, the more accuracy matters"
+      ],
+      "distractors": [
+        "Bad hires are easy to fire, so the cost of one is small compared to the value of finding a star.",
+        "Federal law fines employers for every bad hire, so screening out is mainly about avoiding penalties.",
+        "Good hires are plentiful, so screening matters less for large firms than for avoiding bad press."
       ]
     },
     {
@@ -61,6 +81,11 @@
         "True negative: rejected, would have failed",
         "False positive: hired, unsuccessful",
         "False negative: rejected, would have succeeded"
+      ],
+      "distractors": [
+        "Hired, rejected, promoted, terminated; tracked separately for each protected group by HR.",
+        "Active, semipassive, passive, and referral candidates, sorted by how they entered the pool.",
+        "Valid, reliable, biased, and fair, the four ways to describe any selection assessment."
       ]
     },
     {
@@ -71,6 +96,11 @@
       "note": "Read more: 6.4 Assessment Goals",
       "points": [
         "Worst in high-risk jobs: surgeon, air traffic controller"
+      ],
+      "distractors": [
+        "Someone who was rejected but would have succeeded.",
+        "Someone who was hired and turns out to be successful.",
+        "Someone who was rejected and would have failed the job."
       ]
     },
     {
@@ -81,6 +111,11 @@
       "note": "Read more: 6.4 Assessment Goals",
       "points": [
         "Costly when the person strengthens a competitor or wins a discrimination claim"
+      ],
+      "distractors": [
+        "Someone who was hired but turns out to be unsuccessful.",
+        "Someone who was rejected and would have failed in the job.",
+        "Someone who was hired and later succeeds in the role."
       ]
     },
     {
@@ -91,6 +126,11 @@
       "note": "Read more: 6.4 Assessment Goals",
       "points": [
         "Example: a top salesperson or researcher hired by a rival"
+      ],
+      "distractors": [
+        "When the rejected applicant was weak and would have hurt the team's results if hired.",
+        "When the rejected applicant reapplies later, since rehiring costs more than a first hire.",
+        "When the hire turns out poorly, since firing someone costs more than a missed candidate."
       ]
     },
     {
@@ -103,6 +143,11 @@
         "Dimensions: integrity, compassion, competitiveness, values, goals",
         "Strongly linked to satisfaction, commitment, and intent to stay",
         "Little or no effect on meeting job requirements"
+      ],
+      "distractors": [
+        "The match between a person's abilities and the job's demands, and their needs and the job's rewards.",
+        "The match between a person and their workgroup, including their direct supervisor and coworkers.",
+        "The match between a person's résumé and the minimum qualifications listed in the job description."
       ]
     },
     {
@@ -114,6 +159,11 @@
       "points": [
         "Moderate link with attitudes; modest effect on actual turnover",
         "That's why firms pair it with person-job assessment"
+      ],
+      "distractors": [
+        "Strongly predicts meeting job requirements and output; little effect on satisfaction or intent to stay.",
+        "Predicts nothing reliably, since values change too often to affect any work outcome measured.",
+        "Strongly predicts sales results and pay; little effect on commitment or satisfaction at work."
       ]
     },
     {
@@ -124,6 +174,11 @@
       "note": "Read more: 6.5 Fit",
       "points": [
         "All are about matching the culture, not the job's tasks"
+      ],
+      "distractors": [
+        "Skills, experience, education, salary, and availability.",
+        "Extraversion, agreeableness, openness, stability, and drive.",
+        "Integrity, intelligence, education, tenure, and loyalty."
       ]
     },
     {
@@ -135,6 +190,11 @@
       "points": [
         "Primary focus of most assessment (drives performance)",
         "Dimensions: education, competencies, job knowledge, experience, task-relevant personality"
+      ],
+      "distractors": [
+        "Matching a person's values and personality to the organization's culture, norms, and values.",
+        "Matching a person to their workgroup and supervisor, especially in highly team-based work.",
+        "Matching a candidate's salary request to the budget set for the job in the staffing plan."
       ]
     },
     {
@@ -145,6 +205,11 @@
       "note": "Read more: 6.5 Fit",
       "points": [
         "Also linked to satisfaction, commitment, and intent to stay"
+      ],
+      "distractors": [
+        "Person-organization fit, because it drives job performance.",
+        "Person-group fit, since team chemistry drives performance.",
+        "Person-supervisor fit, since bosses rate job performance."
       ]
     },
     {
@@ -156,6 +221,11 @@
       "points": [
         "Fitting coworkers' communication styles, goals, and skills",
         "Dimensions: expertise vs. team, conflict style, teamwork values, communication, personality"
+      ],
+      "distractors": [
+        "The match between a person's skills and the job's tasks and rewards.",
+        "The match between a person's values and the company's overall culture.",
+        "The match between a person's pay request and the market's going rate."
       ]
     },
     {
@@ -166,6 +236,11 @@
       "note": "Read more: 6.5 Fit",
       "points": [
         "Raises satisfaction, commitment, and intent to stay"
+      ],
+      "distractors": [
+        "When work is independent, as in solo sales roles.",
+        "When jobs are routine and closely supervised daily.",
+        "When the firm is large and has many locations."
       ]
     },
     {
@@ -176,6 +251,11 @@
       "note": "Read more: 6.5 Fit",
       "points": [
         "Fit at all three levels maximizes performance, retention, and engagement"
+      ],
+      "distractors": [
+        "Ask who's hiring: HR = organization; manager = job; team members = group fit in every case.",
+        "Ask about pay: high pay = job fit; team bonus = group fit; stock options = organization fit.",
+        "Ask when it's assessed: screening = job; interview = group; contingent offer = organization fit."
       ]
     },
     {
@@ -187,6 +267,11 @@
       "points": [
         "1M+ applications, about 100,000 hires a year",
         "Asks housekeepers, 'Do you enjoy cleaning?'"
+      ],
+      "distractors": [
+        "It screens first for technical hotel skills and experience, then teaches its culture during training.",
+        "It hires mainly through referrals from current staff, since friends of employees already share values.",
+        "It uses cognitive ability tests alone, since general mental ability predicts fit with brand culture."
       ]
     },
     {
@@ -197,6 +282,11 @@
       "note": "Read more: 6.5 Fit",
       "points": [
         "Define fit by job-related values and behaviors"
+      ],
+      "distractors": [
+        "Fit means hiring people like yourself, since similar backgrounds make teams cohesive and legally safe.",
+        "Fit matters only for executives, so front-line hiring should ignore values and focus on skills alone.",
+        "Fit can't be measured at all, so it should never be used as part of any hiring decision."
       ]
     },
     {
@@ -208,6 +298,11 @@
       "points": [
         "Weigh invasive methods (drug, integrity tests) carefully",
         "Keep results confidential"
+      ],
+      "distractors": [
+        "Keep results secret from applicants, use untrained administrators to save money, and store data forever.",
+        "Share each applicant's test scores with other candidates so the process stays transparent and fair.",
+        "Let each manager choose tests, skip explaining how results are used, and keep data in personal files."
       ]
     },
     {
@@ -219,6 +314,11 @@
       "points": [
         "Subjective judgments aren't illegal per se but invite stereotyping and disparate impact",
         "Train assessors"
+      ],
+      "distractors": [
+        "Letting each interviewer choose different questions so they can follow up on what interests them most.",
+        "Using the hiring manager's gut feel about each candidate, written down after every interview round.",
+        "Comparing applicants on whatever information is available, such as social media and referrals."
       ]
     },
     {
@@ -231,6 +331,11 @@
         "Do a job analysis",
         "Justify required training or experience by job content",
         "Cutoff scores must be reasonable and match normal proficiency"
+      ],
+      "distractors": [
+        "Federal law requiring hiring quotas for protected groups at private employers with 15 or more employees.",
+        "Professional testing standards published jointly by AERA, APA, and NCME for test developers and users.",
+        "Labor Department rules setting minimum wage, overtime, and recordkeeping duties for nonexempt employees."
       ]
     },
     {
@@ -241,6 +346,11 @@
       "note": "Read more: 6.6 Ethics, Legal Compliance, and Positive Stakeholder Reactions",
       "points": [
         "Companion: Principles for the Validation and Use of Personnel Selection Procedures"
+      ],
+      "distractors": [
+        "Federal guidance on avoiding hiring discrimination.",
+        "EEOC rules for using the four-fifths rule in hiring.",
+        "SHRM standards for structured interview scoring."
       ]
     },
     {
@@ -252,6 +362,11 @@
       "points": [
         "PNC fixed its 'black hole' job board because teller applicants are often customers",
         "Anxiety lowers test scores, hurting accuracy"
+      ],
+      "distractors": [
+        "They don't matter much, since rejected applicants rarely talk to others or buy from the firm.",
+        "Reactions matter only for executive hires, since front-line applicants have many other options.",
+        "Reactions matter only legally, since negative ones always lead to discrimination lawsuits."
       ]
     },
     {
@@ -262,6 +377,11 @@
       "note": "Read more: 6.6 Ethics, Legal Compliance, and Positive Stakeholder Reactions",
       "points": [
         "Make assessments feel job-related and reduce anxiety"
+      ],
+      "distractors": [
+        "Anxiety raises scores while motivation lowers them, so tests should be made as stressful as possible.",
+        "Reactions have no effect on scores, since valid tests measure ability regardless of how people feel.",
+        "Self-efficacy lowers scores by causing overconfidence, so unfair-seeming tests give more honest data."
       ]
     },
     {
@@ -272,6 +392,11 @@
       "note": "Read more: 6.7 Assessment Methods; 6.8 Screening Assessment Methods",
       "points": [
         "Résumés, cover letters, applications, phone screens"
+      ],
+      "distractors": [
+        "Examine candidates in depth to decide whom to hire for the job.",
+        "Check backgrounds and drug use after a contingent offer is made.",
+        "Persuade qualified people to apply for and accept job offers."
       ]
     },
     {
@@ -282,6 +407,11 @@
       "note": "Read more: 6.7 Assessment Methods",
       "points": [
         "Tests, interviews, work samples, assessment centers"
+      ],
+      "distractors": [
+        "Reduce applicants to candidates using minimum quals.",
+        "Run background checks and drug screens after an offer.",
+        "Attract applicants by showing the firm's employer brand."
       ]
     },
     {
@@ -293,6 +423,11 @@
       "points": [
         "Passing leads to the formal offer",
         "Only these must wait for an offer"
+      ],
+      "distractors": [
+        "Methods used to reduce applicants to candidates by checking minimum qualifications.",
+        "In-depth methods, like structured interviews and work samples, used to decide whom to hire.",
+        "Methods used only for temporary workers, whose employment is contingent on project needs."
       ]
     },
     {
@@ -303,6 +438,11 @@
       "note": "Read more: 6.7 Assessment Methods",
       "points": [
         "Use multiple methods for the most important characteristics"
+      ],
+      "distractors": [
+        "Alphabetically by test name, by the hiring manager's choice, or randomly to avoid bias in any order.",
+        "Most expensive first to signal seriousness, interviews last, and background checks before any test.",
+        "Contingent methods first, then screening, then evaluative methods last to confirm the final choice."
       ]
     },
     {
@@ -313,6 +453,11 @@
       "note": "Read more: 6.7 Assessment Methods",
       "points": [
         "Validity = how well it predicts job performance; closer to 1 is better"
+      ],
+      "distractors": [
+        "Unstructured interviews (0.51-0.63), reference checks (0.54), and personality tests (0.51).",
+        "Integrity tests (0.51-0.63), job knowledge tests (0.54), and reference checks (0.51).",
+        "Cognitive ability tests (0.20-0.38), simulations (0.26), and structured interviews (0.33)."
       ]
     },
     {
@@ -323,6 +468,11 @@
       "note": "Read more: 6.7 Assessment Methods",
       "points": [
         "Work samples 0.34, assessment centers 0.37, integrity 0.41"
+      ],
+      "distractors": [
+        "Structured interviews (0.20-0.38) and simulations (0.26); cognitive ability ranges from 0 to 0.33.",
+        "Cognitive ability tests (0.20-0.38) and job knowledge tests (0.26); integrity ranges from 0 to 0.33.",
+        "Work samples (0.20-0.38) and assessment centers (0.26); personality ranges from 0.51 to 0.63."
       ]
     },
     {
@@ -334,6 +484,11 @@
       "points": [
         "Erratum: the decimal point is misplaced in the book",
         "Job knowledge tests predict well, especially for complex jobs"
+      ],
+      "distractors": [
+        "0.048. The table is correct; job knowledge tests barely predict.",
+        "0.84. Table 6.3 prints '.048', a typo for 0.84 validity.",
+        "0.26. Table 6.3 swaps it with the reference-check figure."
       ]
     },
     {
@@ -344,6 +499,11 @@
       "note": "Read more: 6.7 Assessment Methods",
       "points": [
         "Most other methods are rated low; medical/background checks are mixed"
+      ],
+      "distractors": [
+        "Integrity tests and personality tests, both structured and unstructured.",
+        "Work samples and simulations, including in-basket exercises and role-plays.",
+        "Reference checks and job knowledge tests, used together in screening."
       ]
     },
     {
@@ -355,6 +515,11 @@
       "points": [
         "2020 Checkster survey of 400 applicants and 400 managers",
         "A signed 'falsification means termination' statement improves honesty"
+      ],
+      "distractors": [
+        "Fake degrees from real universities, invented employers, and false criminal history disclosures.",
+        "Typos and formatting errors, which hiring managers treat as lies about attention to detail.",
+        "Listing hobbies and interests, which recruiters view as misleading padding on most résumés."
       ]
     },
     {
@@ -366,6 +531,11 @@
       "points": [
         "Erratum: teach Thompson; know the book says Levinsohn",
         "Lesson: verify self-reported credentials"
+      ],
+      "distractors": [
+        "Ross Levinsohn, as the book says; Scott Thompson was his interim replacement afterward.",
+        "Marissa Mayer, who left after hiring was found to rely on a padded set of credentials.",
+        "Carol Bartz, who was fired after Yahoo discovered she had invented a computer science degree."
       ]
     },
     {
@@ -377,6 +547,11 @@
       "points": [
         "Include: inaccurate information is grounds for dismissal",
         "Keep demographic questions away from recruiters"
+      ],
+      "distractors": [
+        "It replaces the résumé entirely, since applications are the only legally accepted hiring document.",
+        "It lets applicants describe themselves freely, so recruiters see creativity rather than consistency.",
+        "It's required only for jobs covered by the FLSA, so exempt roles can skip applications entirely."
       ]
     },
     {
@@ -387,6 +562,11 @@
       "note": "Read more: 6.8 Screening Assessment Methods",
       "points": [
         "Can also probe culture fit and other suitable positions"
+      ],
+      "distractors": [
+        "Personality traits, cognitive ability, integrity, and how well the candidate fits the company culture.",
+        "Criminal history, credit score, medical history, and drug test results before any further interviews.",
+        "Behavioral examples of past performance, scored against anchors as in a structured interview."
       ]
     },
     {
@@ -398,6 +578,11 @@
       "points": [
         "Most important for complex jobs, newcomers, and jobs requiring new learning",
         "Examples: Wonderlic, Raven's Progressive Matrices"
+      ],
+      "distractors": [
+        "Personality traits like conscientiousness; they predict success only in sales and management jobs.",
+        "Honesty and trustworthiness; they predict theft and misconduct but not overall job performance.",
+        "Job-specific technical knowledge; they predict success only in skilled trades and IT positions."
       ]
     },
     {
@@ -409,6 +594,11 @@
       "points": [
         "Combining keeps prediction while reducing adverse impact",
         "Applicants dislike them as not job-related"
+      ],
+      "distractors": [
+        "They have very low validity, so use them only as tie-breakers between otherwise equal candidates.",
+        "They often reveal disabilities, so use them only after a contingent offer to comply with the ADA.",
+        "They're easily faked by applicants, so use them only with lie scales and proctored testing centers."
       ]
     },
     {
@@ -419,6 +609,11 @@
       "note": "Read more: 6.9 Evaluative Assessment Methods: Cognitive and Noncognitive Ability Tests",
       "points": [
         "Physical tests must be truly job-necessary; they can cause adverse impact"
+      ],
+      "distractors": [
+        "General mental ability, including reasoning, logic, and perception, which predicts success in most jobs.",
+        "Personality traits like extraversion and conscientiousness, which predict performance across occupations.",
+        "Honesty, reliability, and trustworthiness, which predict theft and misconduct at relatively low cost."
       ]
     },
     {
@@ -430,6 +625,11 @@
       "points": [
         "Text: they capture up to 75% of personality",
         "Not predictive enough to use alone"
+      ],
+      "distractors": [
+        "Extraversion, conscientiousness, intelligence, agreeableness, and openness to experience.",
+        "Integrity, compassion, competitiveness, values, and goals in the person-organization fit model.",
+        "Extraversion, conscientiousness, emotional stability, agreeableness, and integrity at work."
       ]
     },
     {
@@ -441,6 +641,11 @@
       "points": [
         "Emotional stability predicts most jobs",
         "Together they're the 'will do' factors; cognitive ability is 'can do'"
+      ],
+      "distractors": [
+        "Extraversion: outgoing, assertive, sociable, energetic, and talkative.",
+        "Agreeableness: cooperative, trusting, helpful, and good-natured.",
+        "Openness: creative, curious, imaginative, and open to new ideas."
       ]
     },
     {
@@ -451,6 +656,11 @@
       "note": "Read more: 6.10 Evaluative Assessment Methods: Personality and Values Assessments and Integrity Tests",
       "points": [
         "These predict only for specific jobs or criteria"
+      ],
+      "distractors": [
+        "Extraversion: teamwork and helping. Agreeableness: creativity and expat success. Openness: sales and management.",
+        "Extraversion: all occupations. Agreeableness: sales and management. Openness: theft and misconduct at work.",
+        "Extraversion: creativity. Agreeableness: sales and management. Openness: teamwork and helping coworkers."
       ]
     },
     {
@@ -461,6 +671,11 @@
       "note": "Read more: 6.10 Evaluative Assessment Methods: Personality and Values Assessments and Integrity Tests",
       "points": [
         "Protect test scores; consult a lawyer"
+      ],
+      "distractors": [
+        "Personality tests are banned before an offer under Title VII, since they create adverse impact by race.",
+        "Personality tests must be given by a licensed psychologist under FCRA rules for consumer reports.",
+        "Personality questions about religion are required under the UGESP to prove job-relatedness."
       ]
     },
     {
@@ -472,6 +687,11 @@
       "points": [
         "Unrelated to cognitive ability, so they add prediction",
         "Most useful for cash handling, in-home work, valuables"
+      ],
+      "distractors": [
+        "Job-related technical knowledge; high validity, but costly and with high adverse impact across groups.",
+        "General mental ability; they predict success in all jobs but tend to produce strong adverse impact.",
+        "Emotional stability; low cost, but they often violate the ADA by revealing mental health conditions."
       ]
     },
     {
@@ -483,6 +703,11 @@
       "points": [
         "Example: an HR knowledge test for an HR applicant",
         "Minimal adverse impact; predict well for complex jobs"
+      ],
+      "distractors": [
+        "General mental ability, including reasoning, logic, and perception.",
+        "Honesty, reliability, and trustworthiness across job situations.",
+        "Sensory and psychomotor abilities like strength and dexterity."
       ]
     },
     {
@@ -493,6 +718,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "They also let candidates self-select out"
+      ],
+      "distractors": [
+        "They're the most valid method, cost less than tests, and are immune from discrimination claims.",
+        "They're required by federal law, and unstructured ones predict job performance best of all.",
+        "They let managers skip job analysis, and they reveal personality better than any written test."
       ]
     },
     {
@@ -504,6 +734,11 @@
       "points": [
         "Relies on personal theories (eye contact, appearance) and gut judgment",
         "Hard to compare, weak prediction, expensive, legally risky: not recommended"
+      ],
+      "distractors": [
+        "One where every candidate gets the same questions built from job analysis, scored formally.",
+        "One posing hypothetical scenarios and asking what the candidate would do in each case.",
+        "One where a candidate solves a business problem and presents it, thinking out loud."
       ]
     },
     {
@@ -514,6 +749,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews; 6.7 Assessment Methods",
       "points": [
         "Validity only 0.20-0.38"
+      ],
+      "distractors": [
+        "They're illegal under Title VII, cost less than structured ones, and predict too well to be fair.",
+        "They take too long, since standardized scoring adds hours to every interview with candidates.",
+        "They're too rigid, since every candidate gets identical questions with formal scoring rules."
       ]
     },
     {
@@ -525,6 +765,11 @@
       "points": [
         "Trained raters use predetermined scoring keys",
         "Reduces bias from attractiveness and other irrelevant factors"
+      ],
+      "distractors": [
+        "Different questions for each candidate, questions built from a résumé, and an overall gut rating.",
+        "Same questions for everyone, questions written by the hiring manager, and a pass/fail decision.",
+        "Hypothetical scenarios only, questions from O*NET, and scoring by the candidate's peers."
       ]
     },
     {
@@ -535,6 +780,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "Validity 0.51-0.63"
+      ],
+      "distractors": [
+        "It's cheap and needs no training, but it predicts poorly and increases bias and legal risk.",
+        "It predicts poorly and adds bias, but it's cheaper and quicker than unstructured interviews.",
+        "It predicts well and costs less, but it can't assess interpersonal skills or leadership ability."
       ]
     },
     {
@@ -545,6 +795,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "Both can be mixed in one interview"
+      ],
+      "distractors": [
+        "Unstructured (open chat) and panel (several interviewers).",
+        "Case (business problem) and stress (high-pressure questions).",
+        "Screening (by telephone) and evaluative (in person on site)."
       ]
     },
     {
@@ -556,6 +811,11 @@
       "points": [
         "Candidate describes situation, action, result",
         "Cue: 'Tell me about a time...'"
+      ],
+      "distractors": [
+        "A structured interview posing hypothetical scenarios and asking what the candidate would do in each one.",
+        "An interview where questions vary by candidate and there are no standards for judging their answers.",
+        "A structured interview where candidates solve a business problem aloud and present their reasoning."
       ]
     },
     {
@@ -566,6 +826,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "Train scorers, ask consistently, probe skillfully"
+      ],
+      "distractors": [
+        "Candidates with little work experience, since no examples are needed.",
+        "Executive candidates only, since junior roles can't be verified.",
+        "Candidates for technical roles without a job knowledge test."
       ]
     },
     {
@@ -577,6 +842,11 @@
       "points": [
         "Cue: 'What would you do if...' or 'How would you handle...'",
         "Southwest Airlines uses them"
+      ],
+      "distractors": [
+        "A structured interview asking how the candidate actually handled past situations.",
+        "An interview where questions vary by candidate with no standards for scoring.",
+        "Giving the candidate a business problem to solve and present while thinking aloud."
       ]
     },
     {
@@ -587,6 +857,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "Predicts well"
+      ],
+      "distractors": [
+        "Experienced candidates, since they have relevant past situations to describe.",
+        "Executive candidates, since scenarios test strategic thinking at senior levels.",
+        "Candidates for technical roles, since scenarios replace job knowledge tests."
       ]
     },
     {
@@ -598,6 +873,11 @@
       "points": [
         "Candidate may ask questions; rarely one right answer",
         "Common in consulting and investment banking"
+      ],
+      "distractors": [
+        "A structured interview on how the candidate handled past situations at work.",
+        "Asking what the candidate would do in hypothetical workplace scenarios.",
+        "A stack of memos and tasks handled under a time limit at a center."
       ]
     },
     {
@@ -608,6 +888,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "That's why candidates should think aloud"
+      ],
+      "distractors": [
+        "Only whether the final answer is correct; how the candidate reasons and presents doesn't matter.",
+        "Personality traits like extraversion and agreeableness, scored against a Big Five profile.",
+        "Honesty and integrity, by testing whether candidates admit they don't know the answer."
       ]
     },
     {
@@ -619,6 +904,11 @@
       "points": [
         "Behavioral is one type of structured interview; situational is the other",
         "Case focuses on the reasoning process"
+      ],
+      "distractors": [
+        "Structured = real past actions; behavioral = solve a business problem aloud; case = same scored questions.",
+        "Structured = hypothetical scenarios; behavioral = no standards; case = same questions for every candidate.",
+        "Structured = by phone; behavioral = in person; case = done by a panel with an assessment center."
       ]
     },
     {
@@ -629,6 +919,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "Same questions plus scoring key = structured"
+      ],
+      "distractors": [
+        "Past = situational; hypothetical = behavioral; business problem = case; no standards = structured.",
+        "Past = case; hypothetical = unstructured; business problem = behavioral; no standards = situational.",
+        "Past = structured; hypothetical = case; business problem = situational; no standards = behavioral."
       ]
     },
     {
@@ -639,6 +934,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "Anchors make scoring consistent across interviewers"
+      ],
+      "distractors": [
+        "Interviewers give an overall gut rating from 1 to 5 after the interview, without any written anchors.",
+        "Candidates score themselves on each answer, and interviewers adjust the scores up or down as needed.",
+        "Answers are ranked against other candidates' answers, so the best answer of the day always gets a 5."
       ]
     },
     {
@@ -649,6 +949,11 @@
       "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews",
       "points": [
         "Human implicit and explicit bias also causes adverse impact"
+      ],
+      "distractors": [
+        "AI tools are banned by the EEOC, so any employer using them is automatically liable for discrimination.",
+        "AI tools see protected traits directly, so they always produce disparate treatment against applicants.",
+        "AI tools are bias-free by design, so employers don't need to check them for any adverse impact."
       ]
     },
     {
@@ -660,6 +965,11 @@
       "points": [
         "Low adverse impact, well received, hard to fake",
         "Expensive; best for short tasks"
+      ],
+      "distractors": [
+        "Questions about how candidates handled past situations, scored against behavioral anchors.",
+        "Paper tests of general mental ability, such as reasoning, logic, and perception skills.",
+        "Checks done after a contingent offer, like background checks and drug screens."
       ]
     },
     {
@@ -671,6 +981,11 @@
       "points": [
         "Example: a 911 call-taker handling mock calls",
         "Validity 0.54"
+      ],
+      "distractors": [
+        "An interview with the same questions for all, scored formally.",
+        "A test measuring general mental ability like reasoning and logic.",
+        "A paper test of honesty, reliability, and trustworthiness."
       ]
     },
     {
@@ -682,6 +997,11 @@
       "points": [
         "About 6 participants; can last days",
         "Report covers strengths, development needs, overall potential"
+      ],
+      "distractors": [
+        "A building where applicants take cognitive and personality tests on computers under supervision.",
+        "A single structured interview conducted by a panel of three to five trained managers.",
+        "A third-party firm that runs background checks, drug screens, and medical exams after offers."
       ]
     },
     {
@@ -692,6 +1012,11 @@
       "note": "Read more: 6.12 Evaluative Assessment Methods: Work Samples and Interviews (Work Samples & Assessment Centers)",
       "points": [
         "Tests prioritizing and decision making"
+      ],
+      "distractors": [
+        "Talking through a business problem aloud and presenting a solution to interviewers.",
+        "Answering hypothetical scenarios about what you would do in a difficult situation.",
+        "Discussing an issue with other candidates while assessors watch and score each person."
       ]
     },
     {
@@ -703,6 +1028,11 @@
       "points": [
         "Former employers fear defamation claims",
         "Ask about fit and behavior, not just dates"
+      ],
+      "distractors": [
+        "Former employers are legally required to give detailed performance ratings to any employer who asks.",
+        "References are the most valid assessment method in Table 6.3, so they predict job success better.",
+        "Checking references replaces the need for background checks and drug screens after an offer."
       ]
     },
     {
@@ -714,6 +1044,11 @@
       "points": [
         "ADA rule; keep results confidential and stored separately",
         "Collected last so the reason for any rejection is clear"
+      ],
+      "distractors": [
+        "Anytime during interviews, as long as all applicants for the same job are asked to take the same exam.",
+        "Only after the employee starts work and completes a 90-day probationary period in the role.",
+        "Before any offer, if the job is physically demanding and the employer pays for the exam."
       ]
     },
     {
@@ -725,6 +1060,11 @@
       "points": [
         "Drug tests are the most common medical test",
         "Know state rules and union contracts"
+      ],
+      "distractors": [
+        "Only that testing may happen, since giving details lets drug users plan ways to beat the test.",
+        "The names of other applicants who failed, so applicants understand the policy is enforced.",
+        "Nothing in advance; drug tests must be a surprise to be valid under federal law and the ADA."
       ]
     },
     {
@@ -735,6 +1075,11 @@
       "note": "Read more: 6.14 Contingent Assessment Methods: Background Checks",
       "points": [
         "About half of employers run credit checks; critics call them unfair"
+      ],
+      "distractors": [
+        "Employers may check credit only for financial jobs, and applicants can't dispute errors.",
+        "Employers must get a credit score above 650 from any applicant before making an offer.",
+        "Applicants may see background reports only after the hiring decision becomes final."
       ]
     },
     {
@@ -746,6 +1091,11 @@
       "points": [
         "Records disproportionately affect Black and Hispanic applicants",
         "35+ states and 150 cities/counties by 2020"
+      ],
+      "distractors": [
+        "Laws banning employers from ever asking about criminal history, in any job, industry, or stage of hiring.",
+        "Laws requiring a criminal-history checkbox on every application so employers can screen applicants early.",
+        "Laws banning applicants from listing criminal history on applications to protect them from self-incrimination."
       ]
     },
     {
@@ -756,6 +1106,11 @@
       "note": "Read more: 6.14 Contingent Assessment Methods: Background Checks",
       "points": [
         "Allow fair time to contest"
+      ],
+      "distractors": [
+        "Notice that the applicant was hired, with their start date, pay, and benefits enrollment details.",
+        "Notice that the employer is under EEOC investigation for its use of background screening tools.",
+        "Notice of positive background information, sent to the hiring manager before the final interview."
       ]
     },
     {
@@ -766,6 +1121,11 @@
       "note": "Read more: 6.14 Contingent Assessment Methods: Background Checks",
       "points": [
         "Checks must be job-relevant, disclosed, consented to in writing, and documented"
+      ],
+      "distractors": [
+        "Automatically reject anyone with a conviction, since blanket bans are the safest legal approach.",
+        "Ignore criminal records entirely, since considering them always violates Title VII protections.",
+        "Consider only arrests, not convictions, since arrests show more recent risk to the workplace."
       ]
     },
     {
@@ -776,6 +1136,11 @@
       "note": "Read more: 6.15 Case Study: Hiring at MITRE Corporation",
       "points": [
         "Up to 3 months; 2-4 interviews, background checks, one week to decide"
+      ],
+      "distractors": [
+        "It's fast: it skips interviews and hires by lottery among qualified applicants.",
+        "It's selective: it uses many rounds of tests, and it doesn't contact rejects.",
+        "It's cheap: it relies on referrals only and doesn't post jobs publicly."
       ]
     },
     {
@@ -787,6 +1152,11 @@
       "points": [
         "Use when a minimum level is essential (firefighter strength test)",
         "Slower and costlier"
+      ],
+      "distractors": [
+        "Combining scores so high scores on some assessments offset low scores on others.",
+        "Listing candidates from highest to lowest score across every assessment used.",
+        "Hiring first-come, first-served after a few yes/no questions and no interview."
       ]
     },
     {
@@ -798,6 +1168,11 @@
       "points": [
         "Strong experience can make up for a lower GPA",
         "Not for must-have minimums"
+      ],
+      "distractors": [
+        "Candidates must pass each assessment satisfactorily to advance to the next.",
+        "The minimum score a candidate needs to be hired, set by experts or statistics.",
+        "Listing candidates from highest to lowest score without any minimum standard."
       ]
     },
     {
@@ -808,6 +1183,11 @@
       "note": "Read more: 6.16 Choosing Whom to Hire",
       "points": [
         "High for 'hire only the best'; lower for urgent fills or cost leadership"
+      ],
+      "distractors": [
+        "Listing candidates from highest to lowest score across all assessments.",
+        "The score where a candidate passes one hurdle and moves to the next one.",
+        "The average score of all candidates, used to decide who gets interviewed."
       ]
     },
     {
@@ -818,6 +1198,11 @@
       "note": "Read more: 6.16 Choosing Whom to Hire",
       "points": [
         "Pair it with a cut score"
+      ],
+      "distractors": [
+        "Requiring candidates to pass each assessment in turn; it eliminates good candidates too early.",
+        "Combining scores so highs offset lows; it hides weak scores on critical skills from managers.",
+        "Setting a minimum score to be hired; it doesn't show which candidate is strongest overall."
       ]
     },
     {
@@ -828,6 +1213,11 @@
       "note": "Read more: 6.16 Choosing Whom to Hire",
       "points": [
         "Set cut scores high enough to ensure minimum performance"
+      ],
+      "distractors": [
+        "Offer the job to the top-ranked candidate regardless of the cut score, with no backup needed.",
+        "Offer the job to whoever passed the cut score first, keeping all others as backups for later.",
+        "Offer the job to every candidate above the cut score and hire whoever accepts the soonest."
       ]
     },
     {
@@ -839,6 +1229,11 @@
       "points": [
         "Maximize it, not just salary; tailor it to the finalist",
         "Google and SAS pay average but offer standout perks"
+      ],
+      "distractors": [
+        "The firm's statement of what it offers customers in exchange for paying its prices.",
+        "The firm's reputation as an employer, built from employees' online reviews and posts.",
+        "The gap between a new hire's starting pay and the market rate for the same job."
       ]
     },
     {
@@ -850,6 +1245,11 @@
       "points": [
         "Organizational: policies, internal equity, urgency, union contracts, strategy",
         "External: labor market, cost of living, competitor pay"
+      ],
+      "distractors": [
+        "Salary, benefits, signing bonus, relocation pay, and stock options for the finalist.",
+        "Job analysis, recruiting source, selection method, interview score, and references.",
+        "Education, experience, personality, integrity, and cognitive ability of finalists."
       ]
     },
     {
@@ -860,6 +1260,11 @@
       "note": "Read more: 6.17 Making the Job Offer",
       "points": [
         "An organizational factor in offer content"
+      ],
+      "distractors": [
+        "Federal law requires all employees in the same job to be paid the exact same salary at all times.",
+        "New hires always accept less than incumbents, so equity matters only for internal transfers.",
+        "Internal equity only matters for executives, since front-line workers don't compare pay rates."
       ]
     },
     {
@@ -870,6 +1275,11 @@
       "note": "Read more: 6.18 Fairness Perceptions",
       "points": [
         "Usually low for most applicants, since most aren't hired"
+      ],
+      "distractors": [
+        "The perceived fairness of the procedures used to reach a decision.",
+        "The perceived respect candidates receive during the hiring process.",
+        "The fairness of pay distributions across groups within the firm."
       ]
     },
     {
@@ -881,6 +1291,11 @@
       "points": [
         "Driven by job relatedness, a chance to show abilities, proper questions",
         "Violated by a hidden favorite or an illegal question"
+      ],
+      "distractors": [
+        "The perceived fairness of the outcome, such as who got the final job offer.",
+        "The perceived respect and quality of interpersonal treatment candidates get.",
+        "Whether selection rates by group meet the four-fifths rule under the UGESP."
       ]
     },
     {
@@ -891,6 +1306,11 @@
       "note": "Read more: 6.18 Fairness Perceptions",
       "points": [
         "Violated by rude or unprepared interviewers and last-minute cancellations"
+      ],
+      "distractors": [
+        "The perceived fairness of the outcome, such as which candidate got the job.",
+        "The perceived fairness of the policies and procedures used in the decision.",
+        "The legal fairness of selection tools as judged under the Uniform Guidelines."
       ]
     },
     {
@@ -901,6 +1321,11 @@
       "note": "Read more: 6.18 Fairness Perceptions",
       "points": [
         "Candidates prefer definitive, non-invasive, validated methods"
+      ],
+      "distractors": [
+        "A good outcome, fast feedback, and a friendly recruiter who answers questions promptly.",
+        "Low cost of the assessment, short tests, and a high final score for the candidate.",
+        "Being hired, receiving a high salary offer, and having a chance to negotiate the pay."
       ]
     },
     {
@@ -913,6 +1338,11 @@
         "Same rubric for everyone; trained interviewers; no improper questions",
         "Explain the process; communicate promptly, including rejections",
         "Monitor results for adverse impact"
+      ],
+      "distractors": [
+        "Let each interviewer use their own style, give feedback only to finalists, and keep rejected applicants uninformed.",
+        "Use cognitive tests alone, hide how decisions are made, and rely on the hiring manager's judgment for final picks.",
+        "Guarantee every applicant an interview, offer the same pay to all, and let candidates pick their own assessments."
       ]
     },
     {
@@ -923,6 +1353,11 @@
       "note": "Read more: 6.18 Fairness Perceptions",
       "points": [
         "Affects recommendations, buying from the firm, and lawsuit intentions"
+      ],
+      "distractors": [
+        "It doesn't; rejected applicants react the same way no matter how they were treated.",
+        "Fair treatment makes rejection hurt more, so firms should keep rejections brief.",
+        "Fairness only matters legally; rejected applicants rarely talk about their experience."
       ]
     },
     {
@@ -934,6 +1369,11 @@
       "points": [
         "Erratum: book says mid-level ranges are 10-20% negotiable",
         "But its example ($40K-$60K on a $50K job) is ±20%, a 40% spread"
+      ],
+      "distractors": [
+        "All offers are fully negotiable by law, and government jobs typically offer the most flexibility.",
+        "No offers are negotiable, since federal pay laws require fixed scales in the private sector too.",
+        "Only executive offers are negotiable; all front-line jobs use fixed scales set by the union."
       ]
     },
     {
@@ -944,6 +1384,11 @@
       "note": "Read more: 6.19 Negotiating Employment Contracts",
       "points": [
         "Signaling willingness to walk away can loosen talks"
+      ],
+      "distractors": [
+        "The lowest salary you'd accept; take any offer at or above that number.",
+        "The employer's maximum budget for the role, which it shares at the first offer.",
+        "Your bargaining strategy for winning the highest possible offer from them."
       ]
     },
     {
@@ -955,6 +1400,11 @@
       "points": [
         "Negotiators gained 7-8%",
         "Not negotiating can cost $500K+ over a career"
+      ],
+      "distractors": [
+        "Women negotiate more often than men (52% vs. 12%), which narrows pay gaps over time.",
+        "Men and women negotiate at nearly the same rates, so negotiation doesn't affect pay gaps.",
+        "Far fewer men negotiate (12% vs. 52% of women in one MBA study), compounding pay gaps."
       ]
     },
     {
@@ -966,6 +1416,11 @@
       "points": [
         "Written contracts are more common at senior levels",
         "A letter of agreement often substitutes"
+      ],
+      "distractors": [
+        "A written agreement listing pay, duties, and term of employment, signed by both parties at hire.",
+        "A union contract covering wages and conditions for all workers in a bargaining unit.",
+        "A verbal promise of lifetime job security that courts always enforce for long-term staff."
       ]
     },
     {
@@ -978,6 +1433,11 @@
         "Offer: clear terms",
         "Acceptance: exactly as offered",
         "Consideration: exchange of value, usually pay for labor"
+      ],
+      "distractors": [
+        "Offer, signature, and notarization.",
+        "Offer, acceptance, and a written copy.",
+        "Proposal, agreement, and witness."
       ]
     },
     {
@@ -988,6 +1448,11 @@
       "note": "Read more: 6.20 The Employment Contract",
       "points": [
         "Acceptance must match the offer exactly"
+      ],
+      "distractors": [
+        "It's an acceptance, and the employer must pay the extra $10,000.",
+        "It's a rejection, so the employer must withdraw the offer at once.",
+        "It's a binding contract at the original salary amount offered."
       ]
     },
     {
@@ -999,6 +1464,11 @@
       "points": [
         "Only 30% of family businesses reach the 2nd generation",
         "Assess potential, not just current performance"
+      ],
+      "distractors": [
+        "Moving employees among different jobs to build skills through regular cross-training.",
+        "Promoting the most senior employee whenever a leadership position becomes open.",
+        "Hiring outside candidates for every key job so new ideas keep flowing into the firm."
       ]
     },
     {
@@ -1010,6 +1480,11 @@
       "points": [
         "Rejects talented but egotistical candidates",
         "Shuttle drivers report how candidates behave"
+      ],
+      "distractors": [
+        "First assess values for culture fit, then a second interview on skills and experience for job fit.",
+        "First a cognitive ability test, then a group interview where peers vote on who should be hired.",
+        "First a background check and drug screen, then a single case interview with the hiring manager."
       ]
     },
     {
@@ -1020,6 +1495,11 @@
       "note": "Read more: 6.22 Real World Response: How Zappos Hires the Right People",
       "points": [
         "Follows a 4-week paid training on culture and customer obsession"
+      ],
+      "distractors": [
+        "To reward people who complete training; most new hires take the offer and leave right away.",
+        "To reduce payroll costs; about 50% take the offer, which keeps the workforce small.",
+        "To meet a legal requirement for at-will employment disclosures during orientation."
       ]
     },
     {
@@ -1031,6 +1511,11 @@
       "points": [
         "Authorized to work? Stand 8 hours? Lift 50+ lbs?",
         "Monthly turnover fell 60%"
+      ],
+      "distractors": [
+        "Hiring through a structured panel interview, after a background check, drug test, and reference checks.",
+        "Hiring only from employee referrals, with no public postings, interviews, or assessments of any kind.",
+        "Hiring after a single case interview with a manager, with the background check and drug test waived."
       ]
     },
     {
@@ -1042,6 +1527,11 @@
       "points": [
         "Coefficient 0-1: above 0.70 acceptable, 0.80+ preferred",
         "Necessary but not sufficient"
+      ],
+      "distractors": [
+        "Accuracy: a measure predicts what matters, like job success.",
+        "Fairness: a measure produces similar results across groups.",
+        "Difficulty: how hard it is to score well on a measure."
       ]
     },
     {
@@ -1053,6 +1543,11 @@
       "points": [
         "Specific to a purpose and to a group",
         "UGESP requires evidence if a tool has adverse impact"
+      ],
+      "distractors": [
+        "How consistently a measure gives similar scores each time it is used on the same person.",
+        "How fair and job-related a measure seems to the applicants who take it during hiring.",
+        "How much adverse impact a measure has on protected groups compared with the majority group."
       ]
     },
     {
@@ -1064,6 +1559,11 @@
       "points": [
         "Height is reliable but not valid for most jobs",
         "Target: tight cluster = reliable; centered = valid"
+      ],
+      "distractors": [
+        "Yes. Validity can exist without reliability, as long as the scores seem fair to applicants.",
+        "Yes. A valid measure is often unreliable, since jobs and their demands change over time.",
+        "No. Validity is necessary for reliability, and a valid measure is always reliable as well."
       ]
     },
     {

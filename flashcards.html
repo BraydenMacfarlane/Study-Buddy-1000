@@ -569,8 +569,23 @@
         cleanStr(c.front), cleanStr(c.subtitle || c.year), cleanStr(c.note || c.extra), cleanStr(c.answer || c.purpose),
         cleanList(c.points || c.protections), c.type === "scenario" ? "scenario" : "",
         c.type === "scenario" ? cleanList(c.choices) : [], c.type === "scenario" ? Number(c.correct) : null,
-        c.type === "scenario" ? cleanStr(c.explanation) : ""
+        c.type === "scenario" ? cleanStr(c.explanation) : "",
+        c.type === "scenario" ? [] : cleanDistractors(c.distractors, c.answer || c.purpose)
       ]);
+    }
+    // Optional author-written wrong answers for a concept card. Lenient: drops non-strings, blanks,
+    // duplicates and anything equal to the answer; keeps at most 5.
+    function normText(s) { return cleanStr(s).toLowerCase().replace(/\s+/g, " ").replace(/[.;:,!]+$/, ""); }
+    function cleanDistractors(list, answer) {
+      if (!Array.isArray(list)) return [];
+      const seen = new Set([normText(answer)]), out = [];
+      list.forEach((d) => {
+        if (typeof d !== "string" && typeof d !== "number") return;
+        const t = cleanStr(d), k = normText(t);
+        if (!t || seen.has(k)) return;
+        seen.add(k); out.push(t);
+      });
+      return out.slice(0, 5);
     }
     function newSummary() {
       return { foldersAdded: 0, cardsAdded: 0, cardsUpdated: 0, unchanged: 0, skipped: 0, problems: [], decks: [] };
@@ -600,6 +615,9 @@
         card.explanation = cleanStr(raw.explanation);
       } else if (!card.answer && !card.points.length) {
         return { error: "has no answer" };
+      } else {
+        const ds = cleanDistractors(raw.distractors, card.answer);
+        if (ds.length) card.distractors = ds;
       }
       return { card };
     }
@@ -611,8 +629,10 @@
         target.choices = src.choices.slice();
         target.correct = src.correct;
         target.explanation = src.explanation;
+        delete target.distractors;
       } else {
         delete target.type; delete target.choices; delete target.correct; delete target.explanation;
+        if (src.distractors && src.distractors.length) target.distractors = src.distractors.slice(); else delete target.distractors;
       }
       // Deck cards use the modern fields only; drop stale legacy copies so they can't disagree.
       delete target.year; delete target.extra; delete target.purpose; delete target.protections;
@@ -2475,6 +2495,15 @@
       }
       return unique;
     }
+    // Wrong answers: the card's own "distractors" first (3 at random if more), then random picks
+    // from the pool above. Never duplicates, never the correct answer.
+    function pickDistractors(card, n = 3) {
+      const correct = cardAnswerText(card), seen = new Set([normText(correct)]), out = [];
+      const add = (t) => { const k = normText(t); if (t && !seen.has(k) && out.length < n) { seen.add(k); out.push(t); } };
+      shuffle(cleanDistractors(card.distractors, correct)).forEach(add);
+      if (out.length < n) shuffle(distractorPool(card)).forEach(add);
+      return out;
+    }
 
     function makeChoices(card) {
       if (isScenario(card)) {
@@ -2482,7 +2511,7 @@
         return card.choices.map((text, i) => ({ text, correct: i === Number(card.correct) }));
       }
       const correct = cardAnswerText(card);
-      const wrong = shuffle(distractorPool(card)).slice(0, 3);
+      const wrong = pickDistractors(card, 3);
       return shuffle([{ text: correct, correct: true }].concat(wrong.map((text) => ({ text, correct: false }))));
     }
 
@@ -2492,7 +2521,7 @@
       const source = ids && ids.length ? ids : cardsIn(view.folderId).map((c) => c.id);
       const queue = shuffle(source.map((id) => state.cards.find((c) => c.id === id)).filter(Boolean));
       if (!queue.length) return;
-      if (queue.some((c) => !isScenario(c) && distractorPool(c).length < 1)) {
+      if (queue.some((c) => !isScenario(c) && (distractorPool(c).length < 1 && !cleanDistractors(c.distractors, cardAnswerText(c)).length))) {
         alert("Add at least 2 regular (non-scenario) cards in this folder so the quiz can invent wrong answers.");
         return;
       }
@@ -2785,7 +2814,7 @@
     function startBoss() {
       const cards = shuffle(cardsIn(view.folderId));
       if (cards.length < 2) { alert("Add at least 2 cards to this folder for a boss quiz."); return; }
-      if (cards.some((c) => !isScenario(c) && distractorPool(c).length < 1)) {
+      if (cards.some((c) => !isScenario(c) && (distractorPool(c).length < 1 && !cleanDistractors(c.distractors, cardAnswerText(c)).length))) {
         alert("Add at least 2 regular (non-scenario) cards in this folder so the quiz can invent wrong answers.");
         return;
       }

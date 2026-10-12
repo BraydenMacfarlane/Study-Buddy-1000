@@ -15,6 +15,11 @@
       "points": [
         "Affects attraction, retention, motivation, satisfaction, and costs",
         "Shapes what employees WILL do"
+      ],
+      "distractors": [
+        "The HR activity dealing only with base wages and salaries paid to employees in cash.",
+        "The HR activity of ranking jobs by their relative worth inside the organization.",
+        "The payroll function that processes paychecks, tax withholding, and direct deposits."
       ]
     },
     {
@@ -25,6 +30,11 @@
       "note": "Read more: 9.2 Introduction",
       "points": [
         "No firm can pay maximum salary and benefits"
+      ],
+      "distractors": [
+        "Pay as little as possible to cut salary costs, accepting high turnover as the price of savings.",
+        "Pay well above market for every job so the firm never loses an employee to a competitor.",
+        "Pay every employee the same amount so the system is equal and never seen as unfair by anyone."
       ]
     },
     {
@@ -35,6 +45,11 @@
       "note": "Read more: 9.2 Introduction",
       "points": [
         "Ad hoc deals create perceived unfairness"
+      ],
+      "distractors": [
+        "Small firms are exempt from the Equal Pay Act until they adopt a formal grade structure for jobs.",
+        "Ad hoc pay deals are illegal under the FLSA, so small firms must use grades from their first hire.",
+        "Pay grades cost less to administer, since they replace the need for payroll software entirely."
       ]
     },
     {
@@ -45,6 +60,11 @@
       "note": "Read more: 9.3 Real World Challenge: Strategic Global Compensation at Johnson & Johnson",
       "points": [
         "Goal: a consistent pay experience that supports global mobility"
+      ],
+      "distractors": [
+        "It paid far above market everywhere, so labor costs rose too fast after it bought new companies.",
+        "It used one global pay rate for each job, so pay didn't reflect local market differences at all.",
+        "Its pay was consistent, but managers couldn't give raises because every grade was frozen."
       ]
     },
     {
@@ -56,6 +76,11 @@
       "points": [
         "Monetary",
         "Incentives are direct pay (see erratum)"
+      ],
+      "distractors": [
+        "Tangible rewards with financial value that aren't cash, like health insurance and vacation.",
+        "Rewards with no direct dollar payment, like flexible schedules and recognition programs.",
+        "Pay in cash only for hours worked, excluding bonuses, commissions, and stock options."
       ]
     },
     {
@@ -67,6 +92,11 @@
       "points": [
         "Also called benefits",
         "Monetary, but not direct pay"
+      ],
+      "distractors": [
+        "Pay in cash or cash equivalents, such as wages, salary, bonuses, commissions, and stock options.",
+        "Rewards with no direct dollar value, like flexible schedules, recognition, and casual dress codes.",
+        "Pay withheld from wages for taxes and Social Security, which employees receive later in retirement."
       ]
     },
     {
@@ -78,6 +108,11 @@
       "points": [
         "Nonmonetary",
         "Quiz: development opportunities are nonfinancial"
+      ],
+      "distractors": [
+        "Pay in cash or cash equivalents, like wages, salary, bonuses, commissions, and stock options given out.",
+        "Tangible rewards with financial value that aren't cash wages, such as health insurance, vacation, and meals.",
+        "Rewards required by federal law, such as minimum wage, overtime, Social Security, and workers' comp."
       ]
     },
     {
@@ -89,6 +124,11 @@
       "points": [
         "Base salary, bonus, employer-paid insurance: monetary",
         "Flexible Fridays, development, recognition: nonmonetary"
+      ],
+      "distractors": [
+        "Monetary = only cash wages; nonmonetary = benefits like health insurance, retirement, and paid vacation.",
+        "Monetary = rewards set by law; nonmonetary = rewards set by the employer's own compensation policy.",
+        "Monetary = pay for executives; nonmonetary = pay for hourly staff in the form of overtime and tips."
       ]
     },
     {
@@ -100,6 +140,11 @@
       "points": [
         "Erratum: benefits are the indirect form",
         "Teach: bonuses and commissions = direct financial"
+      ],
+      "distractors": [
+        "Indirect. The book is right: bonuses and commissions count as benefits, like health insurance.",
+        "Nonfinancial. Incentives are a form of recognition, like flexible schedules and casual dress.",
+        "Neither. Incentive pay is a separate category that doesn't fit the direct/indirect split."
       ]
     },
     {
@@ -111,6 +156,11 @@
       "points": [
         "Kim wants top pay; Fred left for balance",
         "Options: gift card vs dinner with the boss vs a day off"
+      ],
+      "distractors": [
+        "Tailoring rewards is illegal under the Equal Pay Act, so firms must give every person the same mix.",
+        "Everyone values money above all else, so tailoring only matters for top executives and sales staff.",
+        "Tailoring cuts costs because employees accept lower base pay when given rewards they choose."
       ]
     },
     {
@@ -121,6 +171,11 @@
       "note": "Read more: 9.4 What Is Compensation?",
       "points": [
         "Cost-of-living raises offset inflation"
+      ],
+      "distractors": [
+        "Pay that varies each period with individual, team, or organizational performance results achieved.",
+        "Extra pay for a posting with a lower quality of life or safety risks, added on top of the base salary.",
+        "Pay at termination based on length of service, often exchanged for a release of the employee's claims."
       ]
     },
     {
@@ -131,6 +186,11 @@
       "note": "Read more: 9.4 What Is Compensation?",
       "points": [
         "The release is an agreement not to sue"
+      ],
+      "distractors": [
+        "Pay at termination that federal law requires for every employee, calculated from their final salary.",
+        "Extra pay for a posting with a lower quality of life or safety risks, added on top of the base salary.",
+        "Pay for unused vacation at termination, required in every state under the Fair Labor Standards Act."
       ]
     },
     {
@@ -141,6 +201,11 @@
       "note": "Read more: 9.4 What Is Compensation?",
       "points": [
         "Coca-Cola Enterprises, Rio Tinto, Mercer publish packages online"
+      ],
+      "distractors": [
+        "Only the cash parts of employment: base pay, overtime, bonuses, commissions, and stock options.",
+        "Only the benefits of employment: health insurance, retirement, vacation, and other paid leave.",
+        "Everything required by law: minimum wage, overtime, Social Security, and unemployment insurance."
       ]
     },
     {
@@ -151,6 +216,11 @@
       "note": "Read more: 9.4 What Is Compensation?",
       "points": [
         "A nonfinancial reward (Dale Carnegie's point)"
+      ],
+      "distractors": [
+        "It's costly but legally required for every employee each year.",
+        "It replaces the need for raises, since praise matters more than pay.",
+        "It works only for executives, since front-line staff rarely notice."
       ]
     },
     {
@@ -161,6 +231,11 @@
       "note": "Read more: 9.5 Strategic Compensation",
       "points": [
         "Tailor pay to reinforce the business strategy"
+      ],
+      "distractors": [
+        "Keep pay as low as possible, avoid raises, and ignore market rates so salary costs stay predictable.",
+        "Pay everyone the same, avoid performance differences, and rely on seniority to decide raises.",
+        "Match only the CEO's pay to market, set other pay by negotiation, and keep pay rules confidential."
       ]
     },
     {
@@ -171,6 +246,11 @@
       "note": "Read more: 9.5 Strategic Compensation",
       "points": [
         "Contrast: variable pay"
+      ],
+      "distractors": [
+        "Pay based partly or fully on individual, team, or firm performance.",
+        "Extra pay given at termination, based on years of service.",
+        "A one-time bonus paid at the end of the year to top performers."
       ]
     },
     {
@@ -182,6 +262,11 @@
       "points": [
         "Example: a bonus based on department results",
         "Controls labor costs; base it on what employees can influence"
+      ],
+      "distractors": [
+        "A set amount paid regardless of performance, such as a salary or hourly wage.",
+        "Pay adjusted only for changes in the cost of living, set by a union contract.",
+        "Pay that differs by location, such as a higher salary for jobs in big cities."
       ]
     },
     {
@@ -192,6 +277,11 @@
       "note": "Read more: 9.5 Strategic Compensation",
       "points": [
         "IT example: technicians ~$30-48K up to directors ~$80-110K"
+      ],
+      "distractors": [
+        "The relative emphasis on pay components, such as short-term merit pay vs. stock options.",
+        "A single market rate paid to everyone in a job, regardless of each person's performance.",
+        "All the potential employees in the geographic area an organization might hire from."
       ]
     },
     {
@@ -202,6 +292,11 @@
       "note": "Read more: 9.5 Strategic Compensation",
       "points": [
         "Long-term pay supports long-term goals like innovation"
+      ],
+      "distractors": [
+        "The array of pay rates for different jobs and skills and the differences across job families.",
+        "Pay differences between workers in the same job or field, driven mostly by seniority and merit.",
+        "The ratio of CEO pay to the median worker's pay, which public firms disclose under Dodd-Frank."
       ]
     },
     {
@@ -212,6 +307,11 @@
       "note": "Read more: 9.5 Strategic Compensation",
       "points": [
         "Pay as an investment, not just a cost"
+      ],
+      "distractors": [
+        "Pay above market for every job, so money becomes the main reason people stay.",
+        "Pay below market to save costs, using perks and culture to make up the difference.",
+        "Pay matches whatever each employee negotiates, regardless of what the market pays."
       ]
     },
     {
@@ -222,6 +322,11 @@
       "note": "Read more: 9.6 What Influences Direct Financial Compensation?",
       "points": [
         "External: labor market, economy, unions, legislation"
+      ],
+      "distractors": [
+        "Base pay, benefits, bonuses, and stock options in each package.",
+        "Skill, effort, responsibility, and working conditions in each job.",
+        "Recruiting, selection, training, and appraisal practices used."
       ]
     },
     {
@@ -233,6 +338,11 @@
       "points": [
         "Google, SAS, Starbucks",
         "More motivation, lower turnover"
+      ],
+      "distractors": [
+        "A firm that pays at or below market, often with a low-cost business strategy.",
+        "A firm that matches the market pay rate exactly for every single job it has.",
+        "A firm whose pay is set by union contracts that cover its entire industry."
       ]
     },
     {
@@ -244,6 +354,11 @@
       "points": [
         "May end up with higher total costs",
         "Firms can lead for key jobs and follow elsewhere"
+      ],
+      "distractors": [
+        "A firm paying above competitors, often with an innovation strategy; risks high costs and weak cost control in tight markets.",
+        "A firm matching the market for every job, often with a service strategy; risks weaker recruiting of top talent.",
+        "A firm whose pay is set by unions, often in manufacturing; risks strikes when contracts expire each few years."
       ]
     },
     {
@@ -254,6 +369,11 @@
       "note": "Read more: 9.6 What Influences Direct Financial Compensation?",
       "points": [
         "Set the job's worth, then hire at that rate"
+      ],
+      "distractors": [
+        "The current holder's seniority, education, negotiation skill, and personal financial needs at home.",
+        "Market supply, the economy, union contracts, and cost-of-living changes in each geographic region.",
+        "Job titles, the department's size, the manager's budget, and the company's current stock price."
       ]
     },
     {
@@ -264,6 +384,11 @@
       "note": "Read more: 9.6 What Influences Direct Financial Compensation?",
       "points": [
         "Private-college fundraisers; R&D executives in innovative firms"
+      ],
+      "distractors": [
+        "Jobs found across many firms serve as reference points, so they gain influence and higher pay.",
+        "Pay is set by the market's labor supply, so jobs with the most applicants get the most pay.",
+        "Jobs with the most employees get the highest pay, since they consume the most firm resources."
       ]
     },
     {
@@ -275,6 +400,11 @@
       "points": [
         "Also experience, education, skills",
         "Identify, explain, and document them"
+      ],
+      "distractors": [
+        "Pay differences between different jobs, driven mostly by skill, effort, and responsibility.",
+        "Extra pay for a posting with a lower quality of life or safety risks, added to base salary.",
+        "The gap between federal and state minimum wages that applies in a given location."
       ]
     },
     {
@@ -285,6 +415,11 @@
       "note": "Read more: 9.6 What Influences Direct Financial Compensation?",
       "points": [
         "Aetna skips salary history and reviews raises"
+      ],
+      "distractors": [
+        "Paying every job in the company the same amount, regardless of skill or responsibility.",
+        "Paying the same as competitors for similar jobs in the same local labor market.",
+        "Paying equal amounts for jobs of equal difficulty, regardless of who holds them."
       ]
     },
     {
@@ -295,6 +430,11 @@
       "note": "Read more: 9.6 What Influences Direct Financial Compensation?",
       "points": [
         "Across-the-board raises hadn't worked; data showed preferences"
+      ],
+      "distractors": [
+        "Doubling the annual raise improved retention enough to pay for itself within a single year.",
+        "Eliminating raises in favor of bonuses improved retention and cut payroll costs by half.",
+        "Moving raises to every quarter raised costs sharply but had no effect on retention at all."
       ]
     },
     {
@@ -305,6 +445,11 @@
       "note": "Read more: 9.7 The Influence of External Forces on Direct Financial Compensation",
       "points": [
         "Cashier: ~5-mile radius; VP: national or global"
+      ],
+      "distractors": [
+        "All the employees who currently work for an organization in any of its locations worldwide.",
+        "The array of pay rates for different jobs and the differences between job families.",
+        "The set of jobs found across many organizations that serve as pay reference points."
       ]
     },
     {
@@ -315,6 +460,11 @@
       "note": "Read more: 9.7 The Influence of External Forces on Direct Financial Compensation",
       "points": [
         "Shortages: nurses, software engineers"
+      ],
+      "distractors": [
+        "When it contracts, labor supply falls and market rates rise; a strong economy pushes rates down.",
+        "The economy doesn't affect pay, since rates are set by job evaluation inside each firm.",
+        "When it grows, labor supply rises and market rates fall as more people look for jobs."
       ]
     },
     {
@@ -325,6 +475,11 @@
       "note": "Read more: 9.7 The Influence of External Forces on Direct Financial Compensation",
       "points": [
         "Wagner Act"
+      ],
+      "distractors": [
+        "Through federal law: unions set the minimum wage, and nonunion employers must match union pay rates by law.",
+        "Unions don't influence pay, since wages are a permissive subject that employers may decide on their own.",
+        "Through strikes only: wages can't be bargained over, but strikes can force employers to raise their pay."
       ]
     },
     {
@@ -335,6 +490,11 @@
       "note": "Read more: 9.7 The Influence of External Forces on Direct Financial Compensation",
       "points": [
         "Common in union contracts"
+      ],
+      "distractors": [
+        "Bonuses paid when the company's profits exceed targets, shared equally among employees.",
+        "Extra pay for postings with lower quality of life or safety risks at overseas locations.",
+        "Above-market wages that pay for themselves through higher productivity and lower turnover."
       ]
     },
     {
@@ -346,6 +506,11 @@
       "points": [
         "$139M+ retirement package; SEC later tightened disclosure",
         "Appeals court let him keep the pay"
+      ],
+      "distractors": [
+        "Executive pay should always be tied to stock price, since boards can't judge it any other way.",
+        "Boards should let CEOs set their own pay, since disclosure rules apply only to public companies.",
+        "Executive pay is private, so boards should avoid reviewing it to protect the executive's privacy."
       ]
     },
     {
@@ -357,6 +522,11 @@
       "points": [
         "Common targets: 40th-60th or 60th-75th percentile",
         "Hard for unique, home-grown jobs"
+      ],
+      "distractors": [
+        "Setting a job's worth by ranking it against the organization's other jobs internally.",
+        "Setting a job's worth by scoring compensable factors and totaling the points.",
+        "Setting a job's worth by what the current employee asks for during negotiation."
       ]
     },
     {
@@ -367,6 +537,11 @@
       "note": "Read more: 9.9 Evaluating the Worth of a Job",
       "points": [
         "Free or cheap data isn't always the best"
+      ],
+      "distractors": [
+        "Surveys of employees' satisfaction with their own pay, run each year by the HR team.",
+        "Government reports listing the legal minimum pay for each job title in every state.",
+        "Internal surveys that rank jobs by their relative value using compensable factors."
       ]
     },
     {
@@ -377,6 +552,11 @@
       "note": "Read more: 9.9 Evaluating the Worth of a Job",
       "points": [
         "Titles may vary"
+      ],
+      "distractors": [
+        "Jobs unique to one organization, used to set pay for similar roles inside that organization only.",
+        "The highest-paid jobs in a firm, used to cap the pay of every other job in the same department.",
+        "Jobs filled by union members across an industry, used to set the pay of nonunion employees nearby."
       ]
     },
     {
@@ -387,6 +567,11 @@
       "note": "Read more: 9.9 Evaluating the Worth of a Job",
       "points": [
         "Combine with job evaluation"
+      ],
+      "distractors": [
+        "Market data is illegal to use under the Equal Pay Act, so firms must rely on job evaluation alone.",
+        "Market pricing is too expensive for most firms, since compensation surveys cost more than raises.",
+        "Market rates always match internal value, but surveys are released too late to be useful."
       ]
     },
     {
@@ -397,6 +582,11 @@
       "note": "Read more: 9.9 Evaluating the Worth of a Job",
       "points": [
         "Pay leader for strategic jobs"
+      ],
+      "distractors": [
+        "At the 25th-40th percentile of the market, saving money to fund its premium room service.",
+        "At exactly the 50th percentile, matching the market to keep pay costs predictable.",
+        "By union contract in each city, matching what other hotel chains pay their managers."
       ]
     },
     {
@@ -407,6 +597,11 @@
       "note": "Read more: 9.10 Job Evaluation Methods",
       "points": [
         "Results become ranks, grades, or points, then dollars"
+      ],
+      "distractors": [
+        "A systematic process for rating each employee's performance against their goals and standards.",
+        "Setting a job's worth based only on what other employers pay for similar jobs in the market.",
+        "A process for deciding raises based on each person's experience, education, and current pay."
       ]
     },
     {
@@ -417,6 +612,11 @@
       "note": "Read more: 9.10 Job Evaluation Methods",
       "points": [
         "Non-quantitative"
+      ],
+      "distractors": [
+        "Slotting jobs into predefined grades or classes with written descriptions; best for large firms.",
+        "Scoring jobs on weighted factors and totaling points; objective and best for 100+ jobs.",
+        "Comparing each job to market data; simple and objective, best for any number of jobs."
       ]
     },
     {
@@ -428,6 +628,11 @@
       "points": [
         "Erratum: book calls it job analysis; it's a job evaluation method",
         "Can lump dissimilar jobs together"
+      ],
+      "distractors": [
+        "Ordering whole jobs from most to least valuable to the organization.",
+        "Scoring jobs on weighted compensable factors and totaling the points.",
+        "Setting a job's worth from what other employers pay in the market."
       ]
     },
     {
@@ -438,6 +643,11 @@
       "note": "Read more: 9.10 Job Evaluation Methods",
       "points": [
         "Classes: executives, skilled, semiskilled, unskilled"
+      ],
+      "distractors": [
+        "It lists 'skilled' twice; the second class (managers, engineers) was likely meant to be professional.",
+        "It's a ranking method, not classification, since the jobs are simply ordered from high to low.",
+        "It lists cashiers as skilled; the error is that clerical jobs should rank above all trades."
       ]
     },
     {
@@ -449,6 +659,11 @@
       "points": [
         "Group jobs by point ranges into pay grades",
         "Systematic; complex; can embed bias"
+      ],
+      "distractors": [
+        "Ordering whole jobs from most to least valuable to the firm, then grouping them into pay grades.",
+        "Slotting jobs into predefined grades with written descriptions, then setting the pay for each grade.",
+        "Setting a job's worth using external data on what other employers pay for similar jobs in the market."
       ]
     },
     {
@@ -459,6 +674,11 @@
       "note": "Read more: 9.10 Job Evaluation Methods",
       "points": [
         "Each has levels worth points"
+      ],
+      "distractors": [
+        "Personal traits used to set pay, typically education, seniority, performance, and negotiation skill.",
+        "Market forces used to set pay, typically labor supply, the economy, unions, and the cost of living.",
+        "Pay components used to build packages, typically salary, bonuses, benefits, and stock options."
       ]
     },
     {
@@ -470,6 +690,11 @@
       "points": [
         "Weights vary by job type",
         "Critics: may favor male-dominated management jobs"
+      ],
+      "distractors": [
+        "Skill, effort, responsibility, and working conditions.",
+        "Know-how, seniority, accountability, and job performance.",
+        "Education, problem solving, experience, and mental effort."
       ]
     },
     {
@@ -481,6 +706,11 @@
       "points": [
         "187 job elements in six sections",
         "Statistical rather than subjective factor weights"
+      ],
+      "distractors": [
+        "A government database of job descriptions used to write job ads, scored by applicant flow from postings.",
+        "A Big Five personality test used to select managers, scored against the firm's top performer profiles.",
+        "A compensation survey of what employers pay for benchmark jobs, scored with an internal equation."
       ]
     },
     {
@@ -491,6 +721,11 @@
       "note": "Read more: 9.12 Job Pricing",
       "points": [
         "Three systems: single-rate, pay grades, broadbanding"
+      ],
+      "distractors": [
+        "Judging the relative value of jobs inside the organization.",
+        "Gathering survey data on what competitors pay for similar jobs.",
+        "Setting one market rate for every worker in a job regardless."
       ]
     },
     {
@@ -502,6 +737,11 @@
       "points": [
         "Fits low-discretion jobs like assembly lines",
         "Unions favor it"
+      ],
+      "distractors": [
+        "A pay range with a minimum, midpoint, and maximum for each job.",
+        "Very wide pay grades that merge several smaller grades into one.",
+        "Pay based partly or fully on team or organization performance."
       ]
     },
     {
@@ -513,6 +753,11 @@
       "points": [
         "New hires start near the minimum and move up",
         "Poor fit for CEOs or sales"
+      ],
+      "distractors": [
+        "One market rate paid to everyone in a job, regardless of their performance or experience.",
+        "Very wide pay grades (±30-60%) that merge several grades together into a single band.",
+        "A systematic process for judging the relative value of jobs within an organization."
       ]
     },
     {
@@ -523,6 +768,11 @@
       "note": "Read more: 9.12 Job Pricing",
       "points": [
         "A grade's max may overlap the next grade's min"
+      ],
+      "distractors": [
+        "Ranges are typically ±30-60% of the midpoint; each midpoint is 5-10% above the prior grade's.",
+        "Ranges are typically ±5-10% of the midpoint; each midpoint is 50% above the prior grade's.",
+        "Ranges are typically ±15-25% of the maximum; each maximum is 20-30% above the prior grade's."
       ]
     },
     {
@@ -533,6 +783,11 @@
       "note": "Read more: 9.12 Job Pricing; 9.21 Real World Response: Strategic Global Compensation at Johnson & Johnson",
       "points": [
         "J&J did this until people fit their grade"
+      ],
+      "distractors": [
+        "They get a pay cut to bring them back within their range.",
+        "They must be promoted to the next grade within one year.",
+        "They get the same base raise as everyone else in their grade."
       ]
     },
     {
@@ -544,6 +799,11 @@
       "points": [
         "Flexibility for flatter organizations",
         "Weakens cost control; managers need training"
+      ],
+      "distractors": [
+        "Narrow pay grades (±5-10%) that split one grade into several smaller bands.",
+        "Paying one market rate to everyone in a job, regardless of performance.",
+        "Paying above market to every employee so pay covers broader responsibilities."
       ]
     },
     {
@@ -554,6 +814,11 @@
       "note": "Read more: 9.12 Job Pricing",
       "points": [
         "Table 9.5 grade 1: $12K / $15K / $18K"
+      ],
+      "distractors": [
+        "(Maximum − minimum) ÷ minimum. Grade 1: ($18,000 − $12,000) ÷ $12,000 = ±50%.",
+        "(Maximum − midpoint) ÷ maximum. Grade 1: ($18,000 − $15,000) ÷ $18,000 = ±17%.",
+        "(Midpoint − minimum) ÷ maximum. Grade 1: ($15,000 − $12,000) ÷ $18,000 = ±17%."
       ]
     },
     {
@@ -564,6 +829,11 @@
       "note": "Read more: 9.12 Job Pricing",
       "points": [
         "Guideline: 20-30% between grades"
+      ],
+      "distractors": [
+        "(Higher midpoint − lower midpoint) ÷ higher midpoint. $19K to $23K: $4K ÷ $23K ≈ 17%.",
+        "(Higher maximum − lower minimum) ÷ lower minimum. $19K to $23K: $4K ÷ $19K ≈ 21%.",
+        "Higher midpoint ÷ lower midpoint, with no subtraction. $19K to $23K: $23K ÷ $19K ≈ 121%."
       ]
     },
     {
@@ -574,6 +844,11 @@
       "note": "Read more: 9.12 Job Pricing",
       "points": [
         "A ±20% range around the midpoint gives a 50% spread"
+      ],
+      "distractors": [
+        "(Maximum − minimum) ÷ maximum. Grade 1: ($18,000 − $12,000) ÷ $18,000 = 33%.",
+        "(Maximum − midpoint) ÷ midpoint. Grade 1: ($18,000 − $15,000) ÷ $15,000 = 20%.",
+        "Maximum ÷ minimum, without subtraction. Grade 1: $18,000 ÷ $12,000 = 150%."
       ]
     },
     {
@@ -585,6 +860,11 @@
       "points": [
         "120 skill + 80 responsibility + 30 effort + 20 conditions = 250",
         "250 falls in the text's 200-250 grade ($55,000)"
+      ],
+      "distractors": [
+        "Rank the job against others, then put it in the grade of the job ranked just above it.",
+        "Look up the job's market rate, then find the grade whose pay range contains that rate.",
+        "Average its factor points, then put it in the grade with the most jobs already in it."
       ]
     },
     {
@@ -596,6 +876,11 @@
       "points": [
         "Two-thirds of market-paid employees think they're underpaid",
         "PwC shows company and market midpoints"
+      ],
+      "distractors": [
+        "Pay is confidential by law, so explaining it raises legal risk without any effect on retention or fairness.",
+        "Pay is a purely rational measure of output, so explanations matter less than the amount paid each period.",
+        "Pay communication matters only during hiring, since current employees rarely compare their pay to others."
       ]
     },
     {
@@ -607,6 +892,11 @@
       "points": [
         "Lower turnover, less shirking, better hires",
         "Walmart: customer scores up 90 straight weeks"
+      ],
+      "distractors": [
+        "Below-market wages that save money because employees accept lower pay for job security.",
+        "Wages set by a union contract, rising automatically with the cost-of-living index.",
+        "Pay at termination based on years of service, often exchanged for a release of claims."
       ]
     },
     {
@@ -617,6 +907,11 @@
       "note": "Read more: 9.14 Compensation Issues",
       "points": [
         "Employees see their pay against the market range for their skills"
+      ],
+      "distractors": [
+        "It replaces managers' pay decisions entirely with AI, so no human can override any recommendation.",
+        "It uses only market survey data, ignoring internal data so pay matches competitors exactly.",
+        "It uses AI to cut pay for high performers who are unlikely to leave, saving salary costs overall."
       ]
     },
     {
@@ -627,6 +922,11 @@
       "note": "Read more: 9.15 Equity",
       "points": [
         "A lower-level job paid more than a higher one is inequitable"
+      ],
+      "distractors": [
+        "Pay seen as fair compared with what other employers pay.",
+        "Fairness between people in the same job at the same firm.",
+        "Equal pay for jobs of equal difficulty, regardless of holder."
       ]
     },
     {
@@ -637,6 +937,11 @@
       "note": "Read more: 9.15 Equity",
       "points": [
         "Example: a less experienced new hire paid more"
+      ],
+      "distractors": [
+        "Pay seen as fair compared with other jobs in the same firm.",
+        "Pay seen as fair compared with what other employers pay.",
+        "Equal pay for jobs of equal worth, regardless of their field."
       ]
     },
     {
@@ -647,6 +952,11 @@
       "note": "Read more: 9.15 Equity",
       "points": [
         "Example: a competitor pays 20% more"
+      ],
+      "distractors": [
+        "Pay seen as fair compared with other jobs inside the same organization.",
+        "Fairness between people in similar jobs within the same organization.",
+        "Equal pay for jobs of equal difficulty, regardless of who holds them."
       ]
     },
     {
@@ -657,6 +967,11 @@
       "note": "Read more: 9.15 Equity",
       "points": [
         "Targets lower pay in female-dominated jobs"
+      ],
+      "distractors": [
+        "The legal rule that men and women doing equal work must receive the same pay.",
+        "Paying people in the same job and location fairly regardless of their gender.",
+        "Pay seen as fair compared with what other employers pay for similar jobs nearby."
       ]
     },
     {
@@ -668,6 +983,11 @@
       "points": [
         "Main cause: rising market rates for scarce skills",
         "Fixes: equity adjustments, development, pay for performance"
+      ],
+      "distractors": [
+        "When raises for top performers shrink the gap between pay grades over time.",
+        "When experienced employees' pay rises above the maximum of their pay range.",
+        "When the gap between CEO pay and the median worker's pay keeps widening."
       ]
     },
     {
@@ -679,6 +999,11 @@
       "points": [
         "'Star' systems undermine teams",
         "Southwest: profit sharing; crews log a 'team delay'"
+      ],
+      "distractors": [
+        "Only with individual rewards, since team rewards let low performers coast on the work of others.",
+        "Mostly with individual rewards (80%+), with a small team bonus for meeting the unit's yearly goal.",
+        "With equal base pay and no incentives, since any reward creates competition within the team."
       ]
     },
     {
@@ -689,6 +1014,11 @@
       "note": "Read more: 9.17 Executive Compensation",
       "points": [
         "Washington Mutual's CEO left with $19M after 17 days"
+      ],
+      "distractors": [
+        "A severance payment required by law for any executive who resigns before their contract ends.",
+        "Above-market wages that pay for themselves through higher productivity and lower turnover costs.",
+        "A bonus paid to executives who complete a merger, regardless of whether the company is taken over."
       ]
     },
     {
@@ -699,6 +1029,11 @@
       "note": "Read more: 9.17 Executive Compensation",
       "points": [
         "Applies to public companies"
+      ],
+      "distractors": [
+        "Caps on CEO pay at 20 times the median worker's pay and bans on golden parachutes for executives.",
+        "Disclosure of every employee's salary and board approval of all raises above 10% each year.",
+        "Shareholder approval of all hiring decisions and a ban on stock options for top executives."
       ]
     },
     {
@@ -710,6 +1045,11 @@
       "points": [
         "Immelt: a 20x multiple over top managers is 'lunacy'",
         "Gravity Payments set a $70K minimum salary"
+      ],
+      "distractors": [
+        "They raise perceived fairness, since employees see a clear path to high pay through promotion.",
+        "They have no effect on employees, since workers compare their pay only to peers' pay.",
+        "They're illegal under Dodd-Frank, which caps CEO pay at a fixed multiple of average pay."
       ]
     },
     {
@@ -720,6 +1060,11 @@
       "note": "Read more: 9.18 Global Compensation",
       "points": [
         "J&J reviewed pay more often in hyperinflationary countries"
+      ],
+      "distractors": [
+        "Lump-sum bonuses, stock options, golden parachutes, comp time, severance pay, and retention awards.",
+        "Pay grades, broadbanding, job evaluation, market pricing, and surveys of benchmark jobs by country.",
+        "Overtime pay, minimum wage increases, workers' compensation, and unemployment insurance payments."
       ]
     },
     {
@@ -730,6 +1075,11 @@
       "note": "Read more: 9.18 Global Compensation",
       "points": [
         "Tax equalization offsets higher foreign taxes"
+      ],
+      "distractors": [
+        "Extra pay for working overtime beyond 40 hours in a single week.",
+        "Pay to cover higher housing costs in an expensive U.S. home city.",
+        "A bonus for completing a difficult project ahead of its deadline."
       ]
     },
     {
@@ -740,6 +1090,11 @@
       "note": "Read more: 9.19 Compensation Ethics",
       "points": [
         "Women earn about 80% of what men earn"
+      ],
+      "distractors": [
+        "Fair pay is set by federal law, so any pay that meets minimum wage is ethically fair to everyone.",
+        "Fair pay means everyone earns the same, so any pay differences raise ethical concerns under law.",
+        "Pay is a private matter between employer and employee, so fairness raises no ethical questions."
       ]
     },
     {
@@ -751,6 +1106,11 @@
       "points": [
         "Applies to nonexempt employees",
         "Doesn't require hazard pay"
+      ],
+      "distractors": [
+        "A federal minimum wage and overtime of at least 2x the regular rate for hours over 40 in a workweek.",
+        "A federal minimum wage and overtime of at least 1.5x the regular rate for hours over 8 in any day.",
+        "Equal pay for men and women plus overtime of 1.5x the regular rate for hours over 40 in a week."
       ]
     },
     {
@@ -761,6 +1121,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "Executive, administrative, professional (salary and duties tests)"
+      ],
+      "distractors": [
+        "Hourly employees covered by FLSA minimum wage and overtime rules.",
+        "Any salaried employee, regardless of their duties or salary level.",
+        "Employees who choose to waive overtime by signing an agreement."
       ]
     },
     {
@@ -771,6 +1136,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "Exemption must be earned by meeting the criteria"
+      ],
+      "distractors": [
+        "Salaried employees who meet an FLSA exemption test and don't get overtime; everyone is exempt by default.",
+        "Employees exempt from income tax withholding, typically part-time; employees choose their status at hire.",
+        "Employees covered by union contracts, typically hourly; FLSA rules don't apply to anyone else at all."
       ]
     },
     {
@@ -781,6 +1151,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "Unauthorized overtime must still be paid"
+      ],
+      "distractors": [
+        "Yes. Any employer may give comp time instead of overtime if the employee agrees to it in writing.",
+        "Yes, but only for salaried exempt employees, who earn 1.5 hours of comp time per overtime hour.",
+        "No. Only federal agencies may use comp time; state and local governments must pay cash overtime."
       ]
     },
     {
@@ -791,6 +1166,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "Paid time off isn't counted toward overtime hours"
+      ],
+      "distractors": [
+        "Only time spent on productive tasks; meetings, training, and rest breaks are excluded by law.",
+        "Only scheduled shift hours; travel, on-call time, and changing clothes are never compensable.",
+        "Commuting time, unpaid meal breaks, and time spent off duty while waiting for a shift to start."
       ]
     },
     {
@@ -802,6 +1182,11 @@
       "points": [
         "Same rule for overtime standards",
         "Dollar figures change; don't memorize them"
+      ],
+      "distractors": [
+        "The lower of the two.",
+        "Always the federal rate.",
+        "Always the state's rate."
       ]
     },
     {
@@ -812,6 +1197,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "Exempt employees get no overtime"
+      ],
+      "distractors": [
+        "All hours at 1.5x once the week exceeds 40. At $20/hr for 46 hrs: 46 × $30 = $1,380 total pay.",
+        "Regular hours at base rate plus hours over 40 at 2x. At $20/hr for 46 hrs: $800 + 6 × $40 = $1,040.",
+        "Overtime is owed only if approved in advance; at $20/hr for 46 unapproved hrs: 46 × $20 = $920."
       ]
     },
     {
@@ -823,6 +1213,11 @@
       "points": [
         "Enforced by the EEOC",
         "Allowed: seniority, education, experience, shift, conditions, extra duties"
+      ],
+      "distractors": [
+        "Pay differences for jobs of comparable worth, such as nurses and electricians, regardless of sex.",
+        "Pay differences based on race, color, religion, sex, or national origin for any type of job.",
+        "Paying women less than the federal minimum wage or denying them overtime under the FLSA."
       ]
     },
     {
@@ -833,6 +1228,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "Erratum: the book lists capped compensatory/punitive damages, which come from Title VII"
+      ],
+      "distractors": [
+        "Capped compensatory and punitive damages, as under Title VII.",
+        "Reinstatement only, with no back pay or other damages owed.",
+        "Back pay plus triple damages and the employee's attorney fees."
       ]
     },
     {
@@ -843,6 +1243,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "No-fault; most employers must insure"
+      ],
+      "distractors": [
+        "Federal insurance paying wages to workers who lose their jobs through no fault of their own while they look for work.",
+        "A federal program that pays retirement income to workers based on earnings and work credits earned over time.",
+        "Employer-paid sick leave required by federal law, covering illness or injury that happens on or off the job."
       ]
     },
     {
@@ -853,6 +1258,11 @@
       "note": "Read more: 9.20 Compensation Laws and Regulations",
       "points": [
         "Employers must give record access"
+      ],
+      "distractors": [
+        "The employer, who must prove every hour worked, even if the employee kept no records.",
+        "The Department of Labor, which must prove the claim before any court will hear it.",
+        "Both sides equally, and the court splits the difference when records are incomplete."
       ]
     },
     {
@@ -864,6 +1274,11 @@
       "points": [
         "Lump sums for anyone above their grade",
         "Result: consistency, mobility, easier acquisitions"
+      ],
+      "distractors": [
+        "It cut pay for overpaid employees immediately so everyone fit their new range on day one.",
+        "It set one global pay rate for each title, ignoring country and market differences.",
+        "It froze all pay for two years until market rates caught up with its pay levels."
       ]
     },
     {
@@ -874,6 +1289,11 @@
       "note": "Read more: 9.22 Strategic HRM Exercise: Compensation Decisions",
       "points": [
         "Know your range before the interview"
+      ],
+      "distractors": [
+        "Share your salary history first, since employers must use it to set pay under federal law.",
+        "Refuse to discuss pay until after you accept, since negotiation is illegal once an offer is made.",
+        "Ask for the highest number possible without data, since any offer can be negotiated upward later."
       ]
     },
     {

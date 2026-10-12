@@ -1001,6 +1001,73 @@ async function testSlotsAndKnow() {
   await A.ctx.close(); await B.ctx.close();
 }
 
+/* ---------- Optional per-card distractors ---------- */
+async function testDistractors() {
+  console.log('\n[15] Optional per-card "distractors" for concept cards');
+  const cards = [
+    { id: 'd-1', front: 'Q1', answer: 'Right one', distractors: ['Wrong A', 'Wrong B', 'Wrong C', 'Wrong D', 'Wrong E'] },
+    { id: 'd-2', front: 'Q2', answer: 'Second right', distractors: ['Only wrong', 'second RIGHT', 'Only wrong ', '', 7] },
+    { id: 'd-3', front: 'Q3', answer: 'Third right' },
+    { id: 'd-4', front: 'Q4', answer: 'Fourth right' },
+    { id: 'd-5', front: 'Q5', answer: 'Fifth right' },
+    { id: 'd-6', type: 'scenario', front: 'S', choices: ['L', 'I'], correct: 0, explanation: 'x', distractors: ['nope', 'nah'] }
+  ];
+  const file = tmpJson('distractor-deck.json', { id: 'dtest', folder: 'Distractor test', cards });
+  const { ctx, p } = await page();
+  await p.goto(APP);
+  const sum = await importFile(p, file);
+  ok(/6 cards added/.test(sum), 'lenient import accepts a deck with messy distractors: ' + sum);
+  const st = await S(p, () => ({ d1: state.cards.find((c) => c.id === 'd-1').distractors, d2: state.cards.find((c) => c.id === 'd-2').distractors, d3: 'distractors' in state.cards.find((c) => c.id === 'd-3'), d6: 'distractors' in state.cards.find((c) => c.id === 'd-6') }));
+  ok(JSON.stringify(st.d1) === JSON.stringify(['Wrong A', 'Wrong B', 'Wrong C', 'Wrong D', 'Wrong E']), 'valid distractors kept as written');
+  ok(JSON.stringify(st.d2) === JSON.stringify(['Only wrong', '7']) , 'import drops blanks, duplicates and the answer itself: ' + JSON.stringify(st.d2));
+  ok(!st.d3 && !st.d6, 'no distractors field on cards without one or on scenarios');
+  const runs = await S(p, () => {
+    const pick = (id) => makeChoices(state.cards.find((c) => c.id === id));
+    const r = { d1: [], d2: [], d3: [] };
+    for (let i = 0; i < 40; i++) { r.d1.push(pick('d-1')); r.d2.push(pick('d-2')); r.d3.push(pick('d-3')); }
+    return r;
+  });
+  const wrongs = (cs) => cs.filter((c) => !c.correct).map((c) => c.text);
+  ok(runs.d1.every((cs) => cs.length === 4 && cs.filter((c) => c.correct).length === 1 && wrongs(cs).every((t) => /^Wrong [A-E]$/.test(t))), 'card with 5 distractors: 3 of its own are used every time');
+  ok(new Set(runs.d1.flatMap(wrongs)).size === 5, 'all 5 authored distractors rotate in over several quizzes');
+  ok(runs.d2.every((cs) => cs.length === 4 && wrongs(cs).includes('Only wrong') && wrongs(cs).includes('7') && new Set(cs.map((c) => c.text.toLowerCase())).size === 4 && !wrongs(cs).some((t) => /second right/i.test(t))), 'fewer than 3: authored ones first, filled from other cards, no duplicates or answer');
+  const others = ['Right one', 'Second right', 'Fourth right', 'Fifth right'];
+  ok(runs.d3.every((cs) => cs.length === 4 && wrongs(cs).every((t) => others.includes(t))) && new Set(runs.d3.flatMap(wrongs)).size === 4, 'card without distractors keeps random picks from other cards');
+  await p.click('[data-open="deck-dtest"]'); await skipVis(p); await p.click('#quizBtn'); await skipVis(p);
+  ok(await p.locator('[data-choice]').count() >= 2 && await noBroke(p), 'quiz runs on the deck');
+  await ctx.close();
+  // Real Ch 2 deck: a quiz question uses the card's own authored distractors.
+  {
+    const { ctx, p } = await page();
+    await p.goto(REAL);
+    const info = await S(p, () => ({ total: state.cards.filter((c) => (folderById(c.folderId) || {}).deckId).length, withD: state.cards.filter((c) => c.distractors && c.distractors.length === 3).length, ch1: cardsIn('deck-c202-ch01').filter((c) => c.distractors).length }));
+    ok(info.total === 2380 && info.withD === 1121 && info.ch1 === 0, `built app: ${info.withD} of ${info.total} cards carry 3 distractors (Ch 1: ${info.ch1})`);
+    await p.click('[data-open="deck-c202-ch02"]'); await skipVis(p); await p.click('#quizBtn'); await skipVis(p);
+    const id = await S(p, () => cardsIn('deck-c202-ch02').find((c) => c.distractors && !isScenario(c)).id);
+    await S(p, (id) => { view.queue = [id, ...view.queue.filter((x) => x !== id)]; view.index = 0; view.choices = makeChoices(state.cards.find((c) => c.id === id)); render(); }, id);
+    const shown = (await p.locator('[data-choice]').allTextContents()).map((t) => t.trim());
+    const card = await S(p, (id) => { const c = state.cards.find((x) => x.id === id); return { ans: cardAnswerText(c), d: c.distractors }; }, id);
+    ok(shown.length === 4 && card.d.every((d) => shown.some((t) => t === d || t.startsWith(d.slice(0, 40)))) && shown.some((t) => t === card.ans || t.startsWith(card.ans.slice(0, 40))), 'Ch 2 quiz shows the card\'s own 3 distractors plus the answer');
+    await ctx.close();
+  }
+  // build.sh validation
+  const dir = path.join(T, 'inbox-distractors'); fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
+  const bad = { id: 'bad', folder: 'Bad', cards: [
+    { id: 'b1', front: 'f', answer: 'Ans', distractors: ['one'] },
+    { id: 'b2', front: 'f', answer: 'Ans', distractors: ['x', 'X '] },
+    { id: 'b3', front: 'f', answer: 'Ans', distractors: ['ans', 'y'] },
+    { id: 'b4', front: 'f', answer: 'Ans', distractors: ['', 'y'] },
+    { id: 'b5', front: 'f', answer: 'Ans', distractors: ['a', 'b', 'c', 'd', 'e', 'f'] },
+    { id: 'b6', type: 'scenario', front: 'f', choices: ['a', 'b'], correct: 0, explanation: 'e', distractors: ['p', 'q'] } ] };
+  fs.writeFileSync(path.join(dir, 'bad.json'), JSON.stringify(bad));
+  let out = '';
+  try { execSync(`${ROOT}/build.sh --inbox ${dir} --out ${T}/bad.html 2>&1`); out = 'BUILT'; } catch (e) { out = String(e.stdout || ''); }
+  ok(out !== 'BUILT' && /card 1: "distractors" must be a list of 2-5/.test(out) && /card 2: distractors must be unique/.test(out) && /card 3: a distractor matches the answer/.test(out) && /card 4: every distractor must be a non-empty string/.test(out) && /card 5: "distractors" must be a list of 2-5/.test(out) && /card 6: "distractors" is only for concept cards/.test(out), 'build.sh rejects each bad distractors case with a clear error');
+  fs.writeFileSync(path.join(dir, 'bad.json'), JSON.stringify({ id: 'good', folder: 'Good', cards: [{ id: 'g1', front: 'f', answer: 'Ans', distractors: ['p', 'q', 'r'] }, { id: 'g2', front: 'f', answer: 'Ans2' }] }));
+  try { execSync(`${ROOT}/build.sh --inbox ${dir} --out ${T}/good.html 2>&1`); out = 'BUILT'; } catch (e) { out = String(e.stdout || ''); }
+  ok(out === 'BUILT' && fs.readFileSync(`${T}/good.html`, 'utf8').includes('"distractors":["p","q","r"]'), 'build.sh accepts valid distractors and bakes them in');
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -1078,6 +1145,7 @@ async function screenshots() {
     await testCounter();
     await testSync();
     await testSlotsAndKnow();
+    await testDistractors();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

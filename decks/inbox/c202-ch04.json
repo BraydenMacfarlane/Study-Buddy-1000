@@ -16,6 +16,11 @@
         "Many firms just fill openings reactively; Cox's Jim Robbins saw months spent on budgets, little on talent",
         "Small firms create most new jobs but struggle most to attract talent",
         "Boomer retirements and lower birth rates will make talent harder to find"
+      ],
+      "distractors": [
+        "It sets the pay structure for every job so labor costs stay fixed from one year to the next.",
+        "It documents each job's duties so the firm can defend hiring decisions against legal claims.",
+        "It fills open roles as they come up, so hiring reacts quickly to whatever vacancies appear."
       ]
     },
     {
@@ -27,6 +32,11 @@
       "points": [
         "Pivotal roles: software developers at tech firms, brand managers where brand matters",
         "CNA Financial found it would run short of underwriters in 2 years; Valero built its pool ahead of shortages"
+      ],
+      "distractors": [
+        "Which employees to discipline, how to word job ads, what dress code to use, and when to run payroll.",
+        "Only how many people to hire next year; facilities, training, and outsourcing are set by finance.",
+        "Which benefits to offer, how to handle grievances, and which managers to send to diversity training."
       ]
     },
     {
@@ -38,6 +48,11 @@
       "points": [
         "Regionals fly half or more of flights but pay much less",
         "Too many pilots is costly too, so the goal is balance"
+      ],
+      "distractors": [
+        "A union strike, a federal hiring freeze, mandatory retirement at 55, and high pay at regional carriers.",
+        "Too many new pilots entering the field, a drop in air travel demand, and cheaper licensing costs.",
+        "Automation of cockpit duties, outsourcing of flight crews overseas, and a surplus of military pilots."
       ]
     },
     {
@@ -49,6 +64,11 @@
       "points": [
         "Covers vision, mission, values, which businesses to be in, and structure",
         "HR leaders increasingly help create strategy, not just carry it out"
+      ],
+      "distractors": [
+        "Forecasting next year's labor demand and supply, then building action plans to close any talent gaps.",
+        "Setting short-term operating budgets for each department and tracking them against monthly results.",
+        "Writing the job descriptions and person specifications that define each role in the organization."
       ]
     },
     {
@@ -60,6 +80,11 @@
       "points": [
         "Mission = why we exist now (Coca-Cola: refresh the world, inspire optimism)",
         "Vision = what we want to become (Avon: best understand and satisfy women's needs globally)"
+      ],
+      "distractors": [
+        "A mission describes the ideal future the firm wants; a vision states its basic purpose and scope of operations.",
+        "A mission lists the enduring beliefs that guide daily behavior; a vision states how the firm will compete.",
+        "A mission is set by HR for employees; a vision is set by marketing for customers and is not used internally."
       ]
     },
     {
@@ -71,6 +96,11 @@
       "points": [
         "Can include social responsibility and sustainability",
         "Whole Foods: quality products, team member happiness, community, environmental stewardship"
+      ],
+      "distractors": [
+        "Short-term goals and targets set each year to measure how well departments are performing.",
+        "The firm's basic purpose and scope of operations, stated in a single public sentence.",
+        "Specific rules stating what employees may or may not do, with little room for discretion."
       ]
     },
     {
@@ -82,6 +112,11 @@
       "points": [
         "External: economy, competitors; internal: strengths and weaknesses",
         "Novartis: a focused medicines company powered by advanced therapies and data science"
+      ],
+      "distractors": [
+        "The firm's statement of its ideal future, describing what it hopes to become over time.",
+        "The process of forecasting labor needs and closing gaps with hiring and training plans.",
+        "A set of enduring beliefs that guide everyday decisions, such as 'take care of employees.'"
       ]
     },
     {
@@ -93,6 +128,11 @@
       "points": [
         "Shaped by the talent philosophy (promote from within? retention vs turnover?)",
         "Reconciles labor supply and demand gaps"
+      ],
+      "distractors": [
+        "Recruiting and hiring enough people to fill each open job as soon as a vacancy is posted online.",
+        "Setting the firm's long-term goals and deciding how it will compete in its chosen markets overall.",
+        "Analyzing each job's tasks and conditions to write job descriptions and person specifications."
       ]
     },
     {
@@ -106,6 +146,11 @@
         "2. HR planning aligns talent to goals",
         "3. Forecast demand and supply; find short- and long-term gaps (BLS, DOL data)",
         "4. Action plans: recruiting, retention, compensation, succession, training"
+      ],
+      "distractors": [
+        "Job analysis, recruiting, selection, then training and performance review of the new hires.",
+        "Forecasting labor demand and supply, strategic planning, HR planning, then building action plans.",
+        "Strategic planning, gap analysis, budgeting, then hiring to fill every open position at once."
       ]
     },
     {
@@ -119,6 +164,11 @@
         "Metrics (turnover, time to fill, productivity) show whether the plan is working",
         "Not: planning only from financial reports, without data, or only in emergencies",
         "Model: a hospital forecasts nurse demand from patient volume, compares supply, sets a hiring plan, checks quarterly"
+      ],
+      "distractors": [
+        "They set action plans first, then pick metrics afterward that show the plans have already worked well.",
+        "They forecast talent gaps from gut feel, then use metrics only to rate individual employees each year.",
+        "They keep metrics and action plans separate, so HR planning isn't distorted by short-term results."
       ]
     },
     {
@@ -129,6 +179,11 @@
       "note": "Read more: 4.4 The Strategic Planning Process; 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
       "points": [
         "Example: a firm that values employees as investors may cut everyone's hours rather than lay people off"
+      ],
+      "distractors": [
+        "The firm's formal mission statement, which sets its purpose and scope but has no effect on HR choices at all.",
+        "A list of the KSAOs each job requires, which limits which applicants can be considered for each open role.",
+        "The firm's short-term hiring budget, which caps how many people it can add in a given quarter or fiscal year."
       ]
     },
     {
@@ -136,7 +191,12 @@
       "front": "What are short-term responses to a labor shortage?",
       "answer": "Hiring incentives, retention bonuses, and reassigning current employees.",
       "subtitle": "Ch 4.4 · Effective HRM",
-      "note": "Read more: 4.4 The Strategic Planning Process"
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "distractors": [
+        "Automation, outsourcing, and redesigning jobs to need fewer people.",
+        "Early retirement offers, permanent layoffs, and leaving jobs unfilled.",
+        "Salary cuts, reduced hours, and temporary layoffs of current staff."
+      ]
     },
     {
       "id": "c202-ch04-013",
@@ -146,6 +206,11 @@
       "note": "Read more: 4.4 The Strategic Planning Process",
       "points": [
         "Building a pipeline (schools, training programs) also helps over time"
+      ],
+      "distractors": [
+        "Hiring incentives, retention bonuses, and reassigning current staff to cover openings.",
+        "Early retirement incentives, permanent layoffs, and freezing hiring for vacated jobs.",
+        "Salary cuts, reduced hours, and temporary layoffs of current workers until demand returns."
       ]
     },
     {
@@ -153,14 +218,24 @@
       "front": "What are short-term responses to a labor surplus?",
       "answer": "Salary cuts, reduced hours, and temporary layoffs.",
       "subtitle": "Ch 4.4 · Effective HRM",
-      "note": "Read more: 4.4 The Strategic Planning Process"
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "distractors": [
+        "Hiring incentives and retention bonuses for staff.",
+        "Early retirement offers and permanent layoffs.",
+        "Automation and outsourcing of business processes."
+      ]
     },
     {
       "id": "c202-ch04-015",
       "front": "What are long-term responses to a labor surplus?",
       "answer": "Early retirement incentives, permanent layoffs, and leaving vacated positions unfilled.",
       "subtitle": "Ch 4.4 · Effective HRM",
-      "note": "Read more: 4.4 The Strategic Planning Process"
+      "note": "Read more: 4.4 The Strategic Planning Process",
+      "distractors": [
+        "Salary cuts, reduced hours, and temporary layoffs for current staff until demand recovers.",
+        "Hiring incentives, retention bonuses, and reassigning current staff into short-handed areas.",
+        "Automating routine work and outsourcing whole business processes to outside vendors."
+      ]
     },
     {
       "id": "c202-ch04-016",
@@ -170,6 +245,11 @@
       "note": "Read more: 4.4 The Strategic Planning Process",
       "points": [
         "Revise forecasts as conditions change; check past forecast accuracy when choosing tools"
+      ],
+      "distractors": [
+        "A range lets each department pick the number it likes best for its own budget.",
+        "Ranges are required by law when forecasts are used to justify layoffs or hiring.",
+        "A range hides forecasting errors, so managers can't be blamed for missed targets."
       ]
     },
     {
@@ -180,6 +260,11 @@
       "note": "Read more: 4.4 The Strategic Planning Process",
       "points": [
         "Researchers at innovators; customer-facing staff at service firms"
+      ],
+      "distractors": [
+        "Entry-level jobs with the most turnover, since they always have the most openings to fill each year.",
+        "Jobs where top and average performers do about equally well, since they're the easiest roles to staff.",
+        "Support jobs in HR and finance, since those departments set policy for every other part of the firm."
       ]
     },
     {
@@ -190,6 +275,11 @@
       "note": "Read more: 4.5 Forecasting Labor Demand",
       "points": [
         "Kimberly-Clark cut 13% of its workforce and closed 10 plants as demand fell (2018)"
+      ],
+      "distractors": [
+        "Last year's headcount, adjusted only for expected quits and retirements in each unit.",
+        "The national unemployment rate, adjusted for the firm's share of its regional market.",
+        "The number of applicants received last year, adjusted for changes in recruiting spend."
       ]
     },
     {
@@ -200,6 +290,11 @@
       "note": "Read more: 4.5 Forecasting Labor Demand",
       "points": [
         "Nabors' automated rigs went from about 20 workers per site to 5; the main tool became a laptop"
+      ],
+      "distractors": [
+        "It raises routine headcount and lowers demand for tech-skilled workers.",
+        "It has no real effect on headcount, only on the mix of shifts worked.",
+        "It cuts tech-skilled roles while adding more routine, manual positions."
       ]
     },
     {
@@ -210,6 +305,11 @@
       "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
       "points": [
         "Monthly composite from the Conference Board with 10 components (factory hours, stock prices, expectations)"
+      ],
+      "distractors": [
+        "Monthly consumer job security and willingness to spend; a drop signals growth and a rise signals recession.",
+        "Coming peaks and troughs in interest rates; a turn up signals recession and a turn down signals growth.",
+        "Past changes in national employment, used to project a firm's own staffing needs through trend analysis."
       ]
     },
     {
@@ -217,7 +317,12 @@
       "front": "What does the Consumer Confidence Index measure?",
       "answer": "A monthly survey of adults' job security and willingness to spend, which predicts demand for goods and labor.",
       "subtitle": "Ch 4.6 · Effective HRM",
-      "note": "Read more: 4.6 Sources for Forecasting Labor Demand"
+      "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
+      "distractors": [
+        "Coming peaks and troughs in the business cycle; a downturn signals recession and an upturn signals growth.",
+        "A monthly count of job openings by industry, which shows where employers are struggling to hire.",
+        "Changes in borrowing costs for firms and customers, which predicts demand for housing and the trades."
+      ]
     },
     {
       "id": "c202-ch04-022",
@@ -228,6 +333,11 @@
       "points": [
         "A weaker currency makes exports cheaper, raising demand for workers",
         "Volatile rates make forecasting harder"
+      ],
+      "distractors": [
+        "Exports get cheaper and imports pricier, so domestic demand and hiring tend to rise.",
+        "It has no effect on hiring, since currency only affects the prices of imported goods.",
+        "Imports get pricier and exports cheaper, so domestic hiring falls in import sectors."
       ]
     },
     {
@@ -238,6 +348,11 @@
       "note": "Read more: 4.6 Sources for Forecasting Labor Demand",
       "points": [
         "Falling rates tend to raise labor demand"
+      ],
+      "distractors": [
+        "Borrowing costs fall for firms and customers, raising demand and hiring, especially in housing and the trades.",
+        "Savings earn more, so customers spend more freely, raising demand and hiring in retail and services first.",
+        "They have little effect on hiring, since interest rates affect only stock prices and currency values."
       ]
     },
     {
@@ -249,6 +364,11 @@
       "points": [
         "No single best metric; Whirlpool regularly recalculates its optimal sales force size",
         "Other indicators: GDP, inventories, Purchasing Managers Index, industry forecasts"
+      ],
+      "distractors": [
+        "Use the indicators most cited in the business press, since widely watched ones predict best for everyone.",
+        "Pick one national indicator, such as unemployment, and use it unchanged for at least ten years.",
+        "Rely on managers' judgment alone, since economic indicators rarely predict a single firm's activity."
       ]
     },
     {
@@ -260,6 +380,11 @@
       "points": [
         "2020 forecasts got worse within days (Goldman's Q2 estimate went from -5% to -24%)",
         "Jamie Dimon: base, adverse, and extreme cases were all possible"
+      ],
+      "distractors": [
+        "Rare shocks prove old predictors reliable, so firms should stick to one fixed forecast and avoid ranges.",
+        "Forecasting is pointless during crises, so firms should stop planning and react to events as they come.",
+        "Rare shocks only affect small firms, so large firms can rely on past trend data without re-checking."
       ]
     },
     {
@@ -271,6 +396,11 @@
       "points": [
         "Valero used 5 years of records to forecast 3 years ahead by location, position, and tenure",
         "Weakness: assumes the past continues despite competition, economy, technology"
+      ],
+      "distractors": [
+        "Converting expected business activity into headcount using staffing ratios from the past.",
+        "Rolling up lower managers' headcount estimates and reviewing them at the top for approval.",
+        "Comparing forecasted labor demand with forecasted supply to find a coming shortage or surplus."
       ]
     },
     {
@@ -282,6 +412,11 @@
       "points": [
         "Staffing ratio: headcount indexed to a business metric (support staff per employee, revenue per employee)",
         "Example: 5 assistants per 3 accountants; 6 accountants means 10 assistants"
+      ],
+      "distractors": [
+        "Projecting staffing from past employment patterns of the firm or industry.",
+        "Comparing forecasted labor demand with forecasted labor supply over time.",
+        "Turning leaders' predictions of future growth into unit hiring goals."
       ]
     },
     {
@@ -292,6 +427,11 @@
       "note": "Read more: 4.7 Labor Demand Forecasting Methods",
       "points": [
         "Use managers' judgment to adjust; dramatic change (COVID) breaks trends"
+      ],
+      "distractors": [
+        "Only when the business cycle peaks, since staffing ratios stay fixed at every other time.",
+        "Every quarter, regardless of changes, because labor law requires ratios to be updated.",
+        "Only when headcount drops, since ratios don't need to change when productivity rises."
       ]
     },
     {
@@ -303,6 +443,11 @@
       "points": [
         "Judgmental forecasting = managers' expertise predicts needs",
         "Budgets may set headcount in top-down forecasting"
+      ],
+      "distractors": [
+        "Top-down rolls lower managers' estimates up for review; bottom-up turns leaders' predictions into unit goals.",
+        "Top-down uses past trends and ratios; bottom-up uses economic indicators like the Leading Economic Index.",
+        "Top-down forecasts external supply; bottom-up forecasts internal supply from the firm's talent inventory."
       ]
     },
     {
@@ -314,6 +459,11 @@
       "points": [
         "Regression combines several predictors (mall traffic, seasonality) instead of one ratio",
         "Capital One makes 3-year forecasts with proprietary models"
+      ],
+      "distractors": [
+        "Start with managers' judgment, then confirm it with a single trend line so the forecast stays simple to explain.",
+        "Rely only on regression models, since managers' judgment adds bias that lowers forecast accuracy over time.",
+        "Use whatever forecast the CEO prefers, then adjust staffing plans after the year's results come in."
       ]
     },
     {
@@ -321,7 +471,12 @@
       "front": "Why is labor forecasting harder in small firms?",
       "answer": "They have less history and more variable trends; one hire in a 10-person firm is 10% growth.",
       "subtitle": "Ch 4.7 · Effective HRM",
-      "note": "Read more: 4.7 Labor Demand Forecasting Methods"
+      "note": "Read more: 4.7 Labor Demand Forecasting Methods",
+      "distractors": [
+        "They have more history and steadier trends, so forecasts are too stable to show change.",
+        "They aren't covered by labor laws, so forecasts carry no compliance data to work with.",
+        "They hire only from referrals, so outside labor market data doesn't apply to them."
+      ]
     },
     {
       "id": "c202-ch04-032",
@@ -332,6 +487,11 @@
       "points": [
         "Figure 4.2; managers can estimate retention percentages",
         "Limitation: relies on history (rising unemployment lowers quits)"
+      ],
+      "distractors": [
+        "Current staff plus expected losses (quits, retirements) minus expected gains (moves in).",
+        "Applicant flow plus public labor data from sources like the BLS and the Census Bureau.",
+        "Expected business activity converted into headcount using past staffing ratios."
       ]
     },
     {
@@ -342,6 +502,11 @@
       "note": "Read more: 4.8 Forecasting Labor Supply",
       "points": [
         "IBM's Workforce Management Initiative gives a real-time view of its labor supply chain"
+      ],
+      "distractors": [
+        "A chart of each key job's current holder, possible successors, and each successor's readiness.",
+        "A list of the physical equipment and tools assigned to each employee and to each department.",
+        "A count of open positions and applicants, used to measure how effective recruiting has been."
       ]
     },
     {
@@ -352,6 +517,11 @@
       "note": "Read more: 4.8 Forecasting Labor Supply",
       "points": [
         "Shows strengths, performance, promotability, and development needs (Figure 4.3)"
+      ],
+      "distractors": [
+        "A database of every employee's competencies and qualifications used for matching.",
+        "A diagram of the chain of command showing who reports to whom in each unit.",
+        "A plan to develop and track employees so they can move into higher positions."
       ]
     },
     {
@@ -359,7 +529,12 @@
       "front": "What is succession planning?",
       "answer": "Identifying, developing, and tracking employees so they can move into higher positions.",
       "subtitle": "Ch 4.8 · Effective HRM",
-      "note": "Read more: 4.8 Forecasting Labor Supply"
+      "note": "Read more: 4.8 Forecasting Labor Supply",
+      "distractors": [
+        "Charting each key job's holder, its possible successors, and their current readiness.",
+        "Forecasting labor demand from business activity using staffing ratios from the past.",
+        "Deciding which employees to lay off first when a labor surplus appears in the forecast."
+      ]
     },
     {
       "id": "c202-ch04-036",
@@ -369,6 +544,11 @@
       "note": "Read more: 4.8 Forecasting Labor Supply",
       "points": [
         "Google built an algorithm using reviews, pay history, and promotions to flag likely quitters"
+      ],
+      "distractors": [
+        "Retention affects only external supply, so quits are tracked in BLS data rather than inside the firm.",
+        "Unexpected quits grow internal supply, since openings let the firm promote more people from within.",
+        "Retention matters only for executives; front-line turnover is too small to affect internal forecasts."
       ]
     },
     {
@@ -380,6 +560,11 @@
       "points": [
         "Fewer or weaker applicants signal a tighter market",
         "BLS National Compensation Survey: wage and benefit data for 400+ occupations"
+      ],
+      "distractors": [
+        "By counting current staff minus expected quits and retirements, plus expected internal moves in.",
+        "By surveying current employees on job satisfaction and intent to quit over the next 12 months.",
+        "By building replacement charts that list each key job's holder and their likely successors."
       ]
     },
     {
@@ -387,7 +572,12 @@
       "front": "What is gap analysis?",
       "answer": "Comparing forecasted labor demand with forecasted supply to find a coming shortage, surplus, or balance.",
       "subtitle": "Ch 4.9 · Effective HRM",
-      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "distractors": [
+        "Converting expected business activity into headcount using staffing ratios from past years.",
+        "Comparing a job's intrinsic and extrinsic rewards to find which ones best attract candidates.",
+        "Comparing employees' current KSAOs with job requirements to set each person's training plan."
+      ]
     },
     {
       "id": "c202-ch04-039",
@@ -397,6 +587,11 @@
       "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
       "points": [
         "Plans must reinforce business strategy, talent philosophy, and HR strategy"
+      ],
+      "distractors": [
+        "A mismatched fix is fine short term, since HR philosophy only matters once the gap is closed.",
+        "Any fix that closes the gap fastest is best, since strategy can be revised to fit the result.",
+        "Philosophy limits only hiring plans; layoffs and pay cuts don't need to match it at all."
       ]
     },
     {
@@ -404,7 +599,12 @@
       "front": "Why is gradual downsizing usually better than abrupt mass layoffs?",
       "answer": "It costs less and keeps top talent; also separate lasting trends from short business-cycle swings.",
       "subtitle": "Ch 4.9 · Effective HRM",
-      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts"
+      "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
+      "distractors": [
+        "It's faster and signals strength to investors; treat every short dip as a lasting decline.",
+        "It's required by the WARN Act for any employer with more than 100 full-time workers on staff.",
+        "It costs more but protects morale; treat every brief downturn as a permanent long-term trend."
+      ]
     },
     {
       "id": "c202-ch04-041",
@@ -414,6 +614,11 @@
       "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
       "points": [
         "Manpower example: 2 servers instead of 4"
+      ],
+      "distractors": [
+        "Manpower: the group lacks needed knowledge; expertise: too few people to handle the workload overall.",
+        "Manpower: too many people for the workload; expertise: too many experts for the essential tasks.",
+        "Manpower: short-term shortage from absences; expertise: a long-term shortage caused by retirements."
       ]
     },
     {
@@ -424,6 +629,11 @@
       "note": "Read more: 4.9 Addressing Gaps Between Labor Supply and Demand Forecasts",
       "points": [
         "Manpower understaffing is tolerable briefly but long term raises stress, absenteeism, turnover"
+      ],
+      "distractors": [
+        "Extra people can always be hired within a week, so it's minor; prevent it by raising overtime pay instead.",
+        "Workload rises but work still flows, so it's mild; prevent it by adding temp workers during peak seasons.",
+        "It only affects morale, not output; prevent it with team-building events and recognition programs."
       ]
     },
     {
@@ -436,6 +646,11 @@
         "AT&T Aspire ($350M for graduation rates)",
         "American Welding Society high school outreach nearly doubled course completions in 2 years",
         "Chicago Women in Trades: 12-week training"
+      ],
+      "distractors": [
+        "By cutting training budgets and hiring only experienced workers from competitors.",
+        "By offering early retirement to older staff so younger workers can move up faster.",
+        "By outsourcing work overseas so domestic skill gaps no longer matter to the firm."
       ]
     },
     {
@@ -447,6 +662,11 @@
       "points": [
         "FAA response: targeted recruiting, better location matching, hiring above need",
         "Obstacles: up to 4 years to certify, high washout, about $78,000 lost per dropout"
+      ],
+      "distractors": [
+        "A strike by controllers plus new automation that cut staffing needs while air traffic was dropping.",
+        "Too many new hires in 2013, which created a surplus that led to layoffs and early retirements.",
+        "A sudden rise in pay at regional airports that drew controllers away from major hubs nationwide."
       ]
     },
     {
@@ -458,6 +678,11 @@
       "points": [
         "Model answer: overworked controllers make more mistakes, safety margins shrink, flights get cut or delayed,",
         "and the cycle worsens as stressed controllers retire or quit, with trainees taking up to 4 years to replace them"
+      ],
+      "distractors": [
+        "More overtime raises pay, which attracts new applicants and solves the shortage within a year.",
+        "Delays fall as fewer flights get scheduled, so the shortage mostly fixes itself over time.",
+        "Fatigue has no effect on safety, but costs rise as the agency pays more retention bonuses."
       ]
     },
     {
@@ -468,6 +693,11 @@
       "note": "Read more: 4.11 Job Design",
       "points": [
         "Different job features motivate different people (social needs vs independence)"
+      ],
+      "distractors": [
+        "Cost versus quality: simplified jobs maximize quality, enriched jobs keep labor costs low.",
+        "Efficiency versus motivation: enriched jobs maximize output, simplified ones maximize engagement.",
+        "Autonomy versus feedback: workers can have one or the other, but never both in one job."
       ]
     },
     {
@@ -478,6 +708,11 @@
       "note": "Read more: 4.11 Job Design",
       "points": [
         "Built on time-and-motion studies (Taylor, Frank and Lillian Gilbreth)"
+      ],
+      "distractors": [
+        "Hackman and Oldham's approach: add variety, autonomy, and feedback so work feels meaningful.",
+        "Taylor's approach: enlarge jobs with more same-level tasks so workers stay busy and motivated.",
+        "Mayo's approach: study how social ties and attention from managers raise worker productivity."
       ]
     },
     {
@@ -485,14 +720,24 @@
       "front": "What are Taylor's four principles of scientific management?",
       "answer": "Scientific methods, scientific selection and training, close supervision, and managers plan while workers do.",
       "subtitle": "Ch 4.11 · Effective HRM",
-      "note": "Read more: 4.11 Job Design"
+      "note": "Read more: 4.11 Job Design",
+      "distractors": [
+        "Skill variety, task identity, task significance, and autonomy, with feedback from the job itself.",
+        "Scientific methods, random selection, self-supervision, and workers plan while managers do the work.",
+        "Job rotation, job enlargement, job enrichment, and teamwork, with managers setting goals for all."
+      ]
     },
     {
       "id": "c202-ch04-049",
       "front": "What was the main drawback of scientific management?",
       "answer": "Monotony and no room for initiative; workers called it dehumanizing, prompting a congressional investigation.",
       "subtitle": "Ch 4.11 · Effective HRM",
-      "note": "Read more: 4.11 Job Design"
+      "note": "Read more: 4.11 Job Design",
+      "distractors": [
+        "High cost and slow output; it was replaced because it lowered productivity across most factories.",
+        "Too much autonomy; workers made errors without supervision, prompting new federal safety rules.",
+        "Too much variety in each job, which confused workers and led to high training costs and turnover."
+      ]
     },
     {
       "id": "c202-ch04-050",
@@ -504,6 +749,11 @@
         "Task identity = completing a whole, identifiable piece of work",
         "Task significance = impact on others' lives or work",
         "Together they give a job its motivating potential"
+      ],
+      "distractors": [
+        "Experienced meaningfulness, experienced responsibility, knowledge of results, growth need, and pay.",
+        "Skill variety, job rotation, job enlargement, task significance, and close supervision of work.",
+        "Pay, benefits, job security, working conditions, and relationships with coworkers and supervisors."
       ]
     },
     {
@@ -514,6 +764,11 @@
       "note": "Read more: 4.12 Increasing Motivation Through Job Design",
       "points": [
         "They lead to higher motivation, performance, and satisfaction (Figure 4.4)"
+      ],
+      "distractors": [
+        "Skill variety, task identity, and task significance, which together make a job feel worthwhile.",
+        "Autonomy, feedback from the job, and growth need strength, which determine how people respond.",
+        "Job satisfaction, job security, and fair pay, which drive motivation in every type of job."
       ]
     },
     {
@@ -524,6 +779,11 @@
       "note": "Read more: 4.12 Increasing Motivation Through Job Design",
       "points": [
         "Some people prefer simpler, stable jobs; compare GNS with a job's motivating potential"
+      ],
+      "distractors": [
+        "A job's level of skill variety; jobs high in it respond best to employees who want growth.",
+        "A person's desire for pay and security; people high in it respond best to enlarged jobs.",
+        "A manager's push for growth in output; teams under such managers do best with simple jobs."
       ]
     },
     {
@@ -535,6 +795,11 @@
       "points": [
         "Enrichment: a salesperson also manages inventory",
         "Enlargement: a receptionist also types and sorts mail; less boredom, no more responsibility"
+      ],
+      "distractors": [
+        "Enrichment adds more same-level tasks (horizontal); enlargement adds responsibility and autonomy (vertical).",
+        "Enrichment moves employees among jobs; enlargement adds training so they can do higher-level work.",
+        "Enrichment raises pay for the same job; enlargement adds benefits without changing duties at all."
       ]
     },
     {
@@ -545,6 +810,11 @@
       "note": "Read more: 4.12 Increasing Motivation Through Job Design",
       "points": [
         "A horizontal form of job enlargement"
+      ],
+      "distractors": [
+        "Adding more same-level tasks to a job; it requires no new training or skills.",
+        "Adding responsibility and autonomy to a job; it usually raises the job's pay grade.",
+        "Breaking work into simple steps and training every worker on one best method."
       ]
     },
     {
@@ -556,6 +826,11 @@
       "points": [
         "Also: satisfaction relates to productivity and managers have enrichment experience",
         "Don't overload: UPS split loading from driving after loading drove turnover"
+      ],
+      "distractors": [
+        "When management wants it, efficiency gains outweigh motivation, and payoff comes within the first 3 months.",
+        "Always, since enrichment raises motivation for every worker regardless of growth need or cost of change.",
+        "When workers have low growth need, changes cost little, and the firm can avoid any loss of efficiency."
       ]
     },
     {
@@ -566,6 +841,11 @@
       "note": "Read more: 4.13 Job Analysis",
       "points": [
         "Judged in light of the company's strategy and culture"
+      ],
+      "distractors": [
+        "A written summary of a job's duties, title, reporting lines, pay range, and working conditions overall.",
+        "A study of how work flows from a customer's request through value-adding steps to final delivery.",
+        "A ranking of each job's worth relative to other jobs in the firm, used to build a fair pay structure."
       ]
     },
     {
@@ -577,6 +857,11 @@
       "points": [
         "It's the first step for staffing, training, performance management, and pay",
         "Firms that use it well financially outperform competitors"
+      ],
+      "distractors": [
+        "To set the firm's strategic goals, forecast the business cycle, and choose which markets to enter.",
+        "Mainly to set pay ranges; hiring and training rely on managers' judgment instead of job data.",
+        "To rate each employee's personality and values so managers can predict who will be promoted."
       ]
     },
     {
@@ -588,6 +873,11 @@
       "points": [
         "Medical-device retailer needs specialized education; a low-cost retailer hires efficiency-minded people",
         "Future-proofing: a 1990s marketer who couldn't use the Internet was a poor choice"
+      ],
+      "distractors": [
+        "It focuses on the job as it is today, so firms hire for current needs and change later as strategy shifts.",
+        "It replaces strategy entirely, since a job's tasks determine what the business will need in the future.",
+        "It mainly links hiring to the budget, so firms hire the cheapest qualified candidates for each role."
       ]
     },
     {
@@ -599,6 +889,11 @@
       "points": [
         "Ties to Chapter 3: job-related, business-necessary criteria defend against adverse impact claims",
         "Follow the Uniform Guidelines on Employee Selection Procedures (1978)"
+      ],
+      "distractors": [
+        "It proves every hiring choice was fair, which makes the firm immune from all discrimination lawsuits.",
+        "It's required by Title VII for every job, and firms without one are automatically liable in court.",
+        "It documents employees' personal traits, a defense against harassment and retaliation claims."
       ]
     },
     {
@@ -609,6 +904,11 @@
       "note": "Read more: 4.13 Job Analysis",
       "points": [
         "For fast-changing jobs, focus analysis on key jobs for ROI"
+      ],
+      "distractors": [
+        "It shows which employees are lowest performers so they can be replaced with stronger candidates.",
+        "It shows the market pay rate for each job so the firm can cut salaries for overpaid positions.",
+        "It shows which tasks to automate first, so most job redesign comes from new technology purchases."
       ]
     },
     {
@@ -616,7 +916,12 @@
       "front": "What is a job description?",
       "answer": "A written summary of a job's duties and responsibilities, plus its title, reporting lines, and conditions.",
       "subtitle": "Ch 4.14 · Effective HRM",
-      "note": "Read more: 4.14 Job Analysis Outcomes"
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "distractors": [
+        "The minimum worker characteristics needed for a job's core duties, built from the job analysis.",
+        "A study of a job's tasks, conditions, and tools and the worker traits needed to succeed in it.",
+        "A formal offer letter stating the job's pay, start date, benefits, and at-will employment terms."
+      ]
     },
     {
       "id": "c202-ch04-062",
@@ -626,6 +931,11 @@
       "note": "Read more: 4.14 Job Analysis Outcomes",
       "points": [
         "Plus a flexibility clause: 'other duties as assigned'"
+      ],
+      "distractors": [
+        "Required KSAOs, personality traits, education, years of experience, and preferred candidate background.",
+        "Title, the employee's name and performance rating, salary history, and the manager's development notes.",
+        "Mission, vision, values, strategic goals, competitor analysis, and the department's annual budget."
       ]
     },
     {
@@ -637,6 +947,11 @@
       "points": [
         "Weak: 'accounts for inventory quarterly'",
         "Better: counts merchandise, compares counts with accounting totals, corrects errors so books balance"
+      ],
+      "distractors": [
+        "It uses broad verbs like 'handles' so it covers many duties and stays flexible as the job changes.",
+        "It lists the worker traits needed, like 'detail-oriented,' rather than the actual tasks performed.",
+        "It states only what is done, leaving out how and why so the statement stays short and general."
       ]
     },
     {
@@ -647,6 +962,11 @@
       "note": "Read more: 4.14 Job Analysis Outcomes",
       "points": [
         "'Moves 50-pound boxes to shelves' rather than 'lifts boxes by hand'"
+      ],
+      "distractors": [
+        "Emphasize how each task must be done physically, so applicants know exactly which abilities are needed.",
+        "List every marginal task as essential, so the employer has more grounds to reject unqualified applicants.",
+        "Leave out physical requirements entirely, since the ADA bars mentioning them in any job description."
       ]
     },
     {
@@ -658,6 +978,11 @@
       "points": [
         "Follow U.S. law even where rule of law is weak",
         "Resist pressure to compromise values to hit sales targets"
+      ],
+      "distractors": [
+        "By listing every banned behavior with its penalty, so employees fear the consequences of misconduct.",
+        "By leaving ethics out, since ethical expectations belong only in a separate code of conduct.",
+        "By stating pay ranges openly, which removes all ethical concerns about favoritism in pay decisions."
       ]
     },
     {
@@ -669,6 +994,11 @@
       "points": [
         "Red Lobster weaves its values into lively descriptions of essential functions",
         "Make titles descriptive, accurate, and interesting"
+      ],
+      "distractors": [
+        "They're legal contracts, so engaging wording binds the firm to promises made in the text.",
+        "Engaging ones get fewer applicants, which saves screening time and lowers recruiting cost.",
+        "They're read only by current staff, so engaging wording helps morale more than recruiting."
       ]
     },
     {
@@ -679,6 +1009,11 @@
       "note": "Read more: 4.15 Person Specification",
       "points": [
         "Drives where and how to recruit and which screening criteria to use"
+      ],
+      "distractors": [
+        "A written summary of a job's duties and responsibilities, plus its title and reporting lines.",
+        "The ideal traits of the firm's top performers across jobs, used to build competency models.",
+        "A list of every skill a new hire must master by the end of the first year on the job."
       ]
     },
     {
@@ -686,7 +1021,12 @@
       "front": "How does a job description differ from a person specification?",
       "answer": "A description lists the job's duties; a specification lists the qualities a person needs to perform them.",
       "subtitle": "Ch 4.15 · Effective HRM",
-      "note": "Read more: 4.15 Person Specification"
+      "note": "Read more: 4.15 Person Specification",
+      "distractors": [
+        "A description lists the qualities a person needs; a specification lists the job's duties and tasks.",
+        "A description is used for pay decisions; a specification is used only for performance appraisals.",
+        "A description covers essential criteria; a specification covers only desirable, nice-to-have criteria."
+      ]
     },
     {
       "id": "c202-ch04-069",
@@ -696,6 +1036,11 @@
       "note": "Read more: 4.15 Person Specification",
       "points": [
         "Don't describe a mythical perfect employee; prioritize"
+      ],
+      "distractors": [
+        "Desirable criteria are required to perform adequately; essential ones help compare candidates who meet the rest.",
+        "Essential criteria are set by law for every job; desirable ones are set by the hiring manager's preferences.",
+        "Essential criteria cover education only; desirable criteria cover skills, experience, and personality traits."
       ]
     },
     {
@@ -707,6 +1052,11 @@
       "points": [
         "A child who knows bike parts but can't ride has knowledge without skill",
         "Skill examples: truck driving, manual dexterity, folding two shirts a minute"
+      ],
+      "distractors": [
+        "Skill is knowing the information; knowledge is applying it to perform a task to a standard.",
+        "Knowledge is an innate capacity; skill is a personality trait shaped by values and experience.",
+        "Knowledge is learned on the job; skill is learned in school before someone is ever hired."
       ]
     },
     {
@@ -718,6 +1068,11 @@
       "points": [
         "Ability examples: quantitative, sensory, physical capacities",
         "Other: education, work experience, extraversion"
+      ],
+      "distractors": [
+        "Abilities are learned facts about a job; 'other' covers applying those facts to a task to a set standard.",
+        "Abilities are personality traits like conscientiousness; 'other' covers innate capacities like reasoning.",
+        "Abilities are job-specific skills trained after hire; 'other' covers education and formal certifications."
       ]
     },
     {
@@ -725,14 +1080,24 @@
       "front": "Must new hires already have every KSAO?",
       "answer": "No; decide which must exist on day one and which can be trained, then hire for ability and motivation to learn.",
       "subtitle": "Ch 4.15 · Effective HRM",
-      "note": "Read more: 4.15 Person Specification"
+      "note": "Read more: 4.15 Person Specification",
+      "distractors": [
+        "Yes; every KSAO must be present on day one, since training new hires is too costly and risky to rely on.",
+        "Yes; the ADA requires employers to reject applicants who lack any KSAO listed in the job description.",
+        "No; KSAOs don't matter for hiring, since personality alone predicts who will succeed in a given job."
+      ]
     },
     {
       "id": "c202-ch04-073",
       "front": "What makes a job analysis reliable versus valid?",
       "answer": "Reliable: the same results across analysts, experts, and times; valid: captures the job without gaps or extras.",
       "subtitle": "Ch 4.16 · Effective HRM",
-      "note": "Read more: 4.16 Job Analysis Methods"
+      "note": "Read more: 4.16 Job Analysis Methods",
+      "distractors": [
+        "Reliable: captures the job without gaps or extras; valid: the same results across analysts, experts, and times.",
+        "Reliable: approved by legal counsel; valid: approved by the hiring manager and the job's current incumbents.",
+        "Reliable: uses only one expert; valid: uses a government database like O*NET without any adaptation."
+      ]
     },
     {
       "id": "c202-ch04-074",
@@ -743,6 +1108,11 @@
       "points": [
         "Strengths: catches rare but important events, separates superior from average, feeds interview questions",
         "Weaknesses: narrative data, time to collect enough incidents, focuses on extremes so rarely used alone"
+      ],
+      "distractors": [
+        "An expert group lists and weights the worker traits needed, mostly for industrial and lower-skill jobs.",
+        "Experts list 50-200 tasks grouped into functions; objective but it can miss rare tasks and star traits.",
+        "A standardized questionnaire usable for almost any job that's fast but needs a high reading level."
       ]
     },
     {
@@ -754,6 +1124,11 @@
       "points": [
         "Weights: share of barely acceptable workers with it, usefulness for spotting superior workers, problems if ignored, practicality",
         "Pros: expert ownership, efficient; con: method hard to communicate"
+      ],
+      "distractors": [
+        "Experts describe examples of very effective and very ineffective behavior, with situation and result.",
+        "A standardized questionnaire for nearly any job that's quick and comparable but needs strong reading.",
+        "Experts list 50-200 tasks grouped into functions; reliable, but it misses rare tasks and star traits."
       ]
     },
     {
@@ -764,6 +1139,11 @@
       "note": "Read more: 4.17 Job Elements Method (and other methods); 4.16 Job Analysis Methods",
       "points": [
         "Good when there are few experts or little time; data can be hard to analyze"
+      ],
+      "distractors": [
+        "Experts list 50-200 tasks grouped into functions; objective and reliable but misses rare tasks.",
+        "A standard questionnaire for almost any job; fast and comparable but needs a high reading level.",
+        "Experts describe very effective and very ineffective behaviors with the situation and the result."
       ]
     },
     {
@@ -774,6 +1154,11 @@
       "note": "Read more: 4.17 Job Elements Method (and other methods); 4.16 Job Analysis Methods",
       "points": [
         "Usually collected by survey; combine with other methods"
+      ],
+      "distractors": [
+        "Experts describe very effective and ineffective behavior examples: the situation, action, and result.",
+        "An expert group lists and weights the worker traits needed, mostly for industrial and lower-skill jobs.",
+        "A standardized questionnaire for almost any job; fast and comparable but needs a high reading level."
       ]
     },
     {
@@ -785,6 +1170,11 @@
       "points": [
         "Covers information input, mental processes, work output, job context",
         "Estimates mental, perceptual, psychomotor, and physical requirements"
+      ],
+      "distractors": [
+        "An expert group that lists and weights the worker traits needed, mostly for industrial and lower-skill jobs.",
+        "The government's online job classification database; a good starting point to adapt rather than copy.",
+        "A list of 50-200 tasks grouped into functions; objective and reliable, but it misses rare tasks."
       ]
     },
     {
@@ -792,7 +1182,12 @@
       "front": "Why combine job analysis methods?",
       "answer": "Each method has blind spots, so combining them offsets weaknesses and improves accuracy and legal defense.",
       "subtitle": "Ch 4.17 · Effective HRM",
-      "note": "Read more: 4.17 Job Elements Method (and other methods)"
+      "note": "Read more: 4.17 Job Elements Method (and other methods)",
+      "distractors": [
+        "One method is always enough, so combining them just adds cost without improving accuracy or defense.",
+        "Combining methods is required by the EEOC for every job, regardless of the job's size or importance.",
+        "Combining them lets the firm skip interviewing job experts, which removes bias from the analysis."
+      ]
     },
     {
       "id": "c202-ch04-080",
@@ -802,6 +1197,11 @@
       "note": "Read more: 4.17 Job Elements Method (and other methods)",
       "points": [
         "A relationship-strong salesperson stresses relationships; a records-strong one stresses recordkeeping"
+      ],
+      "distractors": [
+        "Experts lack knowledge of the job, so they guess; a single outside consultant is the fix for this bias.",
+        "Results don't affect pay, so experts don't care; offering bonuses for participation keeps input honest.",
+        "Experts tend to understate their own duties out of modesty; one expert's view per job is enough."
       ]
     },
     {
@@ -812,6 +1212,11 @@
       "note": "Read more: 4.17 Job Elements Method (and other methods); 4.23 Strategic HRM Exercise: Using O*NET",
       "points": [
         "Generic downloaded job descriptions are a weak legal defense and a poor strategy fit"
+      ],
+      "distractors": [
+        "A private vendor's paid job board; post openings there to reach the most qualified applicants.",
+        "The government's job classification database; copy its descriptions word for word to stay compliant.",
+        "The Labor Department's wage survey; use it to set pay ranges for every job without adjusting them."
       ]
     },
     {
@@ -822,6 +1227,11 @@
       "note": "Read more: 4.18 Competency Modeling",
       "points": [
         "Common competencies: results focus, customer service, leadership, emotional intelligence, communication, teamwork"
+      ],
+      "distractors": [
+        "A job analysis method that lists 50-200 job-specific tasks grouped into functions by experts.",
+        "A method of describing the ideal future the firm wants, used to set strategic direction and values.",
+        "A tool that ranks employees by performance data, used to decide pay, promotions, and layoffs."
       ]
     },
     {
@@ -832,6 +1242,11 @@
       "note": "Read more: 4.18 Competency Modeling",
       "points": [
         "Competency-based descriptions last longer and let similar jobs be grouped"
+      ],
+      "distractors": [
+        "Competencies are specific to a single job; KSAOs are broad, cross-job traits that reinforce culture.",
+        "Competencies are legally required for every job; KSAOs are optional and used only in large firms.",
+        "Competencies cover physical abilities only; KSAOs cover knowledge, skills, values, and personality."
       ]
     },
     {
@@ -842,6 +1257,11 @@
       "note": "Read more: 4.18 Competency Modeling",
       "points": [
         "Dell's five executive competencies: learn fast, thrive amid change, deliver results, solve problems, build teams"
+      ],
+      "distractors": [
+        "Usually 20-30; more competencies give a fuller, more legally defensible picture.",
+        "Exactly one per job, so the model stays specific and easy to use in reviews.",
+        "Usually 2-3; any more confuses managers, so keep only the easiest to measure."
       ]
     },
     {
@@ -852,6 +1272,11 @@
       "note": "Read more: 4.18 Competency Modeling",
       "points": [
         "Can miss rare-but-important traits"
+      ],
+      "distractors": [
+        "It's more rigorous and legally proven than job analysis, so it can replace traditional methods fully.",
+        "It's too narrow, covering one job at a time, so it can't reinforce culture or strategy across jobs.",
+        "It works only for executive roles, so front-line jobs must use the critical incidents technique."
       ]
     },
     {
@@ -862,6 +1287,11 @@
       "note": "Read more: 4.18 Competency Modeling",
       "points": [
         "Amazon trained on 10 years of mostly male résumés, used it only in trial, then dropped it"
+      ],
+      "distractors": [
+        "AI ignores past data entirely, so its profiles are random; Amazon dropped its tool for poor accuracy.",
+        "AI favors underrepresented groups by default, which created reverse discrimination at Amazon.",
+        "AI profiles are too costly for most firms, so only large companies like Amazon can use them at all."
       ]
     },
     {
@@ -872,6 +1302,11 @@
       "note": "Read more: 4.18 Competency Modeling",
       "points": [
         "Intrinsic + extrinsic = total rewards; a bonus is extrinsic"
+      ],
+      "distractors": [
+        "Comparing a job's pay with the market to set pay grades and keep the firm's structure competitive.",
+        "Identifying a job's tasks, conditions, and tools and the worker traits needed to succeed in it.",
+        "Identifying each employee's preferred rewards so managers can personalize bonuses each year."
       ]
     },
     {
@@ -882,6 +1317,11 @@
       "note": "Read more: 4.18 Competency Modeling",
       "points": [
         "Barclays touts expert colleagues, facilities, progression, and training"
+      ],
+      "distractors": [
+        "Highlight the same rewards to every candidate, since tailoring messages to people is illegal in hiring.",
+        "Highlight only extrinsic rewards like pay, since intrinsic rewards don't influence job candidates.",
+        "Hide reward details until the offer, so candidates focus on fit with the firm's mission and values."
       ]
     },
     {
@@ -892,6 +1332,11 @@
       "note": "Read more: 4.19 Organizational Structure",
       "points": [
         "Structure coordinates, controls, and motivates; redesign aids survival amid change"
+      ],
+      "distractors": [
+        "Structure is the process of choosing and managing design; design is the formal task, power, and reporting system.",
+        "Design applies to small firms; structure applies to large firms with many levels and divisions.",
+        "Design covers job duties and tasks; structure covers pay grades and benefits for each job level."
       ]
     },
     {
@@ -902,6 +1347,11 @@
       "note": "Read more: 4.19 Organizational Structure",
       "points": [
         "Position isn't importance; a FedEx executive said drivers matter more than he does"
+      ],
+      "distractors": [
+        "The firm's pay grades and the salary range for each job level.",
+        "How work moves from a customer request through to final delivery.",
+        "Each employee's competencies, qualifications, and promotion readiness."
       ]
     },
     {
@@ -913,6 +1363,11 @@
       "points": [
         "Example: 'We reimburse reasonable business travel to serve clients'",
         "Directs and limits actions toward long-term goals"
+      ],
+      "distractors": [
+        "A how-to sequence of steps for carrying out a task in line with the rules.",
+        "A specific statement of what employees may or may not do while at work.",
+        "A long-term goal for how the organization will compete in its chosen market."
       ]
     },
     {
@@ -923,6 +1378,11 @@
       "note": "Read more: 4.19 Organizational Structure",
       "points": [
         "Example: photograph the receipt, upload within 30 days, get manager approval"
+      ],
+      "distractors": [
+        "A broad guiding principle that sets direction and limits choices.",
+        "A specific statement of what employees may or may not do.",
+        "A document that collects all policies and rules for employees."
       ]
     },
     {
@@ -933,6 +1393,11 @@
       "note": "Read more: 4.19 Organizational Structure",
       "points": [
         "Example: 'Safety glasses must be worn on the production floor'"
+      ],
+      "distractors": [
+        "A broad guiding principle that sets direction, in effect a decision already made.",
+        "A how-to sequence of steps for carrying out a task in line with company policy.",
+        "An enduring belief that guides everyday decisions and behavior across the firm."
       ]
     },
     {
@@ -944,6 +1409,11 @@
       "points": [
         "Memory trick: policy = why/direction, procedure = how, rule = must or must not",
         "They support vision and goals, compliance, and safety"
+      ],
+      "distractors": [
+        "Rules set direction, policies say how to do it, and procedures set the musts; together they guide daily work.",
+        "Policies apply to managers, procedures to HR, and rules to front-line staff; each group follows only its own.",
+        "Policies, procedures, and rules are the same thing, and the terms are used interchangeably in most firms."
       ]
     },
     {
@@ -954,6 +1424,11 @@
       "note": "Read more: 4.19 Organizational Structure",
       "points": [
         "Typical contents: discipline rules, ethics code, at-will statement, confidentiality agreement, benefits, complaint steps"
+      ],
+      "distractors": [
+        "A legal contract that guarantees employees' jobs and benefits for a fixed term of employment.",
+        "A chart showing the chain of command and who reports to whom in each department of the firm.",
+        "A written summary of a single job's duties, responsibilities, title, and working conditions."
       ]
     },
     {
@@ -966,6 +1441,11 @@
         "Signed acknowledgments prove employees received the rules",
         "Consistent enforcement lowers discrimination and wrongful discharge risk",
         "Standard practice: a disclaimer that the handbook isn't a contract"
+      ],
+      "distractors": [
+        "It replaces at-will employment with a binding contract, which prevents employees from suing the company.",
+        "It lets managers enforce rules differently case by case, which gives the firm more flexibility in discipline.",
+        "It exempts the organization from federal employment laws once employees sign that they've received it."
       ]
     },
     {
@@ -978,6 +1458,11 @@
         "Model answer (remote-work-style policy): protects the firm by setting clear expectations it can enforce;",
         "protects the employee by defining hours, equipment, and reimbursement so they aren't judged by unwritten rules",
         "Anti-harassment and anti-retaliation policies give a safe way to report"
+      ],
+      "distractors": [
+        "It guarantees lifetime employment and fixed pay raises, which employees can enforce in court.",
+        "It lets each manager set personal rules for their team, so employees know their own boss's style.",
+        "It gives employees the right to rewrite policies they disagree with through a yearly vote."
       ]
     },
     {
@@ -988,6 +1473,11 @@
       "note": "Read more: 4.20 Characteristics of Organizational Structure",
       "points": [
         "High formalization: little discretion, more role clarity and commitment"
+      ],
+      "distractors": [
+        "How much decision authority is kept at the top rather than pushed down.",
+        "The number of levels in an organization's hierarchy, from top to bottom.",
+        "The degree of specialization in jobs across the organization's units."
       ]
     },
     {
@@ -999,6 +1489,11 @@
       "points": [
         "Centralized: new firms, simple stable environments, clear lines of responsibility",
         "Decentralized: flatter, fewer middle managers, best for nonroutine work in complex environments"
+      ],
+      "distractors": [
+        "Centralization pushes decision authority down for speed; decentralization keeps it at the top for control.",
+        "Centralization means many hierarchy levels; decentralization means a wide span of control at every level.",
+        "Centralization writes all rules down; decentralization relies on unwritten norms and informal communication."
       ]
     },
     {
@@ -1009,6 +1504,11 @@
       "note": "Read more: 4.20 Characteristics of Organizational Structure",
       "points": [
         "Generalists are cheaper but slower to decide"
+      ],
+      "distractors": [
+        "How much an organization's rules, procedures, and communications are written down.",
+        "How many employees report directly to a single manager in each part of the firm.",
+        "How much decision authority is kept at the top versus pushed down to lower levels."
       ]
     },
     {
@@ -1019,6 +1519,11 @@
       "note": "Read more: 4.20 Characteristics of Organizational Structure",
       "points": [
         "Span of control = number of direct reports; more than about 9 is often too many"
+      ],
+      "distractors": [
+        "Wide suits complex, novel work needing coaching; narrow suits routine work and similar jobs, and costs less.",
+        "Narrow suits large firms with many levels; wide suits small firms with few employees and managers.",
+        "Narrow suits routine work that needs close control; wide suits complex work where experts need autonomy."
       ]
     },
     {
@@ -1029,6 +1534,11 @@
       "note": "Read more: 4.20 Characteristics of Organizational Structure",
       "points": [
         "Tall = many layers; flat = few. HP ran tens of thousands of people with about 8 levels"
+      ],
+      "distractors": [
+        "Too many speed decisions but weaken control; too few raise cost and slow everything.",
+        "Too many improve coordination with no downside; too few raise payroll and overhead.",
+        "Levels don't affect cost or speed; only the span of control does in practice."
       ]
     },
     {
@@ -1036,7 +1546,12 @@
       "front": "How does structure affect career fit?",
       "answer": "People who like predictability fit bureaucracies; those who like flexibility fit less formal, decentralized firms.",
       "subtitle": "Ch 4.20 · Effective HRM",
-      "note": "Read more: 4.20 Characteristics of Organizational Structure"
+      "note": "Read more: 4.20 Characteristics of Organizational Structure",
+      "distractors": [
+        "People who like flexibility fit bureaucracies; those who like predictability fit decentralized, informal firms.",
+        "Structure doesn't affect fit, since personality matters only for job tasks, not how a firm is organized.",
+        "Everyone prefers decentralized firms, so bureaucracies must pay more to attract and keep employees."
+      ]
     },
     {
       "id": "c202-ch04-104",
@@ -1046,6 +1561,11 @@
       "note": "Read more: 4.21 Workflow Analysis",
       "points": [
         "Workflow = how work is organized to meet goals; regular analysis boosts efficiency and satisfaction"
+      ],
+      "distractors": [
+        "A radical, clean-slate redesign of a process for big gains, often bringing layoffs and lower morale.",
+        "Charting the chain of command to show who reports to whom and where authority sits in each unit.",
+        "A study of a job's tasks, conditions, and tools and the worker traits needed to succeed in it."
       ]
     },
     {
@@ -1056,6 +1576,11 @@
       "note": "Read more: 4.21 Workflow Analysis",
       "points": [
         "Taco Bell centralized ingredient prep: higher quality and morale, fewer injuries, lower cost"
+      ],
+      "distractors": [
+        "BPR improves the existing process step by step; workflow analysis is a radical, clean-slate redesign for big gains.",
+        "BPR applies only to manufacturing; workflow analysis applies only to service and office processes.",
+        "BPR is an HR process for redesigning jobs; workflow analysis is an IT process for automating software."
       ]
     },
     {
@@ -1063,7 +1588,12 @@
       "front": "What are the risks of business process reengineering?",
       "answer": "It can hurt morale, often brings layoffs, and may not fix the real problem; it needs a long-term, people-aware view.",
       "subtitle": "Ch 4.21 · Effective HRM",
-      "note": "Read more: 4.21 Workflow Analysis"
+      "note": "Read more: 4.21 Workflow Analysis",
+      "distractors": [
+        "It's too slow, since step-by-step changes take years to show any real gain in cost, speed, or quality.",
+        "It has no real risks, since a clean-slate design always fixes the root problem it was meant to target.",
+        "It mainly raises costs for new equipment and software, but it rarely affects morale or job security."
+      ]
     },
     {
       "id": "c202-ch04-107",
@@ -1074,6 +1604,11 @@
       "points": [
         "American's average pilot pay: $229K (2018) vs $138K a decade earlier",
         "Raising pay partly shifted the shortage to lower-paying regional carriers"
+      ],
+      "distractors": [
+        "Pay cuts, early retirements, buyouts, and hiring pauses to reduce the number of pilots.",
+        "Automating cockpits, outsourcing flights abroad, and lowering licensing requirements.",
+        "Lower pilot pay, mandatory overtime, and recruiting pilots only from the military."
       ]
     },
     {
@@ -1084,6 +1619,11 @@
       "note": "Read more: 4.22 Real World Response: Managing a Pilot Shortage at American Airlines",
       "points": [
         "Furloughs were a last resort, to avoid a future shortfall"
+      ],
+      "distractors": [
+        "The surplus became a shortage, met with signing bonuses, pay raises, and new paid training pipelines.",
+        "It had no real effect; the shortage simply continued, met with higher pay and more retention bonuses.",
+        "Most pilots were furloughed permanently, and airlines automated a large share of flight operations."
       ]
     },
     {

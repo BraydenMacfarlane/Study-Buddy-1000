@@ -16,6 +16,11 @@
         "Decisions based on job-relevant information, not protected traits, improve performance",
         "Turnover intentions are lowest where employees see a pro-diversity AND ethical climate",
         "Proactive firms go beyond compliance; know when to call an employment lawyer"
+      ],
+      "distractors": [
+        "It is required only for firms with 500+ employees, so smaller firms gain little from compliance efforts.",
+        "It lets firms skip merit-based decisions, since following the law is enough to attract strong talent.",
+        "It mainly lowers payroll taxes, and tax savings are the main reason firms invest in compliance programs."
       ]
     },
     {
@@ -28,6 +33,11 @@
         "Risk assessment: identify, analyze, prioritize (likelihood x impact)",
         "Risk control: plan, monitor, resolve (screening tools, succession plans, bias and law training, compliance audits)",
         "Top HR risks: leadership pipeline, compliance violations, ethics and culture, skill shortages, M&A"
+      ],
+      "distractors": [
+        "Buying insurance for every people risk, so the company never has to assess or resolve risks internally.",
+        "Reacting to lawsuits and turnover after they occur, using legal counsel to limit damages and bad press.",
+        "Tracking safety incidents only, since physical injuries are the one people risk regulators require."
       ]
     },
     {
@@ -41,6 +51,11 @@
         "Reduce: train recruiters on bias and employment law",
         "Share: outsource background checks",
         "Retain: reserve funds for EEO fines, severance, settlements"
+      ],
+      "distractors": [
+        "Avoid it (accept and budget), reduce it (withdraw), share it (mitigate), or retain it (outsource or insure).",
+        "Ignore it, report it, insure it, or litigate it, depending on the size of the likely financial loss.",
+        "Prevent it, detect it, correct it, or document it, as required by OSHA for every workplace hazard."
       ]
     },
     {
@@ -52,6 +67,11 @@
       "points": [
         "Senior executives are personally responsible for accurate reports",
         "Weak HR processes can cause SOX noncompliance"
+      ],
+      "distractors": [
+        "Public firms must keep executive pay confidential and report employment lawsuits only in the annual 10-K.",
+        "All firms, public or private, must post labor contracts and payroll records on a public website each year.",
+        "Public firms must offer whistleblower bonuses and set up union representation on the board of directors."
       ]
     },
     {
@@ -62,6 +82,11 @@
       "note": "Read more: 3.5 The Importance of Employment Laws",
       "points": [
         "Many employment laws arose from social pressure"
+      ],
+      "distractors": [
+        "Employees hold more power than employers, so laws limit unions and protect a firm's right to set pay freely.",
+        "Laws exist mainly to raise tax revenue from payroll, with equal opportunity as a side benefit of compliance.",
+        "Laws exist to guarantee equal outcomes, so every group must be hired and promoted in equal proportions."
       ]
     },
     {
@@ -72,6 +97,11 @@
       "note": "Read more: 3.5 The Importance of Employment Laws",
       "points": [
         "Choosing the candidate with the best skills is fair, legal, and strategic"
+      ],
+      "distractors": [
+        "Fair discrimination uses any trait the manager prefers; unfair discrimination is limited to race and sex only.",
+        "Fair discrimination favors protected groups by quota; unfair discrimination uses objective, job-related traits.",
+        "Fair discrimination is any choice that is legal; unfair discrimination is any choice employees dislike."
       ]
     },
     {
@@ -83,6 +113,11 @@
       "points": [
         "Example: firing fans of a rival sports team is unfair but legal unless it hits a protected group harder",
         "Unlawful employment practice = violates federal, state, or local employment law"
+      ],
+      "distractors": [
+        "Always; any unfair employment decision is automatically unlawful under federal anti-discrimination law.",
+        "Only when the employee files a complaint with HR within 30 days of the decision being made.",
+        "Only when it affects pay; unfair hiring or promotion choices are never unlawful on their own."
       ]
     },
     {
@@ -94,6 +129,11 @@
       "points": [
         "Laws alone don't break down barriers; diversity must be managed proactively",
         "Resource: the U.S. EEOC website"
+      ],
+      "distractors": [
+        "Practices that guarantee each protected group is hired in proportion to its share of the labor market.",
+        "Mandatory hiring quotas that federal contractors must meet to keep their government contracts each year.",
+        "Practices that give preference to protected groups when candidates are equally qualified for a job."
       ]
     },
     {
@@ -105,6 +145,11 @@
       "points": [
         "Having a diverse staff isn't enough; people need positive attitudes toward working with differences",
         "Merck: resource groups and a D&I Center of Excellence weave inclusion into the business"
+      ],
+      "distractors": [
+        "Inclusion is the mix of people; diversity means everyone feels respected, heard, and able to contribute fully.",
+        "Diversity is a legal requirement under Title VII; inclusion is a voluntary HR program with no legal basis.",
+        "Diversity covers race and sex only; inclusion covers age, disability, religion, and every other trait."
       ]
     },
     {
@@ -117,6 +162,11 @@
         "Positive diversity climate is linked to customer satisfaction",
         "Diverse consumer markets are worth trillions",
         "Merck: diverse teams solve problems from multiple viewpoints"
+      ],
+      "distractors": [
+        "They mainly cut legal costs, since diverse firms are exempt from most discrimination claims and audits.",
+        "They raise short-term output by speeding decisions, because diverse teams reach agreement faster.",
+        "They improve results mostly by lowering pay costs, because diverse hires accept lower starting salaries."
       ]
     },
     {
@@ -129,6 +179,11 @@
         "New York protects parental status; Washington protects obesity; New Jersey age law covers 18-70",
         "Workplace tort: a civil wrong (like using an employee's photo in an ad without consent) handled under state law",
         "Constitutional law overrides all others; common law is built from court decisions"
+      ],
+      "distractors": [
+        "States can only copy federal law; they cannot add protections, cover smaller firms, or protect new groups.",
+        "States can weaken federal protections, such as setting a minimum wage below the federal minimum rate.",
+        "States can exempt employers from federal law if the state passes its own version of that statute."
       ]
     },
     {
@@ -140,6 +195,11 @@
       "points": [
         "Also called the Wagner Act",
         "Created a system to arbitrate disputes"
+      ],
+      "distractors": [
+        "Employers' right to block unions and replace striking workers, and it bars union organizing at work.",
+        "A federal minimum wage, overtime pay, and child labor limits for nonexempt employees nationwide.",
+        "Workers age 40 and older from discrimination in hiring, pay, and other terms of employment overall."
       ]
     },
     {
@@ -151,6 +211,11 @@
       "points": [
         "Covers private employers and federal, state, and local governments",
         "Exempt examples: commissioned salespeople, farm workers, salaried executives"
+      ],
+      "distractors": [
+        "Equal pay for men and women doing substantially equal work in the same establishment and job.",
+        "Employees' right to unionize and bargain collectively, with no employer retaliation for organizing.",
+        "60 days' notice of plant closings or mass layoffs at employers with 100+ full-time workers."
       ]
     },
     {
@@ -163,6 +228,11 @@
         "Equal = same skill, effort, responsibility, similar conditions",
         "Allowed differences: seniority, merit, quantity or quality of work",
         "Fix = raise the underpaid group's pay; never cut the other's"
+      ],
+      "distractors": [
+        "Men and women in comparable-worth jobs anywhere in the company must get equal pay and benefits.",
+        "A federal minimum wage, overtime pay, and child labor limits for all nonexempt employees nationwide.",
+        "Men and women must get equal pay only when they hold identical job titles at the same pay grade."
       ]
     },
     {
@@ -176,6 +246,11 @@
         "2020 Supreme Court ruling added sexual orientation and transgender status under 'sex'",
         "Persistently refusing to use an employee's stated name or pronouns can be sex discrimination",
         "Created the EEOC"
+      ],
+      "distractors": [
+        "Job discrimination based on age, disability, veteran status, or genetic information, in any job decision.",
+        "Job discrimination based on race, color, religion, or national origin only; sex was added by later laws.",
+        "Pay differences between men and women doing substantially equal work in the same establishment only."
       ]
     },
     {
@@ -187,6 +262,11 @@
       "points": [
         "Pregnancy was added to Title VII by the Pregnancy Discrimination Act",
         "Marital status and rival-team fandom aren't federally protected (some states add groups)"
+      ],
+      "distractors": [
+        "Age (ADA), disability (ADEA), veteran status (GINA), and genetic info (USERRA), each covered by its own law.",
+        "Religion (RFRA), national origin (IRCA), color (ADEA), and pregnancy (FMLA); Title VII covers age and disability.",
+        "Age (FLSA), disability (OSH Act), veteran status (WARN), and genetic info (HIPAA), all outside Title VII."
       ]
     },
     {
@@ -199,6 +279,11 @@
         "Example: same-gender officers for certain duties on gender-segregated prison wards",
         "Must reflect actual inability to do the job, not stereotypes",
         "The only defense to obvious disparate treatment"
+      ],
+      "distractors": [
+        "Any trait customers prefer in an employee, including race when it matches the customer base served.",
+        "A job requirement that screens out a protected group but is justified by business necessity, like a test.",
+        "A protected trait that is helpful to the job; it can include race or color when a role calls for it."
       ]
     },
     {
@@ -210,6 +295,11 @@
       "points": [
         "Google paid $11M in 2019 over bias against applicants 40+",
         "Affirmative action does NOT cover the 40+ group; ADEA does"
+      ],
+      "distractors": [
+        "Workers age 50 and older from discrimination in hiring, pay, and other terms of employment.",
+        "Workers of all ages, including younger workers who face bias in favor of older employees.",
+        "Workers age 40 and older from layoffs only; hiring and pay decisions are not covered at all."
       ]
     },
     {
@@ -221,6 +311,11 @@
       "points": [
         "Section 503: 7% utilization goal for people with disabilities; missing it alone isn't a violation",
         "Enforced by the OFCCP"
+      ],
+      "distractors": [
+        "All private employers must hire a fixed quota of people with disabilities and report that number to the EEOC.",
+        "Federal contractors must give 60 days' notice before laying off any employee who has a documented disability.",
+        "Federal contractors may screen out applicants with disabilities whenever accommodations would cost over $500."
       ]
     },
     {
@@ -231,6 +326,11 @@
       "note": "Read more: 3.8 Major Federal Employment Laws (1935–1974); 3.9 Major Federal Employment Laws (1978–1990)",
       "points": [
         "Accommodation examples: interpreters, modified schedules, accessible equipment"
+      ],
+      "distractors": [
+        "Anyone with a disability who applies, required regardless of cost, since the ADA has no hardship exception.",
+        "Someone who can do every job function, essential or marginal, without any accommodation at all needed.",
+        "Someone who can do the job's marginal tasks; accommodation is optional unless the employer has 500+ staff."
       ]
     },
     {
@@ -241,6 +341,11 @@
       "note": "Read more: 3.8 Major Federal Employment Laws (1935–1974)",
       "points": [
         "Amended by the Jobs for Veterans Act (2002)"
+      ],
+      "distractors": [
+        "Reemployment rights after military leave, with the seniority and pay the veteran would have earned.",
+        "No discrimination against veterans, and affirmative action by all private employers with 15+ staff.",
+        "No discrimination against disabled people, and affirmative action by federal contractors of $10,000+."
       ]
     },
     {
@@ -252,6 +357,11 @@
       "points": [
         "Amended Title VII",
         "Young v. UPS: a driver denied light duty given to others could sue"
+      ],
+      "distractors": [
+        "Pregnant workers get 12 weeks of unpaid, job-protected leave at employers with 50 or more employees.",
+        "Pregnancy must be treated as a permanent disability, giving pregnant workers priority in job decisions.",
+        "Employers may move pregnant workers to lighter jobs without their consent to reduce safety risks."
       ]
     },
     {
@@ -262,6 +372,11 @@
       "note": "Read more: 3.9 Major Federal Employment Laws (1978–1990)",
       "points": [
         "Triggers: job loss, reduced hours, death, divorce, other life events"
+      ],
+      "distractors": [
+        "Workers who lose group health coverage get free coverage paid by the employer for up to 18 months.",
+        "Eligible employees get up to 12 weeks of unpaid, job-protected leave with continued health coverage.",
+        "Workers who lose group health coverage can keep it for a limited time, at employers with 50+ employees."
       ]
     },
     {
@@ -274,6 +389,11 @@
         "Complete the I-9 within 3 days of hire; keep it private",
         "Make offers contingent on eligibility rather than asking about citizenship",
         "E-Verify checks eligibility online; ICE now prosecutes managers"
+      ],
+      "distractors": [
+        "Verify each new hire's citizenship with E-Verify only; noncitizens may never be hired for any job.",
+        "Verify work authorization only for applicants who seem foreign, to avoid burdening other new hires.",
+        "Keep a copy of each worker's tax return to prove legal status, and never hire green card holders."
       ]
     },
     {
@@ -284,6 +404,11 @@
       "note": "Read more: 3.9 Major Federal Employment Laws (1978–1990)",
       "points": [
         "Some states go further (Illinois: 75+ employees)"
+      ],
+      "distractors": [
+        "Employers with 50+ full-time workers must give 30 days' notice of any layoff of one or more employees.",
+        "Employers with 100+ full-time workers must pay 60 days' severance after plant closings or mass layoffs.",
+        "All employers must give 2 weeks' notice to each worker before ending employment for any reason at all."
       ]
     },
     {
@@ -296,6 +421,11 @@
         "Disability: an impairment substantially limiting a major life activity, a record of one, or being regarded as having one",
         "Judged without mitigating devices (except ordinary glasses)",
         "Lowe's paid $8.6M for failing to accommodate"
+      ],
+      "distractors": [
+        "No discrimination against people with a disability, but accommodation is optional for private employers.",
+        "Hiring quotas for qualified people with disabilities at any employer with 15 or more employees.",
+        "No discrimination against disabled people at federal contractors only, plus affirmative action plans."
       ]
     },
     {
@@ -306,6 +436,11 @@
       "note": "Read more: 3.9 Major Federal Employment Laws (1978–1990)",
       "points": [
         "After an offer, medical exams must be job-related and applied consistently"
+      ],
+      "distractors": [
+        "Anytime during interviews, as long as the same questions are asked of every applicant for the job.",
+        "Only after the employee completes a 90-day probation period, under ADA timing rules for questions.",
+        "Before an offer, if the applicant seems to have a visible disability that could affect performance."
       ]
     },
     {
@@ -318,6 +453,11 @@
         "Compensatory and punitive damages for intentional discrimination",
         "Discrimination is proven if a protected trait was a motivating factor, even with other reasons",
         "Enforced by the EEOC"
+      ],
+      "distractors": [
+        "It added age and disability to Title VII, created the EEOC, and banned all pre-employment testing.",
+        "It capped back pay for unintentional bias, required 'sole cause' for liability, and allowed race norming.",
+        "It created affirmative action quotas, extended FMLA leave, and allowed damages for adverse impact only."
       ]
     },
     {
@@ -329,6 +469,11 @@
       "points": [
         "Passed in 1970; OSHA sits in the Department of Labor",
         "Covered in depth in Chapter 12 (Health and Safety)"
+      ],
+      "distractors": [
+        "Employers must give 12 weeks of job-protected leave to workers injured on the job in hazardous roles.",
+        "Employers must keep the workplace free of all possible hazards, with no exceptions or standards given.",
+        "Employers must insure every worker against injury; OSHA sets premiums but no workplace safety rules."
       ]
     },
     {
@@ -340,6 +485,11 @@
       "points": [
         "Reasons: birth or adoption, a family member's serious health condition, your own, military exigencies",
         "Managers can be personally liable for FMLA retaliation"
+      ],
+      "distractors": [
+        "All employees get up to 12 weeks of paid, job-protected leave each year, with full health coverage kept.",
+        "Eligible employees at 15+ employee worksites get up to 26 weeks of unpaid leave for any personal reason.",
+        "Eligible employees at 50+ employee worksites get up to 12 weeks of paid leave, but health coverage ends."
       ]
     },
     {
@@ -350,6 +500,11 @@
       "note": "Read more: 3.10 Major Federal Employment Laws (1993–2010)",
       "points": [
         "Added by the 2008 amendment (with the NDAA)"
+      ],
+      "distractors": [
+        "Up to 12 workweeks in 12 months to care for a seriously ill or injured service member who is family.",
+        "Up to 26 workweeks in 12 months, but only for a spouse; parents and next of kin don't qualify for it.",
+        "Up to 52 workweeks of paid leave to care for any veteran, regardless of their family relationship."
       ]
     },
     {
@@ -361,6 +516,11 @@
       "points": [
         "Covers present AND future service (applicants who may be called up)",
         "Target lost a USERRA case with $900,000 in punitive damages"
+      ],
+      "distractors": [
+        "Veterans' hiring preference: affirmative action duties for federal contractors with $150,000+ contracts.",
+        "Service members' jobs, but returning workers restart at entry-level pay with their seniority reset to zero.",
+        "Military families, with up to 26 weeks of leave to care for a seriously ill or injured family member."
       ]
     },
     {
@@ -371,6 +531,11 @@
       "note": "Read more: 3.10 Major Federal Employment Laws (1993–2010)",
       "points": [
         "HHS sets standards for electronic exchange of health data"
+      ],
+      "distractors": [
+        "Collecting genetic information, including family medical history, before making hiring decisions.",
+        "Offering continued group health coverage for a limited time to workers who lose their jobs.",
+        "Reporting all employee health claims to OSHA to track workplace illness and injury trends."
       ]
     },
     {
@@ -383,6 +548,11 @@
         "Train recruiters not to ask about family health",
         "Social media can expose genetic info (a candidate posting a parent's diagnosis)",
         "Store any genetic info in a separate confidential medical file"
+      ],
+      "distractors": [
+        "Using genetic information for hiring, but allowing employers to request family medical history freely.",
+        "Using any medical information in employment decisions, including disability, illness, and pregnancy.",
+        "Disclosing employees' health information without consent, under federal privacy and security rules."
       ]
     },
     {
@@ -394,6 +564,11 @@
       "points": [
         "Under 50 full-time employees: not required to insure",
         "Under 25 employees: tax breaks for providing coverage; SHOP marketplace"
+      ],
+      "distractors": [
+        "Employers with 15+ full-time employees must offer health insurance or pay a fine per employee each year.",
+        "All employers, regardless of size, must offer health insurance, with no incentives for small firms.",
+        "Employers with 50+ full-time employees must pay all health premiums; smaller firms are fully exempt."
       ]
     },
     {
@@ -405,6 +580,11 @@
       "points": [
         "Discrimination requires concrete harm: not hired, passed over, harassed",
         "Safer swaps: 'Are you authorized to work in the U.S.?' instead of 'Are you a citizen?'"
+      ],
+      "distractors": [
+        "Yes; questions about age, religion, or family plans are illegal to ask and carry automatic penalties.",
+        "No; any question is fine, since federal law regulates only final decisions, not the interview itself.",
+        "Yes; any question not written in the job description is illegal under Title VII and the ADA rules."
       ]
     },
     {
@@ -416,6 +596,11 @@
       "points": [
         "Executive Order 11246 (1965) required federal contractors to take affirmative action",
         "Protected classes for AA: women and minorities; also disabled and protected veterans under other laws"
+      ],
+      "distractors": [
+        "Hiring quotas that require employers to fill set percentages of jobs with members of protected classes.",
+        "Giving preference to protected-group members over more qualified applicants to balance a workforce.",
+        "A legal ban on considering any protected trait, so employers stay fully neutral in all job decisions."
       ]
     },
     {
@@ -427,6 +612,11 @@
       "points": [
         "Numerical benchmarks reflect the availability of qualified applicants",
         "Missing a goal isn't a violation; failing to make a good-faith effort is"
+      ],
+      "distractors": [
+        "Not voluntary; every private employer must meet hiring targets or face fines from the EEOC each year.",
+        "Not about goals; it requires strict quotas but never allows hiring underqualified people for jobs.",
+        "Not about hiring; it applies only to promotions and layoffs, and requires matching labor-market ratios."
       ]
     },
     {
@@ -438,6 +628,11 @@
       "points": [
         "Plans detail recruiting, training, promotion steps, records, and internal audits",
         "Other reasons: voluntary, court order, or a remedy for past discrimination"
+      ],
+      "distractors": [
+        "All private employers with 15+ employees, under Title VII of the Civil Rights Act of 1964 rules.",
+        "Federal contractors with contracts of $10,000+ and 15+ employees, under the Rehabilitation Act.",
+        "Any employer with 100+ employees, under the WARN Act and Executive Order 11246 together."
       ]
     },
     {
@@ -450,6 +645,11 @@
         "Remedial: fixes an actual imbalance",
         "Temporary: ends when goals are met",
         "Cases: Steelworkers v. Weber, Wygant v. Jackson Board of Education"
+      ],
+      "distractors": [
+        "It's permanent, excludes nonminorities, is informal, and is set by managers.",
+        "It sets strict quotas, is voluntary, is unwritten, and replaces merit hiring.",
+        "It's remedial, is permanent, excludes nonminorities, and is approved by HR."
       ]
     },
     {
@@ -461,6 +661,11 @@
       "points": [
         "A company can't decide on its own to give preferences",
         "Better: hire for the business-related trait (e.g., ties to a community), not the protected trait"
+      ],
+      "distractors": [
+        "Giving a protected-group member a preference; allowed anytime candidates are equally qualified.",
+        "Giving all applicants the same treatment; required by Title VII in every hiring and promotion decision.",
+        "Giving veterans a hiring preference; allowed only for federal agencies and never in the private sector."
       ]
     },
     {
@@ -472,6 +677,11 @@
       "points": [
         "Contractors pay their own Social Security and employment taxes",
         "Misclassification = back taxes plus penalties (Illinois fined one firm $328,500)"
+      ],
+      "distractors": [
+        "The worker sets their own hours; if the company pays by the hour or week, the worker is a contractor.",
+        "The worker signs a contractor agreement; that label decides status no matter how the work is controlled.",
+        "The company controls what and how the work is done; if it controls only the result, it's an employee."
       ]
     },
     {
@@ -484,6 +694,11 @@
         "Hostile environment victims need not be the target",
         "Harassers can be supervisors, coworkers, clients, or customers; anyone can be a victim",
         "Minor teasing or isolated incidents usually aren't illegal; frequent or severe conduct is"
+      ],
+      "distractors": [
+        "Quid pro quo is conduct making work intimidating; hostile environment ties job outcomes to sexual favors.",
+        "Quid pro quo involves coworkers only; hostile environment involves supervisors and job threats only.",
+        "Quid pro quo requires repeated incidents; hostile environment can be proven by a single mild comment."
       ]
     },
     {
@@ -495,6 +710,11 @@
       "points": [
         "Reasonable care = prevent and promptly correct",
         "Remedies: back pay, reinstatement, compensatory and punitive damages, attorney fees"
+      ],
+      "distractors": [
+        "Never, if the company has a written harassment policy, regardless of what supervisors do or how it's handled.",
+        "Only when the victim reported it to the EEOC first; internal complaints don't create employer liability.",
+        "Only for coworker harassment; supervisors are personally liable instead of the employer in all cases."
       ]
     },
     {
@@ -506,6 +726,11 @@
       "points": [
         "Extra training for supervisors on handling complaints",
         "Keep training records to show good-faith prevention in court"
+      ],
+      "distractors": [
+        "A list of banned words, a dress code, and a rule that all complaints go first to the accused's manager.",
+        "A clear definition, but complaints are handled informally, with no investigation steps or training.",
+        "Zero tolerance, a confidential EEOC hotline as the only reporting route, and training every five years."
       ]
     },
     {
@@ -517,6 +742,11 @@
       "points": [
         "Disparate treatment: the decision would change if the person's protected trait were different",
         "Adverse impact: same standards, unequal consequences, intent doesn't matter"
+      ],
+      "distractors": [
+        "Disparate treatment is a neutral rule with unequal results; adverse impact is intentional, using different standards.",
+        "Disparate treatment applies to hiring only; adverse impact applies to pay, promotion, and termination decisions.",
+        "Disparate treatment needs statistics to prove; adverse impact needs proof that a manager intended to discriminate."
       ]
     },
     {
@@ -528,6 +758,11 @@
       "points": [
         "From McDonnell Douglas v. Green (1973)",
         "Then the employer must give a legitimate, nondiscriminatory reason; the plaintiff can show it's a pretext"
+      ],
+      "distractors": [
+        "Protected group member, selection rate below 80% of others, and no business necessity shown for the rule.",
+        "Protected group member, a written complaint to HR, and a later tangible action like demotion or firing.",
+        "Applied and qualified, rejected anyway, and the employer later hired someone of the same protected group."
       ]
     },
     {
@@ -539,6 +774,11 @@
       "points": [
         "Job-related assessment = one that predicts performance in that job",
         "Keep protected-trait records away from decision makers"
+      ],
+      "distractors": [
+        "Disparate treatment: job-related business necessity; adverse impact: a BFOQ or legitimate nondiscriminatory reason.",
+        "Disparate treatment: showing no complaint was filed; adverse impact: proving the rule wasn't meant to exclude anyone.",
+        "Both: showing the company has an affirmative action plan, which defends against either type of discrimination claim."
       ]
     },
     {
@@ -550,6 +790,11 @@
       "points": [
         "Example: 50% pass rate x 0.8 = 40% threshold; a 30% rate falls below it",
         "A guideline, not formal law; courts also use 2-3 standard deviations"
+      ],
+      "distractors": [
+        "Adverse impact is indicated if a group makes up less than 80% of the workforce compared to the labor market.",
+        "Adverse impact is indicated if a group's selection rate is below 20% of the most-selected group's rate.",
+        "Adverse impact is indicated if fewer than 80% of applicants from a protected group pass a selection test."
       ]
     },
     {
@@ -560,6 +805,11 @@
       "note": "Read more: 3.15 Employment Lawsuits: Disparate Treatment and Adverse Impact",
       "points": [
         "Vulnerable practices: written tests, education requirements, height and weight rules, broad criminal background checks"
+      ],
+      "distractors": [
+        "It set up disparate treatment: managers who openly refused to hire Black workers violated Title VII outright.",
+        "It upheld diploma and test rules as legal because they applied equally to every applicant regardless of race.",
+        "It banned race norming: adjusting test cutoffs by race was ruled illegal under the Civil Rights Act of 1964."
       ]
     },
     {
@@ -571,6 +821,11 @@
       "points": [
         "New Haven discarded a firefighter promotion test",
         "Lesson: use valid, job-related assessments from the start"
+      ],
+      "distractors": [
+        "An employer must throw out test results that produce adverse impact, even if the test is valid.",
+        "An employer can't use any written test for promotion in public safety jobs like firefighting.",
+        "An employer may adjust test cutoffs by race to avoid adverse impact, if the test is still valid."
       ]
     },
     {
@@ -578,7 +833,12 @@
       "front": "What is race norming, and is it legal?",
       "answer": "Adjusting scores or cutoffs by race or another protected group; the Civil Rights Act of 1991 bans it.",
       "subtitle": "Ch 3.15 · Legal & Regulatory",
-      "note": "Read more: 3.15 Employment Lawsuits: Disparate Treatment and Adverse Impact"
+      "note": "Read more: 3.15 Employment Lawsuits: Disparate Treatment and Adverse Impact",
+      "distractors": [
+        "Weighting test scores by job-related skill; the Civil Rights Act of 1991 requires it for valid tests.",
+        "Adjusting cutoffs by race to reduce adverse impact; it is legal when an affirmative action plan exists.",
+        "Comparing selection rates across racial groups; the four-fifths rule bans it under Title VII today."
+      ]
     },
     {
       "id": "c202-ch03-053",
@@ -590,6 +850,11 @@
         "A tort claim: needs a false material fact, knowledge, intended and justified reliance, and damages",
         "A Colorado court upheld $250,000 for hiding layoff risk",
         "Qualify positive statements so they aren't guarantees"
+      ],
+      "distractors": [
+        "Hiring someone you knew or should have known could harm others, without screening them with care.",
+        "Recruiting from a competitor's staff; it's illegal under federal law even when no promise is made.",
+        "Posting a job that's already filled; only written job ads, never oral promises, can lead to lawsuits."
       ]
     },
     {
@@ -601,6 +866,11 @@
       "points": [
         "Riskiest jobs: customer, child, or in-home contact (installers, delivery drivers)",
         "Check references, criminal records, and employment gaps"
+      ],
+      "distractors": [
+        "Misrepresenting the job or company to win a recruit; even oral promises can lead to lawsuits later.",
+        "Hiring someone without verifying work authorization on Form I-9 within three days of starting work.",
+        "Hiring someone who later performs poorly, when better candidates were available during selection."
       ]
     },
     {
@@ -613,6 +883,11 @@
         "Test: would it dissuade a reasonable employee? (refused references, excluded from training, undeserved bad review)",
         "Petty slights usually don't count",
         "Covers employees, applicants, and former employees"
+      ],
+      "distractors": [
+        "Punishing someone for poor performance after a complaint; it's legal and rare if properly documented.",
+        "Harassment tied to job outcomes like promotion in exchange for favors; it's the most common EEOC charge.",
+        "Punishing someone for protected activity, but only if they filed with the EEOC, not internal complaints."
       ]
     },
     {
@@ -625,6 +900,11 @@
         "Created by Title VII; enforcement power added in 1972",
         "Remedies: hiring or reinstatement, back pay (to judgment), front pay (after judgment), damages",
         "Employers with 15+ employees must keep employment records; some file EEO-1 reports"
+      ],
+      "distractors": [
+        "The NLRA, FLSA, OSH Act, FMLA, WARN Act, and Executive Order 11246 for federal contractors.",
+        "Title VII, the ADEA, ADA, and Equal Pay Act, plus OSHA safety standards and the FMLA leave rules.",
+        "Title VII and the ADA only; the ADEA and Equal Pay Act are enforced by the Labor Department instead."
       ]
     },
     {
@@ -636,6 +916,11 @@
       "points": [
         "Covers contractors with 50+ employees and $50,000+ in federal business",
         "Reviews triggered by data flags, random selection, or complaints; tries conciliation first"
+      ],
+      "distractors": [
+        "An EEOC office that investigates discrimination charges filed by employees of private employers nationwide.",
+        "A Labor Department office that enforces federal contractors' minimum wage and overtime duties under the FLSA.",
+        "A Justice Department office that enforces Title VII and the ADA against state and local government employers."
       ]
     },
     {
@@ -649,6 +934,11 @@
         "Advancement: unequal access to visible assignments and networks",
         "Terms: unequal pay, inflexible policies, no accommodation",
         "Termination: unfair downsizing standards"
+      ],
+      "distractors": [
+        "Only in recruiting, since once someone is hired, equal opportunity laws no longer apply to their job.",
+        "In individual managers' personal prejudices, rather than in policies like referral-only hiring.",
+        "Only in termination, e.g., layoffs by seniority, since hiring and pay are governed by market forces."
       ]
     },
     {
@@ -660,6 +950,11 @@
       "points": [
         "Example: 'young people are lazy'",
         "Rejecting someone as 'overqualified' is stereotyping; courts treat overqualified as qualified"
+      ],
+      "distractors": [
+        "Outright bigotry toward a group, which clashes with company values and can lead to discrimination.",
+        "Fear that diversity efforts will cost you opportunities, so you withhold help from diverse colleagues.",
+        "Not knowing what employment law requires, which is never a legal defense against discrimination claims."
       ]
     },
     {
@@ -670,6 +965,11 @@
       "note": "Read more: 3.19 Human Biases",
       "points": [
         "Reduce it through careful selection, training, and tracking each manager's diversity results"
+      ],
+      "distractors": [
+        "Assuming everyone in a group shares the same traits, so people are judged by group rather than merit.",
+        "Fear that diversity efforts will cost you opportunities, which leads to withholding help from others.",
+        "Involuntary attitudes and stereotypes that shape decisions without our awareness or conscious intent."
       ]
     },
     {
@@ -681,6 +981,11 @@
       "points": [
         "They may refer, evaluate, train, or develop others less fairly",
         "Counter it by stressing that the focus is objectivity and EEO, not preferences"
+      ],
+      "distractors": [
+        "Outright bigotry toward a group, which can clash with company values and lead to open discrimination.",
+        "Not knowing what employment law requires, which is never a legal defense and which feeds stereotyping.",
+        "Assuming everyone in a group shares the same traits, so people are judged by group instead of by merit."
       ]
     },
     {
@@ -692,6 +997,11 @@
       "points": [
         "Common in small firms and with untrained managers",
         "Mathis v. Phillips Chevrolet: untrained hiring managers were an 'extraordinary mistake'"
+      ],
+      "distractors": [
+        "Outright bigotry toward a group; it's never a legal defense, and it leads directly to discrimination.",
+        "Not knowing what employment law requires; it's a valid legal defense if the employer acted in good faith.",
+        "Fear of losing opportunities to diversity efforts; it's never a defense, and it feeds stereotyping."
       ]
     },
     {
@@ -703,6 +1013,11 @@
       "points": [
         "Model sentence: 'Stereotyping leads a manager to judge an applicant by assumptions about her group instead of her skills.'",
         "Fixes: structured, job-related criteria; bias training; diversity scorecards for managers (Salesforce)"
+      ],
+      "distractors": [
+        "Bias mainly slows hiring, so roles stay open longer, but qualified people are still rated fairly in the end.",
+        "Bias only matters when it's conscious, since unconscious attitudes can't affect job-related judgments at all.",
+        "Bias creates barriers only when written into policy, so individual managers' judgments don't block anyone."
       ]
     },
     {
@@ -714,6 +1029,11 @@
       "points": [
         "Tools: implicit bias tests, the Stroop effect",
         "Counter with diverse leadership and senior advocates for diverse employees"
+      ],
+      "distractors": [
+        "Deliberate, openly stated beliefs about a group that people use knowingly to make employment decisions.",
+        "Errors in AI hiring tools trained on biased past decisions, which create disparate impact risk.",
+        "Rationalizing wrongdoing because 'everyone does it,' which shapes decisions without awareness."
       ]
     },
     {
@@ -724,6 +1044,11 @@
       "note": "Read more: 3.20 Barriers to Ethical HRM",
       "points": [
         "Euphemisms like 'creative accounting' are warning signs of rationalization"
+      ],
+      "distractors": [
+        "Motivated blindness excuses wrongdoing because 'everyone does it'; rationalization ignores inconvenient facts.",
+        "Motivated blindness is fear of speaking up; rationalization is letting small lapses make bigger ones easier.",
+        "Motivated blindness is unconscious stereotyping; rationalization is outright bigotry toward a protected group."
       ]
     },
     {
@@ -735,6 +1060,11 @@
       "points": [
         "Other traps: fear of retaliation, overvaluing money",
         "Moral courage can be developed"
+      ],
+      "distractors": [
+        "Small lapses make bigger ones harder, and people who don't know what's right act anyway despite the risks.",
+        "People ignore inconvenient facts, and excuse wrongdoing by saying everyone else in the company does it too.",
+        "Big lapses come first and small ones follow, and people lack courage because no ethics code exists at all."
       ]
     },
     {
@@ -746,6 +1076,11 @@
       "points": [
         "Don't use protected traits or their proxies as predictors",
         "Audit algorithms regularly; run them separately so bias can be caught and fixed"
+      ],
+      "distractors": [
+        "Bias in manual hiring decisions that AI tools remove, eliminating disparate impact risk entirely.",
+        "An AI tool that deliberately screens out protected groups, creating disparate treatment liability.",
+        "Errors in AI tools caused by bad code, which create risk only if the tool is used for pay decisions."
       ]
     },
     {

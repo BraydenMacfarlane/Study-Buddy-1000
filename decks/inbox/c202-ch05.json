@@ -16,6 +16,11 @@
         "Watson Wyatt: an excellent recruiting function lifted market value 18%+",
         "Fast growers and promote-from-within firms (P&G, Enterprise) depend on strong pipelines",
         "Training can't instill what people can't learn; pay can't motivate the unable"
+      ],
+      "distractors": [
+        "It sets the pay structure for every role, which fixes labor costs and benefit levels for years to come.",
+        "It documents each job's duties, which is the main legal defense against failure-to-hire lawsuits later.",
+        "It decides which employees get promoted first, which shapes succession plans and the leadership bench."
       ]
     },
     {
@@ -27,6 +32,11 @@
       "points": [
         "Like marketing research for talent: who's likely interested and how to reach them",
         "Follows job analysis"
+      ],
+      "distractors": [
+        "Persuading identified candidates to apply and accept offers; interpersonal work that closes the deal with talent.",
+        "Assessing applicants with tests and interviews to choose the best fit; evaluative work done after people apply.",
+        "Forecasting labor demand and supply to find a coming talent gap; planning work done before any hiring begins."
       ]
     },
     {
@@ -38,6 +48,11 @@
       "points": [
         "Interpersonal: converts leads to applicants, keeps them engaged, persuades them to accept",
         "Lasts until the candidate starts work or leaves the process"
+      ],
+      "distractors": [
+        "Identifying qualified people and the labor markets to find them in, which is analytical, lead-generating work.",
+        "Assessing applicants with tests and interviews to decide which of them should receive a job offer at all.",
+        "Preparing new hires to succeed in their roles through orientation, training, and early socialization."
       ]
     },
     {
@@ -49,6 +64,11 @@
       "points": [
         "One line: sourcing identifies talent that recruiting attracts",
         "Sourcing comes first; recruiting carries through to acceptance"
+      ],
+      "distractors": [
+        "Sourcing attracts and persuades talent (interpersonal); recruiting identifies potential talent (analytical).",
+        "Sourcing targets internal candidates only; recruiting targets people outside the company in the labor market.",
+        "Sourcing chooses whom to hire from applicants; recruiting writes job descriptions from the job analysis."
       ]
     },
     {
@@ -61,6 +81,11 @@
         "Sourcing only: research, finding names and labor markets, generating leads, analytical",
         "Recruiting only: relationships, messaging, persuading, keeping candidates engaged, interpersonal",
         "Both: support strategy, rely on technology and knowing the target talent, aim for fit and acceptance"
+      ],
+      "distractors": [
+        "Both are done after selection, rely on interviews, and decide which applicants get job offers and at what pay.",
+        "Both target only passive job seekers, skip job analysis, and are handled entirely by outside search firms.",
+        "Both are purely analytical tasks, use only internal sources, and focus on cutting cost per hire above all."
       ]
     },
     {
@@ -68,7 +93,12 @@
       "front": "What makes a recruit desirable?",
       "answer": "Fit with both the job and the company, plus a good chance of accepting an offer.",
       "subtitle": "Ch 5.2 · Effective HRM",
-      "note": "Read more: 5.2 Introduction"
+      "note": "Read more: 5.2 Introduction",
+      "distractors": [
+        "The most years of experience and the highest degree among all of the applicants.",
+        "Strong fit with the job only, since company culture can be taught after hire.",
+        "A low salary request and immediate availability to start without notice."
+      ]
     },
     {
       "id": "c202-ch05-007",
@@ -78,6 +108,11 @@
       "note": "Read more: 5.3 Real World Challenge: Leveraging Technology for Effective Sourcing and Recruiting at IBM; 5.21 Real World Response: Leveraging Technology for Effective Sourcing and Recruiting at IBM",
       "points": [
         "Challenge: use technology, AI, and cloud to speed and improve hiring"
+      ],
+      "distractors": [
+        "Too many applicants for AI roles, so its main problem was screening volume rather than any shortage of skills.",
+        "Its top performers were only slightly better than average, so it focused recruiting on lowering hiring costs.",
+        "Its units each needed different, unrelated skills, so it couldn't share sourcing across the whole company."
       ]
     },
     {
@@ -89,6 +124,11 @@
       "points": [
         "Includes the recently fired and job hoppers",
         "Exceptions: new college graduates and good people displaced in downturns"
+      ],
+      "distractors": [
+        "People not looking but open to the right offer; often top quality but hard to find and persuade to move.",
+        "People comfortable in their jobs but open to better ones, who look only occasionally for a new role.",
+        "People who recently left the company and may be rehired since their performance and fit are already known."
       ]
     },
     {
@@ -100,6 +140,11 @@
       "points": [
         "May miss postings, so they need proactive outreach",
         "More high-quality people here than among active seekers"
+      ],
+      "distractors": [
+        "People actively looking right now who respond quickly to ads and postings.",
+        "People not looking at all but open to the right offer if one reaches them.",
+        "People who have been referred by current employees for open positions."
       ]
     },
     {
@@ -111,6 +156,11 @@
       "points": [
         "Need the most proactive, strategic effort and the most time and information",
         "Microsoft: about 5% of desired talent is active, 95% passive"
+      ],
+      "distractors": [
+        "People looking right now; easy to reach with ads, though the pool's average quality can be lower.",
+        "People comfortable in their jobs who are open to better ones and look only every now and then.",
+        "People who are unemployed and not searching, often due to discouragement in the labor market."
       ]
     },
     {
@@ -121,6 +171,11 @@
       "note": "Read more: 5.4 Sourcing",
       "points": [
         "McAfee focused on high-value prospects: time to fill critical roles fell from 35 to 11 days"
+      ],
+      "distractors": [
+        "Laws require using at least five new sources a year to meet EEO recruiting obligations.",
+        "Old sources grow more expensive each year, so new ones are mainly a way to cut costs.",
+        "New sources always yield more active seekers, which raises the speed of each hire."
       ]
     },
     {
@@ -133,6 +188,11 @@
         "Videos: day in the life, testimonials, virtual tours",
         "Google Hire resurfaces past candidates; underdog.io taps employees' networks",
         "Automation cuts time to fill and can reduce bias"
+      ],
+      "distractors": [
+        "It has replaced recruiters entirely, since AI now handles outreach, interviews, and every final hiring decision.",
+        "It has narrowed sourcing to job boards, since social media and AI tools are banned under EEO guidelines.",
+        "It mostly raised costs, since software licenses now outweigh the savings from faster, cheaper sourcing."
       ]
     },
     {
@@ -143,6 +203,11 @@
       "note": "Read more: 5.6 Recruiting Sources",
       "points": [
         "Quality beats quantity; promotion rates matter when entry jobs feed future leaders"
+      ],
+      "distractors": [
+        "Number of ads posted, recruiter headcount, office location, website traffic, and brand awards won.",
+        "Cost alone, since the cheapest source always produces the best value per hire in the long run.",
+        "Only the number of applicants, since more applicants always means better quality hires overall."
       ]
     },
     {
@@ -150,7 +215,12 @@
       "front": "How do internal and external recruiting sources differ?",
       "answer": "Internal sources find current employees for other roles; external sources target people outside the company.",
       "subtitle": "Ch 5.6 · Effective HRM",
-      "note": "Read more: 5.6 Recruiting Sources"
+      "note": "Read more: 5.6 Recruiting Sources",
+      "distractors": [
+        "Internal sources target people outside the company; external sources find current employees for other roles.",
+        "Internal sources are run by HR; external sources are run by hiring managers and outside agencies only.",
+        "Internal sources are used for entry-level jobs only; external sources are used for executive roles only."
+      ]
     },
     {
       "id": "c202-ch05-015",
@@ -160,6 +230,11 @@
       "note": "Read more: 5.6 Recruiting Sources; 5.7 Internal Recruiting Sources",
       "points": [
         "PNC: internal hires in key jobs were more productive in year one than experienced outsiders"
+      ],
+      "distractors": [
+        "Fresh ideas, a larger and more diverse pool, new skills, and leaders who may drive change more effectively.",
+        "Lower pay for each hire, since insiders accept smaller raises than outsiders, plus no need for any training.",
+        "It's legally required before posting jobs externally, so it protects the firm against discrimination claims."
       ]
     },
     {
@@ -167,28 +242,48 @@
       "front": "What are the main benefits of external recruiting?",
       "answer": "Fresh ideas, a larger and more diverse pool, new skills, and leaders who may drive change better.",
       "subtitle": "Ch 5.6 · Effective HRM",
-      "note": "Read more: 5.6 Recruiting Sources"
+      "note": "Read more: 5.6 Recruiting Sources",
+      "distractors": [
+        "Faster and cheaper, shorter onboarding, known performance, and it retains talent by showing a path.",
+        "Lower cost per hire, faster time to fill, and better first-year performance than internal hires.",
+        "Guaranteed culture fit, lower turnover, and no need for training since outsiders arrive fully skilled."
+      ]
     },
     {
       "id": "c202-ch05-017",
       "front": "What are the drawbacks of external hires, per research?",
       "answer": "They take longer to hire and train, perform worse their first two years, leave more, and cost 18-20% more.",
       "subtitle": "Ch 5.6 · Effective HRM",
-      "note": "Read more: 5.6 Recruiting Sources"
+      "note": "Read more: 5.6 Recruiting Sources",
+      "distractors": [
+        "They're faster to hire and train, perform better their first two years, stay longer, and cost 18-20% less.",
+        "They perform about the same as insiders, cost the same, and leave at the same rate within two years.",
+        "They take longer to hire but cost less, since outside candidates usually accept lower starting pay."
+      ]
     },
     {
       "id": "c202-ch05-018",
       "front": "What is the risk of filling senior roles only from inside?",
       "answer": "It limits fresh insight and can breed groupthink, since everyone shares the same experience.",
       "subtitle": "Ch 5.6 · Effective HRM",
-      "note": "Read more: 5.6 Recruiting Sources"
+      "note": "Read more: 5.6 Recruiting Sources",
+      "distractors": [
+        "It slows promotions, since insiders must wait for outside leaders to retire first.",
+        "It raises hiring costs, since internal moves cost more than outside hires do overall.",
+        "It violates EEO rules, since internal-only hiring is illegal for most senior roles."
+      ]
     },
     {
       "id": "c202-ch05-019",
       "front": "When is internal recruiting usually the better choice?",
       "answer": "When culture and business knowledge are key to the role; promote-from-within firms try insiders first.",
       "subtitle": "Ch 5.6 · Effective HRM",
-      "note": "Read more: 5.6 Recruiting Sources"
+      "note": "Read more: 5.6 Recruiting Sources",
+      "distractors": [
+        "When the role needs fresh ideas and new skills the company lacks, or the firm wants to drive change.",
+        "When the firm wants a larger, more diverse pool than its current workforce can provide for the role.",
+        "When speed doesn't matter and the firm can afford a long search through an executive search firm."
+      ]
     },
     {
       "id": "c202-ch05-020",
@@ -198,6 +293,11 @@
       "note": "Read more: 5.6 Recruiting Sources",
       "points": [
         "Ads aimed at active seekers are fastest but not always highest quality; keep multiple methods"
+      ],
+      "distractors": [
+        "Larger pools always lower cost per hire, since search firms charge less when more people apply.",
+        "Federal EEO rules require a minimum of ten applicants for every open position that's posted.",
+        "More applicants guarantees better hires, so success is measured by the size of the pool alone."
       ]
     },
     {
@@ -209,6 +309,11 @@
       "points": [
         "Keeps the pipeline full; based on long-term strategy",
         "Insider CEO successors generally outperform outsiders"
+      ],
+      "distractors": [
+        "A one-time plan written after a leader resigns, used mainly to find an outside replacement quickly.",
+        "Ongoing tracking of employee performance ratings, used mainly to decide each year's merit raises.",
+        "A process for laying off employees in order of seniority whenever the company needs to downsize."
       ]
     },
     {
@@ -220,6 +325,11 @@
       "points": [
         "Fast and cheap; inaccurate records mean overlooked candidates",
         "Employees and managers keep it updated"
+      ],
+      "distractors": [
+        "A list of open positions posted to current employees so anyone interested can apply for the role.",
+        "A chart of key jobs showing each holder, possible successors, and each successor's readiness level.",
+        "A searchable file of past outside applicants, including unhired finalists, to re-contact for jobs."
       ]
     },
     {
@@ -230,6 +340,11 @@
       "note": "Read more: 5.7 Internal Recruiting Sources",
       "points": [
         "Bulletin board or intranet; HR checks that applicants meet requirements"
+      ],
+      "distractors": [
+        "A record of employees' traits and experience that HR searches for internal fits.",
+        "A website section where outside applicants can browse and apply for open jobs.",
+        "A plan to prepare employees to fill key leadership roles when they become open."
       ]
     },
     {
@@ -237,7 +352,12 @@
       "front": "Why pair internal job postings with a talent inventory?",
       "answer": "Postings miss good people who aren't looking; the inventory finds them, so fewer insiders are overlooked.",
       "subtitle": "Ch 5.7 · Effective HRM",
-      "note": "Read more: 5.7 Internal Recruiting Sources"
+      "note": "Read more: 5.7 Internal Recruiting Sources",
+      "distractors": [
+        "Postings are legally required, so the inventory adds nothing except extra paperwork for HR teams.",
+        "Inventories find only people who are already looking, so postings are needed to reach everyone else.",
+        "Postings reach outside candidates and inventories reach insiders, so together they cover both pools."
+      ]
     },
     {
       "id": "c202-ch05-025",
@@ -247,6 +367,11 @@
       "note": "Read more: 5.7 Internal Recruiting Sources",
       "points": [
         "Boomer retirements, talent competition, and leadership diversity goals raise the priority"
+      ],
+      "distractors": [
+        "Succession plans are required by the SEC, so firms without one face fines when leaders leave.",
+        "Without one, firms must promote from within, which always slows results after any leader's exit.",
+        "It mainly hurts morale, since replacing key talent usually takes only a few days in practice."
       ]
     },
     {
@@ -258,6 +383,11 @@
       "points": [
         "Dow Chemical: mentoring, coaching, on-the-job, online and university learning",
         "Eli Lilly: individual development plans, formal mentoring, 360 feedback, rotation"
+      ],
+      "distractors": [
+        "Through annual performance ratings, merit raises, and stock grants, which build readiness on their own.",
+        "By hiring outside executives as mentors, then promoting whoever has the most years of service.",
+        "Through job postings and talent inventories, which prepare people as they search for open roles."
       ]
     },
     {
@@ -268,6 +398,11 @@
       "note": "Read more: 5.8 External Recruiting Sources: Careers Sites to Referrals",
       "points": [
         "Some firms route all applications through it for a searchable database and EEO compliance"
+      ],
+      "distractors": [
+        "A paid job board like Indeed; it reaches the most active seekers fast but costs more per applicant.",
+        "A company's social media page; it builds brand image but rarely leads to applications or hires.",
+        "The internal posting system; it lists openings for current employees but not for outside applicants."
       ]
     },
     {
@@ -279,6 +414,11 @@
       "points": [
         "Google Code Jam; TokBox's free taco truck outside downsizing Yahoo",
         "Advantages fade or get copied"
+      ],
+      "distractors": [
+        "Using only the newest technology, like AI tools, so the approach seems innovative to applicants.",
+        "Recruiting from competitors' staff, which is creative because it reaches talent others overlook.",
+        "Posting jobs on as many boards as possible, since novelty matters more than reaching the right talent."
       ]
     },
     {
@@ -290,6 +430,11 @@
       "points": [
         "Relatively fast and cheap; bonuses paid only on hire",
         "Up to 45% of new hires overall; 55%+ at Booz Allen"
+      ],
+      "distractors": [
+        "Referral bonuses are large, so employees refer only top performers in order to collect a bigger payout.",
+        "Referred hires are paid less, so they're more grateful and work harder to keep their new jobs.",
+        "Referrals bypass interviews, so the hiring process is faster and less likely to introduce any bias."
       ]
     },
     {
@@ -301,6 +446,11 @@
       "points": [
         "Ties to Chapter 3 adverse impact; unhappy employees also won't refer",
         "Fix: balance referrals with diverse sources"
+      ],
+      "distractors": [
+        "Referred hires perform worse and leave sooner, since employees refer friends regardless of skill level.",
+        "Referral bonuses are illegal under Title VII, so firms that pay them face automatic EEOC penalties.",
+        "Referrals cost more than any other source, since bonuses add up faster than job board fees do."
       ]
     },
     {
@@ -311,6 +461,11 @@
       "note": "Read more: 5.9 External Recruiting Sources: Job Fairs to Observation",
       "points": [
         "Some fairs target veterans or people with disabilities"
+      ],
+      "distractors": [
+        "When the job is executive level; they work best for passive seekers who aren't looking for a new role.",
+        "When the firm needs to fill one niche role fast; they work best for passive seekers in specialty fields.",
+        "Only when held on campus; they work best for interns and don't reach active or semipassive seekers."
       ]
     },
     {
@@ -321,6 +476,11 @@
       "note": "Read more: 5.9 External Recruiting Sources: Job Fairs to Observation",
       "points": [
         "Tactics: postings, searching by employer, InMail, mutual-connection intros, saved-search alerts"
+      ],
+      "distractors": [
+        "It's the only platform legally approved for recruiting, and all EEO postings must appear there.",
+        "It reaches only active seekers, but it's the cheapest way to post high volumes of entry-level jobs.",
+        "It reaches only U.S. candidates, but over 90% of hiring managers use it to post their openings."
       ]
     },
     {
@@ -331,6 +491,11 @@
       "note": "Read more: 5.9 External Recruiting Sources: Job Fairs to Observation",
       "points": [
         "Home Depot's military recruiting improved diversity and lowered turnover"
+      ],
+      "distractors": [
+        "Access to active-duty service members, who may leave service early to accept civilian job offers.",
+        "Free government-funded training for any civilian applicant, with priority hiring for federal jobs.",
+        "Tax-free wages for veterans, paid by the Department of Defense during their first year of civilian work."
       ]
     },
     {
@@ -342,6 +507,11 @@
       "points": [
         "Labor certification: qualified U.S. workers unavailable, and similar U.S. workers' wages not harmed",
         "The process can take up to 2 years; H-1B slots are limited"
+      ],
+      "distractors": [
+        "No visa, but proof of a U.S. degree, plus paying at least the federal minimum wage to the worker.",
+        "A green card before hire, paying market median wages, and an EEOC review of the hiring decision.",
+        "Visa sponsorship, paying 10% above the prevailing wage, and SBA approval for small employers."
       ]
     },
     {
@@ -354,6 +524,11 @@
         "Federal rule (USCIS): whichever is later; the book's 'whichever is less' wording is wrong for real work",
         "Example: hired 2020, leaves 2026 -> keep until 2027",
         "Every new hire completes an I-9 proving identity and work authorization"
+      ],
+      "distractors": [
+        "3 years after hire or 1 year after employment ends, whichever is LESS (as the textbook says).",
+        "1 year after hire or 3 years after employment ends, whichever is later under federal rules.",
+        "For the full length of employment plus 7 years, matching the retention rule for payroll."
       ]
     },
     {
@@ -365,6 +540,11 @@
       "points": [
         "Nucor recruits construction workers who build its plants",
         "Consider the ethics of costing the other firm time and money"
+      ],
+      "distractors": [
+        "Asking current employees to refer people they know who do similar jobs at other companies.",
+        "Watching current employees' performance to decide who is ready for promotion to new roles.",
+        "Hiring people on a short trial basis and observing them before making an offer permanent."
       ]
     },
     {
@@ -375,6 +555,11 @@
       "note": "Read more: 5.9 External Recruiting Sources: Job Fairs to Observation",
       "points": [
         "Suits projects and intermittent work; protect key secrets (Symantec won't offshore virus definitions)"
+      ],
+      "distractors": [
+        "Higher labor costs but faster hiring, with no legal or cultural risks since work stays in-house.",
+        "Lower labor costs and faster hiring, with stronger IP protection than keeping the work at home.",
+        "It's mainly a recruiting tool for domestic talent, with few cost savings and no real legal risks."
       ]
     },
     {
@@ -385,6 +570,11 @@
       "note": "Read more: 5.10 External Recruiting Sources: Job Boards to Résumé Databases",
       "points": [
         "Also diversity boards and USAJOBS.gov for federal jobs"
+      ],
+      "distractors": [
+        "General boards (Dice) target one field's talent; specialty boards (Indeed) reach many active seekers fast.",
+        "General boards reach passive seekers; specialty boards reach only active seekers already searching.",
+        "General boards are free for employers; specialty boards charge fees but don't require any job postings."
       ]
     },
     {
@@ -395,6 +585,11 @@
       "note": "Read more: 5.10 External Recruiting Sources: Job Boards to Résumé Databases",
       "points": [
         "Amazon fulfillment services; freelancer platforms"
+      ],
+      "distractors": [
+        "Hiring former employees back, since their fit and past performance are already well known.",
+        "Moving work to another country to lower labor costs and tap global talent, though it's slower.",
+        "Short-term gig work matched through apps, used to replace most permanent jobs over time."
       ]
     },
     {
@@ -402,7 +597,12 @@
       "front": "What is the gig economy?",
       "answer": "Short-term contract work replacing traditional jobs, matched through platforms like Upwork and TaskRabbit.",
       "subtitle": "Ch 5.10 · Effective HRM",
-      "note": "Read more: 5.10 External Recruiting Sources: Job Boards to Résumé Databases"
+      "note": "Read more: 5.10 External Recruiting Sources: Job Boards to Résumé Databases",
+      "distractors": [
+        "Long-term contract work matched by staffing agencies, where workers stay the agency's employees.",
+        "Moving work to another country through offshoring to cut labor costs and tap global talent.",
+        "Part-time permanent jobs with benefits, matched through state employment agencies at no cost."
+      ]
     },
     {
       "id": "c202-ch05-041",
@@ -413,6 +613,11 @@
       "points": [
         "Apple rehired Steve Jobs; IBM and KPMG run alumni sites",
         "Learn what they did while away and how they feel about the company"
+      ],
+      "distractors": [
+        "They need full onboarding again, and rehiring them is banned in most firms' handbooks for legal reasons.",
+        "They're always better than new hires, so firms should rehire every former employee who reapplies.",
+        "They cost more than outside hires, and their fit is unknown since culture changes after they leave."
       ]
     },
     {
@@ -423,6 +628,11 @@
       "note": "Read more: 5.10 External Recruiting Sources: Job Boards to Résumé Databases",
       "points": [
         "Microsoft made re-contacting past decliners a core sourcing strategy"
+      ],
+      "distractors": [
+        "A list of current employees' traits and competencies that HR searches to find internal fits.",
+        "A paid job board where employers search for active seekers who have posted their résumés.",
+        "A file of former employees who left on good terms and are eligible to be rehired later."
       ]
     },
     {
@@ -433,6 +643,11 @@
       "note": "Read more: 5.10 External Recruiting Sources: Job Boards to Résumé Databases",
       "points": [
         "Also: tailor to each posting, use its keywords, action words, 1-2 pages, no typos, be honest"
+      ],
+      "distractors": [
+        "List every duty in detail, like 'handled inventory,' so employers see the full scope of each role.",
+        "Keep it to one page by leaving out numbers, since metrics distract readers from your job titles.",
+        "Lead with personal interests and hobbies, since culture fit matters more than achievements."
       ]
     },
     {
@@ -444,6 +659,11 @@
       "points": [
         "Internships yield about 30% of new college hires; Merrill Lynch offers jobs to 75% of interns",
         "Community college partnerships address skill shortages"
+      ],
+      "distractors": [
+        "They supply experienced managers, and internships are mainly a source of cheap seasonal labor.",
+        "They supply executive talent, and internships replace the need for any full-time recruiting.",
+        "They're required by law for entry-level hiring, and internships must convert to full-time jobs."
       ]
     },
     {
@@ -455,6 +675,11 @@
       "points": [
         "Often a large share of first-year salary; check placement and retention rates",
         "Coca-Cola: search-firm senior hires turned over twice as much as in-house recruits"
+      ],
+      "distractors": [
+        "They're cheap and fast for entry-level roles, but can't reach passive seekers or executive talent.",
+        "They find active seekers quickly at low cost, but can't search outside their home state for anyone.",
+        "They supply temporary workers who stay their employees, but can't place people in permanent roles."
       ]
     },
     {
@@ -462,7 +687,12 @@
       "front": "What do state employment agencies provide?",
       "answer": "Free public matching, counseling, testing, and training, with special help for veterans, disabled, and older workers.",
       "subtitle": "Ch 5.11 · Effective HRM",
-      "note": "Read more: 5.11 External Recruiting Sources: Schools to Advertisements"
+      "note": "Read more: 5.11 External Recruiting Sources: Schools to Advertisements",
+      "distractors": [
+        "Paid matching for employers only, with fees based on the salary of each worker they place into a new job.",
+        "Temporary workers who remain the agency's employees while the agency recruits, trains, and places them.",
+        "Executive search for hard-to-find talent, funded by the state and available only to the largest employers."
+      ]
     },
     {
       "id": "c202-ch05-047",
@@ -472,6 +702,11 @@
       "note": "Read more: 5.11 External Recruiting Sources: Schools to Advertisements",
       "points": [
         "A form of outsourcing; good for sourcing people with disabilities"
+      ],
+      "distractors": [
+        "They find permanent hires for a fee, then transfer the worker to the client's payroll on day one.",
+        "They supply workers who become the client's employees, while the agency only handles recruiting.",
+        "They match freelancers to short gigs through an app, with workers paid directly by each customer."
       ]
     },
     {
@@ -482,6 +717,11 @@
       "note": "Read more: 5.11 External Recruiting Sources: Schools to Advertisements",
       "points": [
         "Walk-ins usually get an application and a quick interview"
+      ],
+      "distractors": [
+        "Remove the help-wanted sign and rely on referrals, since walk-ins rarely become strong hires.",
+        "Make the help-wanted sign larger and brighter so more people stop in and apply on the spot.",
+        "Hire walk-ins on the spot to save time, since they've already shown interest by coming in."
       ]
     },
     {
@@ -492,6 +732,11 @@
       "note": "Read more: 5.11 External Recruiting Sources: Schools to Advertisements",
       "points": [
         "Place ads near content passive and semipassive seekers read"
+      ],
+      "distractors": [
+        "Mainly passive seekers who aren't looking; still common for executive jobs.",
+        "Mainly current employees seeking transfers; common for internal postings.",
+        "Mainly semipassive seekers; rarely used anymore for lower-level jobs."
       ]
     },
     {
@@ -502,6 +747,11 @@
       "note": "Read more: 5.11 External Recruiting Sources: Schools to Advertisements; 5.16 Realistic Job Previews",
       "points": [
         "Likely because informal sources give more realistic information"
+      ],
+      "distractors": [
+        "Formal ones (ads, postings) beat informal ones (referrals, rehires) on performance and tenure.",
+        "They produce the same results; only cost and speed differ between informal and formal sources.",
+        "Informal ones produce better performance, but formal ones produce much longer employee tenure."
       ]
     },
     {
@@ -512,6 +762,11 @@
       "note": "Read more: 5.11 External Recruiting Sources: Schools to Advertisements",
       "points": [
         "JPMorgan used Snapchat ads for younger seekers; Jobvite broadcasts across platforms"
+      ],
+      "distractors": [
+        "It replaces job boards entirely, since applicants now apply only through companies' social media pages.",
+        "It mainly helps screen applicants by reviewing their personal posts for signs of poor culture fit.",
+        "It works only for passive seekers, since active job seekers rarely follow companies on social media."
       ]
     },
     {
@@ -522,6 +777,11 @@
       "note": "Read more: 5.12 Recruiting",
       "points": [
         "Rejected applicants invested time and money, so treat them with respect"
+      ],
+      "distractors": [
+        "The lowest cost per hire and the fastest time to fill, even if hires leave within their first year.",
+        "The largest applicant pool possible, since quantity matters more than quality or candidate impressions.",
+        "Hires who match the profile of current staff, so culture stays the same and rejects are not contacted."
       ]
     },
     {
@@ -532,6 +792,11 @@
       "note": "Read more: 5.12 Recruiting",
       "points": [
         "Respectful, timely, fair treatment builds patronage and reapplications"
+      ],
+      "distractors": [
+        "Intended benefits of recruiting, like current employees feeling valued when insiders get promoted.",
+        "The cost of recruiting that spills over budget when a search takes longer than planned to complete.",
+        "Applicants from one opening applying for other roles, which raises the total applicant pool size."
       ]
     },
     {
@@ -543,6 +808,11 @@
       "points": [
         "Valero: 3+ personalized emails and a postcard to every rejected candidate",
         "Raytheon: a 'brag-worthy' experience for every candidate"
+      ],
+      "distractors": [
+        "Prompt updates for finalists only, since rejected applicants don't affect the company's sales.",
+        "Offering every applicant a discount on products as a thank-you for applying to the company.",
+        "Letting candidates set their own interview times and pay ranges, as customers set their orders."
       ]
     },
     {
@@ -554,6 +824,11 @@
       "points": [
         "About 80% of variation in quality of hire tied to recruiters",
         "A third of business and engineering grads chose a company mainly because of the recruiter"
+      ],
+      "distractors": [
+        "Recruiters' skills matter little, since candidates decide almost entirely based on the job's pay and benefits.",
+        "Recruiters mainly affect cost per hire, but have little effect on quality of hire or a candidate's choices.",
+        "Recruiters' demographics are the main factor, since candidates accept offers only from similar recruiters."
       ]
     },
     {
@@ -565,6 +840,11 @@
       "points": [
         "Weaker when candidates are well informed or the recruiter is from HR rather than their field",
         "Hiring manager or CEO involvement signals that talent is valued"
+      ],
+      "distractors": [
+        "Recruiters read a candidate's professionalism and timeliness as clues about how they will perform.",
+        "Firms post salary ranges openly to signal fairness, which is required under federal pay laws.",
+        "Candidates send thank-you notes to signal interest, which is the top factor in hiring decisions."
       ]
     },
     {
@@ -575,6 +855,11 @@
       "note": "Read more: 5.13 Important Recruiter Characteristics",
       "points": [
         "IBM's Watson assistant: 36% of visitors moved from exploring to applying vs 12% on a static site"
+      ],
+      "distractors": [
+        "They make final hiring decisions 24/7, replacing interviews for most entry-level jobs entirely.",
+        "They screen résumés for keywords and reject applicants without any human review at all.",
+        "They post jobs to every board automatically and track cost per hire for each source used."
       ]
     },
     {
@@ -585,6 +870,11 @@
       "note": "Read more: 5.13 Important Recruiter Characteristics",
       "points": [
         "France's postal service game cut trainee dropout from 25% to 8%; Pymetrics games aim to reduce bias"
+      ],
+      "distractors": [
+        "Using personality tests and background checks to screen out applicants before any interviews.",
+        "Using contests among recruiters with bonuses for whoever fills the most positions each month.",
+        "Using social media ads and videos to show company culture to targeted groups of job seekers."
       ]
     },
     {
@@ -595,6 +885,11 @@
       "note": "Read more: 5.13 Important Recruiter Characteristics",
       "points": [
         "Personal data protection laws may bar storing applicant data offshore"
+      ],
+      "distractors": [
+        "Software that answers candidate questions 24/7 and escalates to a human recruiter when needed.",
+        "Software that uses game elements like badges and simulations to attract and assess candidates.",
+        "Software that stores current employees' skills and experience so HR can search for internal fits."
       ]
     },
     {
@@ -605,6 +900,11 @@
       "note": "Read more: 5.14 Recruiting Metrics",
       "points": [
         "Useful but not tied to strategy, so they may cut costs without improving performance"
+      ],
+      "distractors": [
+        "Measures tied to performance: manager satisfaction, time to productivity, and first-year turnover.",
+        "Measures of brand strength: website traffic, social media followers, and 'best employer' rankings.",
+        "Measures of fairness: selection rates by group, adverse impact ratios, and EEO complaint counts."
       ]
     },
     {
@@ -615,6 +915,11 @@
       "note": "Read more: 5.14 Recruiting Metrics",
       "points": [
         "Also new-hire satisfaction, training success, failure rate in key jobs"
+      ],
+      "distractors": [
+        "Measures of hiring speed and cost: time to fill, number of applicants and hires, and cost per hire.",
+        "Measures of brand reach: careers site traffic, social media followers, and best-employer list rankings.",
+        "Measures of recruiter activity: calls made, interviews scheduled, and job postings created each week."
       ]
     },
     {
@@ -625,6 +930,11 @@
       "note": "Read more: 5.14 Recruiting Metrics",
       "points": [
         "Adjust for things recruiters can't control, like tight labor markets"
+      ],
+      "distractors": [
+        "Rewarding speed and cost alone keeps recruiters focused, since quality and tenure are outside their control.",
+        "Tying rewards to any metric is illegal under EEO rules, since it may push recruiters toward bias.",
+        "Rewarding the number of applicants pushes recruiters toward quality, since bigger pools mean better hires."
       ]
     },
     {
@@ -635,6 +945,11 @@
       "note": "Read more: 5.15 The Recruiting Message",
       "points": [
         "General ads raise quantity but lower quality and screening costs rise"
+      ],
+      "distractors": [
+        "Short, vague, exciting language that appeals to everyone, so the largest possible pool applies for the job.",
+        "Only positive details about the job and company, leaving out pay and location until the final interview.",
+        "Detailed legal disclaimers about at-will employment and EEO policy, so applicants know their rights."
       ]
     },
     {
@@ -645,6 +960,11 @@
       "note": "Read more: 5.16 Realistic Job Previews",
       "points": [
         "Not meant to paint the worst picture; balanced information to judge fit"
+      ],
+      "distractors": [
+        "A marketing message that stresses only a job's best features to attract the most applicants.",
+        "A trial period where new hires work a job briefly before deciding whether to stay or leave it.",
+        "A list of a job's negatives only, shared after hire so new employees aren't surprised later."
       ]
     },
     {
@@ -652,7 +972,12 @@
       "front": "What are the three functions of a realistic job preview?",
       "answer": "Self-selection (poor fits opt out), vaccination (expectations lowered), and commitment to the choice.",
       "subtitle": "Ch 5.16 · Effective HRM",
-      "note": "Read more: 5.16 Realistic Job Previews"
+      "note": "Read more: 5.16 Realistic Job Previews",
+      "distractors": [
+        "Attraction (more apply), retention (pay rises), and branding (image improves) for the employer.",
+        "Screening (poor fits rejected), training (skills built), and loyalty (turnover drops) after hire.",
+        "Self-selection (good fits opt out), inflation (expectations raised), and doubt about the choice."
+      ]
     },
     {
       "id": "c202-ch05-066",
@@ -662,6 +987,11 @@
       "note": "Read more: 5.16 Realistic Job Previews",
       "points": [
         "Say 'requires attention to detail and time urgency' rather than 'high-pressure'"
+      ],
+      "distractors": [
+        "Stressing only the positives; describe the best features so applicants feel excited about the job.",
+        "Making it too short; a good RJP must run at least an hour to cover every part of the job in detail.",
+        "Sharing it before hire; RJPs only work if given during the first week after someone is hired."
       ]
     },
     {
@@ -672,6 +1002,11 @@
       "note": "Read more: 5.16 Realistic Job Previews",
       "points": [
         "Post-hire RJPs may be most effective for turnover, signaling honesty"
+      ],
+      "distractors": [
+        "Ask managers what they think the job should be, use marketing copy, and focus on the job's best perks.",
+        "Copy the job description, add a list of company awards, and skip input from current job holders.",
+        "Interview exit candidates only, and focus on what outsiders already know, like pay and location."
       ]
     },
     {
@@ -679,7 +1014,12 @@
       "front": "Can a realistic job preview fix a bad job?",
       "answer": "No; improve the job first (supervisors, pay, conditions), since honesty about a bad job doesn't make it better.",
       "subtitle": "Ch 5.16 · Effective HRM",
-      "note": "Read more: 5.16 Realistic Job Previews"
+      "note": "Read more: 5.16 Realistic Job Previews",
+      "distractors": [
+        "Yes; honest previews make a bad job acceptable, so firms don't need to change pay or conditions.",
+        "Yes; previews cut turnover in any job by lowering expectations, so job redesign is unnecessary.",
+        "No; previews only work for executive roles, so front-line jobs should rely on pay raises instead."
+      ]
     },
     {
       "id": "c202-ch05-069",
@@ -690,6 +1030,11 @@
       "points": [
         "Arvato's RJP games and videos cut turnover 63% and raised hirable interviewees from 45% to 85%",
         "Model answer: also offer a post-hire RJP, peer mentors, and recognition for handling tough calls"
+      ],
+      "distractors": [
+        "Hire more people faster, since turnover is unavoidable and a full pipeline keeps seats filled.",
+        "Stop giving realistic job previews, since honest information scares good candidates away.",
+        "Raise pay alone, since compensation is the only lever that affects call center turnover."
       ]
     },
     {
@@ -697,7 +1042,12 @@
       "front": "What does the applicant attraction model say job seekers weigh?",
       "answer": "The rewards offered, whether their skills match, and culture signals about fit.",
       "subtitle": "Ch 5.18 · Effective HRM",
-      "note": "Read more: 5.18 Applicant Attraction Strategies"
+      "note": "Read more: 5.18 Applicant Attraction Strategies",
+      "distractors": [
+        "The firm's size, its stock price, and the number of awards the company has won recently.",
+        "Only pay, since rewards outweigh skills and culture in nearly every job seeker's choice.",
+        "Commute time, office design, and how many friends already work at the company."
+      ]
     },
     {
       "id": "c202-ch05-071",
@@ -707,6 +1057,11 @@
       "note": "Read more: 5.18 Applicant Attraction Strategies",
       "points": [
         "Can be inaccurate or lag reality; shaped by ethics scandals, philanthropy, community involvement"
+      ],
+      "distractors": [
+        "What the company deliberately communicates it offers employees, answering 'Why work here?'",
+        "The company's reputation specifically as an employer among job seekers and current staff.",
+        "A company's logo and advertising, which exists only when the firm actively manages it."
       ]
     },
     {
@@ -717,6 +1072,11 @@
       "note": "Read more: 5.18 Applicant Attraction Strategies",
       "points": [
         "Students' employer images are malleable, so low-profile firms can compete through recruiting messages"
+      ],
+      "distractors": [
+        "Employer image is the company's overall impression; organizational image is its reputation as an employer only.",
+        "Employer image is what the company deliberately communicates; organizational image is what employees post online.",
+        "Employer image applies to current staff only; organizational image applies to customers and investors only."
       ]
     },
     {
@@ -727,6 +1087,11 @@
       "note": "Read more: 5.19 Employer Brand",
       "points": [
         "Image is held by individuals; the brand is created by the organization"
+      ],
+      "distractors": [
+        "People's general impression of a company based on feelings and facts, whether managed or not.",
+        "The company's reputation specifically as an employer among job seekers and current staff.",
+        "A company's ranking on 'best employer' lists, which raises the quality of its applicants."
       ]
     },
     {
@@ -737,6 +1102,11 @@
       "note": "Read more: 5.19 Employer Brand",
       "points": [
         "Translate real purpose and values into messages; don't invent values"
+      ],
+      "distractors": [
+        "Brands are regulated by the FTC, and false employer claims lead to automatic federal fines.",
+        "Truthful brands attract more applicants, while exaggerated ones attract fewer people overall.",
+        "Untruthful brands mainly hurt sales, since employees rarely compare promises to reality."
       ]
     },
     {
@@ -744,7 +1114,12 @@
       "front": "What's the catch with making 'best employer' lists?",
       "answer": "They raise application volume but not necessarily quality, adding screening burden.",
       "subtitle": "Ch 5.19 · Effective HRM",
-      "note": "Read more: 5.19 Employer Brand"
+      "note": "Read more: 5.19 Employer Brand",
+      "distractors": [
+        "They raise applicant quality but not volume, so the firm gets fewer but better candidates.",
+        "They lower recruiting costs, but only for executive roles filled through search firms.",
+        "They raise turnover, since listed employers pay less to offset their award fees each year."
+      ]
     },
     {
       "id": "c202-ch05-076",
@@ -754,6 +1129,11 @@
       "note": "Read more: 5.20 Ethical Issues",
       "points": [
         "ABC test: over half of Army recruiters visited lied to prospects under quota pressure"
+      ],
+      "distractors": [
+        "Paying recruiters on commission, posting salary ranges, using job boards, and hiring referrals.",
+        "Using AI screening tools, offering signing bonuses, and recruiting from colleges and universities.",
+        "Running background checks, asking for references, and using realistic job previews before hire."
       ]
     },
     {
@@ -764,6 +1144,11 @@
       "note": "Read more: 5.20 Ethical Issues",
       "points": [
         "No agency regulates recruiting; benefits include fewer lawsuits, more trust and referrals"
+      ],
+      "distractors": [
+        "Ban recruiters from contacting passive candidates, and keep all hiring agreements verbal and informal.",
+        "Pay recruiters only for speed, and let hiring managers handle any ethical issues informally as they arise.",
+        "Rely on federal law alone, since written codes of ethics add paperwork without changing actual behavior."
       ]
     },
     {
@@ -774,6 +1159,11 @@
       "note": "Read more: 5.21 Real World Response: Leveraging Technology for Effective Sourcing and Recruiting at IBM",
       "points": [
         "SkillsBuild values skills over degrees; new hires customize up to 3 benefits on mobile"
+      ],
+      "distractors": [
+        "It outsourced all recruiting to search firms and stopped hiring for AI and cloud roles internally.",
+        "It replaced recruiters with chatbots and made hiring decisions using AI without human review.",
+        "It focused on active seekers through job boards and cut referral programs to reduce bias."
       ]
     },
     {
@@ -784,6 +1174,11 @@
       "note": "Read more: 5.22 Strategic HRM Exercise: What Is It Like to Work for the CIA?; 5.16 Realistic Job Previews",
       "points": [
         "Skills shown: critical thinking, concision, improvising, teamwork"
+      ],
+      "distractors": [
+        "It's a training exercise for new analysts after they're hired, used to teach them how to manage stress.",
+        "It's a recruiting game that rewards students with points and job offers for winning the most scenarios.",
+        "It's an assessment center used to select analysts, scored on the spot by current CIA officers and staff."
       ]
     },
     {
