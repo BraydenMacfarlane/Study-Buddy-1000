@@ -1755,6 +1755,8 @@
           roundTotal: view.roundTotal || view.queue.length,
           roundPos: view.roundPos || (view.index + 1),
           rounds: 1,
+          studyOrder: Array.isArray(view.studyOrder) ? view.studyOrder.slice() : null,
+          studyOrderFor: view.studyOrderFor || null,
           roundNo: view.roundNo || 1,
           roundResults: Object.assign({}, view.roundResults || {})
         });
@@ -1841,6 +1843,8 @@
         view.roundPos = s.roundPos || (view.index + 1);
         view.roundNo = s.roundNo || 1;
         view.roundResults = Object.assign({}, s.roundResults || {});
+        view.studyOrder = Array.isArray(s.studyOrder) ? s.studyOrder.slice() : null;
+        view.studyOrderFor = s.studyOrderFor || null;
         skipRetiredInRound();
         render();
         return;
@@ -2754,6 +2758,7 @@
       }
       view.roundNo = next ? (view.roundNo || 1) + 1 : 1;
       view.roundResults = {};
+      view.studyOrderFor = null;
       view.page = "study";
       view.queue = ids;
       view.index = 0;
@@ -2810,14 +2815,23 @@
       return out;
     }
 
+    // Answer order is shuffled every time a question is shown. Choices that refer to the others
+    // ("All of the above", "None of these", "Both of the above"...) stay last, in authored order.
+    const PIN_LAST_RE = /\b(all|none|both|neither|any)\s+of\s+(the\s+)?(above|these|those|the\s+(above|previous|preceding|other)(\s+\w+)?)\b|^\s*(all|none)\s+of\s+them\b/i;
+    function pinsLast(text) { return PIN_LAST_RE.test(String(text || "")); }
+    function orderChoices(items, textOf) {
+      const s = shuffle(items);
+      return s.filter((x) => !pinsLast(textOf(x))).concat(items.filter((x) => pinsLast(textOf(x))));
+    }
+    // Shown order for a scenario's choices as original indices (correct stays card.correct).
+    function scenarioOrder(card) { return orderChoices(card.choices.map((_, i) => i), (i) => card.choices[i]); }
     function makeChoices(card) {
       if (isScenario(card)) {
-        // Keep the author's order (Legal / Illegal / Depends style sets read best as written).
-        return card.choices.map((text, i) => ({ text, correct: i === Number(card.correct) }));
+        return scenarioOrder(card).map((i) => ({ text: card.choices[i], correct: i === Number(card.correct) }));
       }
       const correct = cardAnswerText(card);
       const wrong = pickDistractors(card, 3);
-      return shuffle([{ text: correct, correct: true }].concat(wrong.map((text) => ({ text, correct: false }))));
+      return orderChoices([{ text: correct, correct: true }].concat(wrong.map((text) => ({ text, correct: false }))), (c) => c.text);
     }
 
     function startQuiz(ids, opts) {
@@ -2964,7 +2978,14 @@
 
       if (isScenario(card)) {
         const locked = pendingScenario;
-        const choiceHtml = card.choices.map((text, i) => {
+        const n = card.choices.length;
+        const valid = (o) => Array.isArray(o) && o.length === n && o.slice().sort((a, b) => a - b).every((v, k) => v === k);
+        if (view.studyOrderFor !== card.id || !valid(view.studyOrder)) {
+          // An answered scenario from an older save keeps the order it was shown in (authored order).
+          view.studyOrder = locked ? card.choices.map((_, i) => i) : scenarioOrder(card);
+          view.studyOrderFor = card.id;
+        }
+        const choiceHtml = view.studyOrder.map((i) => [card.choices[i], i]).map(([text, i]) => {
           let cls = "choice";
           if (locked && i === Number(card.correct)) cls += " correct";
           else if (locked && i === view.studyPicked) cls += " wrong";
@@ -3504,6 +3525,7 @@
     // the pool (and get mixed into the next rounds); mastered ones drop out of later rounds.
     function advanceStudy() {
       view.index += 1;
+      view.studyOrderFor = null; // a fresh shuffle for the next presentation
       skipRetiredInRound();
       view.flipped = false;
       view.studyPicked = null;

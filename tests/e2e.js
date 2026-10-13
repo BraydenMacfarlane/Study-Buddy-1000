@@ -174,7 +174,7 @@ async function testScenario() {
   // quiz
   await p.click('#quizBtn');
   const qinfo = await S(p, () => view.queue.map((id) => { const c = state.cards.find((x) => x.id === id); return { scen: isScenario(c), choices: makeChoices(c).map((x) => x.text), supplied: c.choices }; }));
-  ok(qinfo.filter((q) => q.scen).every((q) => JSON.stringify(q.choices) === JSON.stringify(q.supplied)), 'quiz: scenario cards use their supplied choices in order');
+  ok(qinfo.filter((q) => q.scen).every((q) => JSON.stringify(q.choices.slice().sort()) === JSON.stringify(q.supplied.slice().sort())), 'quiz: scenario cards use exactly their supplied choices (shuffled)');
   const scenTexts = await S(p, () => state.cards.filter(isScenario).flatMap((c) => [c.answer, c.explanation, ...c.choices]).filter(Boolean));
   ok(qinfo.filter((q) => !q.scen).every((q) => q.choices.length === 4 && q.choices.every((t) => !scenTexts.includes(t))), 'quiz: regular-card distractors come only from regular cards');
   ok((await S(p, () => view.quizSource.length)) === 12, 'quizBtn fix: view.quizSource is set (12)');
@@ -593,7 +593,7 @@ async function testReal(raw) {
     await p.click(`[data-spick="${correct}"]`);
     ok(/Correct/.test(await p.textContent('#explainBox')) && /Read more/i.test(await p.textContent('#explainBox')), `${mode}: scenario in study grades and shows Read more`);
     await p.click('#exitStudy'); await p.click('#quizBtn');
-    const qi = await S(p, () => { const sc = view.queue.map((id) => state.cards.find((c) => c.id === id)); const s = sc.find(isScenario), r = sc.find((c) => !isScenario(c)); return { s: JSON.stringify(makeChoices(s).map((x) => x.text)) === JSON.stringify(s.choices), r: makeChoices(r).length }; });
+    const qi = await S(p, () => { const sc = view.queue.map((id) => state.cards.find((c) => c.id === id)); const s = sc.find(isScenario), r = sc.find((c) => !isScenario(c)); return { s: JSON.stringify(makeChoices(s).map((x) => x.text).sort()) === JSON.stringify(s.choices.slice().sort()), r: makeChoices(r).length }; });
     ok(qi.s && qi.r === 4, `${mode}: quiz uses supplied scenario choices; regular cards get 4 options`);
     await p.click('#exitStudy'); await p.click('#bossBtn');
     ok((await S(p, () => view.boss.ids.length)) === d1.cards.length, `${mode}: boss has all ${d1.cards.length} cards`);
@@ -1390,6 +1390,102 @@ async function testRounds() {
   await A.ctx.close(); await B.ctx.close();
 }
 
+/* ---------- Shuffled answer order on every multiple-choice surface ---------- */
+async function shownSpick(p) { return p.$$eval('[data-spick]', (bs) => bs.map((b) => Number(b.dataset.spick))); }
+async function testShuffle() {
+  console.log('\n[18] Answer order is shuffled per presentation; "of the above" stays last; resume keeps the order');
+  const F = 'deck-c202-ch02';
+  const { ctx, p } = await page();
+  await p.goto(GIST); await hideToast(p);
+  const r = await S(p, (F) => {
+    const sc = cardsIn(F).filter(isScenario), co = cardsIn(F).filter((c) => !isScenario(c));
+    const orders = new Set(); let okMap = true;
+    sc.slice(0, 10).forEach((c) => { for (let k = 0; k < 15; k++) { const ch = makeChoices(c); orders.add(c.id + ':' + ch.map((x) => x.text).join('|')); const right = ch.filter((x) => x.correct); okMap = okMap && ch.length === c.choices.length && right.length === 1 && right[0].text === c.choices[c.correct]; } });
+    let cOk = true, cOrders = new Set();
+    co.slice(0, 5).forEach((c) => { for (let k = 0; k < 15; k++) { const ch = makeChoices(c); cOrders.add(c.id + ':' + ch.findIndex((x) => x.correct)); cOk = cOk && ch.filter((x) => x.correct).length === 1 && ch.find((x) => x.correct).text === cardAnswerText(c); } });
+    const fake = { id: 'fake', type: 'scenario', choices: ['Fire them', 'None of the above', 'Retrain them', 'Promote them'], correct: 1 };
+    const fake2 = { id: 'fake2', type: 'scenario', choices: ['All of the above', 'Pay', 'Benefits', 'Training'], correct: 0 };
+    let pinOk = true, mixed = new Set();
+    for (let k = 0; k < 30; k++) {
+      const a = makeChoices(fake), b = makeChoices(fake2);
+      pinOk = pinOk && a[3].text === 'None of the above' && a[3].correct && a.filter((x) => x.correct).length === 1 && b[3].text === 'All of the above' && b[3].correct;
+      mixed.add(a.slice(0, 3).map((x) => x.text).join('|'));
+    }
+    const order = orderChoices([{ text: 'x' }, { text: 'All of these' }, { text: 'y' }, { text: 'z' }], (c) => c.text);
+    return { scen: sc.length, distinct: orders.size, okMap, cOk, cSpread: new Set([...cOrders].map((s) => s.split(':')[1])).size, pinOk, mixed: mixed.size, concept: order[3].text === 'All of these',
+      bothKept: !pinsLast('Both employees and employers') && !pinsLast('Neither') && pinsLast('Both of the above') && pinsLast('none of these') };
+  }, F);
+  ok(r.okMap && r.distinct > 10 + 5, `scenario choices (quiz / quick / boss / practice) are shuffled and the correct one is remapped (${r.distinct} orders over 10 cards)`);
+  ok(r.cOk && r.cSpread >= 3, `concept-card choices stay shuffled, correct answer lands in ${r.cSpread} different positions`);
+  ok(r.pinOk && r.mixed > 1 && r.concept, '"None/All of the above"-style choices stay last (and keep the right answer) while the rest shuffle');
+  ok(r.bothKept, 'plain "Both …" / "Neither" answers shuffle normally; only "… of the above/these" pins');
+
+  // Scenario study: shown order is shuffled, clicks map to the right choice, feedback names the right answer
+  await p.click(`[data-open="${F}"]`); await skipVis(p);
+  await p.click('#scenarioBtn'); await skipVis(p);
+  let nonId = 0, feedOk = true;
+  for (let i = 0; i < 8; i++) {
+    const order = await shownSpick(p);
+    if (order.some((v, k) => v !== k)) nonId++;
+    const c = await S(p, () => { const c = state.cards.find((x) => x.id === view.queue[view.index]); return { correct: c.correct, text: c.choices[c.correct], n: c.choices.length }; });
+    const pickWrong = i % 2 === 1;
+    const pick = pickWrong ? (c.correct + 1) % c.n : c.correct;
+    await p.click(`[data-spick="${pick}"]`);
+    const fb = await p.textContent('#explainBox');
+    const greenText = (await p.textContent('.choice.correct')).trim();
+    feedOk = feedOk && greenText === c.text.trim() && (pickWrong ? /Not quite/.test(fb) && fb.includes(c.text.slice(0, 40)) : /Correct/.test(fb));
+    if (i === 3) {
+      // answered + saved: same shown order after Save & leave and after a reload
+      const before = await shownSpick(p);
+      await p.click('#exitStudy'); await p.reload(); await p.click(`[data-open="${F}"]`); await skipVis(p); await p.click('[data-resume="study-scenario"]');
+      ok(JSON.stringify(await shownSpick(p)) === JSON.stringify(before) && await p.locator('#explainBox').count() === 1, 'an answered scenario keeps its shown order through Save & leave and reload');
+    }
+    await p.click('#nextStudy');
+  }
+  ok(nonId >= 4, `scenario study shows shuffled orders (${nonId} of 8 not in authored order)`);
+  ok(feedOk, 'the highlighted correct choice and the "Best answer" feedback always match the card');
+  const unanswered = await shownSpick(p);
+  await p.click('#exitStudy'); await p.click('[data-resume="study-scenario"]');
+  ok(JSON.stringify(await shownSpick(p)) === JSON.stringify(unanswered), 'an unanswered scenario keeps its shown order on resume');
+  await p.click('#exitStudy');
+
+  // Quiz, quick, boss: the saved question keeps its shown order
+  for (const [btn, slot, sel] of [['#quizBtn', 'quiz', '[data-choice]'], ['#quickBtn', 'quick', '[data-choice]'], ['#bossBtn', 'boss', '[data-bpick]']]) {
+    p.dialogAnswers.push(true);
+    await p.click(btn); await skipVis(p);
+    const before = await p.$$eval(sel, (bs) => bs.map((b) => b.textContent.trim()));
+    await p.click(slot === 'boss' ? '#exitBoss' : '#exitStudy');
+    await p.reload(); await p.click(`[data-open="${F}"]`); await skipVis(p);
+    await p.click(`[data-resume="${slot}"]`);
+    const after = await p.$$eval(sel, (bs) => bs.map((b) => b.textContent.trim()));
+    ok(before.length >= 2 && JSON.stringify(before) === JSON.stringify(after), `${slot}: a resumed question shows the same answer order`);
+    await p.click(slot === 'boss' ? '#exitBoss' : '#exitStudy');
+  }
+  // Boss review and practice-missed point at the right answers
+  p.dialogAnswers.push(true);
+  await p.click('#bossBtn'); await skipVis(p);
+  await answerBoss(p, () => false);
+  const rev = await S(p, () => view.boss.answers.every((a) => { const c = state.cards.find((x) => x.id === a.id); const right = a.choices.find((x) => x.correct); return right && right.text === (isScenario(c) ? c.choices[c.correct] : cardAnswerText(c)); }));
+  ok(rev, 'boss review: every "correct answer" matches its card');
+  await p.click('#bossPractice');
+  let pmOk = true;
+  for (let i = 0; i < 6; i++) {
+    const c = await S(p, () => { const c = currentCard(); const right = view.choices.find((x) => x.correct); return right && right.text === (isScenario(c) ? c.choices[c.correct] : cardAnswerText(c)); });
+    pmOk = pmOk && c;
+    await answerQuiz(p, true);
+  }
+  ok(pmOk && await S(p, () => view.quizKind === 'practice'), 'practice-missed questions are shuffled with the right answer marked');
+  await p.click('#exitStudy');
+
+  // Old save (before shuffling): an answered scenario keeps the authored order it was shown in
+  const sc = await S(p, (F) => { const c = cardsIn(F).filter(isScenario)[0]; const st = JSON.parse(localStorage.getItem('flashcards.v1')); st.sessions[F + ':study-scenario'] = { studyMode: 'scenario', queue: [c.id], index: 0, flipped: false, studyPicked: c.correct, studyTargets: [], studySeen: [], roundTotal: 1, roundPos: 1, savedAt: Date.now() }; localStorage.setItem('flashcards.v1', JSON.stringify(st)); return { n: c.choices.length, text: c.choices[c.correct] }; }, F);
+  await p.reload(); await p.click(`[data-open="${F}"]`); await skipVis(p); await p.click('[data-resume="study-scenario"]');
+  ok(JSON.stringify(await shownSpick(p)) === JSON.stringify([...Array(sc.n).keys()]) && (await p.textContent('.choice.correct')).trim() === sc.text.trim(), 'an old answered scenario save resumes in its original order with the right answer highlighted');
+  await p.click('#exitStudy');
+  ok(await noBroke(p), 'app fine');
+  await ctx.close();
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -1473,6 +1569,7 @@ async function screenshots() {
     await testDistractors();
     await testGoogleSync();
     await testRounds();
+    await testShuffle();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

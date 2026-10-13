@@ -43,7 +43,7 @@
   ✓ 3 correct in a row retires the scenario card
   ✓ regular card front hides the Read more note
   ✓ Read more appears on the back
-  ✓ quiz: scenario cards use their supplied choices in order
+  ✓ quiz: scenario cards use exactly their supplied choices (shuffled)
   ✓ quiz: regular-card distractors come only from regular cards
   ✓ quizBtn fix: view.quizSource is set (12)
   ✓ quiz: wrong scenario answer shows explanation + Read more
@@ -341,7 +341,7 @@
   ✓ one click: signed in as brayden@example.com and synced
   ✓ users/{uid} doc holds the progress (same payload format as the gist)
   ✓ shares/{id} mirrors the C202 plan text for Study Buddy
-  ✓ Sync screen shows the plan link: fs:study-buddy-1000/346ac6f5ffb97e0ed609885daa4b116b
+  ✓ Sync screen shows the plan link: fs:study-buddy-1000/40f6cecdef2671ca215983c16576dc2b
   ✓ no Google token stored in Firestore
   ✓ phone gets the desktop progress after one tap
   ✓ phone reuses the same plan link
@@ -394,8 +394,25 @@
   ✓ the other device resumes the synced round at Card 4 of 20
   ✓ an old device's synced quiz save resumes as rounds
 
+[18] Answer order is shuffled per presentation; "of the above" stays last; resume keeps the order
+  ✓ scenario choices (quiz / quick / boss / practice) are shuffled and the correct one is remapped (115 orders over 10 cards)
+  ✓ concept-card choices stay shuffled, correct answer lands in 4 different positions
+  ✓ "None/All of the above"-style choices stay last (and keep the right answer) while the rest shuffle
+  ✓ plain "Both …" / "Neither" answers shuffle normally; only "… of the above/these" pins
+  ✓ an answered scenario keeps its shown order through Save & leave and reload
+  ✓ scenario study shows shuffled orders (8 of 8 not in authored order)
+  ✓ the highlighted correct choice and the "Best answer" feedback always match the card
+  ✓ an unanswered scenario keeps its shown order on resume
+  ✓ quiz: a resumed question shows the same answer order
+  ✓ quick: a resumed question shows the same answer order
+  ✓ boss: a resumed question shows the same answer order
+  ✓ boss review: every "correct answer" matches its card
+  ✓ practice-missed questions are shuffled with the right answer marked
+  ✓ an old answered scenario save resumes in its original order with the right answer highlighted
+  ✓ app fine
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-362 passed, 0 failed
+377 passed, 0 failed
