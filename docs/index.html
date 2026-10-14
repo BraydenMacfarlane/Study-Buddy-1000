@@ -235,6 +235,13 @@
     .weak-actions { gap: 10px; align-items: center; }
     .weak-badge { display: inline-block; margin-top: 8px; padding: 3px 9px; border-radius: 999px; background: #fbe6df; color: #9c3b25; font-size: 13px; font-weight: 600; }
     .flash-target { background: #fff3c4; border-radius: 4px; }
+    .kn { display: none; margin-left: 6px; font-size: 0.8em; font-weight: 600; opacity: .6; font-variant-numeric: tabular-nums; }
+    @media (hover: hover) and (pointer: fine) { .kn { display: inline; } }
+    small + .kn, .mode-grid .kn { position: absolute; top: 6px; right: 8px; margin: 0; }
+    .mode-grid button, [data-resume], [data-open] { position: relative; }
+    [data-open] > .kn { top: 10px; right: 12px; position: absolute; }
+    .confirm-dlg { max-width: 440px; width: calc(100% - 32px); border: none; border-radius: 16px; padding: 0; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+    .confirm-dlg::backdrop { background: rgba(20,30,40,.45); }
     .round-score { font-size: 46px; font-weight: 800; letter-spacing: -1px; margin: 6px 0 4px; color: var(--gold, #c9a227); }
     .round-summary p { margin: 6px 0; }
     .explain {
@@ -1604,8 +1611,8 @@
       const si = document.getElementById("googleSignIn");
       if (si) si.onclick = () => { si.disabled = true; googleSignIn().finally(() => { if (view.page === "sync") render(); }); };
       const so = document.getElementById("googleSignOut");
-      if (so) so.onclick = () => {
-        if (!confirm("Sign out of Google sync on this device?\n\nEverything stays on this device. Other devices keep syncing.")) return;
+      if (so) so.onclick = async () => {
+        if (!(await askConfirm("Sign out of Google sync on this device?\n\nEverything stays on this device. Other devices keep syncing."))) return;
         googleSignOut().then(() => { toast("Signed out. Your data is still on this device."); render(); });
       };
       const pc = document.getElementById("planIdCopy");
@@ -1671,8 +1678,8 @@
       const rep = document.getElementById("syncReplace");
       if (rep) rep.onclick = () => { view.syncReplace = true; render(); };
       const dis = document.getElementById("syncDisconnect");
-      if (dis) dis.onclick = () => {
-        if (!confirm("Disconnect this device from sync?\n\nEverything stays on this device. Other devices keep syncing.")) return;
+      if (dis) dis.onclick = async () => {
+        if (!(await askConfirm("Disconnect this device from sync?\n\nEverything stays on this device. Other devices keep syncing."))) return;
         syncDisconnect(); toast("Sync is off on this device. Your data is still here."); render();
       };
       const cp = document.getElementById("syncCopyId");
@@ -1784,8 +1791,8 @@
       return "";
     }
     function confirmDiscardSession(folderId, mode, label) {
-      if (!getSession(folderId, mode)) return true;
-      return confirm(`You have a saved ${label}. Start fresh and discard it?`);
+      if (!getSession(folderId, mode)) return Promise.resolve(true);
+      return askConfirm(`You have a saved ${label}. Start fresh and discard it?`, { yes: "Start fresh", no: "Keep it" });
     }
     function captureOpenSession() {
       const fid = view.folderId;
@@ -1985,6 +1992,116 @@
       return String(s || "").replace(/[&<>"']/g, (ch) => map[ch]);
     }
 
+    /* ---------- Custom confirm dialog (keyboard: 1 = yes, 2 = no, Enter = yes, Esc = no) ---------- */
+    function askConfirm(message, opts) {
+      opts = opts || {};
+      return new Promise((resolve) => {
+        let d = document.getElementById("confirmDlg");
+        if (d) { if (d.open) d.close(); d.remove(); }
+        d = document.createElement("dialog");
+        d.id = "confirmDlg";
+        d.className = "confirm-dlg";
+        d.setAttribute("aria-labelledby", "cdMsg");
+        const lines = String(message).split(/\n\n+/);
+        d.innerHTML = `
+          <div class="dialog-body">
+            <div class="cd-msg" id="cdMsg">${lines.map((l, i) => i ? `<p class="muted">${escaped(l)}</p>` : `<p><strong>${escaped(l)}</strong></p>`).join("")}</div>
+            <div class="row" style="justify-content:flex-end;margin-top:14px">
+              <button class="secondary" id="cdNo">${escaped(opts.no || "Cancel")}</button>
+              <button class="${opts.danger ? "danger" : "gold"}" id="cdYes">${escaped(opts.yes || "OK")}</button>
+            </div>
+          </div>`;
+        document.body.appendChild(d);
+        let done = false;
+        const finish = (v) => { if (done) return; done = true; if (d.open) d.close(); d.remove(); resolve(v); };
+        d.querySelector("#cdYes").onclick = () => finish(true);
+        d.querySelector("#cdNo").onclick = () => finish(false);
+        d.addEventListener("cancel", (e) => { e.preventDefault(); finish(false); });
+        d.showModal();
+        d.querySelector("#cdYes").focus();
+      });
+    }
+
+    /* ---------- Number-key shortcuts ----------
+       Each screen gets a fixed, ordered list of actions; their keys are shown as "(n)" on devices with
+       a fine pointer (hidden on touch phones). Disabled actions keep their number so the order never
+       shifts. Enter flips a study card (shown as "(Enter)"), otherwise continues (Next / primary).
+       Ignored while typing, with modifiers, and on key-repeat. Space keeps its normal behaviour. */
+    const SUMMARY_KEYS = ["#nextRound", "#resetDone", "#quizAgain", "#quizMissed", "#bossPractice", "#bossRetake", "#bossNextCh", "#matchAgain", "#backChapter", "#backDone", "#matchBack"];
+    function qsa(root, sel) { return Array.from(root.querySelectorAll(sel)).filter((el) => el.offsetParent !== null || el.getClientRects().length); }
+    function keyPlan() {
+      const cd = document.getElementById("confirmDlg");
+      if (cd && cd.open) return { nums: [cd.querySelector("#cdYes"), cd.querySelector("#cdNo")], enter: cd.querySelector("#cdYes") };
+      if (modal.open) return { nums: qsa(modal, "button").slice(0, 9), enter: null };
+      const page = view.page, one = (s) => app.querySelector(s);
+      if (one("#roundSummary") || one("#bossResult") || one("#matchResult") || (one(".empty.card") && (page === "study" || page === "quiz"))) {
+        const nums = SUMMARY_KEYS.map(one).filter(Boolean);
+        return { nums, enter: nums[0] || null };
+      }
+      if (page === "study") {
+        if (one("[data-spick]")) { const ch = qsa(app, "[data-spick]"); return { nums: ch.concat([one("#nextStudy"), one("#knowBtn")].filter(Boolean)), enter: one("#nextStudy") }; }
+        return { nums: [one("#missBtn"), one("#gotBtn"), one("#knowBtn")].filter(Boolean), enter: one("#flipBtn"), enterLabel: one("#flipBtn") };
+      }
+      if (page === "quiz") return { nums: qsa(app, "[data-choice]").concat([one("#nextQuiz")].filter(Boolean)), enter: one("#nextQuiz") };
+      if (page === "boss") return { nums: qsa(app, "[data-bpick]").concat([one("#bossNext")].filter(Boolean)), enter: one("#bossNext") };
+      if (page === "match" && view.match) {
+        // Two columns: with no term picked the numbers pick a term, then they pick a definition.
+        const terms = qsa(app, "[data-term]"), defs = qsa(app, "[data-def]");
+        return { nums: view.match.selTerm ? defs : terms, also: view.match.selTerm ? terms : defs, enter: null };
+      }
+      if (page === "folder") return { nums: qsa(app, ".mode-grid button").concat(qsa(app, "[data-resume]")).slice(0, 9), enter: null };
+      if (page === "guide") return { nums: ["#guideRead", "#guideUnread", "#guideDone"].map(one).filter(Boolean), enter: null };
+      if (page === "home") return { nums: qsa(app, "[data-open]").slice(0, 9), enter: null };
+      return { nums: [], enter: null };
+    }
+    let keyApplying = false;
+    function setKeyLabel(el, label, shortcut) {
+      let k = el.querySelector(":scope > .kn");
+      if (!label) { if (k) k.remove(); el.removeAttribute("aria-keyshortcuts"); return; }
+      if (!k) { k = document.createElement("span"); k.className = "kn"; k.setAttribute("aria-hidden", "true"); el.appendChild(k); }
+      if (k.textContent !== `(${label})`) k.textContent = `(${label})`;
+      if (el.getAttribute("aria-keyshortcuts") !== shortcut) el.setAttribute("aria-keyshortcuts", shortcut);
+    }
+    function applyKeys() {
+      if (keyApplying) return;
+      keyApplying = true;
+      try {
+        const plan = keyPlan();
+        const seen = new Set();
+        plan.nums.slice(0, 9).forEach((el, i) => { if (!el) return; seen.add(el); setKeyLabel(el, String(i + 1), (el === plan.enter ? "Enter " : "") + String(i + 1)); });
+        (plan.also || []).forEach((el, i) => { if (!seen.has(el) && i < 9) { seen.add(el); setKeyLabel(el, String(i + 1), String(i + 1)); } });
+        if (plan.enterLabel) { seen.add(plan.enterLabel); setKeyLabel(plan.enterLabel, "Enter", "Enter"); }
+        document.querySelectorAll(".kn").forEach((k) => { if (!seen.has(k.parentElement)) { k.parentElement.removeAttribute("aria-keyshortcuts"); k.remove(); } });
+      } finally { if (keyObserver) keyObserver.takeRecords(); keyApplying = false; }
+    }
+    let keyObserver = null, keyQueued = false;
+    function initKeys() {
+      keyObserver = new MutationObserver(() => {
+        if (keyApplying || keyQueued) return;
+        keyQueued = true;
+        queueMicrotask(() => { keyQueued = false; applyKeys(); });
+      });
+      keyObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["open", "disabled", "class"] });
+      document.addEventListener("keydown", (e) => {
+        if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+        const t = e.target;
+        if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+        const plan = keyPlan();
+        let el = null;
+        if (/^[1-9]$/.test(e.key)) el = plan.nums[Number(e.key) - 1] || null;
+        else if (e.key === "Enter") {
+          // A focused control handles Enter itself (native behaviour); otherwise use the screen's Enter action.
+          if (t && t !== document.body && /^(BUTTON|A)$/.test(t.tagName) && !(plan.enter && t === plan.enter)) return;
+          el = plan.enter;
+        } else return;
+        if (!el) return;
+        e.preventDefault();
+        if (el.disabled || el.getAttribute("aria-disabled") === "true") return;
+        el.click();
+      });
+      applyKeys();
+    }
+
     function render() {
       window.onscroll = null;
       if (matchTimer && view.page !== "match") { clearInterval(matchTimer); matchTimer = null; }
@@ -2073,10 +2190,10 @@
           ${weak.length ? rows : `<div class="ok-text" style="margin-top:8px">No weak spots right now ✓ <span class="muted">(${tries} recent tries across ${tracked.length} section${tracked.length === 1 ? "" : "s"})</span></div>`}
         </div>`;
     }
-    function startReview(folderId, section) {
+    async function startReview(folderId, section) {
       view.folderId = folderId;
       view.reviewSection = section;
-      if (getSession(folderId, "study-review") && !confirmDiscardSession(folderId, "study-review", "weak-spot review")) return;
+      if (getSession(folderId, "study-review") && !(await confirmDiscardSession(folderId, "study-review", "weak-spot review"))) return;
       clearSession(folderId, "study-review");
       startStudy("review");
     }
@@ -2145,11 +2262,11 @@
       const sf = document.getElementById("syncFooter"); if (sf) sf.onclick = openSync;
       if (SYNC) renderSyncStatus();
       app.querySelectorAll("[data-open]").forEach((el) => {
-        el.onclick = (e) => {
+        el.onclick = async (e) => {
           const wantGuide = !!(e.target.closest && e.target.closest("[data-guide]"));
           if (wantGuide) e.preventDefault();
           if (el.dataset.locked) {
-            if (!confirm(`This chapter is locked until you pass the ${el.dataset.locked} boss quiz.\n\nOpen anyway?`)) return;
+            if (!(await askConfirm(`This chapter is locked until you pass the ${el.dataset.locked} boss quiz.\n\nOpen anyway?`))) return;
             sessionUnlocked.add(el.dataset.open);
           }
           view.page = wantGuide ? "guide" : "folder";
@@ -2220,8 +2337,8 @@
       app.querySelectorAll("[data-review]").forEach((b) => { b.onclick = () => startReview(folder.id, b.dataset.review); });
       app.querySelectorAll("[data-wguide]").forEach((b) => { b.onclick = (e) => { e.preventDefault(); openGuide(folder.id, b.dataset.wguide); }; });
       document.getElementById("renameFolder").onclick = () => openFolderForm(folder);
-      document.getElementById("deleteFolder").onclick = () => {
-        if (!confirm("Delete this folder and all of its cards?")) return;
+      document.getElementById("deleteFolder").onclick = async () => {
+        if (!(await askConfirm("Delete this folder and all of its cards?"))) return;
         state.cards = state.cards.filter((c) => c.folderId !== folder.id);
         state.folders = state.folders.filter((f) => f.id !== folder.id);
         clearSession(folder.id);
@@ -2229,26 +2346,26 @@
         view.page = "home";
         render();
       };
-      document.getElementById("resetBtn").onclick = () => {
-        if (!confirm("Reset mastery progress for every card in this folder?")) return;
+      document.getElementById("resetBtn").onclick = async () => {
+        if (!(await askConfirm("Reset mastery progress for every card in this folder?"))) return;
         all.forEach((c) => { state.progress[c.id] = { streak: 0, retired: false }; });
         clearSession(folder.id); // clears all modes for this folder
         save();
         render();
       };
       document.getElementById("addCardBtn").onclick = () => openCardForm();
-      document.getElementById("studyBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, studySlot("mixed"), "study session")) return; clearSession(folder.id, studySlot("mixed")); startStudy("mixed"); });
-      document.getElementById("conceptBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, studySlot("concept"), "concept-card session")) return; clearSession(folder.id, studySlot("concept")); startStudy("concept"); });
-      document.getElementById("scenarioBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, studySlot("scenario"), "scenario session")) return; clearSession(folder.id, studySlot("scenario")); startStudy("scenario"); });
-      document.getElementById("quizBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "quiz", "quiz")) return; clearSession(folder.id, "quiz"); startQuiz(); });
-      document.getElementById("quickBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "quick", "quick quiz")) return; clearSession(folder.id, "quick"); startQuickQuiz(); });
-      document.getElementById("bossBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "boss", "boss quiz")) return; clearSession(folder.id, "boss"); startBoss(); });
-      document.getElementById("matchBtn").onclick = () => withGuideCheck(() => { if (!confirmDiscardSession(folder.id, "match", "match")) return; clearSession(folder.id, "match"); startMatch(); });
+      document.getElementById("studyBtn").onclick = () => withGuideCheck(async () => { if (!(await confirmDiscardSession(folder.id, studySlot("mixed"), "study session"))) return; clearSession(folder.id, studySlot("mixed")); startStudy("mixed"); });
+      document.getElementById("conceptBtn").onclick = () => withGuideCheck(async () => { if (!(await confirmDiscardSession(folder.id, studySlot("concept"), "concept-card session"))) return; clearSession(folder.id, studySlot("concept")); startStudy("concept"); });
+      document.getElementById("scenarioBtn").onclick = () => withGuideCheck(async () => { if (!(await confirmDiscardSession(folder.id, studySlot("scenario"), "scenario session"))) return; clearSession(folder.id, studySlot("scenario")); startStudy("scenario"); });
+      document.getElementById("quizBtn").onclick = () => withGuideCheck(async () => { if (!(await confirmDiscardSession(folder.id, "quiz", "quiz"))) return; clearSession(folder.id, "quiz"); startQuiz(); });
+      document.getElementById("quickBtn").onclick = () => withGuideCheck(async () => { if (!(await confirmDiscardSession(folder.id, "quick", "quick quiz"))) return; clearSession(folder.id, "quick"); startQuickQuiz(); });
+      document.getElementById("bossBtn").onclick = () => withGuideCheck(async () => { if (!(await confirmDiscardSession(folder.id, "boss", "boss quiz"))) return; clearSession(folder.id, "boss"); startBoss(); });
+      document.getElementById("matchBtn").onclick = () => withGuideCheck(async () => { if (!(await confirmDiscardSession(folder.id, "match", "match"))) return; clearSession(folder.id, "match"); startMatch(); });
       app.querySelectorAll("[data-resume]").forEach((b) => { b.onclick = () => resumeSession(folder.id, b.dataset.resume); });
       app.querySelectorAll("[data-step]").forEach((b) => { b.onclick = () => runStep(folder.id, b.dataset.step); });
       app.querySelectorAll("[data-edit]").forEach((b) => b.onclick = () => openCardForm(state.cards.find((c) => c.id === b.dataset.edit)));
-      app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => {
-        if (!confirm("Delete this card?")) return;
+      app.querySelectorAll("[data-del]").forEach((b) => b.onclick = async () => {
+        if (!(await askConfirm("Delete this card?"))) return;
         state.cards = state.cards.filter((c) => c.id !== b.dataset.del);
         delete state.progress[b.dataset.del];
         save();
@@ -2322,10 +2439,10 @@
       if (key === "guide") return openGuide(folderId);
       if (key === "practice") key = cardsIn(folderId).some(isScenario) ? "scenario" : "quiz";
       const go = {
-        concept: () => { if (!confirmDiscardSession(folderId, studySlot("concept"), "concept-card session")) return; clearSession(folderId, studySlot("concept")); startStudy("concept"); },
-        scenario: () => { if (!confirmDiscardSession(folderId, studySlot("scenario"), "scenario session")) return; clearSession(folderId, studySlot("scenario")); startStudy("scenario"); },
-        quiz: () => { if (!confirmDiscardSession(folderId, "quiz", "quiz")) return; clearSession(folderId, "quiz"); startQuiz(); },
-        boss: () => { if (!confirmDiscardSession(folderId, "boss", "boss quiz")) return; clearSession(folderId, "boss"); startBoss(); }
+        concept: async () => { if (!(await confirmDiscardSession(folderId, studySlot("concept"), "concept-card session"))) return; clearSession(folderId, studySlot("concept")); startStudy("concept"); },
+        scenario: async () => { if (!(await confirmDiscardSession(folderId, studySlot("scenario"), "scenario session"))) return; clearSession(folderId, studySlot("scenario")); startStudy("scenario"); },
+        quiz: async () => { if (!(await confirmDiscardSession(folderId, "quiz", "quiz"))) return; clearSession(folderId, "quiz"); startQuiz(); },
+        boss: async () => { if (!(await confirmDiscardSession(folderId, "boss", "boss quiz"))) return; clearSession(folderId, "boss"); startBoss(); }
       }[key];
       if (!go) return render();
       render();
@@ -3917,12 +4034,12 @@
       showSummary("Import complete", sum);
     }
 
-    function importRestore(data) {
+    async function importRestore(data) {
       if (!data || Array.isArray(data) || !Array.isArray(data.folders) || !Array.isArray(data.cards)) {
         alert("Restore needs a full backup file (made with Export). To add a deck, use \"Choose file to add / merge\" instead.");
         return;
       }
-      if (!confirm("Replace ALL folders, cards and progress in this browser with this backup?\n\nThis can't be undone. Tip: Export first if you might want your current data.")) return;
+      if (!(await askConfirm("Replace ALL folders, cards and progress in this browser with this backup?\n\nThis can't be undone. Tip: Export first if you might want your current data."))) return;
       state = migrate(JSON.parse(JSON.stringify(data)));
       syncRebase(); // a restore merges with synced data; it never deletes things on other devices
       applyBundledDecks();
@@ -3970,6 +4087,7 @@
       if (app) app.innerHTML = "<div class=\"card\"><strong>Something broke.</strong><div class=\"muted\">"+String(msg)+"</div></div>";
     };
     syncStart();
+    initKeys();
     try { render(); } catch (err) { window.onerror(err && err.message ? err.message : err); }
     if (bundledSummary && (bundledSummary.foldersAdded || bundledSummary.cardsAdded || bundledSummary.cardsUpdated)) {
       toast(`New study material: ${bundledSummary.decks.join(", ")} (${bundledSummary.cardsAdded} new, ${bundledSummary.cardsUpdated} updated cards)`);

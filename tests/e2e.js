@@ -16,6 +16,19 @@ async function page(opts = {}) {
   if (opts.now) await p.clock.setFixedTime(new Date(opts.now));
   p.dialogAnswers = []; p.dialogLog = [];
   p.on('dialog', (d) => { p.dialogLog.push(d.message()); const a = p.dialogAnswers.length ? p.dialogAnswers.shift() : true; a ? d.accept() : d.dismiss(); });
+  // The app's custom confirm dialog (#confirmDlg) is answered the same way as native dialogs.
+  if (!opts.manualDialogs) {
+    await p.exposeFunction('__testDialog', (msg) => { p.dialogLog.push(msg); return p.dialogAnswers.length ? p.dialogAnswers.shift() : true; });
+    await p.addInitScript(() => {
+      new MutationObserver(() => {
+        const d = document.getElementById('confirmDlg');
+        if (!d || !d.open || d.dataset.t) return;
+        d.dataset.t = '1';
+        const msg = Array.from(d.querySelectorAll('.cd-msg p')).map((x) => x.textContent).join('\n\n');
+        window.__testDialog(msg).then((yes) => { const b = d.querySelector(yes ? '#cdYes' : '#cdNo'); if (b) b.click(); });
+      }).observe(document, { subtree: true, childList: true, attributes: true, attributeFilter: ['open'] });
+    });
+  }
   p.on('pageerror', (e) => errors.push(`[pageerror ${p.url()}] ${e.message}`));
   p.on('console', (m) => { if (m.type() === 'error') errors.push(`[console ${p.url()}] ${m.text()}`); });
   return { ctx, p };
@@ -179,7 +192,7 @@ async function testScenario() {
   ok(qinfo.filter((q) => !q.scen).every((q) => q.choices.length === 4 && q.choices.every((t) => !scenTexts.includes(t))), 'quiz: regular-card distractors come only from regular cards');
   ok((await S(p, () => view.quizSource.length)) === 12, 'quizBtn fix: view.quizSource is set (12)');
   await S(p, () => { const id = 'c202-ch02-017'; view.queue[view.index] = id; view.choices = makeChoices(state.cards.find((c) => c.id === id)); render(); });
-  await p.click('[data-choice="2"]');
+  await p.click(`[data-choice="${await S(p, () => view.choices.findIndex((c) => !c.correct))}"]`);
   ok(/Not quite/.test(await p.textContent('#explainBox')) && /Read more/.test(await p.textContent('#explainBox')), 'quiz: wrong scenario answer shows explanation + Read more');
   await p.click('#exitStudy');
   // editor
@@ -1432,7 +1445,7 @@ async function testShuffle() {
     const pick = pickWrong ? (c.correct + 1) % c.n : c.correct;
     await p.click(`[data-spick="${pick}"]`);
     const fb = await p.textContent('#explainBox');
-    const greenText = (await p.textContent('.choice.correct')).trim();
+    const greenText = (await p.textContent('.choice.correct')).replace(/\s*\((\d|Enter)\)\s*$/, '').trim();
     feedOk = feedOk && greenText === c.text.trim() && (pickWrong ? /Not quite/.test(fb) && fb.includes(c.text.slice(0, 40)) : /Correct/.test(fb));
     if (i === 3) {
       // answered + saved: same shown order after Save & leave and after a reload
@@ -1480,7 +1493,7 @@ async function testShuffle() {
   // Old save (before shuffling): an answered scenario keeps the authored order it was shown in
   const sc = await S(p, (F) => { const c = cardsIn(F).filter(isScenario)[0]; const st = JSON.parse(localStorage.getItem('flashcards.v1')); st.sessions[F + ':study-scenario'] = { studyMode: 'scenario', queue: [c.id], index: 0, flipped: false, studyPicked: c.correct, studyTargets: [], studySeen: [], roundTotal: 1, roundPos: 1, savedAt: Date.now() }; localStorage.setItem('flashcards.v1', JSON.stringify(st)); return { n: c.choices.length, text: c.choices[c.correct] }; }, F);
   await p.reload(); await p.click(`[data-open="${F}"]`); await skipVis(p); await p.click('[data-resume="study-scenario"]');
-  ok(JSON.stringify(await shownSpick(p)) === JSON.stringify([...Array(sc.n).keys()]) && (await p.textContent('.choice.correct')).trim() === sc.text.trim(), 'an old answered scenario save resumes in its original order with the right answer highlighted');
+  ok(JSON.stringify(await shownSpick(p)) === JSON.stringify([...Array(sc.n).keys()]) && (await p.textContent('.choice.correct')).replace(/\s*\((\d|Enter)\)\s*$/, '').trim() === sc.text.trim(), 'an old answered scenario save resumes in its original order with the right answer highlighted');
   await p.click('#exitStudy');
   ok(await noBroke(p), 'app fine');
   await ctx.close();
@@ -1639,6 +1652,130 @@ async function testWeakSpots() {
   await A.ctx.close(); await B.ctx.close();
 }
 
+/* ---------- Number-key shortcuts ---------- */
+async function kn(p, sel) { return S(p, (sel) => { const el = document.querySelector(sel); const k = el && el.querySelector(':scope > .kn'); return k ? { t: k.textContent, shown: getComputedStyle(k).display !== 'none', aria: el.getAttribute('aria-keyshortcuts') } : null; }, sel); }
+async function press(p, key) { await p.keyboard.press(key); await p.waitForTimeout(30); }
+async function testKeys() {
+  console.log('\n[20] Number-key shortcuts (desktop), Enter flips, custom confirm dialog');
+  const F = 'deck-c202-ch02';
+  const { ctx, p } = await page({ manualDialogs: true });
+  await p.goto(GIST); await hideToast(p);
+  const home = await kn(p, '[data-open]');
+  ok(home && home.t === '(1)' && home.shown && home.aria === '1', 'home: chapter cards are numbered (1)..(9) with aria-keyshortcuts');
+  await p.click(`[data-open="${F}"]`);
+  ok(await p.locator('#confirmDlg').count() === 1 && /locked/.test(await p.textContent('#confirmDlg')), 'locked chapter asks in the custom dialog');
+  await press(p, '1');
+  const grid = await S(p, () => Array.from(document.querySelectorAll('.mode-grid button')).map((b) => [b.id, (b.querySelector('.kn') || {}).textContent]));
+  ok(JSON.stringify(grid) === JSON.stringify([['studyBtn', '(1)'], ['conceptBtn', '(2)'], ['scenarioBtn', '(3)'], ['quizBtn', '(4)'], ['quickBtn', '(5)'], ['matchBtn', '(6)'], ['bossBtn', '(7)']]), 'chapter screen: modes are 1 Study shuffled … 7 Boss');
+  await press(p, '2');
+  ok(await p.locator('#ovSkip').count() === 1 && (await kn(p, '#ovSkip')).t === '(1)' && (await kn(p, '#ovGo')).t === '(2)', 'custom dialogs number their buttons in order');
+  await press(p, '1');
+  ok(await S(p, () => view.page === 'study' && view.studyMode === 'concept'), 'keys: 2 starts concept cards, 1 skips the guide prompt');
+  // Study card: Enter flips, 1 missed, 2 got it, 3 I know this; Space does nothing
+  ok((await kn(p, '#flipBtn')).t === '(Enter)' && (await kn(p, '#flipBtn')).aria === 'Enter' && (await kn(p, '#missBtn')).t === '(1)' && (await kn(p, '#gotBtn')).t === '(2)' && (await kn(p, '#knowBtn')).t === '(3)', 'study card: (Enter) flip, (1) Missed it, (2) Got it, (3) I know this');
+  await hideToast(p); await p.screenshot({ path: `${SHOTS}/keys-study-desktop.png` });
+  await press(p, ' ');
+  ok(!(await S(p, () => view.flipped)), 'Space does not flip');
+  await press(p, '2');
+  ok(!(await S(p, () => view.flipped)) && await S(p, () => view.index) === 0, 'grading keys do nothing before the answer is shown (disabled)');
+  await press(p, 'Enter');
+  ok(await S(p, () => view.flipped), 'Enter flips the card');
+  await press(p, 'Enter');
+  ok(!(await S(p, () => view.flipped)), 'Enter flips it back');
+  await press(p, 'Enter');
+  let id = await S(p, () => view.queue[view.index]);
+  await press(p, '2');
+  ok(await S(p, (id) => view.index === 1 && state.progress[id].streak >= 1, id), '2 = Got it');
+  await press(p, 'Enter');
+  id = await S(p, () => view.queue[view.index]);
+  await press(p, '1');
+  ok(await S(p, (id) => view.index === 2 && state.progress[id].streak === 0, id), '1 = Missed it');
+  // Held keys don't repeat
+  await press(p, 'Enter');
+  await S(p, () => { for (let i = 0; i < 5; i++) document.dispatchEvent(new KeyboardEvent('keydown', { key: '2', repeat: i > 0, bubbles: true })); });
+  ok(await S(p, () => view.index) === 3, 'holding a key triggers once (repeats ignored)');
+  await press(p, '3');
+  ok(await S(p, () => view.index === 4 && state.progress[view.queue[3]].retired), '3 = I know this');
+  // Round summary: 1 Next, last = Back to chapter
+  await S(p, () => { view.index = view.queue.length - 1; view.flipped = true; render(); });
+  await press(p, '2');
+  ok((await kn(p, '#nextRound')).t === '(1)' && (await kn(p, '#backChapter')).t === '(2)', 'round summary: (1) Next 20, (2) Back to chapter');
+  await press(p, 'Enter');
+  ok(await S(p, () => view.roundNo === 2 && view.index === 0), 'Enter on the summary = Next 20');
+  await p.click('#exitStudy');
+
+  // Scenario study: numbers follow the shown (shuffled) order, then Next and I know this
+  await press(p, '3');
+  const sc = await S(p, () => ({ order: Array.from(document.querySelectorAll('[data-spick]')).map((b) => Number(b.dataset.spick)), n: document.querySelectorAll('[data-spick]').length }));
+  ok((await kn(p, `[data-spick="${sc.order[0]}"]`)).t === '(1)' && (await kn(p, `[data-spick="${sc.order[sc.n - 1]}"]`)).t === `(${sc.n})`, 'scenario: choices numbered 1..n top to bottom');
+  await press(p, '2');
+  ok(await S(p, (o) => view.studyPicked === o[1], sc.order), 'scenario: 2 picks the second shown choice');
+  ok((await kn(p, '#nextStudy')).t === `(${sc.n + 1})`, `scenario: Next is (${sc.n + 1})`);
+  await press(p, 'Enter');
+  ok(await S(p, () => view.index === 1 && view.studyPicked === null), 'Enter = Next after answering');
+  await p.click('#exitStudy');
+
+  // Quiz: 1-4 choices in shown order, 5 / Enter = Next
+  await press(p, '4');
+  const q = await S(p, () => view.choices.map((c) => c.text));
+  ok((await kn(p, '[data-choice="0"]')).t === '(1)' && (await kn(p, '[data-choice="3"]')).t === '(4)', 'quiz: choices (1)..(4)');
+  await press(p, '3');
+  ok(await S(p, () => view.picked === 2), 'quiz: 3 picks the third shown choice');
+  ok((await kn(p, '#nextQuiz')).t === '(5)', 'quiz: Next is (5)');
+  await press(p, '1');
+  ok(await S(p, () => view.picked === 2), 'answered: choice keys are inert');
+  await press(p, 'Enter');
+  ok(await S(p, () => view.index === 1 && view.picked === null), 'Enter = Next question');
+  await hideToast(p); await p.screenshot({ path: `${SHOTS}/keys-quiz-desktop.png` });
+  await press(p, '2'); await press(p, '5');
+  ok(await S(p, () => view.index === 2), '5 = Next');
+  await p.click('#exitStudy');
+
+  // Custom confirm replaces native confirm(): 1 = yes, 2 = no, Esc = no
+  await press(p, '4');
+  ok(await p.locator('#confirmDlg').count() === 1 && (await kn(p, '#cdYes')).t === '(1)' && (await kn(p, '#cdNo')).t === '(2)', 'restarting a saved quiz asks in a keyed dialog: (1) Start fresh, (2) Keep it');
+  await press(p, '2');
+  ok(await S(p, (F) => view.page === 'folder' && !!state.sessions[F + ':quiz'], F), '2 keeps the saved quiz');
+  await press(p, '4'); await press(p, 'Escape');
+  ok(await S(p, (F) => view.page === 'folder' && !!state.sessions[F + ':quiz'], F), 'Esc also keeps it');
+  await press(p, '4'); await press(p, '1');
+  ok(await S(p, () => view.page === 'quiz' && view.index === 0), '1 starts fresh');
+  await p.click('#exitStudy');
+
+  // Boss: numbers select, Enter locks in
+  await press(p, '7');
+  await press(p, '2');
+  ok(await S(p, () => view.boss.sel === 1) && (await kn(p, '#bossNext')).t === `(${await S(p, () => view.boss.choices.length + 1)})`, 'boss: 2 selects the second choice; Lock in is the next number');
+  await press(p, 'Enter');
+  ok(await S(p, () => view.boss.index === 1 && view.boss.answers.length === 1), 'Enter = Lock in & next');
+  await p.click('#exitBoss');
+
+  // Match: numbers pick a term, then a definition
+  await press(p, '6');
+  const m = await S(p, () => ({ terms: view.match.pairs.map((x) => x.id), defs: view.match.defs.slice() }));
+  ok((await kn(p, `[data-term="${m.terms[0]}"]`)).t === '(1)' && (await kn(p, `[data-def="${m.defs[0]}"]`)).t === '(1)', 'match: both columns numbered');
+  await press(p, '1');
+  ok(await S(p, (t) => view.match.selTerm === t, m.terms[0]), 'match: 1 picks the first term');
+  await press(p, String(m.defs.indexOf(m.terms[0]) + 1));
+  ok(await S(p, (t) => view.match.matched.includes(t), m.terms[0]), 'match: the definition number completes the pair');
+  await p.click('#exitMatch');
+
+  // Typing in inputs is ignored
+  await p.click('#addCardBtn');
+  await p.locator('.dialog-body input[type="text"], .dialog-body textarea').first().click();
+  await press(p, '1'); await press(p, '2');
+  ok(await S(p, () => modal.open) && (await p.locator('.dialog-body input[type="text"], .dialog-body textarea').first().inputValue()).endsWith('12'), 'digits typed into a form field stay in the field');
+  await press(p, 'Escape');
+  ok(await noBroke(p), 'app fine');
+  await ctx.close();
+
+  // Touch phone: labels hidden, progress untouched
+  const ph = await page({ device: 'iPhone 13' });
+  await ph.p.goto(GIST); await ph.p.click(`[data-open="${F}"]`); await ph.p.waitForSelector('#studyBtn');
+  ok(!(await kn(ph.p, '#studyBtn')).shown && (await kn(ph.p, '#studyBtn')).aria === '1', 'phone: (n) labels hidden by media query (aria-keyshortcuts kept)');
+  await ph.ctx.close();
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -1724,6 +1861,7 @@ async function screenshots() {
     await testRounds();
     await testShuffle();
     await testWeakSpots();
+    await testKeys();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

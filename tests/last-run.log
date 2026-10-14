@@ -8,7 +8,7 @@
   ✓ all progress entries identical
   ✓ migration added schema/bundled defaults
   ✓ home renders both folders
-  ✓ U.S. Employment Law still shows 17 cards: U.S. Employment Law 17 cards · 0 mastered Boss quiz: not taken yet
+  ✓ U.S. Employment Law still shows 17 cards: U.S. Employment Law 17 cards · 0 mastered Boss quiz: not taken yet (1)
   ✓ study front does not show the note
   ✓ note shows on the back as a Note line
   ✓ downgrade: original app still opens data saved by the new app
@@ -163,7 +163,7 @@
   ✓ after 2 correct: index=2 score=2
   ✓ Save & leave returns to folder
   ✓ folder shows Resume quiz button
-  ✓ Resume label shows progress: Resume quizQuestion 3 of 12 · 2 correct
+  ✓ Resume label shows progress: Resume quizQuestion 3 of 12 · 2 correct(8)
   ✓ Quick quiz button present
   ✓ resume restores exact quiz state
   ✓ resumed mid-quiz still shows Save & leave
@@ -227,7 +227,7 @@
   ✓ v1: matching game completes on Ch 2
   ✓ previous ch01 build: 77 cards
   ✓ ch01 updated in place: one folder, 84 cards, no duplicates
-  ✓ progress from the previous ch01 version kept (10 cards with progress)
+  ✓ progress from the previous ch01 version kept (11 cards with progress)
   ✓ card content, notes and study guide updated; folder stats kept
   ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management, C202 Ch 9: Base Compensation, C202 Ch 10: Incentives, C202 Ch 11: Benefits, C202 Ch 12: Creating a Healthy Work Environment, C202 Ch 13: Creating Positive Employee-Management Relations, C202 Ch 14: Managing Engagement and Turnover (2303 new, 77 updated cards)
 
@@ -247,7 +247,7 @@
   ✓ gist is secret with the fixed description
   ✓ gist has study-buddy-sync.json and c202-plan.txt
   ✓ Sync ID shown on the Sync screen matches the gist id
-  ✓ payload carries device A progress (4 studied cards)
+  ✓ payload carries device A progress (5 studied cards)
   ✓ payload is compact (14.4 KB) with no bundled card text or study guides
   ✓ token is never written to the gist
   ✓ payload has a 14-chapter progress summary for the helper
@@ -341,7 +341,7 @@
   ✓ one click: signed in as brayden@example.com and synced
   ✓ users/{uid} doc holds the progress (same payload format as the gist)
   ✓ shares/{id} mirrors the C202 plan text for Study Buddy
-  ✓ Sync screen shows the plan link: fs:study-buddy-1000/d26f678c5a76bd4155a4141f571a87a5
+  ✓ Sync screen shows the plan link: fs:study-buddy-1000/bb775178e1855433e648945091663b6b
   ✓ no Google token stored in Firestore
   ✓ phone gets the desktop progress after one tap
   ✓ phone reuses the same plan link
@@ -365,7 +365,7 @@
   ✓ every old streak / retired flag is kept on load
   ✓ quizBest and all old saves survive (shared "study" slot moved to study-scenario)
   ✓ old concept save is offered as a round: "Card 1 of 20"
-  ✓ old quiz save shows its place: Resume quizRound 2: question 1 of 20 · 30 of 101 answered
+  ✓ old quiz save shows its place: Resume quizRound 2: question 1 of 20 · 30 of 101 answered(8)
   ✓ old concept save resumes on the same (revealed) card in a round of 20 active cards
   ✓ counter "Card 1 of 20" and remaining-to-master shown
   ✓ Save & leave mid-round resumes at Card 5 of 20
@@ -395,12 +395,12 @@
   ✓ an old device's synced quiz save resumes as rounds
 
 [18] Answer order is shuffled per presentation; "of the above" stays last; resume keeps the order
-  ✓ scenario choices (quiz / quick / boss / practice) are shuffled and the correct one is remapped (115 orders over 10 cards)
+  ✓ scenario choices (quiz / quick / boss / practice) are shuffled and the correct one is remapped (114 orders over 10 cards)
   ✓ concept-card choices stay shuffled, correct answer lands in 4 different positions
   ✓ "None/All of the above"-style choices stay last (and keep the right answer) while the rest shuffle
   ✓ plain "Both …" / "Neither" answers shuffle normally; only "… of the above/these" pins
   ✓ an answered scenario keeps its shown order through Save & leave and reload
-  ✓ scenario study shows shuffled orders (6 of 8 not in authored order)
+  ✓ scenario study shows shuffled orders (7 of 8 not in authored order)
   ✓ the highlighted correct choice and the "Best answer" feedback always match the card
   ✓ an unanswered scenario keeps its shown order on resume
   ✓ quiz: a resumed question shows the same answer order
@@ -444,8 +444,48 @@
   ✓ attempts sync to the other device
   ✓ repeated syncs converge without double counting (2 right, 2 wrong, "0011")
 
+[20] Number-key shortcuts (desktop), Enter flips, custom confirm dialog
+  ✓ home: chapter cards are numbered (1)..(9) with aria-keyshortcuts
+  ✓ locked chapter asks in the custom dialog
+  ✓ chapter screen: modes are 1 Study shuffled … 7 Boss
+  ✓ custom dialogs number their buttons in order
+  ✓ keys: 2 starts concept cards, 1 skips the guide prompt
+  ✓ study card: (Enter) flip, (1) Missed it, (2) Got it, (3) I know this
+  ✓ Space does not flip
+  ✓ grading keys do nothing before the answer is shown (disabled)
+  ✓ Enter flips the card
+  ✓ Enter flips it back
+  ✓ 2 = Got it
+  ✓ 1 = Missed it
+  ✓ holding a key triggers once (repeats ignored)
+  ✓ 3 = I know this
+  ✓ round summary: (1) Next 20, (2) Back to chapter
+  ✓ Enter on the summary = Next 20
+  ✓ scenario: choices numbered 1..n top to bottom
+  ✓ scenario: 2 picks the second shown choice
+  ✓ scenario: Next is (5)
+  ✓ Enter = Next after answering
+  ✓ quiz: choices (1)..(4)
+  ✓ quiz: 3 picks the third shown choice
+  ✓ quiz: Next is (5)
+  ✓ answered: choice keys are inert
+  ✓ Enter = Next question
+  ✓ 5 = Next
+  ✓ restarting a saved quiz asks in a keyed dialog: (1) Start fresh, (2) Keep it
+  ✓ 2 keeps the saved quiz
+  ✓ Esc also keeps it
+  ✓ 1 starts fresh
+  ✓ boss: 2 selects the second choice; Lock in is the next number
+  ✓ Enter = Lock in & next
+  ✓ match: both columns numbered
+  ✓ match: 1 picks the first term
+  ✓ match: the definition number completes the pair
+  ✓ digits typed into a form field stay in the field
+  ✓ app fine
+  ✓ phone: (n) labels hidden by media query (aria-keyshortcuts kept)
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-408 passed, 0 failed
+446 passed, 0 failed
