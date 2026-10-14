@@ -1486,6 +1486,159 @@ async function testShuffle() {
   await ctx.close();
 }
 
+/* ---------- Weak-area tracking ---------- */
+async function attemptsOf(p, id) { return S(p, (id) => (state.attempts || {})[id] || null, id); }
+async function testWeakSpots() {
+  console.log('\n[19] Weak spots: attempts per card, per-section aggregation, review rounds, sync, export, plan text');
+  const F = 'deck-c202-ch02';
+  let { ctx, p } = await page({ device: 'iPhone 13' });
+  await p.goto(GIST); await hideToast(p);
+  // Old state (before attempts existed): streaks, a missedAt, a retired card
+  const ids = await S(p, (F) => {
+    const st = JSON.parse(localStorage.getItem('flashcards.v1'));
+    const con = cardsIn(F).filter((c) => !isScenario(c)).map((c) => c.id);
+    delete st.attempts;
+    st.progress[con[0]] = { streak: 2, retired: true };
+    st.progress[con[1]] = { streak: 0, retired: false, missedAt: 1760000000000 };
+    st.progress[con[2]] = { streak: 1, retired: false };
+    localStorage.setItem('flashcards.v1', JSON.stringify(st));
+    return con;
+  }, F);
+  await p.reload(); await hideToast(p);
+  const bf = await S(p, (ids) => ({ a: ids.slice(0, 4).map((id) => state.attempts[id] || null), p: ids.slice(0, 3).map((id) => state.progress[id]) }), ids);
+  ok(JSON.stringify(bf.a) === JSON.stringify([[2, 0, 0, '11'], [0, 1, 0, '0'], [1, 0, 0, '1'], null]), 'backfill from old progress: streak -> recent rights, missedAt -> one miss, timestamp 0 ' + JSON.stringify(bf.a));
+  ok(bf.p[0].retired && bf.p[0].streak === 2 && bf.p[1].missedAt === 1760000000000 && bf.p[2].streak === 1, 'existing progress is untouched by the backfill');
+
+  // Section keys and coverage
+  const sec = await S(p, () => ({
+    multi: cardSection({ note: 'Read more: 2.4 Why culture matters; 2.5 Culture and HRM' }),
+    plain: cardSection({ note: 'Read more - 3.1 Intro.' }), none: cardSection({ note: '' }), odd: cardSection({ note: 'See the textbook' }),
+    c202: state.cards.filter((c) => /^deck-c202/.test(c.folderId)).length,
+    general: state.cards.filter((c) => /^deck-c202/.test(c.folderId) && cardSection(c) === 'General').length
+  }));
+  ok(sec.multi === '2.4 Why culture matters' && sec.plain === '3.1 Intro' && sec.none === 'General' && sec.odd === 'General', 'section key: first "Read more" section, else General');
+  ok(sec.c202 > 2000 && sec.general === 0, `every bundled C202 card has a usable section (${sec.c202} cards, ${sec.general} fall back to General)`);
+
+  // Every surface records attempts
+  await p.click(`[data-open="${F}"]`); await skipVis(p);
+  await p.click('#conceptBtn'); await skipVis(p);
+  let id = await S(p, () => view.queue[view.index]); let before = await attemptsOf(p, id);
+  await answerCard(p, false);
+  let a = await attemptsOf(p, id);
+  ok(a && a[1] === ((before && before[1]) || 0) + 1 && a[3].endsWith('0') && a[2] > 0, 'concept study records a miss');
+  await p.click('#exitStudy');
+  await p.click('#scenarioBtn'); await skipVis(p);
+  id = await S(p, () => view.queue[view.index]); await answerCard(p, true);
+  a = await attemptsOf(p, id); ok(a && a[0] === 1 && a[3] === '1', 'scenario study records a right answer');
+  await p.click('#exitStudy');
+  for (const [btn, label] of [['#quizBtn', 'multiple choice'], ['#quickBtn', 'quick quiz']]) {
+    p.dialogAnswers.push(true);
+    await p.click(btn); await skipVis(p);
+    id = await S(p, () => currentCard().id); before = await attemptsOf(p, id);
+    await answerQuiz(p, false);
+    a = await attemptsOf(p, id); ok(a && a[1] === ((before && before[1]) || 0) + 1, `${label} records attempts`);
+    await p.click('#exitStudy');
+  }
+  p.dialogAnswers.push(true);
+  await p.click('#bossBtn'); await skipVis(p);
+  const bossIds = await S(p, () => view.boss.ids.slice());
+  const tot0 = await S(p, (ids) => ids.reduce((n, id) => { const a = (state.attempts || {})[id]; return n + (a ? a[0] + a[1] : 0); }, 0), bossIds);
+  await answerBoss(p, (i) => i % 4 !== 0);
+  const tot1 = await S(p, (ids) => ids.reduce((n, id) => { const a = (state.attempts || {})[id]; return n + (a ? a[0] + a[1] : 0); }, 0), bossIds);
+  ok(tot1 - tot0 === bossIds.length, `boss records one attempt per question (${tot1 - tot0})`);
+  await p.click('#bossPractice');
+  id = await S(p, () => currentCard().id); before = await attemptsOf(p, id);
+  await answerQuiz(p, true);
+  a = await attemptsOf(p, id); ok(a && a[0] === before[0] + 1, 'practice-missed records attempts');
+  await p.click('#exitStudy');
+
+  // Thresholds: start clean, then build a weak section
+  const S1 = await S(p, (F) => {
+    state.attempts = {}; save();
+    const st = sectionStats(F).filter((s) => s.cards.length >= 4).sort((a, b) => b.cards.length - a.cards.length);
+    return { name: st[0].section, cards: st[0].cards, other: st[1].section, ocards: st[1].cards };
+  }, F);
+  await S(p, (c) => { recordAttempt(c[0], false); c.slice(1, 4).forEach((id) => recordAttempt(id, true)); recordAttempt(c[1], true); recordAttempt(c[2], true); save(); }, S1.cards);
+  ok(await S(p, (F) => weakSections(F).length, F) === 0, 'one miss in 6 tries does not flag a section');
+  await S(p, (c) => { recordAttempt(c[0], false); recordAttempt(c[1], false); recordAttempt(c[3], false); save(); }, S1.cards);
+  await S(p, (c) => { c.forEach((id) => recordAttempt(id, false)); c.forEach((id) => recordAttempt(id, true)); save(); }, S1.ocards.slice(0, 2));
+  const w = await S(p, (F) => weakSections(F).map((s) => [s.section, s.miss, s.n]), F);
+  ok(w.length >= 1 && w[0][0] === S1.name && w[0][1] === 4 && w[0][2] === 9, 'a section with 4 of 9 recent tries missed is flagged first: ' + JSON.stringify(w));
+  ok(!w.some((x) => x[0] === S1.other), 'a section at 50% missed but only 4 tries stays unflagged (minimum attempts)');
+  await p.click('#backHome'); await p.click(`[data-open="${F}"]`); await skipVis(p);
+  const panel = await p.textContent('#weakPanel');
+  ok(/Weak spots/.test(panel) && panel.includes(S1.name) && /44% missed · 4 of 9 recent tries · \d+ cards/.test(panel), 'folder screen shows the Weak spots panel with miss rate, tries and cards');
+  ok(await p.locator('#weakPanel [data-review]').count() >= 1 && await p.locator('#weakPanel [data-wguide]').count() >= 1, 'each weak section has Review this and a study-guide link');
+  await hideToast(p);
+  await p.locator('#weakPanel').scrollIntoViewIfNeeded();
+  await p.locator('#weakPanel').screenshot({ path: `${SHOTS}/weak-spots-panel-phone.png` });
+  await p.screenshot({ path: `${SHOTS}/weak-spots-folder-phone.png`, fullPage: true });
+
+  // Guide link jumps to the section heading
+  await p.click(`#weakPanel [data-wguide="${S1.name}"]`);
+  ok(await S(p, () => view.page === 'guide') && await p.locator('#guideArticle .flash-target').count() === 1 && await S(p, () => { const r = document.querySelector('#guideArticle .flash-target').getBoundingClientRect(); return r.top >= -5 && r.top < innerHeight; }), 'study-guide link opens the guide at that section heading');
+  await p.click('#guideBack');
+
+  // Review this: a round from that section, missed first; save/resume works
+  await p.click(`#weakPanel [data-review="${S1.name}"]`); await skipVis(p);
+  const rv = await S(p, () => ({ mode: view.studyMode, q: view.queue.slice(), total: view.roundTotal, sec: view.reviewSection, all: studyPool(view.folderId, 'review').map((c) => c.id) }));
+  ok(rv.mode === 'review' && rv.sec === S1.name && rv.total === Math.min(20, rv.all.length) && rv.q.every((id) => rv.all.includes(id)), `Review this starts a round of ${rv.total} from that section only`);
+  ok(rv.q.slice(0, 3).sort().join() === [S1.cards[0], S1.cards[1], S1.cards[3]].sort().join(), 'recently missed cards come first');
+  ok(/Card 1 of/.test(await p.textContent('#roundCounter')) && /Weak-spot review/.test(await p.textContent('#headerSub')), 'review shows the round counter and its name');
+  await answerCard(p, true);
+  await p.click('#exitStudy');
+  ok(/Continue weak-spot review/.test(await p.textContent('#resumeRow')) && /Card 2 of/.test(await p.textContent('[data-resume="study-review"]')), 'review saves into its own slot');
+  await p.click('[data-resume="study-review"]');
+  ok(await S(p, (n) => view.studyMode === 'review' && view.reviewSection === n && view.index === 1, S1.name), 'review resumes in its section');
+  while (!(await p.locator('#roundSummary').count())) await answerCard(p, true);
+  ok(/Review again/.test(await p.textContent('#nextRound')) && /no longer flagged|still a weak spot/.test(await p.textContent('#reviewState')), 'review summary says whether the section is still weak');
+  await p.click('#backChapter');
+  // Improvement clears the flag (recent window)
+  await S(p, (c) => { for (let k = 0; k < 8; k++) c.forEach((id) => recordAttempt(id, true)); save(); render(); }, S1.cards);
+  ok(!(await S(p, ([F, n]) => weakSections(F).some((s) => s.section === n), [F, S1.name])) && await S(p, (c) => state.attempts[c[0]][1] >= 2, S1.cards), 'answering right 8 times clears the flag; lifetime misses are kept');
+  await S(p, (c) => { c.forEach((id) => { recordAttempt(id, false); recordAttempt(id, false); recordAttempt(id, false); }); save(); }, S1.cards);
+
+  // Home badge
+  await p.click('#backHome');
+  ok(/Weak spot/.test(await p.textContent(`[data-open="${F}"] .weak-badge`)) && await p.locator('[data-open="deck-c202-ch03"] .weak-badge').count() === 0, 'home flags only the chapter with a weak section');
+
+  // Plan text + share summary
+  await p.click('#planBtn'); await p.click('#savePlan'); await hideToast(p); await p.click('#planBack');
+  const share = await S(p, () => ({ plan: planText(SYNC_PLAN_COURSE), sum: syncSummary() }));
+  const ch2 = share.sum.courses.C202 ? share.sum.courses.C202.find((x) => x.ch === 2) : Object.values(share.sum.courses).flat().find((x) => x.ch === 2);
+  ok(/Weak spots \(last 8 tries per card/.test(share.plan) && share.plan.includes('Ch 2   ' + S1.name), 'plan text (c202-plan.txt / share doc) lists weakest sections');
+  ok(ch2 && ch2.weak.length >= 1 && ch2.weak[0].section === S1.name && ch2.weak[0].missRate > 30, 'share summary carries weak sections per chapter');
+
+  // Export includes attempts
+  const [dl] = await Promise.all([p.waitForEvent('download'), S(p, () => exportData())]);
+  const exp = JSON.parse(fs.readFileSync(await dl.path(), 'utf8'));
+  ok(exp.attempts && Array.isArray(exp.attempts[S1.cards[0]]) && exp.attempts[S1.cards[0]].length === 4, 'Export includes attempts');
+
+  // Merge rules
+  const mg = await S(p, () => {
+    const L = { a: { x: [3, 1, 100, '1101'], y: [1, 0, 5, '1'] } }, R = { a: { x: [5, 0, 50, '11'], z: [0, 2, 9, '00'] } };
+    const M1 = mergeSyncPayloads(L, R), M2 = mergeSyncPayloads(M1, R), M3 = mergeSyncPayloads(M1, M1), old = mergeSyncPayloads({ p: {} }, L);
+    return { m: M1.a, again: JSON.stringify(M2.a) === JSON.stringify(M1.a) && JSON.stringify(M3.a) === JSON.stringify(M1.a), old: JSON.stringify(old.a) === JSON.stringify(L.a) };
+  });
+  ok(JSON.stringify(mg.m) === JSON.stringify({ x: [5, 1, 100, '1101'], y: [1, 0, 5, '1'], z: [0, 2, 9, '00'] }), 'merge: counts keep the max, recent window from the latest attempt');
+  ok(mg.again && mg.old, 'merging again never double counts; payloads from older app versions (no attempts) merge fine');
+  await ctx.close();
+
+  // Two devices over gist sync
+  const store = makeGistStore();
+  const A = await syncDevice({ store }), B = await syncDevice({ store, device: 'iPhone 13' });
+  for (const d of [A, B]) { await d.p.click('#syncBtn'); await d.p.fill('#syncToken', GOOD_TOKEN); await d.p.click('#syncConnect'); await waitStatus(d.p, /Synced/); await d.p.click('#syncBack'); }
+  const cid = await S(A.p, (F) => cardsIn(F)[0].id, F);
+  await S(A.p, (id) => { recordAttempt(id, false); recordAttempt(id, false); recordAttempt(id, true); save(); }, cid);
+  await syncNowAndWait(A.p); await syncNowAndWait(B.p);
+  ok(JSON.stringify((await attemptsOf(B.p, cid)).slice(0, 2)) === '[1,2]', 'attempts sync to the other device');
+  await S(B.p, (id) => { recordAttempt(id, true); save(); }, cid);
+  await syncNowAndWait(B.p); await syncNowAndWait(A.p); await syncNowAndWait(B.p); await syncNowAndWait(A.p);
+  const aA = await attemptsOf(A.p, cid), aB = await attemptsOf(B.p, cid);
+  ok(JSON.stringify(aA) === JSON.stringify(aB) && aA[0] === 2 && aA[1] === 2 && aA[3] === '0011', 'repeated syncs converge without double counting (2 right, 2 wrong, "0011")');
+  await A.ctx.close(); await B.ctx.close();
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -1570,6 +1723,7 @@ async function screenshots() {
     await testGoogleSync();
     await testRounds();
     await testShuffle();
+    await testWeakSpots();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

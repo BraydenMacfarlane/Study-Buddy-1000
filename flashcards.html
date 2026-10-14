@@ -226,6 +226,15 @@
     .flash.scenario { align-items: stretch; text-align: left; justify-content: center; }
     .flash.scenario .hint { text-align: center; }
     .scenario-text { font-size: 19px; line-height: 1.5; white-space: pre-line; margin-top: 18px; }
+    .weak-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 10px 0; border-top: 1px solid rgba(0,0,0,.07); }
+    .weak-row:first-of-type { margin-top: 6px; }
+    .weak-info { flex: 1 1 220px; min-width: 0; }
+    .weak-rate { color: #b5462f; font-weight: 650; }
+    .weak-bar { height: 5px; border-radius: 3px; background: rgba(0,0,0,.08); margin-top: 6px; overflow: hidden; }
+    .weak-bar span { display: block; height: 100%; background: #d9714f; }
+    .weak-actions { gap: 10px; align-items: center; }
+    .weak-badge { display: inline-block; margin-top: 8px; padding: 3px 9px; border-radius: 999px; background: #fbe6df; color: #9c3b25; font-size: 13px; font-weight: 600; }
+    .flash-target { background: #fff3c4; border-radius: 4px; }
     .round-score { font-size: 46px; font-weight: 800; letter-spacing: -1px; margin: 6px 0 4px; color: var(--gold, #c9a227); }
     .round-summary p { margin: 6px 0; }
     .explain {
@@ -518,13 +527,15 @@
         p.retired = !!p.retired || p.streak >= RETIRE_AFTER;
       });
       migrateStudySlots(out.sessions);
+      if (!out.attempts || typeof out.attempts !== "object" || Array.isArray(out.attempts)) out.attempts = backfillAttempts(out);
+      Object.keys(out.attempts).forEach((k) => { const a = cleanAttempt(out.attempts[k]); if (a) out.attempts[k] = a; else delete out.attempts[k]; });
       out.schema = 2;
       return out;
     }
 
     // Each study method has its own resume slot: "<folder>:study-mixed|study-concept|study-scenario".
     // Older saves used one shared "<folder>:study" slot; move it into the slot of the mode it was saved from.
-    const STUDY_MODES = ["mixed", "concept", "scenario"];
+    const STUDY_MODES = ["mixed", "concept", "scenario", "review"];
     function studySlot(mode) { return "study-" + (STUDY_MODES.includes(mode) ? mode : "mixed"); }
     function migrateStudySlots(sessions) {
       if (!sessions || typeof sessions !== "object") return false;
@@ -546,6 +557,73 @@
        older versions simply ignore). Multiple choice works through the whole chapter as a "pass" of
        rounds; quizBest is the cumulative accuracy of a completed pass. */
     const ROUND_SIZE = 20, ROUND_MISSED = 4;
+
+    /* ---------- Weak-area tracking ----------
+       state.attempts[cardId] = [right, wrong, lastAttemptMs, recent] where recent is the last
+       ATT_RECENT results as "1"/"0" (newest last). Every graded answer counts: concept and scenario
+       study, quiz, quick, practice-missed and boss. Sections come from the card note
+       "Read more: <section>" (first section if several), else "General". Weak spots use only the
+       recent window, so improving clears a flag. */
+    const ATT_RECENT = 8, WEAK_MIN_ATTEMPTS = 6, WEAK_MIN_MISSES = 2, WEAK_RATE = 0.3;
+    function recordAttempt(id, ok) {
+      if (!id) return;
+      if (!state.attempts) state.attempts = {};
+      const a = Array.isArray(state.attempts[id]) ? state.attempts[id] : [0, 0, 0, ""];
+      if (ok) a[0] = (Number(a[0]) || 0) + 1; else a[1] = (Number(a[1]) || 0) + 1;
+      a[2] = Date.now();
+      a[3] = (String(a[3] || "") + (ok ? "1" : "0")).slice(-ATT_RECENT);
+      state.attempts[id] = a;
+    }
+    function cleanAttempt(a) {
+      if (!Array.isArray(a)) return null;
+      const r = Math.max(0, Math.floor(Number(a[0]) || 0)), w = Math.max(0, Math.floor(Number(a[1]) || 0));
+      const hh = String(a[3] || "").replace(/[^01]/g, "").slice(-ATT_RECENT);
+      return r || w || hh ? [r, w, Math.max(0, Number(a[2]) || 0), hh] : null;
+    }
+    // Sync merge for one card: counts keep the max (never double counted), the recent window comes
+    // from whichever device answered last.
+    function mergeAttempt(a, b) {
+      a = cleanAttempt(a); b = cleanAttempt(b);
+      if (!a || !b) return a || b;
+      const newer = a[2] !== b[2] ? (a[2] > b[2] ? a : b) : (a[3].length >= b[3].length ? a : b);
+      return [Math.max(a[0], b[0]), Math.max(a[1], b[1]), Math.max(a[2], b[2]), newer[3]];
+    }
+    // One-time backfill from what older versions stored: a streak means that many recent rights,
+    // missedAt (or a broken streak) one recent miss. Timestamp 0, so any real attempt wins on merge.
+    function backfillAttempts(st) {
+      const out = {};
+      Object.keys(st.progress || {}).forEach((id) => {
+        const p = st.progress[id] || {};
+        const s = Math.max(0, Math.floor(Number(p.streak) || 0)), miss = Number(p.missedAt) > 0;
+        if (!s && !miss) return;
+        out[id] = [s, miss ? 1 : 0, 0, ((miss ? "0" : "") + "1".repeat(Math.min(s, ATT_RECENT))).slice(-ATT_RECENT)];
+      });
+      return out;
+    }
+    function cardSection(c) {
+      const raw = cleanStr(c && (c.note || c.extra));
+      const m = raw.match(/^read more\s*[:\-–]\s*(.*)$/i);
+      const s = m ? cleanStr(m[1].split(/\s*;\s*/)[0]).replace(/[.\s]+$/, "") : "";
+      return s || cleanStr(c && c.section) || "General";
+    }
+    function sectionStats(folderId) {
+      const by = {};
+      cardsIn(folderId).forEach((c) => {
+        const k = cardSection(c);
+        const s = by[k] || (by[k] = { section: k, cards: [], n: 0, miss: 0, right: 0, wrong: 0, last: 0 });
+        s.cards.push(c.id);
+        const a = cleanAttempt((state.attempts || {})[c.id]);
+        if (!a) return;
+        s.n += a[3].length; s.miss += (a[3].match(/0/g) || []).length;
+        s.right += a[0]; s.wrong += a[1]; s.last = Math.max(s.last, a[2]);
+      });
+      return Object.values(by).map((s) => Object.assign(s, { rate: s.n ? s.miss / s.n : 0, weak: s.n >= WEAK_MIN_ATTEMPTS && s.miss >= WEAK_MIN_MISSES && s.miss / s.n >= WEAK_RATE }));
+    }
+    function weakSections(folderId, n = 3) {
+      return sectionStats(folderId).filter((s) => s.weak).sort((a, b) => b.rate - a.rate || b.miss - a.miss || a.section.localeCompare(b.section)).slice(0, n);
+    }
+    function recentMisses(id) { const a = cleanAttempt((state.attempts || {})[id]); return a ? (a[3].match(/0/g) || []).length : 0; }
+    function pctOf(x) { return Math.round(x * 100); }
     function recentMissedIds(cards, n = ROUND_MISSED) {
       return cards.filter((c) => Number(prog(c.id).missedAt) > 0)
         .sort((a, b) => prog(b.id).missedAt - prog(a.id).missedAt).slice(0, n).map((c) => c.id);
@@ -898,6 +976,7 @@
       Object.keys(state.sessions || {}).forEach((k) => { fp["s:" + k] = hashString(JSON.stringify(state.sessions[k])); });
       Object.keys(state.plans || {}).forEach((k) => { fp["pl:" + k] = hashString(JSON.stringify(state.plans[k])); });
       state.folders.forEach((f) => { fp["f:" + f.id] = hashString(JSON.stringify(folderSyncObj(f))); });
+      fp["a"] = hashString(JSON.stringify(state.attempts || {}));
       state.cards.forEach((c) => { fp["c:" + c.id] = isBundledCard(c) ? "b:" + c.folderId : hashString(JSON.stringify(cardSyncObj(c))); });
       return fp;
     }
@@ -949,20 +1028,22 @@
     // Build the compact payload that goes into the gist.
     function buildSyncPayload() {
       const st = SYNC.st, t = (k) => Number(st[k]) || 0;
-      const p = {}, s = {}, pl = {}, f = {}, c = {}, x = {};
+      const p = {}, s = {}, pl = {}, f = {}, c = {}, x = {}, a = {};
       const cutoff = Date.now() - TOMB_MAX_AGE;
       state.cards.forEach((card) => {
         const pr = state.progress[card.id], k = "p:" + card.id;
         if (progFp(pr) !== "0|0" || t(k)) p[card.id] = [Number(pr && pr.streak) || 0, pr && pr.retired ? 1 : 0, t(k)];
         if (!isBundledCard(card)) c[card.id] = [t("c:" + card.id), cardSyncObj(card)];
+        const at = cleanAttempt((state.attempts || {})[card.id]);
+        if (at) a[card.id] = at;
       });
       Object.keys(state.sessions || {}).forEach((k) => { s[k] = [t("s:" + k), state.sessions[k]]; });
       Object.keys(state.plans || {}).forEach((k) => { pl[k] = [t("pl:" + k), state.plans[k]]; });
       state.folders.forEach((fo) => { f[fo.id] = [t("f:" + fo.id), folderSyncObj(fo)]; });
       Object.keys(SYNC.x).forEach((k) => { if (SYNC.x[k] >= cutoff) x[k] = SYNC.x[k]; });
-      return { v: 1, app: "Study-Buddy-1000", p: sortedObj(p), s: sortedObj(s), pl: sortedObj(pl), f: sortedObj(f), c: sortedObj(c), x: sortedObj(x) };
+      return { v: 1, app: "Study-Buddy-1000", p: sortedObj(p), s: sortedObj(s), pl: sortedObj(pl), f: sortedObj(f), c: sortedObj(c), x: sortedObj(x), a: sortedObj(a) };
     }
-    function payloadCore(pl) { return pl ? JSON.stringify({ p: pl.p, s: pl.s, pl: pl.pl, f: pl.f, c: pl.c, x: pl.x }) : ""; }
+    function payloadCore(pl) { return pl ? JSON.stringify({ p: pl.p, s: pl.s, pl: pl.pl, f: pl.f, c: pl.c, x: pl.x, a: pl.a || {} }) : ""; }
 
     function syncSummary() {
       const courses = {};
@@ -974,7 +1055,8 @@
           mastered: cards.filter((c) => state.progress[c.id] && state.progress[c.id].retired).length,
           boss: f.bestBoss ? Math.round(f.bestBoss.pct) : null, passed: !!(f.bestBoss && f.bestBoss.passed),
           guide: f.guideRead ? String(f.guideRead) : (cleanStr(f.summary) ? false : null),
-          quiz: typeof f.quizBest === "number" ? f.quizBest : null
+          quiz: typeof f.quizBest === "number" ? f.quizBest : null,
+          weak: weakSections(f.id, 3).map((s) => ({ section: s.section, missRate: pctOf(s.rate), recent: s.n, misses: s.miss, cards: s.cards.length }))
         });
       });
       Object.values(courses).forEach((list) => list.sort((a, b) => (a.ch ?? 1e9) - (b.ch ?? 1e9)));
@@ -984,7 +1066,7 @@
     // Merge two payloads. Pure: no state access.
     function mergeSyncPayloads(L, R) {
       L = L || {}; R = R || {};
-      const M = { v: 1, app: "Study-Buddy-1000", p: {}, s: {}, pl: {}, f: {}, c: {}, x: {} };
+      const M = { v: 1, app: "Study-Buddy-1000", p: {}, s: {}, pl: {}, f: {}, c: {}, x: {}, a: {} };
       const keys = (a, b) => Array.from(new Set(Object.keys(a || {}).concat(Object.keys(b || {})))).sort();
       ["x"].forEach(() => keys(L.x, R.x).forEach((k) => { M.x[k] = Math.max(Number((L.x || {})[k]) || 0, Number((R.x || {})[k]) || 0); }));
       keys(L.p, R.p).forEach((k) => {
@@ -994,6 +1076,7 @@
         const bp = betterProgress({ streak: a[0], retired: !!a[1] }, { streak: b[0], retired: !!b[1] });
         M.p[k] = [Number(bp.streak) || 0, bp.retired ? 1 : 0, a[2] || 0];
       });
+      keys(L.a, R.a).forEach((k) => { const m = mergeAttempt((L.a || {})[k], (R.a || {})[k]); if (m) M.a[k] = m; });
       const tieJson = (a, b) => (JSON.stringify(a[1]) >= JSON.stringify(b[1]) ? a : b);
       const pick = (sec, tie) => keys(L[sec], R[sec]).forEach((k) => {
         const a = (L[sec] || {})[k], b = (R[sec] || {})[k];
@@ -1073,6 +1156,8 @@
       }
       const cardIds = new Set(state.cards.map((c) => c.id));
       Object.keys(M.p).forEach((cid) => { if (cardIds.has(cid)) state.progress[cid] = { ...(state.progress[cid] || {}), streak: Number(M.p[cid][0]) || 0, retired: !!M.p[cid][1] || (Number(M.p[cid][0]) || 0) >= RETIRE_AFTER }; });
+      if (!state.attempts) state.attempts = {};
+      Object.keys(M.a || {}).forEach((cid) => { if (cardIds.has(cid)) { const m = mergeAttempt(state.attempts[cid], M.a[cid]); if (m) state.attempts[cid] = m; } });
       ["s", "pl"].forEach((sec) => {
         const target = sec === "s" ? (state.sessions = state.sessions || {}) : state.plans;
         Object.keys(M[sec]).forEach((k) => { target[k] = JSON.parse(JSON.stringify(M[sec][k][1])); });
@@ -1691,7 +1776,7 @@
         s = upgradeStudySession(s);
         const total = s.roundTotal || (s.queue || []).length;
         const pos = s.roundPos || Math.min((s.index || 0) + 1, total || 1);
-        return `Card ${pos} of ${total}` + (s.studyMode && MODE_LABEL[s.studyMode] ? ` · ${MODE_LABEL[s.studyMode]}` : "");
+        return `Card ${pos} of ${total}` + (s.studyMode && MODE_LABEL[s.studyMode] ? ` · ${MODE_LABEL[s.studyMode]}` : "") + (s.studyMode === "review" && s.reviewSection ? `: ${s.reviewSection}` : "");
       }
       if (mode === "match" && s.match) {
         return `${(s.match.matched || []).length} of ${(s.match.pairs || []).length} pairs · ${fmtElapsed(s.match.elapsed || 0)}`;
@@ -1743,7 +1828,7 @@
         if (!view.queue.length || view.index >= view.queue.length) return; // round summary
         // Still unfinished if there are active cards or a pending scenario answer
         const pending = view.studyPicked !== null && view.studyPicked !== undefined;
-        if (!pending && !activeStudy(fid, mode).length) return;
+        if (!pending && mode !== "review" && !activeStudy(fid, mode).length) return;
         setSession(fid, studySlot(mode), {
           studyMode: mode,
           queue: view.queue.slice(),
@@ -1755,6 +1840,7 @@
           roundTotal: view.roundTotal || view.queue.length,
           roundPos: view.roundPos || (view.index + 1),
           rounds: 1,
+          reviewSection: mode === "review" ? view.reviewSection : undefined,
           studyOrder: Array.isArray(view.studyOrder) ? view.studyOrder.slice() : null,
           studyOrderFor: view.studyOrderFor || null,
           roundNo: view.roundNo || 1,
@@ -1843,6 +1929,7 @@
         view.roundPos = s.roundPos || (view.index + 1);
         view.roundNo = s.roundNo || 1;
         view.roundResults = Object.assign({}, s.roundResults || {});
+        if (view.studyMode === "review") view.reviewSection = s.reviewSection || "General";
         view.studyOrder = Array.isArray(s.studyOrder) ? s.studyOrder.slice() : null;
         view.studyOrderFor = s.studyOrderFor || null;
         skipRetiredInRound();
@@ -1867,6 +1954,7 @@
         ["study-mixed", "Continue shuffled"],
         ["study-concept", "Continue concept cards"],
         ["study-scenario", "Continue scenarios"],
+        ["study-review", "Continue weak-spot review"],
         ["match", "Resume match"]
       ];
       const btns = items.map(([mode, label]) => {
@@ -1958,6 +2046,40 @@
       return `<span class="boss-line ${b.passed ? "passed" : ""}">Boss best: <strong>${Math.round(b.pct)}%</strong> ${b.passed ? "✓ passed" : "· not passed yet"}</span>`;
     }
 
+    function weakPanelHtml(folder) {
+      const stats = sectionStats(folder.id), tracked = stats.filter((s) => s.n);
+      if (!tracked.length) return "";
+      const weak = weakSections(folder.id, 3);
+      const tries = tracked.reduce((n, s) => n + s.n, 0);
+      const rows = weak.map((s) => {
+        const g = guideHeadingFor(folder, s.section);
+        return `
+          <div class="weak-row">
+            <div class="weak-info">
+              <strong>${escaped(s.section)}</strong>
+              <div class="muted"><span class="weak-rate">${pctOf(s.rate)}% missed</span> · ${s.miss} of ${s.n} recent tries · ${s.cards.length} card${s.cards.length === 1 ? "" : "s"}</div>
+              <div class="weak-bar"><span style="width:${pctOf(s.rate)}%"></span></div>
+            </div>
+            <div class="row weak-actions">
+              <button class="gold" data-review="${escaped(s.section)}">Review this</button>
+              ${g ? `<a href="#" class="ov-link" data-wguide="${escaped(s.section)}">📖 Guide section</a>` : ""}
+            </div>
+          </div>`;
+      }).join("");
+      return `
+        <div class="card weak-panel" id="weakPanel" style="margin-top:12px">
+          <h3 style="margin:0 0 4px">${weak.length ? "⚠ Weak spots" : "Weak spots"}</h3>
+          <div class="muted" style="font-size:13px">Based on your last ${ATT_RECENT} tries per card across study, scenarios and quizzes. A section is flagged after ${WEAK_MIN_ATTEMPTS}+ tries with ${pctOf(WEAK_RATE)}%+ missed.</div>
+          ${weak.length ? rows : `<div class="ok-text" style="margin-top:8px">No weak spots right now ✓ <span class="muted">(${tries} recent tries across ${tracked.length} section${tracked.length === 1 ? "" : "s"})</span></div>`}
+        </div>`;
+    }
+    function startReview(folderId, section) {
+      view.folderId = folderId;
+      view.reviewSection = section;
+      if (getSession(folderId, "study-review") && !confirmDiscardSession(folderId, "study-review", "weak-spot review")) return;
+      clearSession(folderId, "study-review");
+      startStudy("review");
+    }
     function folderCardHtml(f) {
       const all = cardsIn(f.id);
       const retired = all.filter((c) => prog(c.id).retired).length;
@@ -1970,6 +2092,7 @@
           <h3>${escaped(f.name)}</h3>
           <div class="muted">${all.length} cards · ${retired} mastered${scen ? ` · ${scen} scenarios` : ""}</div>
           <div class="muted" style="margin-top:6px">${bossLine(f)}${f.bestMatch ? ` · Match best ${fmtTime(f.bestMatch.ms)}` : ""}</div>
+          ${(() => { const w = weakSections(f.id, 3); return w.length ? `<div class="weak-badge" title="${escaped(w.map((s) => s.section).join(" · "))}">⚠ ${w.length === 1 ? "Weak spot" : w.length + " weak spots"}: ${escaped(truncate(w[0].section, 48))}</div>` : ""; })()}
           ${cleanStr(f.summary) ? (f.guideRead ? `<div class="ov-done">✓ Study guide read</div>` : `<a href="#" class="ov-link" data-guide="1">📖 Read study guide (~${readMinutes(f.summary)} min)</a>`) : ""}
         </div>`;
     }
@@ -2072,6 +2195,7 @@
       }).join("");
       app.innerHTML = `
         ${pathHtml(folder)}
+        ${weakPanelHtml(folder)}
         <div class="card" style="margin-top:12px">
           <div class="muted">${left} in the mix · ${retired} pulled out after ${RETIRE_AFTER} correct in a row · ${bossLine(folder)}${folder.bestBoss ? ` (${fmtDate(folder.bestBoss.date)})` : ""}</div>
           ${lockedBehind(folder) ? `<div class="muted" style="margin-top:4px">🔒 Opened early: ${escaped(chLabel(lockedBehind(folder)))} boss not passed yet</div>` : ""}
@@ -2093,6 +2217,8 @@
         <div class="card" style="margin-top:12px">${list || `<div class="empty">No cards in this folder yet.</div>`}</div>
       `;
       document.getElementById("backHome").onclick = () => { view.page = "home"; render(); };
+      app.querySelectorAll("[data-review]").forEach((b) => { b.onclick = () => startReview(folder.id, b.dataset.review); });
+      app.querySelectorAll("[data-wguide]").forEach((b) => { b.onclick = (e) => { e.preventDefault(); openGuide(folder.id, b.dataset.wguide); }; });
       document.getElementById("renameFolder").onclick = () => openFolderForm(folder);
       document.getElementById("deleteFolder").onclick = () => {
         if (!confirm("Delete this folder and all of its cards?")) return;
@@ -2210,11 +2336,12 @@
       const all = cardsIn(folderId);
       if (mode === "concept") return all.filter((c) => !isScenario(c));
       if (mode === "scenario") return all.filter(isScenario);
+      if (mode === "review") return all.filter((c) => cardSection(c) === view.reviewSection);
       return all;
     }
 
     function activeStudy(folderId, mode) { return studyPool(folderId, mode).filter((c) => !prog(c.id).retired); }
-    const MODE_LABEL = { mixed: "Study shuffled", concept: "Concept cards", scenario: "Scenarios" };
+    const MODE_LABEL = { mixed: "Study shuffled", concept: "Concept cards", scenario: "Scenarios", review: "Weak-spot review" };
 
     /* ---------- Study guide (markdown `summary` on deck folders) ---------- */
     function guideWords(md) { return cleanStr(md).split(/\s+/).filter(Boolean).length; }
@@ -2243,7 +2370,8 @@
         if ((m = t.match(/^(#{1,6})\s+(.*?)\s*#*$/))) {
           flushPara(); flushList();
           const tag = "h" + (Math.min(m[1].length, 3) + 2);
-          html += `<${tag}>${mdInline(m[2])}</${tag}>`;
+          const num = m[2].match(/^(\d+)\.(\d+)(?:\s*[-–]\s*(?:\d+\.)?(\d+))?/);
+          html += `<${tag}${num ? ` data-sec="${num[1]}.${num[2]}-${num[3] || num[2]}"` : ""}>${mdInline(m[2])}</${tag}>`;
           return;
         }
         if ((m = t.match(/^[-*+]\s+(.*)$/))) {
@@ -2270,12 +2398,24 @@
       return folder.guideRead ? `✓ Read${typeof folder.guideRead === "string" ? " " + escaped(fmtDate(folder.guideRead)) : ""}` : "Not read yet";
     }
 
-    function openGuide(folderId) {
+    // The guide heading that covers a "N.M ..." section (headings like "## 2.1-2.3 ..."), or null.
+    function guideHeadingFor(folder, section) {
+      const m = String(section || "").match(/^(\d+)\.(\d+)/);
+      if (!m || !folder || !cleanStr(folder.summary)) return null;
+      const ch = Number(m[1]), sec = Number(m[2]);
+      const heads = cleanStr(folder.summary).split(/\r?\n/).map((l) => l.trim().match(/^#{1,6}\s+(\d+)\.(\d+)(?:\s*[-–]\s*(?:\d+\.)?(\d+))?/)).filter(Boolean);
+      const h = heads.find((x) => Number(x[1]) === ch && Number(x[2]) <= sec && sec <= Number(x[3] || x[2]));
+      return h ? `${h[1]}.${h[2]}-${h[3] || h[2]}` : null;
+    }
+    function openGuide(folderId, section) {
       if (modal.open) modal.close();
       view.folderId = folderId;
       view.page = "guide";
       render();
       window.scrollTo(0, 0);
+      const key = section ? guideHeadingFor(folderById(folderId), section) : null;
+      const el = key && document.querySelector(`#guideArticle [data-sec="${key}"]`);
+      if (el) { el.classList.add("flash-target"); el.scrollIntoView({ block: "start" }); window.scrollBy(0, -70); }
     }
 
     // Comfortable long-read screen for the study guide.
@@ -2678,6 +2818,11 @@
         }
         lines.push(`  Ch ${String(r.chapter).padEnd(2)}  due ${day} ${r.due}  ${status}`);
       });
+      const weak = [];
+      st.items.forEach((r) => { if (r.folder) weakSections(r.folder.id, 3).forEach((s) => weak.push({ ch: r.chapter, s })); });
+      weak.sort((a, b) => b.s.rate - a.s.rate || b.s.miss - a.s.miss);
+      lines.push(`Weak spots (last ${ATT_RECENT} tries per card; ${WEAK_MIN_ATTEMPTS}+ tries, ${pctOf(WEAK_RATE)}%+ missed):${weak.length ? "" : " none yet"}`);
+      weak.slice(0, 8).forEach((w) => lines.push(`  Ch ${String(w.ch).padEnd(2)}  ${w.s.section} · ${pctOf(w.s.rate)}% missed (${w.s.miss} of ${w.s.n} recent tries, ${w.s.cards.length} cards)`));
       if (plan.history && plan.history.length) {
         const h = plan.history[plan.history.length - 1];
         lines.push(`Pace changes: ${plan.history.length} (last: ${h.pace} -> ${plan.pace} on ${h.replacedOn})`);
@@ -2739,6 +2884,12 @@
 
     function buildStudyRound(folderId, mode, avoid) {
       avoid = avoid || [];
+      if (mode === "review") {
+        // Weak-spot review: every card in the section (mastered too), recently missed first.
+        const key = (c) => [-recentMisses(c.id), -(Number(prog(c.id).missedAt) || 0), prog(c.id).retired ? 1 : 0];
+        const cmp = (a, b) => { const x = key(a), y = key(b); for (let i = 0; i < x.length; i++) if (x[i] !== y[i]) return x[i] - y[i]; return 0; };
+        return shuffle(studyPool(folderId, mode)).sort(cmp).slice(0, ROUND_SIZE).map((c) => c.id);
+      }
       const active = activeStudy(folderId, mode);
       const missed = recentMissedIds(active);
       const rest = shuffle(active.filter((c) => !missed.includes(c.id)));
@@ -2751,7 +2902,8 @@
       const ids = buildStudyRound(view.folderId, mode, next ? view.queue : []);
       if (!ids.length) return;
       view.studyMode = mode;
-      if (!next) {
+      if (!next && mode === "review") { view.studyTargets = []; view.studySeen = []; }
+      else if (!next) {
         // Track a "full pass" over the concept (regular) cards that were still active at the start.
         view.studyTargets = activeStudy(view.folderId, mode).filter((c) => !isScenario(c)).map((c) => c.id);
         view.studySeen = [];
@@ -2937,9 +3089,9 @@
       const left = activeStudy(view.folderId, mode).length;
       const retired = all.length - left;
       const pendingScenario = view.studyPicked !== null && view.studyPicked !== undefined;
-      headerSub.textContent = folder ? `${folder.name} · ${MODE_LABEL[mode]}` : "Study";
+      headerSub.textContent = folder ? `${folder.name} · ${MODE_LABEL[mode]}${mode === "review" ? ": " + view.reviewSection : ""}` : "Study";
       if (view.queue.length && view.index >= view.queue.length && !pendingScenario) { renderStudyRoundSummary(); return; }
-      const studyDone = (!view.queue.length || left === 0) && !pendingScenario;
+      const studyDone = (!view.queue.length || (left === 0 && mode !== "review")) && !pendingScenario;
       headerActions.innerHTML = `
         <button class="secondary" id="exitStudy">${studyDone ? "Back to folder" : "Back to folder"}</button>
         <button class="secondary" id="resetStudy">Reset progress</button>
@@ -3141,6 +3293,8 @@
           view.picked = i;
           view.asked += 1;
           const correct = view.choices[i].correct;
+          recordAttempt(card.id, !!correct);
+          save();
           if (correct) {
             view.score += 1;
             view.roundScore = (view.roundScore || 0) + 1;
@@ -3264,6 +3418,8 @@
       document.getElementById("bossNext").onclick = () => {
         if (b.sel === null) return;
         b.answers.push({ id: card.id, choices: b.choices, picked: b.sel, ok: !!b.choices[b.sel].correct });
+        recordAttempt(card.id, !!b.choices[b.sel].correct);
+        save();
         b.index += 1;
         b.sel = null;
         if (b.index >= b.ids.length) return finishBoss();
@@ -3484,6 +3640,7 @@
       }
       if (!view.roundResults) view.roundResults = {};
       view.roundResults[card.id] = correct ? 1 : 0;
+      recordAttempt(card.id, correct);
       save();
     }
 
@@ -3535,7 +3692,7 @@
     function skipRetiredInRound() {
       const pending = view.studyPicked !== null && view.studyPicked !== undefined;
       if (pending && view.index < view.queue.length) return;
-      while (view.index < view.queue.length && (!state.cards.some((c) => c.id === view.queue[view.index]) || (prog(view.queue[view.index]).retired && !(view.queue[view.index] in (view.roundResults || {}))))) view.index += 1;
+      while (view.index < view.queue.length && (!state.cards.some((c) => c.id === view.queue[view.index]) || (view.studyMode !== "review" && prog(view.queue[view.index]).retired && !(view.queue[view.index] in (view.roundResults || {}))))) view.index += 1;
       view.roundPos = Math.min(view.index + 1, view.queue.length);
     }
     function renderStudyRoundSummary() {
@@ -3545,15 +3702,17 @@
       const res = view.roundResults || {}, right = Object.values(res).filter((v) => v).length;
       const total = view.roundTotal || view.queue.length;
       const noun = mode === "concept" ? "concept cards" : mode === "scenario" ? "scenarios" : "cards";
+      const rv = mode === "review" ? sectionStats(view.folderId).find((s) => s.section === view.reviewSection) : null;
       headerActions.innerHTML = `<button class="secondary" id="exitStudy">Back to chapter</button>`;
       app.innerHTML = `
         <div class="empty card round-summary" id="roundSummary">
           <h2>Round ${view.roundNo || 1} complete</h2>
           <div class="round-score" id="roundScore">${right} / ${total}</div>
+          ${rv ? `<p id="reviewState">${escaped(rv.section)}: ${rv.weak ? `still a weak spot, ${pctOf(rv.rate)}% of recent tries missed` : `no longer flagged ✓ (${pctOf(rv.rate)}% of recent tries missed)`}</p>` : ""}
           <p id="roundLeft">${left ? `<strong>${left}</strong> ${noun} left to master` : `All ${noun} mastered 🎉`} · ${all.length - left} of ${all.length} mastered</p>
           <div class="progress-bar" style="margin:8px auto 0;max-width:320px"><span style="width:${all.length ? Math.round(((all.length - left) / all.length) * 100) : 0}%"></span></div>
           <div class="row" style="justify-content:center;margin-top:14px">
-            ${left ? `<button class="gold" id="nextRound">Next ${Math.min(ROUND_SIZE, left)}</button>` : `<button class="gold" id="resetDone">Reset and study again</button>`}
+            ${mode === "review" ? `<button class="gold" id="nextRound">Review again</button>` : left ? `<button class="gold" id="nextRound">Next ${Math.min(ROUND_SIZE, left)}</button>` : `<button class="gold" id="resetDone">Reset and study again</button>`}
             <button class="secondary" id="backChapter">Back to chapter</button>
           </div>
         </div>`;

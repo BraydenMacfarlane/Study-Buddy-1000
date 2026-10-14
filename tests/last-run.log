@@ -227,7 +227,7 @@
   ✓ v1: matching game completes on Ch 2
   ✓ previous ch01 build: 77 cards
   ✓ ch01 updated in place: one folder, 84 cards, no duplicates
-  ✓ progress from the previous ch01 version kept (11 cards with progress)
+  ✓ progress from the previous ch01 version kept (10 cards with progress)
   ✓ card content, notes and study guide updated; folder stats kept
   ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management, C202 Ch 9: Base Compensation, C202 Ch 10: Incentives, C202 Ch 11: Benefits, C202 Ch 12: Creating a Healthy Work Environment, C202 Ch 13: Creating Positive Employee-Management Relations, C202 Ch 14: Managing Engagement and Turnover (2303 new, 77 updated cards)
 
@@ -247,8 +247,8 @@
   ✓ gist is secret with the fixed description
   ✓ gist has study-buddy-sync.json and c202-plan.txt
   ✓ Sync ID shown on the Sync screen matches the gist id
-  ✓ payload carries device A progress (5 studied cards)
-  ✓ payload is compact (14.1 KB) with no bundled card text or study guides
+  ✓ payload carries device A progress (4 studied cards)
+  ✓ payload is compact (14.4 KB) with no bundled card text or study guides
   ✓ token is never written to the gist
   ✓ payload has a 14-chapter progress summary for the helper
   ✓ app fine after connect
@@ -341,7 +341,7 @@
   ✓ one click: signed in as brayden@example.com and synced
   ✓ users/{uid} doc holds the progress (same payload format as the gist)
   ✓ shares/{id} mirrors the C202 plan text for Study Buddy
-  ✓ Sync screen shows the plan link: fs:study-buddy-1000/40f6cecdef2671ca215983c16576dc2b
+  ✓ Sync screen shows the plan link: fs:study-buddy-1000/d26f678c5a76bd4155a4141f571a87a5
   ✓ no Google token stored in Firestore
   ✓ phone gets the desktop progress after one tap
   ✓ phone reuses the same plan link
@@ -400,7 +400,7 @@
   ✓ "None/All of the above"-style choices stay last (and keep the right answer) while the rest shuffle
   ✓ plain "Both …" / "Neither" answers shuffle normally; only "… of the above/these" pins
   ✓ an answered scenario keeps its shown order through Save & leave and reload
-  ✓ scenario study shows shuffled orders (8 of 8 not in authored order)
+  ✓ scenario study shows shuffled orders (6 of 8 not in authored order)
   ✓ the highlighted correct choice and the "Best answer" feedback always match the card
   ✓ an unanswered scenario keeps its shown order on resume
   ✓ quiz: a resumed question shows the same answer order
@@ -411,8 +411,41 @@
   ✓ an old answered scenario save resumes in its original order with the right answer highlighted
   ✓ app fine
 
+[19] Weak spots: attempts per card, per-section aggregation, review rounds, sync, export, plan text
+  ✓ backfill from old progress: streak -> recent rights, missedAt -> one miss, timestamp 0 [[2,0,0,"11"],[0,1,0,"0"],[1,0,0,"1"],null]
+  ✓ existing progress is untouched by the backfill
+  ✓ section key: first "Read more" section, else General
+  ✓ every bundled C202 card has a usable section (2380 cards, 0 fall back to General)
+  ✓ concept study records a miss
+  ✓ scenario study records a right answer
+  ✓ multiple choice records attempts
+  ✓ quick quiz records attempts
+  ✓ boss records one attempt per question (101)
+  ✓ practice-missed records attempts
+  ✓ one miss in 6 tries does not flag a section
+  ✓ a section with 4 of 9 recent tries missed is flagged first: [["2.4 Why Is Organizational Culture Important?",4,9]]
+  ✓ a section at 50% missed but only 4 tries stays unflagged (minimum attempts)
+  ✓ folder screen shows the Weak spots panel with miss rate, tries and cards
+  ✓ each weak section has Review this and a study-guide link
+  ✓ study-guide link opens the guide at that section heading
+  ✓ Review this starts a round of 14 from that section only
+  ✓ recently missed cards come first
+  ✓ review shows the round counter and its name
+  ✓ review saves into its own slot
+  ✓ review resumes in its section
+  ✓ review summary says whether the section is still weak
+  ✓ answering right 8 times clears the flag; lifetime misses are kept
+  ✓ home flags only the chapter with a weak section
+  ✓ plan text (c202-plan.txt / share doc) lists weakest sections
+  ✓ share summary carries weak sections per chapter
+  ✓ Export includes attempts
+  ✓ merge: counts keep the max, recent window from the latest attempt
+  ✓ merging again never double counts; payloads from older app versions (no attempts) merge fine
+  ✓ attempts sync to the other device
+  ✓ repeated syncs converge without double counting (2 right, 2 wrong, "0011")
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-377 passed, 0 failed
+408 passed, 0 failed
