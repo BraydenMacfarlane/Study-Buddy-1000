@@ -180,7 +180,7 @@
   ✓ Export backup includes sessions keyed by folder:mode
 
 [10] Real inbox decks in dist/flashcards.html
-  ✓ inbox has c202-ch01 (84 cards), c202-ch02 (101 cards), c202-ch03 (172 cards), c202-ch04 (202 cards), c202-ch05 (150 cards), c202-ch06 (189 cards), c202-ch07 (164 cards), c202-ch08 (191 cards), c202-ch09 (172 cards), c202-ch10 (163 cards), c202-ch11 (200 cards), c202-ch12 (191 cards), c202-ch13 (191 cards), c202-ch14 (210 cards)
+  ✓ inbox has c202-ch01 (84 cards), c202-ch02 (101 cards), c202-ch03 (172 cards), c202-ch04 (202 cards), c202-ch05 (150 cards), c202-ch06 (189 cards), c202-ch07 (164 cards), c202-ch08 (191 cards), c202-ch09 (172 cards), c202-ch10 (163 cards), c202-ch11 (200 cards), c202-ch12 (191 cards), c202-ch13 (191 cards), c202-ch14 (210 cards), c202-q1-misses (113 cards)
   ✓ dist contains nothing from decks/samples
   ✓ fresh: c202-ch01 has 84 cards
   ✓ fresh: c202-ch02 has 101 cards
@@ -227,9 +227,9 @@
   ✓ v1: matching game completes on Ch 2
   ✓ previous ch01 build: 77 cards
   ✓ ch01 updated in place: one folder, 84 cards, no duplicates
-  ✓ progress from the previous ch01 version kept (11 cards with progress)
+  ✓ progress from the previous ch01 version kept (10 cards with progress)
   ✓ card content, notes and study guide updated; folder stats kept
-  ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management, C202 Ch 9: Base Compensation, C202 Ch 10: Incentives, C202 Ch 11: Benefits, C202 Ch 12: Creating a Healthy Work Environment, C202 Ch 13: Creating Positive Employee-Management Relations, C202 Ch 14: Managing Engagement and Turnover (2303 new, 77 updated cards)
+  ✓ toast: New study material: C202 Ch 1: Strategic Human Resource Management, C202 Ch 2: The Role of Human Resource Management in Business, C202 Ch 3: The Legal Context of HRM, C202 Ch 4: Analyzing Work and HR Planning, C202 Ch 5: Sourcing and Recruiting, C202 Ch 6: Selection and Hiring, C202 Ch 7: Training and Development, C202 Ch 8: Performance Management, C202 Ch 9: Base Compensation, C202 Ch 10: Incentives, C202 Ch 11: Benefits, C202 Ch 12: Creating a Healthy Work Environment, C202 Ch 13: Creating Positive Employee-Management Relations, C202 Ch 14: Managing Engagement and Turnover, C202 Q1 Quiz Misses (2416 new, 77 updated cards)
 
 [12] Study counter keeps the shuffle total fixed
   ✓ starts at Card 1 of 20
@@ -248,7 +248,7 @@
   ✓ gist has study-buddy-sync.json and c202-plan.txt
   ✓ Sync ID shown on the Sync screen matches the gist id
   ✓ payload carries device A progress (5 studied cards)
-  ✓ payload is compact (14.4 KB) with no bundled card text or study guides
+  ✓ payload is compact (17.9 KB) with no bundled card text or study guides
   ✓ token is never written to the gist
   ✓ payload has a 14-chapter progress summary for the helper
   ✓ app fine after connect
@@ -341,7 +341,7 @@
   ✓ one click: signed in as brayden@example.com and synced
   ✓ users/{uid} doc holds the progress (same payload format as the gist)
   ✓ shares/{id} mirrors the C202 plan text for Study Buddy
-  ✓ Sync screen shows the plan link: fs:study-buddy-1000/bb775178e1855433e648945091663b6b
+  ✓ Sync screen shows the plan link: fs:study-buddy-1000/b1c5e99c7fdd8fd79b5a45fa3c5bcd8f
   ✓ no Google token stored in Firestore
   ✓ phone gets the desktop progress after one tap
   ✓ phone reuses the same plan link
@@ -395,12 +395,12 @@
   ✓ an old device's synced quiz save resumes as rounds
 
 [18] Answer order is shuffled per presentation; "of the above" stays last; resume keeps the order
-  ✓ scenario choices (quiz / quick / boss / practice) are shuffled and the correct one is remapped (114 orders over 10 cards)
+  ✓ scenario choices (quiz / quick / boss / practice) are shuffled and the correct one is remapped (108 orders over 10 cards)
   ✓ concept-card choices stay shuffled, correct answer lands in 4 different positions
   ✓ "None/All of the above"-style choices stay last (and keep the right answer) while the rest shuffle
   ✓ plain "Both …" / "Neither" answers shuffle normally; only "… of the above/these" pins
   ✓ an answered scenario keeps its shown order through Save & leave and reload
-  ✓ scenario study shows shuffled orders (7 of 8 not in authored order)
+  ✓ scenario study shows shuffled orders (8 of 8 not in authored order)
   ✓ the highlighted correct choice and the "Best answer" feedback always match the card
   ✓ an unanswered scenario keeps its shown order on resume
   ✓ quiz: a resumed question shows the same answer order
@@ -415,7 +415,7 @@
   ✓ backfill from old progress: streak -> recent rights, missedAt -> one miss, timestamp 0 [[2,0,0,"11"],[0,1,0,"0"],[1,0,0,"1"],null]
   ✓ existing progress is untouched by the backfill
   ✓ section key: first "Read more" section, else General
-  ✓ every bundled C202 card has a usable section (2380 cards, 0 fall back to General)
+  ✓ every bundled C202 card has a usable section (2493 cards, 0 fall back to General)
   ✓ concept study records a miss
   ✓ scenario study records a right answer
   ✓ multiple choice records attempts
@@ -484,8 +484,29 @@
   ✓ app fine
   ✓ phone: (n) labels hidden by media query (aria-keyshortcuts kept)
 
+[21] C202 Q1 Quiz Misses review deck, quiz-flagged weak spots
+  ✓ bundled deck "C202 Q1 Quiz Misses" (course C202, no chapter order, sorted after Ch 4)
+  ✓ 113 cards: 92 copies of the matching chapter cards (copyOf -> original) + 21 new scenarios
+  ✓ all 7 sections covered, 3 new 4-choice scenarios each with an explanation
+  ✓ no gating, and the plan still has 14 chapters
+  ✓ the 7 sections are seeded as quiz flags
+  ✓ existing progress and real attempt stats are untouched
+  ✓ Home shows the review deck right after Ch 4
+  ✓ boss count still says "of 14"
+  ✓ Home flags Ch 1, 2, 4 and the review deck, not Ch 3
+  ✓ review panel lists the 7 flagged sections in quiz order: 1.13 The Role of HRM in Executing Business Strategy | ⚑ flagged from Q1 quarter quiz (Ch 1-4) (Q3) · 0 of 5 correct to clear
+  ✓ each has Review this
+  ✓ a miss counts once on the copy and once on its chapter original; the flag stays at 0
+  ✓ 5 correct answers clear the flag
+  ✓ cleared in the chapter too; Ch 1 keeps its other flag
+  ✓ a cleared flag is not re-seeded on reload
+  ✓ plan text lists the quiz flags; share summary keeps 14 chapters and lists the review deck apart
+  ✓ flags merge: progress toward clearing keeps the max, never double counts
+  ✓ app fine
+
 [11] Screenshots
   ✓ screenshots written to /workspace/flashcards/screens
   ✓ no console/page errors
 
-446 passed, 0 failed
+464 passed, 0 failed
+EXIT 0

@@ -89,4 +89,10 @@ for course, chapters in sorted(courses.items()):
         if c.get("quiz") is not None: bits.append(f"quiz best {c['quiz']}%")
         label = f"Ch {c['ch']}" if c.get("ch") is not None else ""
         print(f"  {label:<6}{c.get('name', '')}: " + " · ".join(bits))
+        for w in c.get("weak") or []:
+            extra = f"flagged from {w['flagged']}, {w.get('toClear', 0)} correct to clear" if w.get("flagged") else f"{w.get('missRate', 0)}% of {w.get('recent', 0)} recent tries missed"
+            print(f"        weak spot: {w.get('section', '')} ({extra})")
+for course, decks in sorted((summary.get("reviews") or {}).items()):
+    for c in decks:
+        print(f"{course} review deck: {c.get('name', '')}: {c.get('mastered', 0)}/{c.get('cards', 0)} mastered" + (f" · quiz best {c['quiz']}%" if c.get("quiz") is not None else ""))
 PY

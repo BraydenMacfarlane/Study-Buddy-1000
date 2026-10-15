@@ -233,6 +233,7 @@
     .weak-bar { height: 5px; border-radius: 3px; background: rgba(0,0,0,.08); margin-top: 6px; overflow: hidden; }
     .weak-bar span { display: block; height: 100%; background: #d9714f; }
     .weak-actions { gap: 10px; align-items: center; }
+    .weak-flag { color: #8a5a00; font-size: 13px; font-weight: 600; margin: 2px 0; }
     .weak-badge { display: inline-block; margin-top: 8px; padding: 3px 9px; border-radius: 999px; background: #fbe6df; color: #9c3b25; font-size: 13px; font-weight: 600; }
     .flash-target { background: #fff3c4; border-radius: 4px; }
     .kn { display: none; margin-left: 6px; font-size: 0.8em; font-weight: 600; opacity: .6; font-variant-numeric: tabular-nums; }
@@ -535,6 +536,7 @@
       });
       migrateStudySlots(out.sessions);
       if (!out.attempts || typeof out.attempts !== "object" || Array.isArray(out.attempts)) out.attempts = backfillAttempts(out);
+      if (!out.flags || typeof out.flags !== "object" || Array.isArray(out.flags)) out.flags = {};
       Object.keys(out.attempts).forEach((k) => { const a = cleanAttempt(out.attempts[k]); if (a) out.attempts[k] = a; else delete out.attempts[k]; });
       out.schema = 2;
       return out;
@@ -572,9 +574,42 @@
        "Read more: <section>" (first section if several), else "General". Weak spots use only the
        recent window, so improving clears a flag. */
     const ATT_RECENT = 8, WEAK_MIN_ATTEMPTS = 6, WEAK_MIN_MISSES = 2, WEAK_RATE = 0.3;
+    /* Quiz flags: state.flags["<course>|<section>"] = {src, q, topic, t, got, need}. A flagged section
+       counts as a weak spot until `need` correct answers from it (a miss takes one back). Kept apart
+       from attempts, so real attempt stats stay untouched. Seeded once per key from deck "flags". */
+    const FLAG_NEED = 5;
+    function flagKey(course, section) { return `${course || ""}|${section}`; }
+    function flagActive(fl) { return !!fl && (Number(fl.got) || 0) < (Number(fl.need) || FLAG_NEED); }
+    function seedDeckFlags() {
+      if (!state.flags) state.flags = {};
+      let added = false;
+      state.folders.forEach((f) => (f.deckFlags || []).forEach((x) => {
+        const k = flagKey(f.course, x.section);
+        if (!state.flags[k]) { state.flags[k] = { src: x.src || f.name, q: x.q || "", topic: x.topic || "", t: Date.now(), got: 0, need: FLAG_NEED }; added = true; }
+      }));
+      return added;
+    }
+    function mergeFlag(a, b) {
+      if (!a || !b) return a || b;
+      return Object.assign({}, a, b, { t: Math.min(Number(a.t) || 0, Number(b.t) || 0) || Number(a.t) || Number(b.t) || 0, got: Math.max(Number(a.got) || 0, Number(b.got) || 0), need: Math.max(Number(a.need) || FLAG_NEED, Number(b.need) || FLAG_NEED) });
+    }
+    function noteFlag(card, ok) {
+      const f = folderById(card.folderId);
+      const fl = state.flags && state.flags[flagKey(f && f.course, cardSection(card))];
+      if (!flagActive(fl)) return;
+      fl.got = ok ? (Number(fl.got) || 0) + 1 : Math.max(0, (Number(fl.got) || 0) - 1);
+      if (!flagActive(fl)) { fl.cleared = Date.now(); try { toast(`${cardSection(card)}: quiz flag cleared ✓`); } catch {} }
+    }
     function recordAttempt(id, ok) {
       if (!id) return;
       if (!state.attempts) state.attempts = {};
+      const card = state.cards.find((c) => c.id === id);
+      if (card) noteFlag(card, ok);
+      // A review-deck copy also counts for its original, so the chapter's weak spots see it.
+      if (card && card.copyOf && card.copyOf !== id && state.cards.some((c) => c.id === card.copyOf)) bumpAttempt(card.copyOf, ok);
+      bumpAttempt(id, ok);
+    }
+    function bumpAttempt(id, ok) {
       const a = Array.isArray(state.attempts[id]) ? state.attempts[id] : [0, 0, 0, ""];
       if (ok) a[0] = (Number(a[0]) || 0) + 1; else a[1] = (Number(a[1]) || 0) + 1;
       a[2] = Date.now();
@@ -614,7 +649,7 @@
       return s || cleanStr(c && c.section) || "General";
     }
     function sectionStats(folderId) {
-      const by = {};
+      const by = {}, fo = folderById(folderId), flags = state.flags || {};
       cardsIn(folderId).forEach((c) => {
         const k = cardSection(c);
         const s = by[k] || (by[k] = { section: k, cards: [], n: 0, miss: 0, right: 0, wrong: 0, last: 0 });
@@ -624,11 +659,21 @@
         s.n += a[3].length; s.miss += (a[3].match(/0/g) || []).length;
         s.right += a[0]; s.wrong += a[1]; s.last = Math.max(s.last, a[2]);
       });
-      return Object.values(by).map((s) => Object.assign(s, { rate: s.n ? s.miss / s.n : 0, weak: s.n >= WEAK_MIN_ATTEMPTS && s.miss >= WEAK_MIN_MISSES && s.miss / s.n >= WEAK_RATE }));
+      return Object.values(by).map((s) => {
+        const fl = flags[flagKey(fo && fo.course, s.section)];
+        const flag = flagActive(fl) ? fl : null;
+        return Object.assign(s, { rate: s.n ? s.miss / s.n : 0, flag, weak: !!flag || (s.n >= WEAK_MIN_ATTEMPTS && s.miss >= WEAK_MIN_MISSES && s.miss / s.n >= WEAK_RATE) });
+      });
     }
+    // All quiz-flagged sections (in quiz-question order), then the worst n by recent miss rate.
     function weakSections(folderId, n = 3) {
-      return sectionStats(folderId).filter((s) => s.weak).sort((a, b) => b.rate - a.rate || b.miss - a.miss || a.section.localeCompare(b.section)).slice(0, n);
+      const all = sectionStats(folderId).filter((s) => s.weak);
+      const qn = (s) => Number(String(s.flag.q || "").replace(/\D/g, "")) || 999;
+      const flagged = all.filter((s) => s.flag).sort((a, b) => qn(a) - qn(b) || a.section.localeCompare(b.section, undefined, { numeric: true }));
+      const rest = all.filter((s) => !s.flag).sort((a, b) => b.rate - a.rate || b.miss - a.miss || a.section.localeCompare(b.section)).slice(0, n);
+      return flagged.concat(rest);
     }
+    function flagText(fl) { return `flagged from ${fl.src || "a quiz"}${fl.q ? ` (${fl.q})` : ""} · ${Number(fl.got) || 0} of ${Number(fl.need) || FLAG_NEED} correct to clear`; }
     function recentMisses(id) { const a = cleanAttempt((state.attempts || {})[id]); return a ? (a[3].match(/0/g) || []).length : 0; }
     function pctOf(x) { return Math.round(x * 100); }
     function recentMissedIds(cards, n = ROUND_MISSED) {
@@ -684,7 +729,8 @@
         cleanList(c.points || c.protections), c.type === "scenario" ? "scenario" : "",
         c.type === "scenario" ? cleanList(c.choices) : [], c.type === "scenario" ? Number(c.correct) : null,
         c.type === "scenario" ? cleanStr(c.explanation) : "",
-        c.type === "scenario" ? [] : cleanDistractors(c.distractors, c.answer || c.purpose)
+        c.type === "scenario" ? [] : cleanDistractors(c.distractors, c.answer || c.purpose),
+        cleanStr(c.copyOf)
       ]);
     }
     // Optional author-written wrong answers for a concept card. Lenient: drops non-strings, blanks,
@@ -718,6 +764,8 @@
         answer: cleanStr(raw.answer),
         points: cleanList(raw.points)
       };
+      // copyOf: a review-deck copy of another bundled card; answers also count for the original.
+      if (cleanStr(raw.copyOf)) card.copyOf = cleanStr(raw.copyOf);
       if (raw.type === "scenario") {
         const choices = cleanList(raw.choices);
         if (choices.length < 2) return { error: "is a scenario with fewer than 2 choices" };
@@ -738,6 +786,7 @@
 
     function applyCardContent(target, src) {
       ["front", "subtitle", "note", "answer", "points"].forEach((k) => { target[k] = src[k]; });
+      if (src.copyOf) target.copyOf = src.copyOf; else delete target.copyOf;
       if (src.type === "scenario") {
         target.type = "scenario";
         target.choices = src.choices.slice();
@@ -777,6 +826,10 @@
       if (deck.order !== undefined && deck.order !== null && deck.order !== "" && Number.isFinite(Number(deck.order))) folder.order = Number(deck.order);
       if (typeof deck.summary === "string" && deck.summary.trim()) folder.summary = deck.summary.trim();
       if (typeof deck.source === "string" && deck.source.trim()) folder.source = deck.source.trim();
+      // Review decks: sortAfter places an unordered (ungated, unplanned) deck after that chapter on Home;
+      // flags seed weak-spot markers (see seedDeckFlags).
+      if (Number.isFinite(Number(deck.sortAfter)) && deck.sortAfter !== null && deck.sortAfter !== "") folder.sortAfter = Number(deck.sortAfter); else delete folder.sortAfter;
+      if (Array.isArray(deck.flags) && deck.flags.length) folder.deckFlags = deck.flags.filter((x) => x && cleanStr(x.section)).map((x) => ({ section: cleanStr(x.section), q: cleanStr(x.q), topic: cleanStr(x.topic), src: cleanStr(x.src) })); else delete folder.deckFlags;
       const deckKey = deckId || slugify(name);
       const seen = new Set();
       deck.cards.forEach((raw, i) => {
@@ -952,7 +1005,7 @@
     const SYNC_API = "https://api.github.com";
     const SYNC_DEBOUNCE_MS = 6000;
     const TOMB_MAX_AGE = 400 * 86400000;
-    const DECK_FIELDS = ["deckFolderName", "course", "order", "summary", "source"];
+    const DECK_FIELDS = ["deckFolderName", "course", "order", "summary", "source", "sortAfter", "deckFlags"];
     const BUNDLED_DECK_IDS = new Set();
     const BUNDLED_CARD_IDS = new Set();
     (Array.isArray(BUNDLED_DECKS) ? BUNDLED_DECKS : []).forEach((d) => {
@@ -984,6 +1037,7 @@
       Object.keys(state.plans || {}).forEach((k) => { fp["pl:" + k] = hashString(JSON.stringify(state.plans[k])); });
       state.folders.forEach((f) => { fp["f:" + f.id] = hashString(JSON.stringify(folderSyncObj(f))); });
       fp["a"] = hashString(JSON.stringify(state.attempts || {}));
+      fp["q"] = hashString(JSON.stringify(state.flags || {}));
       state.cards.forEach((c) => { fp["c:" + c.id] = isBundledCard(c) ? "b:" + c.folderId : hashString(JSON.stringify(cardSyncObj(c))); });
       return fp;
     }
@@ -1048,32 +1102,34 @@
       Object.keys(state.plans || {}).forEach((k) => { pl[k] = [t("pl:" + k), state.plans[k]]; });
       state.folders.forEach((fo) => { f[fo.id] = [t("f:" + fo.id), folderSyncObj(fo)]; });
       Object.keys(SYNC.x).forEach((k) => { if (SYNC.x[k] >= cutoff) x[k] = SYNC.x[k]; });
-      return { v: 1, app: "Study-Buddy-1000", p: sortedObj(p), s: sortedObj(s), pl: sortedObj(pl), f: sortedObj(f), c: sortedObj(c), x: sortedObj(x), a: sortedObj(a) };
+      return { v: 1, app: "Study-Buddy-1000", p: sortedObj(p), s: sortedObj(s), pl: sortedObj(pl), f: sortedObj(f), c: sortedObj(c), x: sortedObj(x), a: sortedObj(a), q: sortedObj(state.flags || {}) };
     }
-    function payloadCore(pl) { return pl ? JSON.stringify({ p: pl.p, s: pl.s, pl: pl.pl, f: pl.f, c: pl.c, x: pl.x, a: pl.a || {} }) : ""; }
+    function payloadCore(pl) { return pl ? JSON.stringify({ p: pl.p, s: pl.s, pl: pl.pl, f: pl.f, c: pl.c, x: pl.x, a: pl.a || {}, q: pl.q || {} }) : ""; }
 
     function syncSummary() {
-      const courses = {};
+      const courses = {}, reviews = {};
       state.folders.forEach((f) => {
         const cards = cardsIn(f.id);
         const key = f.course || "Other";
-        (courses[key] = courses[key] || []).push({
+        // Review decks (copies of chapter cards) are listed apart so course totals don't double count.
+        const bucket = !hasOrder(f) && (f.deckFlags || Number.isFinite(f.sortAfter)) ? reviews : courses;
+        (bucket[key] = bucket[key] || []).push({
           ch: hasOrder(f) ? f.order : null, name: f.name, cards: cards.length,
           mastered: cards.filter((c) => state.progress[c.id] && state.progress[c.id].retired).length,
           boss: f.bestBoss ? Math.round(f.bestBoss.pct) : null, passed: !!(f.bestBoss && f.bestBoss.passed),
           guide: f.guideRead ? String(f.guideRead) : (cleanStr(f.summary) ? false : null),
           quiz: typeof f.quizBest === "number" ? f.quizBest : null,
-          weak: weakSections(f.id, 3).map((s) => ({ section: s.section, missRate: pctOf(s.rate), recent: s.n, misses: s.miss, cards: s.cards.length }))
+          weak: weakSections(f.id, 3).map((s) => ({ section: s.section, missRate: pctOf(s.rate), recent: s.n, misses: s.miss, cards: s.cards.length, ...(s.flag ? { flagged: s.flag.src + (s.flag.q ? " " + s.flag.q : ""), toClear: Math.max(0, (Number(s.flag.need) || FLAG_NEED) - (Number(s.flag.got) || 0)) } : {}) }))
         });
       });
       Object.values(courses).forEach((list) => list.sort((a, b) => (a.ch ?? 1e9) - (b.ch ?? 1e9)));
-      return { generated: new Date().toISOString(), courses };
+      return { generated: new Date().toISOString(), courses, ...(Object.keys(reviews).length ? { reviews } : {}) };
     }
 
     // Merge two payloads. Pure: no state access.
     function mergeSyncPayloads(L, R) {
       L = L || {}; R = R || {};
-      const M = { v: 1, app: "Study-Buddy-1000", p: {}, s: {}, pl: {}, f: {}, c: {}, x: {}, a: {} };
+      const M = { v: 1, app: "Study-Buddy-1000", p: {}, s: {}, pl: {}, f: {}, c: {}, x: {}, a: {}, q: {} };
       const keys = (a, b) => Array.from(new Set(Object.keys(a || {}).concat(Object.keys(b || {})))).sort();
       ["x"].forEach(() => keys(L.x, R.x).forEach((k) => { M.x[k] = Math.max(Number((L.x || {})[k]) || 0, Number((R.x || {})[k]) || 0); }));
       keys(L.p, R.p).forEach((k) => {
@@ -1083,6 +1139,7 @@
         const bp = betterProgress({ streak: a[0], retired: !!a[1] }, { streak: b[0], retired: !!b[1] });
         M.p[k] = [Number(bp.streak) || 0, bp.retired ? 1 : 0, a[2] || 0];
       });
+      keys(L.q, R.q).forEach((k) => { const m = mergeFlag((L.q || {})[k], (R.q || {})[k]); if (m) M.q[k] = m; });
       keys(L.a, R.a).forEach((k) => { const m = mergeAttempt((L.a || {})[k], (R.a || {})[k]); if (m) M.a[k] = m; });
       const tieJson = (a, b) => (JSON.stringify(a[1]) >= JSON.stringify(b[1]) ? a : b);
       const pick = (sec, tie) => keys(L[sec], R[sec]).forEach((k) => {
@@ -1163,6 +1220,8 @@
       }
       const cardIds = new Set(state.cards.map((c) => c.id));
       Object.keys(M.p).forEach((cid) => { if (cardIds.has(cid)) state.progress[cid] = { ...(state.progress[cid] || {}), streak: Number(M.p[cid][0]) || 0, retired: !!M.p[cid][1] || (Number(M.p[cid][0]) || 0) >= RETIRE_AFTER }; });
+      if (!state.flags) state.flags = {};
+      Object.keys(M.q || {}).forEach((k) => { state.flags[k] = mergeFlag(state.flags[k], M.q[k]); });
       if (!state.attempts) state.attempts = {};
       Object.keys(M.a || {}).forEach((cid) => { if (cardIds.has(cid)) { const m = mergeAttempt(state.attempts[cid], M.a[cid]); if (m) state.attempts[cid] = m; } });
       ["s", "pl"].forEach((sec) => {
@@ -1710,6 +1769,7 @@
     let state = load();
     let bundledSummary = null;
     try { bundledSummary = applyBundledDecks(); } catch (err) { console.warn("Bundled decks could not be applied", err); }
+    try { if (seedDeckFlags()) save(); } catch (err) { console.warn("Quiz flags could not be seeded", err); }
     let view = { page: "home", folderId: null, queue: [], index: 0, flipped: false, choices: [], picked: null, score: 0, asked: 0, run: 0, missed: [], quizTotal: 0, quizSource: [] };
 
     const app = document.getElementById("app");
@@ -2165,8 +2225,8 @@
 
     function weakPanelHtml(folder) {
       const stats = sectionStats(folder.id), tracked = stats.filter((s) => s.n);
-      if (!tracked.length) return "";
       const weak = weakSections(folder.id, 3);
+      if (!tracked.length && !weak.length) return "";
       const tries = tracked.reduce((n, s) => n + s.n, 0);
       const rows = weak.map((s) => {
         const g = guideHeadingFor(folder, s.section);
@@ -2174,8 +2234,9 @@
           <div class="weak-row">
             <div class="weak-info">
               <strong>${escaped(s.section)}</strong>
-              <div class="muted"><span class="weak-rate">${pctOf(s.rate)}% missed</span> · ${s.miss} of ${s.n} recent tries · ${s.cards.length} card${s.cards.length === 1 ? "" : "s"}</div>
-              <div class="weak-bar"><span style="width:${pctOf(s.rate)}%"></span></div>
+              ${s.flag ? `<div class="weak-flag">⚑ ${escaped(flagText(s.flag))}</div>` : ""}
+              <div class="muted">${s.n ? `<span class="weak-rate">${pctOf(s.rate)}% missed</span> · ${s.miss} of ${s.n} recent tries` : "no tries yet"} · ${s.cards.length} card${s.cards.length === 1 ? "" : "s"}</div>
+              <div class="weak-bar"><span style="width:${s.flag && !s.n ? 100 : pctOf(s.rate)}%"></span></div>
             </div>
             <div class="row weak-actions">
               <button class="gold" data-review="${escaped(s.section)}">Review this</button>
@@ -2186,7 +2247,7 @@
       return `
         <div class="card weak-panel" id="weakPanel" style="margin-top:12px">
           <h3 style="margin:0 0 4px">${weak.length ? "⚠ Weak spots" : "Weak spots"}</h3>
-          <div class="muted" style="font-size:13px">Based on your last ${ATT_RECENT} tries per card across study, scenarios and quizzes. A section is flagged after ${WEAK_MIN_ATTEMPTS}+ tries with ${pctOf(WEAK_RATE)}%+ missed.</div>
+          <div class="muted" style="font-size:13px">Based on your last ${ATT_RECENT} tries per card across study, scenarios and quizzes. A section is flagged after ${WEAK_MIN_ATTEMPTS}+ tries with ${pctOf(WEAK_RATE)}%+ missed, or by a real quiz miss until you get ${FLAG_NEED} right.</div>
           ${weak.length ? rows : `<div class="ok-text" style="margin-top:8px">No weak spots right now ✓ <span class="muted">(${tries} recent tries across ${tracked.length} section${tracked.length === 1 ? "" : "s"})</span></div>`}
         </div>`;
     }
@@ -2226,13 +2287,15 @@
       const courses = [];
       state.folders.forEach((f) => { if (f.course && !courses.includes(f.course)) courses.push(f.course); });
       courses.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
-      const byOrder = (a, b) => (hasOrder(a) ? a.order : Infinity) - (hasOrder(b) ? b.order : Infinity);
+      const sortKey = (f) => hasOrder(f) ? f.order : Number.isFinite(f.sortAfter) ? f.sortAfter + 0.5 : Infinity;
+      const byOrder = (a, b) => sortKey(a) - sortKey(b);
       let html = courses.map((course) => {
         const fs = state.folders.filter((f) => f.course === course).slice().sort(byOrder);
-        const passed = fs.filter((f) => f.bestBoss && f.bestBoss.passed).length;
+        const gated = fs.some(hasOrder) ? fs.filter(hasOrder) : fs; // review decks don't count as chapters
+        const passed = gated.filter((f) => f.bestBoss && f.bestBoss.passed).length;
         return `
           <section class="course">
-            <h2 class="course-head">${escaped(course)} <span class="muted">${passed} of ${fs.length} boss quizzes passed</span></h2>
+            <h2 class="course-head">${escaped(course)} <span class="muted">${passed} of ${gated.length} boss quizzes passed</span></h2>
             <div class="grid">${fs.map(folderCardHtml).join("")}</div>
           </section>`;
       }).join("");
@@ -2939,7 +3002,8 @@
       st.items.forEach((r) => { if (r.folder) weakSections(r.folder.id, 3).forEach((s) => weak.push({ ch: r.chapter, s })); });
       weak.sort((a, b) => b.s.rate - a.s.rate || b.s.miss - a.s.miss);
       lines.push(`Weak spots (last ${ATT_RECENT} tries per card; ${WEAK_MIN_ATTEMPTS}+ tries, ${pctOf(WEAK_RATE)}%+ missed):${weak.length ? "" : " none yet"}`);
-      weak.slice(0, 8).forEach((w) => lines.push(`  Ch ${String(w.ch).padEnd(2)}  ${w.s.section} · ${pctOf(w.s.rate)}% missed (${w.s.miss} of ${w.s.n} recent tries, ${w.s.cards.length} cards)`));
+      weak.sort((a, b) => (a.s.flag ? 0 : 1) - (b.s.flag ? 0 : 1));
+      weak.slice(0, 12).forEach((w) => lines.push(`  Ch ${String(w.ch).padEnd(2)}  ${w.s.section} · ${w.s.n ? `${pctOf(w.s.rate)}% missed (${w.s.miss} of ${w.s.n} recent tries, ${w.s.cards.length} cards)` : `no tries yet (${w.s.cards.length} cards)`}${w.s.flag ? ` · ${flagText(w.s.flag)}` : ""}`));
       if (plan.history && plan.history.length) {
         const h = plan.history[plan.history.length - 1];
         lines.push(`Pace changes: ${plan.history.length} (last: ${h.pace} -> ${plan.pace} on ${h.replacedOn})`);
@@ -4043,6 +4107,7 @@
       state = migrate(JSON.parse(JSON.stringify(data)));
       syncRebase(); // a restore merges with synced data; it never deletes things on other devices
       applyBundledDecks();
+      seedDeckFlags();
       save();
       modal.close();
       view.page = "home";

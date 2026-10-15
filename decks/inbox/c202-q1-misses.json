@@ -1,0 +1,1849 @@
+{
+  "id": "c202-q1-misses",
+  "folder": "C202 Q1 Quiz Misses",
+  "course": "C202",
+  "sortAfter": 4,
+  "source": "Built from the C202 Ch 1-4 decks and study guides (Phillips, Human Resource Management, 3rd ed.)",
+  "summary": "# C202 Q1 quarter quiz: review deck\n\nThis deck collects the cards for the seven textbook sections missed on the Ch 1-4 quarter quiz, plus new practice scenarios for each. Progress here is separate from the chapter decks, but every answer also counts toward the weak-spot tracker for the matching chapter section.\n\n- **Q23** Aligning individual and organizational goals: 1.8 Performance Management\n- **Q3** HRM and business strategy: 1.13 The Role of HRM in Executing Business Strategy\n- **Q25** Culture types (consensual): 2.4 Why Is Organizational Culture Important?\n- **Q8** Ethical standards (safety, policy): 2.7 The Role of HRM in Corporate Ethics and Social Responsibility\n- **Q4** Predicting ethical behavior: 2.8 Ethical and Unethical Behavior\n- **Q13** Job analysis outcomes: 4.14 Job Analysis Outcomes\n- **Q38** Organizational structure: 4.19 Organizational Structure\n\nEach section is flagged as a weak spot until you answer 5 questions from it correctly (a miss sets it back by one).",
+  "flags": [
+    {
+      "section": "1.8 Performance Management",
+      "q": "Q23",
+      "topic": "Aligning individual and organizational goals",
+      "src": "Q1 quarter quiz (Ch 1-4)"
+    },
+    {
+      "section": "1.13 The Role of HRM in Executing Business Strategy",
+      "q": "Q3",
+      "topic": "HRM and business strategy",
+      "src": "Q1 quarter quiz (Ch 1-4)"
+    },
+    {
+      "section": "2.4 Why Is Organizational Culture Important?",
+      "q": "Q25",
+      "topic": "Culture types (consensual)",
+      "src": "Q1 quarter quiz (Ch 1-4)"
+    },
+    {
+      "section": "2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "q": "Q8",
+      "topic": "Ethical standards (safety, policy)",
+      "src": "Q1 quarter quiz (Ch 1-4)"
+    },
+    {
+      "section": "2.8 Ethical and Unethical Behavior",
+      "q": "Q4",
+      "topic": "Predicting ethical behavior",
+      "src": "Q1 quarter quiz (Ch 1-4)"
+    },
+    {
+      "section": "4.14 Job Analysis Outcomes",
+      "q": "Q13",
+      "topic": "Job analysis outcomes",
+      "src": "Q1 quarter quiz (Ch 1-4)"
+    },
+    {
+      "section": "4.19 Organizational Structure",
+      "q": "Q38",
+      "topic": "Organizational structure",
+      "src": "Q1 quarter quiz (Ch 1-4)"
+    }
+  ],
+  "cards": [
+    {
+      "id": "c202-q1-misses-ch01-009",
+      "front": "What is performance management?",
+      "answer": "Aligning employee goals and behavior with company strategy, appraising performance, and guiding improvement.",
+      "subtitle": "Ch 1.8 · Effective HRM",
+      "note": "Read more: 1.8 Performance Management",
+      "points": [
+        "Depends on staffing (raw talent) and development (fixing gaps)",
+        "Often tied to pay, so biased ratings demotivate people"
+      ],
+      "copyOf": "c202-ch01-009"
+    },
+    {
+      "id": "c202-q1-misses-ch01-010",
+      "front": "Why do specific goals and frequent feedback improve performance?",
+      "answer": "Goals show people what to aim for; feedback shows how they're doing so they can adjust before it's too late.",
+      "subtitle": "Ch 1.8 · Effective HRM",
+      "note": "Read more: 1.8 Performance Management",
+      "points": [
+        "No goals: unclear focus, underperformance, quits (which burdens staffing)",
+        "Feedback that feels unfair lowers effort",
+        "Performance feedback also maintains ethical behavior and communicates expectations"
+      ],
+      "copyOf": "c202-ch01-010"
+    },
+    {
+      "id": "c202-q1-misses-ch01-065",
+      "type": "scenario",
+      "front": "Which HR function makes sure what individual employees aim for lines up with what the organization is trying to achieve?",
+      "choices": [
+        "Succession planning",
+        "Compensation and benefits",
+        "Training and development",
+        "Performance management"
+      ],
+      "correct": 3,
+      "explanation": "Performance management aligns employee goals and behavior with organizational goals, then appraises and improves performance.",
+      "subtitle": "Ch 1 Quiz Q8 · Effective HRM",
+      "note": "Read more: 1.8 Performance Management",
+      "copyOf": "c202-ch01-065"
+    },
+    {
+      "id": "c202-q1-misses-ch01-066",
+      "type": "scenario",
+      "front": "If staffing brings in the wrong people, which two other functions feel the impact most directly?",
+      "choices": [
+        "Training & development and succession management",
+        "Performance management and strategic management",
+        "Training & development and performance management",
+        "Change management and succession management"
+      ],
+      "correct": 2,
+      "explanation": "Staffing supplies the raw talent. Development has to fill the gaps, and performance management depends on that talent being there.",
+      "subtitle": "Ch 1 Quiz Q9 · Strategic HRM",
+      "note": "Read more: 1.8 Performance Management; 1.6 Staffing",
+      "copyOf": "c202-ch01-066"
+    },
+    {
+      "id": "c202-q1-misses-ch01-067",
+      "type": "scenario",
+      "front": "A manager wants to reinforce ethical conduct day to day. According to the chapter, which kind of feedback serves that purpose?",
+      "choices": [
+        "Strategic feedback",
+        "Performance feedback",
+        "Critical feedback",
+        "Progressive feedback"
+      ],
+      "correct": 1,
+      "explanation": "Performance feedback, part of performance management, tells people how they're doing, communicates expectations, and helps maintain ethical behavior.",
+      "subtitle": "Ch 1 Quiz Q10 · Effective HRM",
+      "note": "Read more: 1.8 Performance Management",
+      "copyOf": "c202-ch01-067"
+    },
+    {
+      "id": "c202-q1-misses-new-1-8-1",
+      "type": "scenario",
+      "front": "Which HRM function aligns employees' goals and behaviors with the organization's goals and strategy?",
+      "choices": [
+        "Training and development",
+        "Performance management",
+        "Staffing",
+        "Rewards and benefits"
+      ],
+      "correct": 1,
+      "explanation": "Performance management aligns individual goals and behaviors with organizational goals and appraises performance. Training and development builds skills; it doesn't set and align the goals.",
+      "subtitle": "Q1 review · Performance management",
+      "note": "Read more: 1.8 Performance Management"
+    },
+    {
+      "id": "c202-q1-misses-new-1-8-2",
+      "type": "scenario",
+      "front": "A manager sets specific quarterly goals with each employee and gives frequent feedback on progress. Which HRM function is she carrying out?",
+      "choices": [
+        "Staffing",
+        "Health and safety",
+        "Performance management",
+        "Employee-management relations"
+      ],
+      "correct": 2,
+      "explanation": "Specific goals and frequent feedback are what make performance management work.",
+      "subtitle": "Q1 review · Performance management",
+      "note": "Read more: 1.8 Performance Management"
+    },
+    {
+      "id": "c202-q1-misses-new-1-8-3",
+      "type": "scenario",
+      "front": "All of the following are part of performance management except ____.",
+      "choices": [
+        "appraising past and current performance",
+        "suggesting ways to improve performance",
+        "aligning individual goals with organizational goals",
+        "sourcing and recruiting new candidates"
+      ],
+      "correct": 3,
+      "explanation": "Sourcing and recruiting belong to staffing. Performance management appraises performance, suggests improvements and aligns goals.",
+      "subtitle": "Q1 review · Performance management",
+      "note": "Read more: 1.8 Performance Management"
+    },
+    {
+      "id": "c202-q1-misses-ch01-018",
+      "front": "What does it mean for HR functions to be 'aligned'?",
+      "answer": "They all reinforce the same behaviors and never undercut each other, so they work as one integrated system.",
+      "subtitle": "Ch 1.11 · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy; 1.11 Employee-Management Relations",
+      "points": [
+        "Example of misalignment: training teamwork but paying only for individual results",
+        "SAS: trust-based culture, results-based reviews, and rich benefits all point the same way"
+      ],
+      "copyOf": "c202-ch01-018"
+    },
+    {
+      "id": "c202-q1-misses-ch01-022",
+      "front": "What is a business strategy?",
+      "answer": "How a company chooses to compete, based on what customers want and what it can deliver cost-effectively.",
+      "subtitle": "Ch 1.13 · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy",
+      "points": [
+        "Can differ across business units",
+        "HRM must fit the strategy, and the strategy must fit the competitive environment"
+      ],
+      "copyOf": "c202-ch01-022"
+    },
+    {
+      "id": "c202-q1-misses-ch01-023",
+      "front": "What is a talent philosophy?",
+      "answer": "A company's beliefs about how employees should be treated, e.g., as long-term partners or replaceable inputs.",
+      "subtitle": "Ch 1.13 · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy",
+      "points": [
+        "Covers diversity, ethics, short vs career-long tenure, assets vs investors of their time",
+        "Usually shaped by founders",
+        "Goldman Sachs: people are our greatest asset; diverse staff serves diverse clients"
+      ],
+      "copyOf": "c202-ch01-023"
+    },
+    {
+      "id": "c202-q1-misses-ch01-024",
+      "front": "How do HR strategy and strategic HRM differ?",
+      "answer": "HR strategy ties HR to business strategy; strategic HRM aligns employee and company goals within each HR function.",
+      "subtitle": "Ch 1.13 · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy",
+      "points": [
+        "Strategic HRM shapes the strategy of each HR function",
+        "Aligned functions form an integrated HRM system guided by the talent philosophy"
+      ],
+      "copyOf": "c202-ch01-024"
+    },
+    {
+      "id": "c202-q1-misses-ch01-059",
+      "type": "scenario",
+      "front": "A CFO asks how HR actually creates value. What's the best answer?",
+      "choices": [
+        "Leasing employees to cut costs",
+        "Hiring only people with advanced degrees",
+        "Helping the company carry out its business strategy",
+        "Keeping pay as low as possible"
+      ],
+      "correct": 2,
+      "explanation": "HRM creates value by helping execute business strategy, getting the right people with the right skills and motivation in place.",
+      "subtitle": "Ch 1 Quiz Q2 · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy; 1.12 How Does HRM Influence Organizational Performance?",
+      "copyOf": "c202-ch01-059"
+    },
+    {
+      "id": "c202-q1-misses-ch01-073",
+      "type": "scenario",
+      "front": "The strategy that defines where and how a company competes in its market is its ___ strategy.",
+      "choices": [
+        "financial",
+        "performance",
+        "business",
+        "management"
+      ],
+      "correct": 2,
+      "explanation": "Business strategy is how a firm competes and positions itself. HR strategy must then fit it.",
+      "subtitle": "Ch 1 Quiz Q16 · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy",
+      "copyOf": "c202-ch01-073"
+    },
+    {
+      "id": "c202-q1-misses-ch01-074",
+      "type": "scenario",
+      "front": "A founder believes employees are long-term partners worth investing in, not interchangeable parts. This set of beliefs about how people should be treated is the company's...",
+      "choices": [
+        "Strategic philosophy",
+        "Talent philosophy",
+        "Employee philosophy",
+        "Business philosophy"
+      ],
+      "correct": 1,
+      "explanation": "A talent philosophy is the firm's beliefs about how employees should be treated. It guides the integrated HRM system. ('Employee philosophy' is the tempting wrong pick.)",
+      "subtitle": "Ch 1 Quiz Q17 · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy",
+      "copyOf": "c202-ch01-074"
+    },
+    {
+      "id": "c202-q1-misses-ch01-084",
+      "type": "scenario",
+      "front": "A retailer switches its strategy from lowest price to premium, personalized service, but keeps hiring for speed and paying the lowest wages in town. What is the most likely strategic impact?",
+      "choices": [
+        "The new strategy stalls because HR practices no longer fit it",
+        "Costs fall, so the premium strategy succeeds",
+        "Nothing changes, since strategy is set by executives, not HR",
+        "Customers notice no difference"
+      ],
+      "correct": 0,
+      "explanation": "HR must fit the business strategy. A customer-intimacy strategy needs people with service skills and the pay and training to keep them; low-cost HR undermines it.",
+      "subtitle": "Ch 1.13 Apply · Strategic HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy",
+      "copyOf": "c202-ch01-084"
+    },
+    {
+      "id": "c202-q1-misses-new-1-13-1",
+      "type": "scenario",
+      "front": "Which statement best captures how HR relates to a company's business strategy?",
+      "choices": [
+        "HR policies and practices must fit and support the strategy",
+        "HR sets the company's competitive direction on its own",
+        "HR's main role is comparing department budgets",
+        "HR's role is limited to writing the talent philosophy"
+      ],
+      "correct": 0,
+      "explanation": "1.13: HR must fit the business strategy, and the strategy must fit the competitive environment. A talent philosophy (beliefs about how employees are treated) is a related idea, not the relationship itself.",
+      "subtitle": "Q1 review · Strategy & HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy"
+    },
+    {
+      "id": "c202-q1-misses-new-1-13-2",
+      "type": "scenario",
+      "front": "A company's system of beliefs about how employees should be treated is called its ____.",
+      "choices": [
+        "talent philosophy",
+        "business strategy",
+        "human resource strategy",
+        "code of conduct"
+      ],
+      "correct": 0,
+      "explanation": "A talent philosophy covers how employees are valued and treated. It guides an integrated HRM system but is not the link between HR and strategy.",
+      "subtitle": "Q1 review · Strategy & HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy"
+    },
+    {
+      "id": "c202-q1-misses-new-1-13-3",
+      "type": "scenario",
+      "front": "All of the following describe strategic HRM except ____.",
+      "choices": [
+        "aligning company values and goals with employees' behaviors and goals",
+        "shaping the strategy of each HR function",
+        "deciding the company's products and markets without regard to people",
+        "linking HR functions into an integrated HRM system"
+      ],
+      "correct": 2,
+      "explanation": "Strategic HRM aligns the company's values and goals with employees' and shapes each HR function. Choosing products and markets is business strategy, which HR must then fit.",
+      "subtitle": "Q1 review · Strategy & HRM",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy"
+    },
+    {
+      "id": "c202-q1-misses-ch02-003",
+      "front": "What is organizational culture?",
+      "answer": "The shared norms, values, and assumptions that shape how people see and do things in a company.",
+      "subtitle": "Ch 2.4 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "points": [
+        "The firm's 'personality': 'the way we do things around here'",
+        "Signaled by logos, ceremonies, dress codes, office design",
+        "Guides behavior where no rule exists"
+      ],
+      "distractors": [
+        "The formal rules, policies, and procedures written in a company's handbook and enforced by HR and managers.",
+        "The mix of demographics, job titles, and pay grades that describes who works at a company at a point in time.",
+        "The official mission statement and strategic plan that executives publish to guide the company's direction."
+      ],
+      "copyOf": "c202-ch02-003"
+    },
+    {
+      "id": "c202-q1-misses-ch02-004",
+      "front": "Why must culture fit the business strategy?",
+      "answer": "Culture guides behavior where rules don't reach, so a culture that clashes with strategy quietly undermines it.",
+      "subtitle": "Ch 2.4 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?; 2.5 Culture and HRM",
+      "points": [
+        "Four Seasons: great service comes from treating employees as you want guests treated",
+        "Rigid bureaucracy hampers innovation (Nokia's risk-averse culture contributed to its decline)",
+        "Culture is linked to financial performance and customer satisfaction"
+      ],
+      "distractors": [
+        "Culture is set by law and regulation, so a firm must match its strategy to whatever culture regulators require.",
+        "Strategy guides behavior where culture can't reach, so a weak strategy quietly undermines an otherwise strong culture.",
+        "Culture only matters for recruiting brand, so a mismatch hurts hiring ads but rarely affects how strategy plays out."
+      ],
+      "copyOf": "c202-ch02-004"
+    },
+    {
+      "id": "c202-q1-misses-ch02-005",
+      "front": "How do entrepreneurial and bureaucratic cultures differ?",
+      "answer": "Entrepreneurial cultures prize creativity and risk; bureaucratic ones prize formal rules, procedure, and consistency.",
+      "subtitle": "Ch 2.4 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "points": [
+        "Entrepreneurial: EA, IDEO",
+        "Bureaucratic: GSK, Merck; common in regulated industries",
+        "Most firms mix types, with one dominant"
+      ],
+      "distractors": [
+        "Entrepreneurial cultures prize formal rules and consistency; bureaucratic ones prize creativity, speed, and risk.",
+        "Entrepreneurial cultures value loyalty, tradition, and tenure; bureaucratic ones value winning and market dominance.",
+        "Entrepreneurial cultures base all decisions on performance data; bureaucratic ones base them on seniority and rank."
+      ],
+      "copyOf": "c202-ch02-005"
+    },
+    {
+      "id": "c202-q1-misses-ch02-006",
+      "front": "How do consensual and competitive cultures differ?",
+      "answer": "Consensual cultures value loyalty, tradition, and long tenure; competitive ones value winning and market dominance.",
+      "subtitle": "Ch 2.4 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "points": [
+        "Consensual: law firms, military; promote from within",
+        "Competitive: brokerages, currency trading; often stressful"
+      ],
+      "distractors": [
+        "Consensual cultures value winning and market dominance; competitive ones value loyalty, tradition, and long tenure.",
+        "Consensual cultures prize creativity and risk taking; competitive ones prize formal rules, procedure, and consistency.",
+        "Consensual cultures run decisions on performance data; competitive ones rely on intuition and personal relationships."
+      ],
+      "copyOf": "c202-ch02-006"
+    },
+    {
+      "id": "c202-q1-misses-ch02-007",
+      "front": "What is a performance culture?",
+      "answer": "One where hiring, development, pay, and assignments are all driven by performance data.",
+      "subtitle": "Ch 2.4 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "points": [
+        "Example: putting the best servers on the busiest shifts",
+        "Sports teams like the Yankees and Steelers"
+      ],
+      "distractors": [
+        "One where hiring, development, pay, and assignments are all driven by seniority and tenure.",
+        "One where formal rules, procedures, and consistency are valued above creativity or risk.",
+        "One where front-line teams manage their own work with little or no direct supervision."
+      ],
+      "copyOf": "c202-ch02-007"
+    },
+    {
+      "id": "c202-q1-misses-ch02-068",
+      "type": "scenario",
+      "front": "Whether a strategy succeeds often depends on how well it fits the company's...",
+      "choices": [
+        "Approach",
+        "Values statement",
+        "Culture",
+        "Budget"
+      ],
+      "correct": 2,
+      "explanation": "Culture either reinforces or undermines strategy, so strategy and culture must fit.",
+      "subtitle": "Ch 2.4 Practice · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-068"
+    },
+    {
+      "id": "c202-q1-misses-ch02-069",
+      "type": "scenario",
+      "front": "A video game studio celebrates bold ideas and tolerates failed experiments. Which culture type is this?",
+      "choices": [
+        "Bureaucratic",
+        "Consensual",
+        "Competitive",
+        "Entrepreneurial"
+      ],
+      "correct": 3,
+      "explanation": "Entrepreneurial cultures emphasize creativity, innovation, and risk-taking (EA, IDEO).",
+      "subtitle": "Ch 2.4 Practice · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-069"
+    },
+    {
+      "id": "c202-q1-misses-ch02-070",
+      "type": "scenario",
+      "front": "A drug manufacturer runs on standard operating procedures, sign-offs, and strict compliance checks. Which culture type fits?",
+      "choices": [
+        "Bureaucratic",
+        "Entrepreneurial",
+        "Competitive",
+        "Consensual"
+      ],
+      "correct": 0,
+      "explanation": "Bureaucratic cultures value formal structure, correct procedures, and consistency, common in regulated industries.",
+      "subtitle": "Ch 2.4 Practice · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-070"
+    },
+    {
+      "id": "c202-q1-misses-ch02-071",
+      "type": "scenario",
+      "front": "A firm prizes loyalty and tradition, promotes almost entirely from within, and has many 25-year employees. Which culture type is this?",
+      "choices": [
+        "Competitive",
+        "Consensual",
+        "Entrepreneurial",
+        "Bureaucratic"
+      ],
+      "correct": 1,
+      "explanation": "Consensual cultures emphasize loyalty, tradition, and long tenure (law firms, military).",
+      "subtitle": "Ch 2.4 Practice · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-071"
+    },
+    {
+      "id": "c202-q1-misses-ch02-072",
+      "type": "scenario",
+      "front": "A trading desk is intense and focused on beating rivals and dominating the market. Which culture type is this?",
+      "choices": [
+        "Consensual",
+        "Bureaucratic",
+        "Competitive",
+        "Entrepreneurial"
+      ],
+      "correct": 2,
+      "explanation": "Competitive cultures emphasize advantage and market superiority, and they can be stressful.",
+      "subtitle": "Ch 2.4 Practice · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-072"
+    },
+    {
+      "id": "c202-q1-misses-ch02-082",
+      "type": "scenario",
+      "front": "Which list names the four organizational culture types in the textbook?",
+      "choices": [
+        "Administrative, bureaucratic, consensual, directorial",
+        "Entrepreneurial, bureaucratic, consensual, competitive",
+        "Administrative, bureaucratic, consensual, competitive",
+        "Entrepreneurial, bureaucratic, consensual, directorial"
+      ],
+      "correct": 1,
+      "explanation": "The four types are entrepreneurial, bureaucratic, consensual, and competitive. 'Administrative' and 'directorial' are distractors.",
+      "subtitle": "Ch 2 Quiz Q1 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-082"
+    },
+    {
+      "id": "c202-q1-misses-ch02-084",
+      "type": "scenario",
+      "front": "A new hire asks what 'company culture' really means. Which answer is most accurate?",
+      "choices": [
+        "The firm's objectives, goals, values, and mission",
+        "The tasks and jobs people perform",
+        "The employees, managers, and leaders who work there",
+        "The shared norms, values, and assumptions of its members"
+      ],
+      "correct": 3,
+      "explanation": "Culture is the shared norms, values, and assumptions guiding how people see and do things. A mission statement is not the culture itself.",
+      "subtitle": "Ch 2 Quiz Q3 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-084"
+    },
+    {
+      "id": "c202-q1-misses-ch02-094",
+      "type": "scenario",
+      "front": "A strategy can be strengthened or sabotaged depending on its fit with the organization's...",
+      "choices": [
+        "Values",
+        "Approach",
+        "Strategy",
+        "Culture"
+      ],
+      "correct": 3,
+      "explanation": "Culture reinforces or undermines strategy depending on the fit.",
+      "subtitle": "Ch 2 Quiz Q13 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-094"
+    },
+    {
+      "id": "c202-q1-misses-ch02-097",
+      "type": "scenario",
+      "front": "A company built on formal structures and detailed procedures has which type of culture?",
+      "choices": [
+        "Consensual",
+        "Competitive",
+        "Entrepreneurial",
+        "Bureaucratic"
+      ],
+      "correct": 3,
+      "explanation": "Bureaucratic cultures value formal structure, correct procedures, and consistency.",
+      "subtitle": "Ch 2 Quiz Q16 · Strategic HRM",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?",
+      "copyOf": "c202-ch02-097"
+    },
+    {
+      "id": "c202-q1-misses-new-2-4-1",
+      "type": "scenario",
+      "front": "An organization known for tradition, loyalty, long tenure and promoting from within most likely has which culture type?",
+      "choices": [
+        "Bureaucratic",
+        "Consensual",
+        "Entrepreneurial",
+        "Competitive"
+      ],
+      "correct": 1,
+      "explanation": "Consensual cultures value loyalty, tradition, long tenure and internal promotion (law firms, the military). Bureaucratic cultures stress formal structure and correct procedures instead.",
+      "subtitle": "Q1 review · Culture types",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?"
+    },
+    {
+      "id": "c202-q1-misses-new-2-4-2",
+      "type": "scenario",
+      "front": "A pharmaceutical company in a heavily regulated industry emphasizes formal structure, correct procedures and consistency. Which culture type is this?",
+      "choices": [
+        "Bureaucratic",
+        "Consensual",
+        "Competitive",
+        "Entrepreneurial"
+      ],
+      "correct": 0,
+      "explanation": "Bureaucratic cultures emphasize formal structure, procedures and consistency, common in regulated industries.",
+      "subtitle": "Q1 review · Culture types",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?"
+    },
+    {
+      "id": "c202-q1-misses-new-2-4-3",
+      "type": "scenario",
+      "front": "Which culture type values creativity, innovation and risk-taking?",
+      "choices": [
+        "Consensual",
+        "Competitive",
+        "Entrepreneurial",
+        "Bureaucratic"
+      ],
+      "correct": 2,
+      "explanation": "Entrepreneurial cultures (e.g., IDEO) value creativity, innovation and risk-taking. Competitive cultures focus on winning and market superiority.",
+      "subtitle": "Q1 review · Culture types",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?"
+    },
+    {
+      "id": "c202-q1-misses-ch02-014",
+      "front": "What is ethics, and how is it different from legality?",
+      "answer": "Ethics is a shared moral standard of right and wrong; an act can be perfectly legal yet still unethical.",
+      "subtitle": "Ch 2.7 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "points": [
+        "Base values: honesty, tolerance, responsibility",
+        "Lapses: Madoff, faked executive degrees, McLaren spying on Ferrari",
+        "Because unethical isn't always illegal, firms must define and reinforce values"
+      ],
+      "distractors": [
+        "Ethics is the set of laws a society enforces; anything that is legal is automatically ethical as well.",
+        "Ethics is a personal preference with no shared standard; legality is the only objective test of right.",
+        "Ethics and legality are the same; an act that is unethical is always illegal under employment law too."
+      ],
+      "copyOf": "c202-ch02-014"
+    },
+    {
+      "id": "c202-q1-misses-ch02-015",
+      "front": "What formula produces ethical behavior in an organization?",
+      "answer": "Ethical values + clear expectations + rewards and punishments that back ethics = ethical behavior.",
+      "subtitle": "Ch 2.7 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "points": [
+        "Figure 2.1 in the text",
+        "Stress and pressure erode ethics, so all three pieces matter"
+      ],
+      "distractors": [
+        "Ethical values + a written code alone = ethical behavior, since clear rules make enforcement unnecessary.",
+        "Strict monitoring + harsh punishment for violations = ethical behavior, regardless of stated values.",
+        "Ethical hiring + high pay + job security = ethical behavior, because satisfied people don't break rules."
+      ],
+      "copyOf": "c202-ch02-015"
+    },
+    {
+      "id": "c202-q1-misses-ch02-016",
+      "front": "How do the utilitarian and rights standards differ?",
+      "answer": "Utilitarian seeks the most good and least harm overall; rights protects each person's rights, like privacy and safety.",
+      "subtitle": "Ch 2.7 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "points": [
+        "Utilitarian example: cutting everyone's pay instead of laying some people off",
+        "Rights example: refusing hazardous work without protective gear"
+      ],
+      "distractors": [
+        "Utilitarian protects each person's rights, like privacy and safety; rights seeks the most good and least harm overall.",
+        "Utilitarian treats everyone equally under a defensible rule; rights asks how an ideal, virtuous person would act.",
+        "Utilitarian maximizes shareholder profit above all; rights follows whatever the law requires and nothing more."
+      ],
+      "copyOf": "c202-ch02-016"
+    },
+    {
+      "id": "c202-q1-misses-ch02-017",
+      "front": "How do the fairness, common good, and virtue standards differ?",
+      "answer": "Fairness: equal treatment by a defensible rule; common good: care for the vulnerable; virtue: act as an ideal person.",
+      "subtitle": "Ch 2.7 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "points": [
+        "Fairness example: debates over CEO pay vs worker pay",
+        "Common good example: refusing suppliers that use child labor",
+        "Virtue example: promptly recalling a dangerous product",
+        "The five standards can conflict; each is a lens for evaluating a decision"
+      ],
+      "distractors": [
+        "Fairness: care for the vulnerable; common good: equal treatment by a defensible rule; virtue: maximize overall good.",
+        "Fairness: maximize total benefit; common good: protect each person's rights; virtue: obey the law as written.",
+        "Fairness: reward seniority equally; common good: serve shareholders first; virtue: follow the code of conduct."
+      ],
+      "copyOf": "c202-ch02-017"
+    },
+    {
+      "id": "c202-q1-misses-ch02-021",
+      "front": "How should HR approach resolving an ethical dilemma?",
+      "answer": "Name the conflict, apply an ethical standard, weigh everyone affected, and choose the option you could defend openly.",
+      "subtitle": "Ch 2.8 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility; 2.8 Ethical and Unethical Behavior",
+      "points": [
+        "Back it with HR systems: code of conduct, training, anonymous reporting, prompt discipline, rewards for ethics",
+        "Ask: Which option produces the most good? Respects rights? Treats people by a fair, job-related rule?"
+      ],
+      "distractors": [
+        "Follow whatever the most senior leader prefers, since accountability for the outcome rests with that leader anyway.",
+        "Choose the option that is legal and cheapest, then keep the reasoning confidential to avoid later challenges.",
+        "Pick the choice that keeps the most employees happy, since popularity is the best sign of an ethical decision."
+      ],
+      "copyOf": "c202-ch02-021"
+    },
+    {
+      "id": "c202-q1-misses-ch02-022",
+      "front": "Long tenure vs. stronger results: how should HR justify a promotion recommendation?",
+      "answer": "Recommend the stronger performer: the fairness standard judges candidates on a defensible, job-related rule like merit.",
+      "subtitle": "Ch 2.8 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility; 2.8 Ethical and Unethical Behavior",
+      "points": [
+        "Model answer: promoting on merit is fair to every candidate and best for the team and customers (utilitarian)",
+        "Promoting on loyalty alone signals that results don't matter and can feel like favoritism",
+        "Recognize loyalty in other ways: development, a retention bonus, or a mentoring role",
+        "Either way, explain the job-related criteria openly"
+      ],
+      "distractors": [
+        "Recommend the longest-tenured employee: the fairness standard requires rewarding loyalty and years of service first.",
+        "Recommend whoever the team likes most: the common good standard puts group harmony ahead of individual results.",
+        "Recommend both for a shared role: the rights standard bars choosing one employee over another for promotion."
+      ],
+      "copyOf": "c202-ch02-022"
+    },
+    {
+      "id": "c202-q1-misses-ch02-050",
+      "type": "scenario",
+      "front": "An HR director refuses a manager's request to browse employees' medical files, even though it would speed up a scheduling decision. Which ethical standard guides her?",
+      "choices": [
+        "Utilitarian",
+        "Common good",
+        "Rights",
+        "Virtue"
+      ],
+      "correct": 2,
+      "explanation": "The rights standard protects each person's moral rights, including privacy, even when overriding them would be convenient.",
+      "subtitle": "Ch 2.7 Apply · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-050"
+    },
+    {
+      "id": "c202-q1-misses-ch02-051",
+      "type": "scenario",
+      "front": "A clothing company drops a cheaper supplier after learning it uses child labor. Which ethical standard best explains the decision?",
+      "choices": [
+        "Common good",
+        "Fairness",
+        "Utilitarian",
+        "Rights"
+      ],
+      "correct": 0,
+      "explanation": "The common good standard emphasizes respect and compassion for everyone, especially the most vulnerable, such as children.",
+      "subtitle": "Ch 2.7 Apply · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-051"
+    },
+    {
+      "id": "c202-q1-misses-ch02-074",
+      "type": "scenario",
+      "front": "Which ethical standard asks which option produces the greatest good and the least harm?",
+      "choices": [
+        "Rights",
+        "Fairness",
+        "Common good",
+        "Utilitarian"
+      ],
+      "correct": 3,
+      "explanation": "The utilitarian standard weighs total benefits against total harms.",
+      "subtitle": "Ch 2.7 Practice · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-074"
+    },
+    {
+      "id": "c202-q1-misses-ch02-075",
+      "type": "scenario",
+      "front": "Which ethical standard focuses on protecting the moral rights of everyone affected?",
+      "choices": [
+        "Rights",
+        "Utilitarian",
+        "Fairness",
+        "Common good"
+      ],
+      "correct": 0,
+      "explanation": "The rights standard protects rights like privacy, truthful information, and safety.",
+      "subtitle": "Ch 2.7 Practice · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-075"
+    },
+    {
+      "id": "c202-q1-misses-ch02-076",
+      "type": "scenario",
+      "front": "Which ethical standard asks whether everyone is treated equally, or fairly by a defensible standard?",
+      "choices": [
+        "Virtue",
+        "Fairness",
+        "Rights",
+        "Utilitarian"
+      ],
+      "correct": 1,
+      "explanation": "The fairness (justice) standard requires equal treatment or differences based on a defensible standard.",
+      "subtitle": "Ch 2.7 Practice · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-076"
+    },
+    {
+      "id": "c202-q1-misses-ch02-087",
+      "type": "scenario",
+      "front": "The moral standards that define socially accepted right and wrong behavior are called...",
+      "choices": [
+        "Policies",
+        "Laws",
+        "Ethics",
+        "Strategies"
+      ],
+      "correct": 2,
+      "explanation": "Ethics are moral standards of right and wrong. Laws are legal requirements, and the two don't always match.",
+      "subtitle": "Ch 2 Quiz Q6 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-087"
+    },
+    {
+      "id": "c202-q1-misses-ch02-088",
+      "type": "scenario",
+      "front": "A company's ethics policy stresses respect and compassion for everyone, especially its most vulnerable stakeholders. Which standard is that?",
+      "choices": [
+        "Rights",
+        "Fairness",
+        "Utilitarian",
+        "Common good"
+      ],
+      "correct": 3,
+      "explanation": "The common good standard emphasizes respect and compassion for all, especially the vulnerable.",
+      "subtitle": "Ch 2 Quiz Q7 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-088"
+    },
+    {
+      "id": "c202-q1-misses-ch02-089",
+      "type": "scenario",
+      "front": "Which ethical standard asks whether an action is consistent with ideals like civility, compassion, and benevolence?",
+      "choices": [
+        "Virtue",
+        "Rights",
+        "Utilitarian",
+        "Fairness"
+      ],
+      "correct": 0,
+      "explanation": "The virtue standard judges actions by whether they reflect ideal character traits.",
+      "subtitle": "Ch 2 Quiz Q8 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-089"
+    },
+    {
+      "id": "c202-q1-misses-ch02-099",
+      "type": "scenario",
+      "front": "Facing a revenue drop, a CEO cuts every employee's pay by 8% instead of laying off 10% of staff, reasoning it does the most good and the least harm overall. Which standard is she applying?",
+      "choices": [
+        "Fairness",
+        "Rights",
+        "Utilitarian",
+        "Common good"
+      ],
+      "correct": 2,
+      "explanation": "Weighing total benefits against total harms (spreading a small cut over everyone instead of a big loss for a few) is the utilitarian standard.",
+      "subtitle": "Ch 2 Quiz Q18 · Strategic HRM",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility",
+      "copyOf": "c202-ch02-099"
+    },
+    {
+      "id": "c202-q1-misses-new-2-7-1",
+      "type": "scenario",
+      "front": "Which ethical standard focuses on protecting people's moral rights, such as privacy, truthful information and personal safety?",
+      "choices": [
+        "Utilitarian",
+        "Rights",
+        "Virtue",
+        "Fairness"
+      ],
+      "correct": 1,
+      "explanation": "The rights standard protects everyone's moral rights, including privacy, truthful information and safety. Utilitarian weighs the most good and least harm.",
+      "subtitle": "Q1 review · Ethical standards",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility"
+    },
+    {
+      "id": "c202-q1-misses-new-2-7-2",
+      "type": "scenario",
+      "front": "To avoid layoffs, a company trims everyone's pay slightly because that produces the most good and the least harm overall. Which ethical standard is being applied?",
+      "choices": [
+        "Utilitarian",
+        "Rights",
+        "Common good",
+        "Virtue"
+      ],
+      "correct": 0,
+      "explanation": "The utilitarian standard chooses the option that produces the most good and the least harm.",
+      "subtitle": "Q1 review · Ethical standards",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility"
+    },
+    {
+      "id": "c202-q1-misses-new-2-7-3",
+      "type": "scenario",
+      "front": "A company refuses to buy from suppliers that use child labor, out of compassion for the most vulnerable. Which ethical standard does this reflect?",
+      "choices": [
+        "Fairness",
+        "Utilitarian",
+        "Rights",
+        "Common good"
+      ],
+      "correct": 3,
+      "explanation": "The common good standard shows respect and compassion for everyone, especially the vulnerable, as in refusing suppliers that use child labor.",
+      "subtitle": "Q1 review · Ethical standards",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility"
+    },
+    {
+      "id": "c202-q1-misses-ch02-018",
+      "front": "What are the three systemic ethics errors?",
+      "answer": "Omission: no written rules; remission: pressure to act unethically; commission: ignoring sound established practices.",
+      "subtitle": "Ch 2.8 · Strategic HRM",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "points": [
+        "Unethical acts come from individuals AND the organizational context",
+        "Top cause of ethical compromise: pressure to hit unrealistic goals or deadlines",
+        "Strong predictor: an emphasis on self-gain"
+      ],
+      "distractors": [
+        "Omission: pressure to act unethically; remission: no written rules; commission: ignoring sound established practices.",
+        "Omission: ignoring sound practices; remission: no written rules; commission: pressure from leaders to act unethically.",
+        "Omission: no ethics training; remission: no anonymous hotline; commission: no discipline for rule violators at all."
+      ],
+      "copyOf": "c202-ch02-018"
+    },
+    {
+      "id": "c202-q1-misses-ch02-019",
+      "front": "What signals an HR ethical dilemma rather than just a hard decision?",
+      "answer": "Someone is pushed toward an unfair, harmful, or rule-breaking act; a fair choice that disappoints someone isn't one.",
+      "subtitle": "Ch 2.8 · Strategic HRM",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "points": [
+        "Common HR ethics areas: privacy, staffing, layoffs, rewards, safety, appraisals, labor practices",
+        "Example: pressure to hire a friend, inflate a job grade, or rate someone on non-performance factors"
+      ],
+      "distractors": [
+        "Any decision that disappoints someone or is unpopular with employees is an ethical dilemma that HR must escalate.",
+        "A decision becomes an ethical dilemma only when it is clearly illegal; lawful but harmful acts are just hard calls.",
+        "Any choice involving money or pay is an ethical dilemma, while staffing and scheduling choices never are ones."
+      ],
+      "copyOf": "c202-ch02-019"
+    },
+    {
+      "id": "c202-q1-misses-ch02-020",
+      "front": "How do a code of conduct and a code of ethics differ?",
+      "answer": "A code of conduct lists specific required and banned actions; a code of ethics states ideal values to guide choices.",
+      "subtitle": "Ch 2.8 · Strategic HRM",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "points": [
+        "Codes alone aren't enough: need fair treatment, aligned HR systems, ethical leaders, real consequences",
+        "Good codes correlate with better reputation and citizenship rankings"
+      ],
+      "distractors": [
+        "A code of conduct states ideal values to guide choices; a code of ethics lists specific required and banned actions.",
+        "A code of conduct is legally required by federal law; a code of ethics is optional and only used by nonprofits.",
+        "A code of conduct covers executives only; a code of ethics covers front-line staff and their daily behavior."
+      ],
+      "copyOf": "c202-ch02-020"
+    },
+    {
+      "id": "c202-q1-misses-ch02-023",
+      "front": "What six elements do the Federal Sentencing Guidelines expect in an ethics program?",
+      "answer": "Written standards, training, an advice channel, anonymous reporting, discipline for violators, ethics in appraisals.",
+      "subtitle": "Ch 2.8 · Legal & Regulatory",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "points": [
+        "Federal Sentencing Guidelines for Organizations",
+        "HR also hires ethical people and acts fast on violations"
+      ],
+      "distractors": [
+        "Written standards, a compliance officer, drug testing, background checks, union review, and annual audits.",
+        "Training, profit-sharing, an ethics hotline, executive bonuses, legal review, and a public CSR report each year.",
+        "Written standards, training, open-door policy, peer review, outside auditing, and ethics bonuses for managers."
+      ],
+      "copyOf": "c202-ch02-023"
+    },
+    {
+      "id": "c202-q1-misses-ch02-047",
+      "type": "scenario",
+      "front": "Which of these is an ethical dilemma in HRM?",
+      "choices": [
+        "A manager asks HR to quietly drop a qualified applicant after learning he's in cancer treatment",
+        "A manager schedules quarterly career conversations",
+        "HR chooses between two strong internal candidates using posted criteria",
+        "HR moves open enrollment to November"
+      ],
+      "correct": 0,
+      "explanation": "A dilemma involves pressure to do something unfair or harmful. Picking fairly between good candidates is hard but not unethical.",
+      "subtitle": "Ch 2.8 Apply · Strategic HRM",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "copyOf": "c202-ch02-047"
+    },
+    {
+      "id": "c202-q1-misses-ch02-048",
+      "type": "scenario",
+      "front": "A company has no written policy on accepting gifts from vendors, and buyers start taking expensive trips from suppliers. Which systemic ethics error is this?",
+      "choices": [
+        "Commission",
+        "Remission",
+        "Omission",
+        "Utilitarian error"
+      ],
+      "correct": 2,
+      "explanation": "Omission is the lack of written rules. Without clear standards, people fill the gap with self-interest.",
+      "subtitle": "Ch 2.8 Apply · Strategic HRM",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "copyOf": "c202-ch02-048"
+    },
+    {
+      "id": "c202-q1-misses-ch02-049",
+      "type": "scenario",
+      "front": "A firm has a code of conduct and annual ethics training, but employees who see misconduct have no way to report it without revealing their identity. Which Federal Sentencing Guidelines element is missing?",
+      "choices": [
+        "Written standards",
+        "Anonymous misconduct reporting",
+        "Ethics in performance appraisals",
+        "Ethics training"
+      ],
+      "correct": 1,
+      "explanation": "The guidelines expect written standards, training, an advice channel, anonymous reporting, discipline, and ethics in appraisals. Fear of retaliation silences reporters.",
+      "subtitle": "Ch 2.8 Apply · Legal & Regulatory",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "copyOf": "c202-ch02-049"
+    },
+    {
+      "id": "c202-q1-misses-ch02-053",
+      "type": "scenario",
+      "front": "Engineers at a manufacturer raise safety concerns, but managers dismiss them to protect a launch date, and staff fear for their jobs if they push. Which HR fix targets the root cause?",
+      "choices": [
+        "Bigger launch bonuses",
+        "Faster certification",
+        "Firing the engineers who complained",
+        "Written safety standards, anonymous reporting, and leaders who reward speaking up"
+      ],
+      "correct": 3,
+      "explanation": "The root problem is a lack of psychological safety and values that give way under pressure. HR can make speaking up safe and expected.",
+      "subtitle": "Ch 2.10 Apply · Strategic HRM",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior; 2.10 Case Study: Boeing 737 MAX",
+      "copyOf": "c202-ch02-053"
+    },
+    {
+      "id": "c202-q1-misses-new-2-8-1",
+      "type": "scenario",
+      "front": "According to the chapter, what is the strongest predictor of unethical behavior?",
+      "choices": [
+        "An emphasis on self-gain",
+        "Working in a consensual culture",
+        "Having a written code of ethics",
+        "Long tenure with the company"
+      ],
+      "correct": 0,
+      "explanation": "The strongest predictor of unethical behavior is an emphasis on self-gain; it comes from individuals and from the organizational context.",
+      "subtitle": "Q1 review · Predicting unethical behavior",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior"
+    },
+    {
+      "id": "c202-q1-misses-new-2-8-2",
+      "type": "scenario",
+      "front": "What is the most common cause of employees compromising their ethics at work?",
+      "choices": [
+        "Frequent performance feedback",
+        "Pressure to meet unrealistic goals or deadlines",
+        "A clear code of conduct",
+        "Promotion from within"
+      ],
+      "correct": 1,
+      "explanation": "The top cause of compromise is pressure to hit unrealistic goals or deadlines.",
+      "subtitle": "Q1 review · Predicting unethical behavior",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior"
+    },
+    {
+      "id": "c202-q1-misses-new-2-8-3",
+      "type": "scenario",
+      "front": "A company has no written ethics rules at all. Which systemic error does this represent?",
+      "choices": [
+        "Remission",
+        "Commission",
+        "Omission",
+        "Retaliation"
+      ],
+      "correct": 2,
+      "explanation": "Omission is the lack of written rules. Remission is pressure to act unethically; commission is not following sound, established practices.",
+      "subtitle": "Q1 review · Predicting unethical behavior",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior"
+    },
+    {
+      "id": "c202-q1-misses-ch04-061",
+      "front": "What is a job description?",
+      "answer": "A written summary of a job's duties and responsibilities, plus its title, reporting lines, and conditions.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "distractors": [
+        "The minimum worker characteristics needed for a job's core duties, built from the job analysis.",
+        "A study of a job's tasks, conditions, and tools and the worker traits needed to succeed in it.",
+        "A formal offer letter stating the job's pay, start date, benefits, and at-will employment terms."
+      ],
+      "copyOf": "c202-ch04-061"
+    },
+    {
+      "id": "c202-q1-misses-ch04-062",
+      "front": "What does a typical job description include?",
+      "answer": "Title, department, pay range and grade, reporting lines, main and occasional duties, equipment, special conditions.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Plus a flexibility clause: 'other duties as assigned'"
+      ],
+      "distractors": [
+        "Required KSAOs, personality traits, education, years of experience, and preferred candidate background.",
+        "Title, the employee's name and performance rating, salary history, and the manager's development notes.",
+        "Mission, vision, values, strategic goals, competitor analysis, and the department's annual budget."
+      ],
+      "copyOf": "c202-ch04-062"
+    },
+    {
+      "id": "c202-q1-misses-ch04-063",
+      "front": "What makes a good task statement?",
+      "answer": "It specifically states what is done, how, and why, and avoids vague verbs like 'handles' or 'prepares.'",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Weak: 'accounts for inventory quarterly'",
+        "Better: counts merchandise, compares counts with accounting totals, corrects errors so books balance"
+      ],
+      "distractors": [
+        "It uses broad verbs like 'handles' so it covers many duties and stays flexible as the job changes.",
+        "It lists the worker traits needed, like 'detail-oriented,' rather than the actual tasks performed.",
+        "It states only what is done, leaving out how and why so the statement stays short and general."
+      ],
+      "copyOf": "c202-ch04-063"
+    },
+    {
+      "id": "c202-q1-misses-ch04-064",
+      "front": "How should task statements be written with the ADA in mind?",
+      "answer": "Emphasize what must be accomplished rather than how, so people with disabilities aren't screened out needlessly.",
+      "subtitle": "Ch 4.14 · Legal & Regulatory",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "'Moves 50-pound boxes to shelves' rather than 'lifts boxes by hand'"
+      ],
+      "distractors": [
+        "Emphasize how each task must be done physically, so applicants know exactly which abilities are needed.",
+        "List every marginal task as essential, so the employer has more grounds to reject unqualified applicants.",
+        "Leave out physical requirements entirely, since the ADA bars mentioning them in any job description."
+      ],
+      "copyOf": "c202-ch04-064"
+    },
+    {
+      "id": "c202-q1-misses-ch04-065",
+      "front": "How can a job description promote ethical behavior?",
+      "answer": "By stating legal and ethical expectations, like refusing bribes and protecting employees who raise concerns.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Follow U.S. law even where rule of law is weak",
+        "Resist pressure to compromise values to hit sales targets"
+      ],
+      "distractors": [
+        "By listing every banned behavior with its penalty, so employees fear the consequences of misconduct.",
+        "By leaving ethics out, since ethical expectations belong only in a separate code of conduct.",
+        "By stating pay ranges openly, which removes all ethical concerns about favoritism in pay decisions."
+      ],
+      "copyOf": "c202-ch04-065"
+    },
+    {
+      "id": "c202-q1-misses-ch04-066",
+      "front": "Why should job descriptions be engaging?",
+      "answer": "They double as recruiting ads, so selling the mission and values attracts better-fit applicants.",
+      "subtitle": "Ch 4.14 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "points": [
+        "Red Lobster weaves its values into lively descriptions of essential functions",
+        "Make titles descriptive, accurate, and interesting"
+      ],
+      "distractors": [
+        "They're legal contracts, so engaging wording binds the firm to promises made in the text.",
+        "Engaging ones get fewer applicants, which saves screening time and lowers recruiting cost.",
+        "They're read only by current staff, so engaging wording helps morale more than recruiting."
+      ],
+      "copyOf": "c202-ch04-066"
+    },
+    {
+      "id": "c202-q1-misses-ch04-144",
+      "type": "scenario",
+      "front": "A posting reads: 'Schedules patient appointments, verifies insurance, and reports to the clinic manager. Some Saturdays required.' What document is this drawn from?",
+      "choices": [
+        "Replacement chart",
+        "Talent inventory",
+        "Job description",
+        "Person specification"
+      ],
+      "correct": 2,
+      "explanation": "Duties, reporting relationships, and special conditions are the content of a job description.",
+      "subtitle": "Ch 4.14 Apply · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "copyOf": "c202-ch04-144"
+    },
+    {
+      "id": "c202-q1-misses-ch04-148",
+      "type": "scenario",
+      "front": "Which task statement is written best?",
+      "choices": [
+        "Prepares and conducts inventory on a regular basis",
+        "Counts stock monthly, compares counts with accounting records, and fixes discrepancies",
+        "Handles all inventory matters for the store as needed",
+        "Is responsible for inventory accuracy and other duties as assigned"
+      ],
+      "correct": 1,
+      "explanation": "Good task statements say what is done, how, and why. Vague verbs like 'handles' or 'prepares' tell applicants and analysts little.",
+      "subtitle": "Ch 4.14 Apply · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "copyOf": "c202-ch04-148"
+    },
+    {
+      "id": "c202-q1-misses-ch04-149",
+      "type": "scenario",
+      "front": "With the ADA in mind, which task statement is better for a stock associate?",
+      "choices": [
+        "Lifts 40-pound cartons by hand and carries them up a ladder",
+        "Must be physically strong",
+        "Handles stock",
+        "Moves 40-pound cartons from the loading dock to storage shelves"
+      ],
+      "correct": 3,
+      "explanation": "Under the ADA, task statements should emphasize what must be accomplished, not how, so a person who could do it another way isn't screened out.",
+      "subtitle": "Ch 4.14 Apply · Legal & Regulatory",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "copyOf": "c202-ch04-149"
+    },
+    {
+      "id": "c202-q1-misses-ch04-188",
+      "type": "scenario",
+      "front": "A written document listing a job's duties and responsibilities is a...",
+      "choices": [
+        "Job description",
+        "Job task",
+        "Job preview",
+        "Job statement"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: a job description summarizes duties and responsibilities.",
+      "subtitle": "Ch 4 Quiz Q6 · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "copyOf": "c202-ch04-188"
+    },
+    {
+      "id": "c202-q1-misses-new-4-14-1",
+      "type": "scenario",
+      "front": "Once HR has analyzed a position, what is the main document that analysis produces?",
+      "choices": [
+        "A job description summarizing the position's duties and responsibilities",
+        "A performance appraisal for current employees",
+        "A list of each employee's personal strengths",
+        "An organizational chart"
+      ],
+      "correct": 0,
+      "explanation": "Job analysis produces the job description first (a written summary of duties and responsibilities), and from it the person specification.",
+      "subtitle": "Q1 review · Job analysis outcomes",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-q1-misses-new-4-14-2",
+      "type": "scenario",
+      "front": "A document lists the minimum knowledge, skills, abilities and other characteristics needed to do a job's core duties. What is it?",
+      "choices": [
+        "A job description",
+        "A person specification",
+        "A task statement",
+        "An employee handbook"
+      ],
+      "correct": 1,
+      "explanation": "The person specification describes the person (KSAOs); the job description describes the job.",
+      "subtitle": "Q1 review · Job analysis outcomes",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-q1-misses-new-4-14-3",
+      "type": "scenario",
+      "front": "All of the following typically appear in a job description except ____.",
+      "choices": [
+        "the job title and department",
+        "main and occasional duties",
+        "reporting relationships",
+        "the current employee's annual performance rating"
+      ],
+      "correct": 3,
+      "explanation": "A job description lists title, department, salary range, grade, reporting relationships, duties, equipment and special conditions. A person's performance rating belongs to performance management.",
+      "subtitle": "Q1 review · Job analysis outcomes",
+      "note": "Read more: 4.14 Job Analysis Outcomes"
+    },
+    {
+      "id": "c202-q1-misses-ch04-089",
+      "front": "How does organizational design differ from organizational structure?",
+      "answer": "Design is the process of choosing and managing structure; structure is the formal task, power, and reporting system.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Structure coordinates, controls, and motivates; redesign aids survival amid change"
+      ],
+      "distractors": [
+        "Structure is the process of choosing and managing design; design is the formal task, power, and reporting system.",
+        "Design applies to small firms; structure applies to large firms with many levels and divisions.",
+        "Design covers job duties and tasks; structure covers pay grades and benefits for each job level."
+      ],
+      "copyOf": "c202-ch04-089"
+    },
+    {
+      "id": "c202-q1-misses-ch04-090",
+      "front": "What does an organizational chart show?",
+      "answer": "The chain of command: who reports to whom and who is responsible for whom.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Position isn't importance; a FedEx executive said drivers matter more than he does"
+      ],
+      "distractors": [
+        "The firm's pay grades and the salary range for each job level.",
+        "How work moves from a customer request through to final delivery.",
+        "Each employee's competencies, qualifications, and promotion readiness."
+      ],
+      "copyOf": "c202-ch04-090"
+    },
+    {
+      "id": "c202-q1-misses-ch04-091",
+      "front": "What is a policy?",
+      "answer": "A broad guiding principle that sets direction; in effect, a decision already made.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Example: 'We reimburse reasonable business travel to serve clients'",
+        "Directs and limits actions toward long-term goals"
+      ],
+      "distractors": [
+        "A how-to sequence of steps for carrying out a task in line with the rules.",
+        "A specific statement of what employees may or may not do while at work.",
+        "A long-term goal for how the organization will compete in its chosen market."
+      ],
+      "copyOf": "c202-ch04-091"
+    },
+    {
+      "id": "c202-q1-misses-ch04-092",
+      "front": "What is a procedure?",
+      "answer": "A how-to sequence of steps for carrying out a task in line with policy.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Example: photograph the receipt, upload within 30 days, get manager approval"
+      ],
+      "distractors": [
+        "A broad guiding principle that sets direction and limits choices.",
+        "A specific statement of what employees may or may not do.",
+        "A document that collects all policies and rules for employees."
+      ],
+      "copyOf": "c202-ch04-092"
+    },
+    {
+      "id": "c202-q1-misses-ch04-093",
+      "front": "What is a rule?",
+      "answer": "A specific statement of what employees may or may not do, with little room for discretion.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Example: 'Safety glasses must be worn on the production floor'"
+      ],
+      "distractors": [
+        "A broad guiding principle that sets direction, in effect a decision already made.",
+        "A how-to sequence of steps for carrying out a task in line with company policy.",
+        "An enduring belief that guides everyday decisions and behavior across the firm."
+      ],
+      "copyOf": "c202-ch04-093"
+    },
+    {
+      "id": "c202-q1-misses-ch04-094",
+      "front": "How do policies, procedures, and rules work together?",
+      "answer": "Policies set direction, procedures say how to do it, and rules set the musts; together they guide daily work.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Memory trick: policy = why/direction, procedure = how, rule = must or must not",
+        "They support vision and goals, compliance, and safety"
+      ],
+      "distractors": [
+        "Rules set direction, policies say how to do it, and procedures set the musts; together they guide daily work.",
+        "Policies apply to managers, procedures to HR, and rules to front-line staff; each group follows only its own.",
+        "Policies, procedures, and rules are the same thing, and the terms are used interchangeably in most firms."
+      ],
+      "copyOf": "c202-ch04-094"
+    },
+    {
+      "id": "c202-q1-misses-ch04-095",
+      "front": "What is an employee handbook?",
+      "answer": "A document, often online, that collects the organization's policies, procedures, and rules for employees.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Typical contents: discipline rules, ethics code, at-will statement, confidentiality agreement, benefits, complaint steps"
+      ],
+      "distractors": [
+        "A legal contract that guarantees employees' jobs and benefits for a fixed term of employment.",
+        "A chart showing the chain of command and who reports to whom in each department of the firm.",
+        "A written summary of a single job's duties, responsibilities, title, and working conditions."
+      ],
+      "copyOf": "c202-ch04-095"
+    },
+    {
+      "id": "c202-q1-misses-ch04-096",
+      "front": "How does the employee handbook protect the organization?",
+      "answer": "It documents expectations and notice, supports consistent enforcement, and records at-will and confidentiality terms.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Signed acknowledgments prove employees received the rules",
+        "Consistent enforcement lowers discrimination and wrongful discharge risk",
+        "Standard practice: a disclaimer that the handbook isn't a contract"
+      ],
+      "distractors": [
+        "It replaces at-will employment with a binding contract, which prevents employees from suing the company.",
+        "It lets managers enforce rules differently case by case, which gives the firm more flexibility in discipline.",
+        "It exempts the organization from federal employment laws once employees sign that they've received it."
+      ],
+      "copyOf": "c202-ch04-096"
+    },
+    {
+      "id": "c202-q1-misses-ch04-097",
+      "front": "How does the employee handbook protect employees?",
+      "answer": "It spells out rights, benefits, and complaint channels so everyone is held to the same known rules.",
+      "subtitle": "Ch 4.19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "points": [
+        "Model answer (remote-work-style policy): protects the firm by setting clear expectations it can enforce;",
+        "protects the employee by defining hours, equipment, and reimbursement so they aren't judged by unwritten rules",
+        "Anti-harassment and anti-retaliation policies give a safe way to report"
+      ],
+      "distractors": [
+        "It guarantees lifetime employment and fixed pay raises, which employees can enforce in court.",
+        "It lets each manager set personal rules for their team, so employees know their own boss's style.",
+        "It gives employees the right to rewrite policies they disagree with through a yearly vote."
+      ],
+      "copyOf": "c202-ch04-097"
+    },
+    {
+      "id": "c202-q1-misses-ch04-157",
+      "type": "scenario",
+      "front": "A plant posts this sign: 'Safety glasses must be worn at all times on the production floor.' What type of statement is this?",
+      "choices": [
+        "Procedure",
+        "Mission",
+        "Rule",
+        "Policy"
+      ],
+      "correct": 2,
+      "explanation": "A rule states exactly what employees must or must not do, with no room for discretion.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-157"
+    },
+    {
+      "id": "c202-q1-misses-ch04-158",
+      "type": "scenario",
+      "front": "A company's handbook says: 'We reimburse reasonable business travel expenses so our people can serve clients well.' What type of statement is this?",
+      "choices": [
+        "Rule",
+        "Job description",
+        "Policy",
+        "Procedure"
+      ],
+      "correct": 2,
+      "explanation": "A policy is a broad guiding principle that sets direction and reflects the company's values.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-158"
+    },
+    {
+      "id": "c202-q1-misses-ch04-159",
+      "type": "scenario",
+      "front": "An expense guide reads: '1. Photograph your receipt. 2. Upload it in the app within 30 days. 3. Your manager approves it in the portal.' What type of statement is this?",
+      "choices": [
+        "Rule",
+        "Core value",
+        "Procedure",
+        "Policy"
+      ],
+      "correct": 2,
+      "explanation": "A procedure is the step-by-step sequence for carrying out a task in line with policy.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-159"
+    },
+    {
+      "id": "c202-q1-misses-ch04-160",
+      "type": "scenario",
+      "front": "A company states, 'We offer eight weeks of paid parental leave to support families,' then adds, 'Submit your request in the HR portal at least 30 days before leave begins.' How should these two statements be classified?",
+      "choices": [
+        "The first is a procedure; the second is a policy",
+        "Both are policies",
+        "The first is a policy; the second is a procedure",
+        "Both are rules"
+      ],
+      "correct": 2,
+      "explanation": "The first sets direction (policy). The second gives the how-to steps to use it (procedure).",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-160"
+    },
+    {
+      "id": "c202-q1-misses-ch04-161",
+      "type": "scenario",
+      "front": "An employee fired for sharing confidential client data claims no one ever told her the rule. The company has her signed acknowledgment of the handbook, which includes its confidentiality policy. How did the handbook protect the company?",
+      "choices": [
+        "It doesn't help, since handbooks have no legal value",
+        "It documents that she was told the rule, supporting consistent enforcement",
+        "It makes any firing automatically legal, whatever the reason",
+        "It shifts legal liability for the leak to the client"
+      ],
+      "correct": 1,
+      "explanation": "A handbook with signed acknowledgment proves employees were told the rules, which supports consistent discipline and defends the organization.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-161"
+    },
+    {
+      "id": "c202-q1-misses-ch04-162",
+      "type": "scenario",
+      "front": "An employee is harassed by her supervisor. The handbook gives her a second reporting channel that bypasses the supervisor and promises no retaliation. How does the handbook protect her?",
+      "choices": [
+        "It doesn't; handbooks protect only the company, not employees",
+        "It requires her to resolve it with the supervisor before reporting",
+        "It guarantees her a transfer and a promotion if she reports",
+        "It spells out her rights and a safe way to report without retaliation"
+      ],
+      "correct": 3,
+      "explanation": "Handbooks protect employees by clarifying rights, complaint channels, and protections like anti-retaliation, so treatment is consistent and fair.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-162"
+    },
+    {
+      "id": "c202-q1-misses-ch04-163",
+      "type": "scenario",
+      "front": "A growing company has no handbook, and each manager enforces attendance rules differently. One employee is fired for lateness that others get away with. What's the biggest risk, and what's the fix?",
+      "choices": [
+        "Inconsistent treatment invites discrimination claims; publish a handbook",
+        "No real risk, since managers have full discretion over discipline",
+        "Low morale only; the fix is training managers to be stricter",
+        "Overtime costs; the fix is a new time-tracking system"
+      ],
+      "correct": 0,
+      "explanation": "Without documented rules, enforcement varies by manager. A handbook protects the organization through consistency and employees through clear, shared expectations.",
+      "subtitle": "Ch 4.19 Apply · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-163"
+    },
+    {
+      "id": "c202-q1-misses-ch04-177",
+      "type": "scenario",
+      "front": "The formal system of task, power, and reporting relationships in a company is its organizational...",
+      "choices": [
+        "Chart",
+        "Structure",
+        "Design",
+        "Style"
+      ],
+      "correct": 1,
+      "explanation": "Structure is the system itself. A chart is the diagram of it, and design is the process of choosing it.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-177"
+    },
+    {
+      "id": "c202-q1-misses-ch04-178",
+      "type": "scenario",
+      "front": "A diagram showing a company's chain of command is an organizational...",
+      "choices": [
+        "Structure",
+        "Style",
+        "Design",
+        "Chart"
+      ],
+      "correct": 3,
+      "explanation": "An organizational chart shows who reports to whom.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-178"
+    },
+    {
+      "id": "c202-q1-misses-ch04-179",
+      "type": "scenario",
+      "front": "Selecting and managing aspects of structure to achieve the company's goals is called organizational...",
+      "choices": [
+        "Policy",
+        "Design",
+        "Procedure",
+        "Chart"
+      ],
+      "correct": 1,
+      "explanation": "Organizational design is the process of choosing and managing structure.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-179"
+    },
+    {
+      "id": "c202-q1-misses-ch04-180",
+      "type": "scenario",
+      "front": "A guiding principle that sets the direction for an organization is a...",
+      "choices": [
+        "Rule",
+        "Procedure",
+        "Process",
+        "Policy"
+      ],
+      "correct": 3,
+      "explanation": "A policy sets direction. Procedures give the steps, and rules state what's allowed.",
+      "subtitle": "Ch 4.19 Practice · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-180"
+    },
+    {
+      "id": "c202-q1-misses-ch04-190",
+      "type": "scenario",
+      "front": "Discipline rules, the code of ethics, an at-will statement, and a confidentiality agreement are usually found in the...",
+      "choices": [
+        "Collective bargaining agreement",
+        "Standard operating procedures",
+        "Job description",
+        "Employee handbook"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: the employee handbook documents policies, procedures, and rules like these.",
+      "subtitle": "Ch 4 Quiz Q8 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-190"
+    },
+    {
+      "id": "c202-q1-misses-ch04-191",
+      "type": "scenario",
+      "front": "An organizational chart depicts the formal system called...",
+      "choices": [
+        "Organizational structure",
+        "Organizational design",
+        "Job design",
+        "Job analysis"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: the chart diagrams the organizational structure (task, power, and reporting relationships).",
+      "subtitle": "Ch 4 Quiz Q9 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-191"
+    },
+    {
+      "id": "c202-q1-misses-ch04-192",
+      "type": "scenario",
+      "front": "A basic guideline that directs and limits actions in pursuit of long-term goals is a...",
+      "choices": [
+        "Procedure",
+        "Process",
+        "Protocol",
+        "Policy"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: a policy is a guiding principle that sets direction.",
+      "subtitle": "Ch 4 Quiz Q10 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-192"
+    },
+    {
+      "id": "c202-q1-misses-ch04-193",
+      "type": "scenario",
+      "front": "A directive that spells out the specific actions to take to reach an objective is a...",
+      "choices": [
+        "Policy",
+        "Procedure",
+        "Protocol",
+        "Process"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: a procedure is the how-to sequence of steps.",
+      "subtitle": "Ch 4 Quiz Q11 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-193"
+    },
+    {
+      "id": "c202-q1-misses-ch04-195",
+      "type": "scenario",
+      "front": "Where is the most reasonable place to publish company policies, procedures, and rules?",
+      "choices": [
+        "Job description",
+        "Employee handbook",
+        "Code of conduct",
+        "Company website"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: the employee handbook collects policies, procedures, and rules.",
+      "subtitle": "Ch 4 Quiz Q13 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-195"
+    },
+    {
+      "id": "c202-q1-misses-ch04-196",
+      "type": "scenario",
+      "front": "Which best defines a policy?",
+      "choices": [
+        "A sequence of steps",
+        "A statement of what's permitted",
+        "A process for ensuring consistency",
+        "A guiding principle that sets direction"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: a policy is a guiding principle setting direction.",
+      "subtitle": "Ch 4 Quiz Q14 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-196"
+    },
+    {
+      "id": "c202-q1-misses-ch04-197",
+      "type": "scenario",
+      "front": "Which best defines a procedure?",
+      "choices": [
+        "A how-to sequence of steps for applying guidelines to a task",
+        "A guiding principle",
+        "A process for ensuring consistency",
+        "A statement of what's permitted"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: a procedure is a step-by-step sequence for doing a task.",
+      "subtitle": "Ch 4 Quiz Q15 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-197"
+    },
+    {
+      "id": "c202-q1-misses-ch04-198",
+      "type": "scenario",
+      "front": "Which best defines a rule?",
+      "choices": [
+        "A sequence of steps",
+        "A process for ensuring consistency",
+        "A guiding principle",
+        "A statement of what employees may or may not do"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: a rule says what is or isn't permitted.",
+      "subtitle": "Ch 4 Quiz Q16 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-198"
+    },
+    {
+      "id": "c202-q1-misses-ch04-199",
+      "type": "scenario",
+      "front": "Which of the following is a rule?",
+      "choices": [
+        "A commitment to transparent communication",
+        "No personal cell phone use while on the job",
+        "401(k) eligibility after 90 days",
+        "A restroom-cleaning rotation"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: a rule states a must or must-not. Transparency is a value or policy, 401(k) eligibility is a policy, and a rotation is a procedure or schedule.",
+      "subtitle": "Ch 4 Quiz Q17 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-199"
+    },
+    {
+      "id": "c202-q1-misses-ch04-200",
+      "type": "scenario",
+      "front": "Employees accrue 2.15 hours of emergency personal time each pay period, up to 56 hours a year. This statement is a...",
+      "choices": [
+        "Procedure",
+        "Process",
+        "Protocol",
+        "Policy"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: it's a standing decision about a benefit, which makes it a policy. Moderate confidence, since it reads like a rule too, but 'rule' isn't a choice.",
+      "subtitle": "Ch 4 Quiz Q18 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-200"
+    },
+    {
+      "id": "c202-q1-misses-ch04-201",
+      "type": "scenario",
+      "front": "Employees using emergency time must call their supervisor within one hour of their shift start. This statement is a...",
+      "choices": [
+        "Policy",
+        "Protocol",
+        "Procedure",
+        "Process"
+      ],
+      "correct": 2,
+      "explanation": "Likely per text: it tells employees how to carry out the policy, which makes it a procedure.",
+      "subtitle": "Ch 4 Quiz Q19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-201"
+    },
+    {
+      "id": "c202-q1-misses-ch04-202",
+      "type": "scenario",
+      "front": "Fill in the blanks: a ___ is a decision already made, and a ___ is how to complete an action.",
+      "choices": [
+        "Rule; procedure",
+        "Policy; procedure",
+        "Procedure; policy",
+        "Policy; rule"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: a policy reflects a decision already made; a procedure describes how to act. Moderate confidence, since a rule could also be called a decision made.",
+      "subtitle": "Ch 4 Quiz Q20 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-202"
+    },
+    {
+      "id": "c202-q1-misses-new-4-19-1",
+      "type": "scenario",
+      "front": "Which organizational feature coordinates, controls and motivates employees to work together toward the organization's goals?",
+      "choices": [
+        "Organizational structure",
+        "Organizational chart",
+        "Organizational commitment",
+        "Organizational design"
+      ],
+      "correct": 0,
+      "explanation": "Structure, the formal system of task, power and reporting relationships, coordinates, controls and motivates. The chart only diagrams it, and design is the process of choosing it.",
+      "subtitle": "Q1 review · Organizational structure",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-q1-misses-new-4-19-2",
+      "type": "scenario",
+      "front": "The process of choosing and managing an organization's structure to reach its goals is called ____.",
+      "choices": [
+        "organizational chart",
+        "organizational structure",
+        "organizational design",
+        "job analysis"
+      ],
+      "correct": 2,
+      "explanation": "Organizational design is the process; organizational structure is the result; the organizational chart is the diagram.",
+      "subtitle": "Q1 review · Organizational structure",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-q1-misses-new-4-19-3",
+      "type": "scenario",
+      "front": "A diagram showing the chain of command from top leadership to front-line staff is a(n) ____.",
+      "choices": [
+        "organizational design",
+        "organizational chart",
+        "person specification",
+        "employee handbook"
+      ],
+      "correct": 1,
+      "explanation": "An organizational chart diagrams the chain of command. Chart position isn't the same as importance.",
+      "subtitle": "Q1 review · Organizational structure",
+      "note": "Read more: 4.19 Organizational Structure"
+    }
+  ]
+}
