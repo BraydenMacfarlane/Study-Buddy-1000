@@ -348,10 +348,6 @@
     .course { margin-bottom: 22px; }
     .course-head { font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--primary); margin: 4px 0 10px; border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
     .course-head .muted { text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: 6px; }
-    .folder-card.locked { opacity: .55; background: #eeebe3; box-shadow: none; }
-    .folder-card.locked:hover { opacity: .8; }
-    .lock { font-size: 12px; font-weight: 650; color: var(--muted); margin-bottom: 6px; }
-    .lock.open { color: var(--accent-ink); }
     .boss-line.passed strong { color: var(--ok); }
     .boss-result { text-align: center; padding: 26px 16px; border-top: 6px solid var(--bad); }
     .boss-result.pass { border-top-color: var(--ok); }
@@ -2178,7 +2174,6 @@
 
     /* ---------- Courses, chapter order and soft gating ---------- */
     const BOSS_PASS = 80;
-    const sessionUnlocked = new Set();
 
     function hasOrder(f) { return typeof f.order === "number" && Number.isFinite(f.order); }
 
@@ -2197,10 +2192,9 @@
     }
     // The previous chapter this folder is waiting on, or null if it's open.
 
-    function lockedBehind(f) {
-      const prev = prevChapter(f);
-      return prev && !(prev.bestBoss && prev.bestBoss.passed) ? prev : null;
-    }
+    // Chapters are no longer soft-locked: every chapter (and review deck) opens freely.
+    // Boss quizzes, best scores, plan pacing and path suggestions are unchanged.
+    function lockedBehind(f) { return null; }
 
     function chLabel(f) { return hasOrder(f) ? "Ch " + f.order : f.name; }
 
@@ -2262,11 +2256,8 @@
       const all = cardsIn(f.id);
       const retired = all.filter((c) => prog(c.id).retired).length;
       const scen = all.filter(isScenario).length;
-      const prev = lockedBehind(f);
-      const locked = prev && !sessionUnlocked.has(f.id);
       return `
-        <div class="card folder-card ${locked ? "locked" : ""}" data-open="${f.id}" ${locked ? `data-locked="${escaped(chLabel(prev))}"` : ""}>
-          ${locked ? `<div class="lock">🔒 Pass ${escaped(chLabel(prev))} boss to unlock</div>` : (prev ? `<div class="lock open">Opened early</div>` : "")}
+        <div class="card folder-card" data-open="${f.id}">
           <h3>${escaped(f.name)}</h3>
           <div class="muted">${all.length} cards · ${retired} mastered${scen ? ` · ${scen} scenarios` : ""}</div>
           <div class="muted" style="margin-top:6px">${bossLine(f)}${f.bestMatch ? ` · Match best ${fmtTime(f.bestMatch.ms)}` : ""}</div>
@@ -2328,10 +2319,6 @@
         el.onclick = async (e) => {
           const wantGuide = !!(e.target.closest && e.target.closest("[data-guide]"));
           if (wantGuide) e.preventDefault();
-          if (el.dataset.locked) {
-            if (!(await askConfirm(`This chapter is locked until you pass the ${el.dataset.locked} boss quiz.\n\nOpen anyway?`))) return;
-            sessionUnlocked.add(el.dataset.open);
-          }
           view.page = wantGuide ? "guide" : "folder";
           view.folderId = el.dataset.open;
           render();
@@ -2378,7 +2365,6 @@
         ${weakPanelHtml(folder)}
         <div class="card" style="margin-top:12px">
           <div class="muted">${left} in the mix · ${retired} pulled out after ${RETIRE_AFTER} correct in a row · ${bossLine(folder)}${folder.bestBoss ? ` (${fmtDate(folder.bestBoss.date)})` : ""}</div>
-          ${lockedBehind(folder) ? `<div class="muted" style="margin-top:4px">🔒 Opened early: ${escaped(chLabel(lockedBehind(folder)))} boss not passed yet</div>` : ""}
           ${resumeButtonsHtml(folder)}
           <div class="mode-grid">
             <button class="gold" id="studyBtn" ${left ? "" : "disabled"}>Study shuffled<small>all cards, mixed</small></button>
@@ -3656,7 +3642,7 @@
           <div class="boss-badge">${r.passed ? "Boss defeated" : "Not yet"}</div>
           <div class="boss-score">${r.pct}%</div>
           <div class="muted">${r.correct} of ${r.total} correct · pass mark ${BOSS_PASS}%${folder.bestBoss ? ` · best ${Math.round(folder.bestBoss.pct)}%` : ""}${r.newBest ? " · new best!" : ""}</div>
-          ${r.passed && next ? `<p style="margin:10px 0 0"><strong>${escaped(next.name)}</strong> is ${r.unlocked ? "now unlocked" : "open"}.</p>` : ""}
+          ${r.passed && next ? `<p style="margin:10px 0 0"><strong>${escaped(next.name)}</strong> is up next.</p>` : ""}
           ${!r.passed ? `<p style="margin:10px 0 0" class="muted">Review the misses below, practice them, then try again.</p>` : ""}
           <div class="row" style="justify-content:center;margin-top:14px">
             <button class="${r.passed ? "secondary" : "gold"}" id="bossPractice" ${missed.length ? "" : "disabled"}>Practice missed (${missed.length})</button>

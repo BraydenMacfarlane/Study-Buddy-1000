@@ -221,14 +221,11 @@ async function testBossGating() {
   ok((await p.locator('.course-head').allTextContents()).some((t) => t.startsWith('C202')), 'C202 course heading present');
   const order = await p.$$eval('.course >> nth=0 >> .folder-card h3', (els) => els.map((e) => e.textContent));
   ok(/Ch 1/.test(order[0]) && /Ch 2/.test(order[1]), 'chapters sorted by order under course');
-  ok(await p.locator('[data-open="deck-c202-ch02"].locked').count() === 1 && /Pass Ch 1 boss to unlock/.test(await p.textContent('[data-open="deck-c202-ch02"]')), 'Ch 2 locked behind Ch 1 boss');
-  ok(await p.locator('[data-open="deck-c202-ch01"].locked').count() === 0, 'Ch 1 is open');
-  p.dialogAnswers = [false]; await p.click('[data-open="deck-c202-ch02"]');
-  ok((await S(p, () => view.page)) === 'home' && /Open anyway/.test(p.dialogLog.pop()), 'locked click asks "Open anyway?"; cancel stays home');
-  p.dialogAnswers = [true]; await p.click('[data-open="deck-c202-ch02"]');
-  ok((await S(p, () => view.page + ':' + view.folderId)) === 'folder:deck-c202-ch02', 'override opens the folder');
+  ok(await p.locator('.folder-card.locked, .lock').count() === 0 && !/unlock|🔒|Opened early/i.test(await p.textContent('#app')), 'no chapter is locked (Ch 2 open before the Ch 1 boss)');
+  p.dialogLog.length = 0; await p.click('[data-open="deck-c202-ch02"]');
+  ok((await S(p, () => view.page + ':' + view.folderId)) === 'folder:deck-c202-ch02' && p.dialogLog.length === 0 && !(await p.locator('#confirmDlg').count()), 'Ch 2 opens straight away, no "Open anyway?" prompt');
+  ok(!/Opened early|boss not passed/i.test(await p.textContent('#app')), 'chapter screen has no lock notice');
   await p.click('#backHome');
-  ok(/Opened early/.test(await p.textContent('[data-open="deck-c202-ch02"]')), 'overridden folder shows "Opened early" this session');
   await p.click('[data-open="deck-c202-ch01"]'); await p.click('#bossBtn'); if (await p.locator('#ovSkip').count()) await p.click('#ovSkip');
   ok((await S(p, () => view.boss.ids.length)) === 12, 'boss includes all 12 cards (scenarios + regular)');
   ok(await p.locator('#bossNext[disabled]').count() === 1, 'cannot advance without answering (no skip)');
@@ -243,12 +240,12 @@ async function testBossGating() {
   await p.click('#bossPractice');
   ok((await S(p, () => view.page + ':' + view.quizTotal)) === 'quiz:12', 'Practice missed starts a quiz of the missed cards');
   await p.click('#exitStudy'); await p.reload();
-  ok(await p.locator('[data-open="deck-c202-ch02"].locked').count() === 1, 'after reload, Ch 2 still locked after failing');
+  ok(await p.locator('.folder-card.locked').count() === 0, 'after failing the boss, Ch 2 is still open');
   ok(/Boss best: 0%/.test(await p.textContent('[data-open="deck-c202-ch01"]')), 'best boss score shown on folder card');
   await p.click('[data-open="deck-c202-ch01"]'); await p.click('#bossBtn'); if (await p.locator('#ovSkip').count()) await p.click('#ovSkip');
   await answerBoss(p, (i) => i >= 2); // 10/12 = 83%
   txt = await p.textContent('#bossResult');
-  ok(/Boss defeated/.test(txt) && /83%/.test(txt) && /now unlocked/.test(txt), 'pass at 83% unlocks next chapter');
+  ok(/Boss defeated/.test(txt) && /83%/.test(txt) && /is up next/.test(txt), 'pass at 83% points to the next chapter');
   ok(await p.locator('.review-item').count() === 2, 'review shows 2 missed');
   const bb = await S(p, () => folderById('deck-c202-ch01').bestBoss);
   ok(bb.pct === 83 && bb.passed && /^\d{4}-\d\d-\d\d$/.test(bb.date), 'bestBoss stored {pct:83, passed, date}');
@@ -256,7 +253,7 @@ async function testBossGating() {
   const bb2 = await S(p, () => folderById('deck-c202-ch01').bestBoss);
   ok(bb2.pct === 83 && bb2.passed, 'a worse retake keeps the best score and passed flag');
   await p.reload();
-  ok(await p.locator('.folder-card.locked').count() === 0 && /Boss best: 83%/.test(await p.textContent('[data-open="deck-c202-ch01"]')), 'after reload Ch 2 unlocked; best 83% shown');
+  ok(await p.locator('.folder-card.locked').count() === 0 && /Boss best: 83%/.test(await p.textContent('[data-open="deck-c202-ch01"]')), 'after reload nothing is locked; best 83% shown');
   await ctx.close();
 }
 
@@ -579,7 +576,7 @@ async function testReal(raw) {
     for (const d of [d1, d2]) ok(st.cards.filter((c) => c.folderId === 'deck-' + d.id).length === d.cards.length, `${mode}: ${d.id} has ${d.cards.length} cards`);
     const course = await p.textContent('.course >> nth=0');
     ok(/^\s*C202/.test(await p.textContent('.course-head >> nth=0')) && course.includes(d1.folder) && course.includes(d2.folder), `${mode}: both chapters under the C202 heading`);
-    ok(await p.locator('[data-open="deck-c202-ch02"].locked').count() === 1, `${mode}: Ch 2 soft-locked until the Ch 1 boss is passed`);
+    ok(await p.locator('.folder-card.locked').count() === 0, `${mode}: every chapter is open (no soft-lock)`);
     if (mode === 'v1') {
       const old = JSON.parse(raw);
       ok(old.cards.every((c) => st.cards.some((x) => x.id === c.id && x.front === c.front)) && Object.entries(old.progress).every(([k, v]) => JSON.stringify(st.progress[k]) === JSON.stringify(v)), 'v1: existing cards and progress intact alongside the decks');
@@ -612,7 +609,7 @@ async function testReal(raw) {
     ok((await S(p, () => view.boss.ids.length)) === d1.cards.length, `${mode}: boss has all ${d1.cards.length} cards`);
     await answerBoss(p, (i) => i % 10 !== 0);
     const res = await p.textContent('#bossResult');
-    ok(/Boss defeated/.test(res) && /now unlocked/.test(res), `${mode}: Ch 1 boss passes (${res.match(/\d+%/)[0]}) and unlocks Ch 2`);
+    ok(/Boss defeated/.test(res) && /is up next/.test(res), `${mode}: Ch 1 boss passes (${res.match(/\d+%/)[0]}) and points to Ch 2`);
     ok(await p.locator('.review-item .readmore').count() > 0, `${mode}: boss review shows Read more`);
     await p.click('#exitBoss'); await p.click('#matchBtn');
     const ids = await S(p, () => view.match.pairs.map((x) => x.id));
@@ -620,8 +617,8 @@ async function testReal(raw) {
     await p.waitForSelector('#matchResult');
     ok(ids.length === 6, `${mode}: matching game completes on Ch 1`);
     await p.click('#matchBack'); await p.click('#backHome');
-    ok(await p.locator('.folder-card.locked[data-open="deck-c202-ch02"]').count() === 0 && await p.locator('[data-open="deck-c202-ch02"]').count() === 1, `${mode}: Ch 2 unlocked on home`);
-    if (await p.locator('[data-open="deck-c202-ch03"]').count()) ok(await p.locator('.folder-card.locked[data-open="deck-c202-ch03"]').count() === 1, `${mode}: Ch 3 still locked behind Ch 2 boss`);
+    ok(await p.locator('.folder-card.locked[data-open="deck-c202-ch02"]').count() === 0 && await p.locator('[data-open="deck-c202-ch02"]').count() === 1, `${mode}: Ch 2 open on home`);
+    if (await p.locator('[data-open="deck-c202-ch03"]').count()) ok(await p.locator('.folder-card.locked[data-open="deck-c202-ch03"]').count() === 0, `${mode}: Ch 3 open too, without passing the Ch 2 boss`);
     await p.click('[data-open="deck-c202-ch02"]'); await p.click('#matchBtn');
     ok(/Read the study guide first\? \(~15 min\)/.test(await p.textContent('.dialog-body')), `${mode}: Ch 2 nudge shows ~15 min`);
     await p.click('#ovSkip');
@@ -1663,8 +1660,7 @@ async function testKeys() {
   const home = await kn(p, '[data-open]');
   ok(home && home.t === '(1)' && home.shown && home.aria === '1', 'home: chapter cards are numbered (1)..(9) with aria-keyshortcuts');
   await p.click(`[data-open="${F}"]`);
-  ok(await p.locator('#confirmDlg').count() === 1 && /locked/.test(await p.textContent('#confirmDlg')), 'locked chapter asks in the custom dialog');
-  await press(p, '1');
+  ok(await p.locator('#confirmDlg').count() === 0 && await S(p, () => view.page === 'folder'), 'chapter opens with no lock dialog');
   const grid = await S(p, () => Array.from(document.querySelectorAll('.mode-grid button')).map((b) => [b.id, (b.querySelector('.kn') || {}).textContent]));
   ok(JSON.stringify(grid) === JSON.stringify([['studyBtn', '(1)'], ['conceptBtn', '(2)'], ['scenarioBtn', '(3)'], ['quizBtn', '(4)'], ['quickBtn', '(5)'], ['matchBtn', '(6)'], ['bossBtn', '(7)']]), 'chapter screen: modes are 1 Study shuffled … 7 Boss');
   await press(p, '2');
@@ -1855,10 +1851,10 @@ async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
   for (const [tag, opt] of [['desktop', { viewport: { width: 1280, height: 800 } }], ['phone', { device: 'iPhone 13' }]]) {
-    // samples: grouping/locked, scenario, boss results, match
+    // samples: grouping, scenario, boss results, match
     let { ctx, p } = await page({ ...opt, now: NOW });
     await p.goto(SAMPLES); await hideToast(p);
-    await p.screenshot({ path: `${SHOTS}/home-course-locked-${tag}.png`, fullPage: true });
+    await p.screenshot({ path: `${SHOTS}/home-course-${tag}.png`, fullPage: true });
     await p.click('[data-open="deck-c202-ch01"]');
     await p.click('#studyBtn');
     await p.screenshot({ path: `${SHOTS}/read-guide-prompt-${tag}.png` });
