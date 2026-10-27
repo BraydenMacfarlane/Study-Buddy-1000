@@ -1799,7 +1799,7 @@ async function testQ1Review() {
     return { name: f && f.name, course: f && f.course, order: f && f.order, after: f && f.sortAfter, total: cards.length, copies: copies.length, fresh: fresh.length, okCopies,
       secs: [...new Set(cards.map(cardSection))].sort(), per: Object.values(per),
       freshOk: fresh.every((c) => isScenario(c) && c.choices.length === 4 && new Set(c.choices).size === 4 && !!cleanStr(c.explanation) && /^c202-q1-misses-new-/.test(c.id)),
-      chapters: courseInfo('C202').chapters, gated: !!lockedBehind(f), flags: Object.keys(state.flags).filter((k) => k.startsWith('C202|')).map((k) => k.slice(5)).sort(),
+      chapters: courseInfo('C202').chapters, gated: !!lockedBehind(f), flags: Object.keys(state.flags).filter((k) => k.startsWith('C202|') && /Q1 /.test(state.flags[k].src)).map((k) => k.slice(5)).sort(),
       flagGot: Object.values(state.flags).map((x) => x.got) };
   }, R);
   ok(info.name === 'C202 Q1 Quiz Misses' && info.course === 'C202' && info.order === undefined && info.after === 4, 'bundled deck "C202 Q1 Quiz Misses" (course C202, no chapter order, sorted after Ch 4)');
@@ -1839,10 +1839,63 @@ async function testQ1Review() {
   // Plan text / share summary
   await p.click('#planBtn'); await p.click('#savePlan'); await hideToast(p); await p.click('#planBack');
   const sh = await S(p, () => ({ plan: planText('C202'), sum: syncSummary() }));
-  ok(/flagged from Q1 quarter quiz \(Ch 1-4\) \(Q3\) · 0 of 5 correct to clear/.test(sh.plan) && sh.sum.courses.C202.length === 14 && sh.sum.reviews && sh.sum.reviews.C202[0].name === 'C202 Q1 Quiz Misses', 'plan text lists the quiz flags; share summary keeps 14 chapters and lists the review deck apart');
+  ok(/flagged from Q1 quarter quiz \(Ch 1-4\) \(Q3\) · 0 of 5 correct to clear/.test(sh.plan) && sh.sum.courses.C202.length === 14 && sh.sum.reviews && sh.sum.reviews.C202.some((r) => r.name === 'C202 Q1 Quiz Misses') && sh.sum.reviews.C202.some((r) => r.name === 'C202 Q2 Quiz Misses'), 'plan text lists the quiz flags; share summary keeps 14 chapters and lists the review deck apart');
   // Merge
   const mg = await S(p, () => mergeSyncPayloads({ q: { k: { got: 3, need: 5, t: 10, q: 'Q3' } } }, { q: { k: { got: 1, need: 5, t: 5, q: 'Q3' }, j: { got: 0, need: 5, t: 7 } } }).q);
   ok(mg.k.got === 3 && mg.k.t === 5 && mg.j.got === 0, 'flags merge: progress toward clearing keeps the max, never double counts');
+  ok(await noBroke(p), 'app fine');
+  await ctx.close();
+}
+
+/* ---------- Q2 quarter-quiz review deck ---------- */
+async function testQ2Review() {
+  console.log('\n[22] C202 Q2 Quiz Misses review deck');
+  const R = 'deck-c202-q2-misses';
+  const SECS = ["7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment", '8.17 Progressive Discipline', '8.4 Why Is Performance Management Important?'];
+  const { ctx, p } = await page();
+  await p.goto(GIST); await hideToast(p);
+  const pre = await S(p, () => {
+    const st = JSON.parse(localStorage.getItem('flashcards.v1'));
+    const id = cardsIn('deck-c202-ch08').find((c) => /^Read more: 8\.17 /.test(c.note || '')).id;
+    st.progress[id] = { streak: 2, retired: true }; st.attempts = { [id]: [3, 1, 1760000000000, '1011'] };
+    Object.keys(st.flags || {}).forEach((k) => { if (/Q2 /.test(st.flags[k].src)) delete st.flags[k]; });
+    delete st.bundled['c202-q2-misses'];
+    st.folders = st.folders.filter((f) => f.id !== 'deck-c202-q2-misses'); st.cards = st.cards.filter((c) => c.folderId !== 'deck-c202-q2-misses');
+    localStorage.setItem('flashcards.v1', JSON.stringify(st));
+    return { id, pr: st.progress[id], at: st.attempts[id] };
+  });
+  await p.reload(); await hideToast(p);
+  const info = await S(p, (R) => {
+    const f = folderById(R), cards = cardsIn(R), copies = cards.filter((c) => c.copyOf), fresh = cards.filter((c) => !c.copyOf);
+    const okCopies = copies.every((c) => { const o = state.cards.find((x) => x.id === c.copyOf); return o && o.front === c.front && o.id !== c.id && /^deck-c202-ch0[78]$/.test(o.folderId); });
+    const per = {}; fresh.forEach((c) => { per[cardSection(c)] = (per[cardSection(c)] || 0) + 1; });
+    return { name: f && f.name, course: f && f.course, order: f && f.order, after: f && f.sortAfter, total: cards.length, copies: copies.length, fresh: fresh.length, okCopies,
+      secs: [...new Set(cards.map(cardSection))].sort(), per: Object.values(per),
+      freshOk: fresh.every((c) => isScenario(c) && c.choices.length === 4 && new Set(c.choices).size === 4 && !!cleanStr(c.explanation) && /^c202-q2-misses-new-/.test(c.id)),
+      chapters: courseInfo('C202').chapters, flags: Object.keys(state.flags).filter((k) => /Q2 quarter quiz/.test(state.flags[k].src)).map((k) => k.slice(5)).sort(),
+      q1flags: Object.keys(state.flags).filter((k) => /Q1 quarter quiz/.test(state.flags[k].src)).length };
+  }, R);
+  ok(info.name === 'C202 Q2 Quiz Misses' && info.course === 'C202' && info.order === undefined && info.after === 8, 'bundled deck "C202 Q2 Quiz Misses" (course C202, no chapter order, sorted after Ch 8)');
+  ok(info.total === 77 && info.copies === 68 && info.fresh === 9 && info.okCopies, `77 cards: 68 copies of Ch 7/8 cards (copyOf -> original) + 9 new scenarios`);
+  ok(JSON.stringify(info.secs) === JSON.stringify(SECS.slice().sort()) && info.per.length === 3 && info.per.every((n) => n === 3) && info.freshOk, '7.12, 8.4, 8.17 covered, 3 new 4-choice scenarios each');
+  ok(info.chapters === 14 && JSON.stringify(info.flags) === JSON.stringify(SECS.slice().sort()) && info.q1flags === 7, 'the 3 sections are seeded as Q2 flags; Q1 flags kept; plan still 14 chapters');
+  const post = await S(p, (id) => ({ pr: state.progress[id], at: state.attempts[id] }), pre.id);
+  ok(JSON.stringify(post) === JSON.stringify({ pr: pre.pr, at: pre.at }), 'existing Ch 8 progress and attempts untouched');
+  const order = await S(p, () => Array.from(document.querySelectorAll('.course .folder-card')).map((e) => e.dataset.open));
+  ok(order.indexOf(R) === order.indexOf('deck-c202-ch08') + 1 && order.indexOf('deck-c202-q1-misses') === order.indexOf('deck-c202-ch04') + 1, 'Home shows Q2 review right after Ch 8 (Q1 stays after Ch 4)');
+  await p.click(`[data-open="${R}"]`); await skipVis(p);
+  ok((await S(p, () => view.page + ':' + view.folderId)) === 'folder:' + R && p.dialogLog.length === 0, 'opens freely (no gating)');
+  const panel = await S(p, () => Array.from(document.querySelectorAll('#weakPanel .weak-row')).map((r) => (r.querySelector('.weak-flag') || {}).textContent));
+  ok(panel.length === 3 && panel.every((x) => /flagged from Q2 quarter quiz \(Ch 5-8\) \(Q\d+\) · 0 of 5 correct to clear/.test(x)), 'review panel lists the 3 flagged sections');
+  const sec = '8.17 Progressive Discipline';
+  await p.click(`#weakPanel [data-review="${sec}"]`); await skipVis(p);
+  const c0 = await S(p, () => { const c = currentCard(); return { id: c.id, orig: c.copyOf || null }; });
+  const b = await S(p, (c) => c.orig ? (state.attempts[c.orig] || [0, 0])[1] : null, c0);
+  await answerCard(p, false);
+  const a = await S(p, (c) => c.orig ? state.attempts[c.orig][1] : null, c0);
+  ok(!c0.orig || a === b + 1, 'an answer on a copy counts toward its chapter original');
+  for (let i = 0; i < 6; i++) await answerCard(p, true);
+  ok(await S(p, (s) => state.flags['C202|' + s].got >= 5, sec), 'correct answers clear the 8.17 flag');
   ok(await noBroke(p), 'app fine');
   await ctx.close();
 }
@@ -1934,6 +1987,7 @@ async function screenshots() {
     await testWeakSpots();
     await testKeys();
     await testQ1Review();
+    await testQ2Review();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));

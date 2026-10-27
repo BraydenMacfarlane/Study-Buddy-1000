@@ -4,3 +4,4 @@ node_modules/
 firebase-debug.log
 firestore-debug.log
 decks/source/c202-q1-quiz-questions.md
+decks/source/*-quiz-questions.md

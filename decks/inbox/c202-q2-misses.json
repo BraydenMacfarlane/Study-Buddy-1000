@@ -1,0 +1,1264 @@
+{
+  "id": "c202-q2-misses",
+  "folder": "C202 Q2 Quiz Misses",
+  "course": "C202",
+  "sortAfter": 8,
+  "source": "Built from the C202 Ch 7-8 decks and study guides (Phillips, Human Resource Management, 3rd ed.)",
+  "summary": "# C202 Q2 quarter quiz: review deck\n\nThis deck collects the cards for the three textbook sections missed on the Ch 5-8 quarter quiz (27/30), plus new practice scenarios for each. Progress here is separate from the chapter decks, but every answer also counts toward the weak-spot tracker for the matching chapter section.\n\n- **Q12** Progressive discipline steps: 8.17 Progressive Discipline\n- **Q23** Kirkpatrick levels (customer satisfaction = results): 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment\n- **Q30** Feedback tracks progress toward goals: 8.4 Why Is Performance Management Important?\n\nEach section is flagged as a weak spot until you answer 5 questions from it correctly (a miss sets it back by one).\n",
+  "flags": [
+    {
+      "section": "7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "q": "Q23",
+      "topic": "Kirkpatrick levels (customer satisfaction = results)",
+      "src": "Q2 quarter quiz (Ch 5-8)"
+    },
+    {
+      "section": "8.4 Why Is Performance Management Important?",
+      "q": "Q30",
+      "topic": "Feedback tracks progress toward goals",
+      "src": "Q2 quarter quiz (Ch 5-8)"
+    },
+    {
+      "section": "8.17 Progressive Discipline",
+      "q": "Q12",
+      "topic": "Progressive discipline steps",
+      "src": "Q2 quarter quiz (Ch 5-8)"
+    }
+  ],
+  "cards": [
+    {
+      "id": "c202-q2-misses-ch07-043",
+      "front": "What are Kirkpatrick's four levels of training evaluation?",
+      "answer": "Reaction, learning, behavior, and results.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Each level feeds the next",
+        "Cost and difficulty rise with each level"
+      ],
+      "distractors": [
+        "Reaction, learning, transfer, and ROI.",
+        "Needs, objectives, design, and results.",
+        "Learning, behavior, results, and ROI."
+      ],
+      "copyOf": "c202-ch07-043"
+    },
+    {
+      "id": "c202-q2-misses-ch07-044",
+      "front": "What does Kirkpatrick's reaction level measure?",
+      "answer": "How participants felt about the training, such as satisfaction and engagement.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Feedback forms and surveys",
+        "Fast, easy, cheap"
+      ],
+      "distractors": [
+        "The change in participants' knowledge, skills, or attitudes after training.",
+        "Whether people use what they learned on the job in their daily work.",
+        "The training's business impact on sales, quality, safety, or ROI."
+      ],
+      "copyOf": "c202-ch07-044"
+    },
+    {
+      "id": "c202-q2-misses-ch07-045",
+      "front": "What does Kirkpatrick's learning level measure?",
+      "answer": "The change in participants' knowledge, skills, or attitudes.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Pre/post tests, observation, simulations",
+        "Dunkin': bake 140 dozen donuts in 8 hours"
+      ],
+      "distractors": [
+        "How participants felt about the training session itself.",
+        "Whether people use what they learned back on the job.",
+        "The training's impact on sales, quality, safety, or ROI."
+      ],
+      "copyOf": "c202-ch07-045"
+    },
+    {
+      "id": "c202-q2-misses-ch07-046",
+      "front": "What does Kirkpatrick's behavior level measure?",
+      "answer": "Whether people use what they learned on the job (transfer).",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Long-term observation; supervisor support makes it easier",
+        "Verizon: new-hire metrics at 30/60/90 days"
+      ],
+      "distractors": [
+        "The change in participants' knowledge, skills, or attitudes.",
+        "How participants felt about the training and the trainer.",
+        "The training's business impact, such as sales or quality."
+      ],
+      "copyOf": "c202-ch07-046"
+    },
+    {
+      "id": "c202-q2-misses-ch07-047",
+      "front": "What does Kirkpatrick's results level measure?",
+      "answer": "The training's business impact, such as sales, quality, safety, or ROI.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Hardest to isolate",
+        "CarMax checks whether trained behaviors drive performance"
+      ],
+      "distractors": [
+        "Whether people use what they learned on the job in their work.",
+        "How participants felt about the training, such as satisfaction.",
+        "The change in participants' knowledge, skills, or attitudes."
+      ],
+      "copyOf": "c202-ch07-047"
+    },
+    {
+      "id": "c202-q2-misses-ch07-048",
+      "front": "Why does each Kirkpatrick level depend on the one before it?",
+      "answer": "No enjoyment means less learning, no learning means no behavior change, and no change means no results.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Evaluate against the original goals"
+      ],
+      "distractors": [
+        "Each level is measured by a different department, so results flow from HR to finance to executives.",
+        "Results come first, then behavior, then learning, so business gains drive what trainees learn later.",
+        "They don't depend on each other; a program can show results without any learning or behavior change."
+      ],
+      "copyOf": "c202-ch07-048"
+    },
+    {
+      "id": "c202-q2-misses-ch07-049",
+      "front": "How do cost and difficulty change across Kirkpatrick's levels?",
+      "answer": "They rise with each level: reaction is cheapest and easiest, results the hardest to measure.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Measure multiple outcomes where you can"
+      ],
+      "distractors": [
+        "They fall with each level: results are cheapest, since company numbers already exist in reports.",
+        "They stay the same at every level, since each one uses the same survey tools and methods.",
+        "Reaction is the hardest and costliest, since feelings are difficult to measure accurately."
+      ],
+      "copyOf": "c202-ch07-049"
+    },
+    {
+      "id": "c202-q2-misses-ch07-050",
+      "front": "What's a quick way to label a Kirkpatrick level from an example?",
+      "answer": "Survey = reaction; test = learning; doing it on the job = behavior; company numbers = results.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Retailer results: sales and conversion, not hours trained"
+      ],
+      "distractors": [
+        "Survey = learning; test = reaction; company numbers = behavior; doing it on the job = results.",
+        "Survey = behavior; test = results; doing it on the job = learning; company numbers = reaction.",
+        "Survey = results; test = behavior; company numbers = learning; doing it on the job = reaction."
+      ],
+      "copyOf": "c202-ch07-050"
+    },
+    {
+      "id": "c202-q2-misses-ch07-051",
+      "front": "What is the training ROI formula?",
+      "answer": "ROI% = (training benefits − training costs) ÷ training costs × 100.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Positive: continue, maybe improve",
+        "Negative: change or drop, unless unmeasured benefits like morale"
+      ],
+      "distractors": [
+        "ROI% = training benefits ÷ training costs × 100, with no subtraction.",
+        "ROI% = (training costs − training benefits) ÷ training benefits × 100.",
+        "ROI% = (training benefits − training costs) ÷ training benefits × 100."
+      ],
+      "copyOf": "c202-ch07-051"
+    },
+    {
+      "id": "c202-q2-misses-ch07-052",
+      "front": "A $40,000 program yields $200,000 in benefits. What is the ROI, and what does it mean?",
+      "answer": "400%: (200,000 − 40,000) ÷ 40,000. That's a $4 net gain per $1 invested, or $5 back in total.",
+      "subtitle": "Ch 7.12 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "points": [
+        "Book: 'a return of 400 percent, or $4' means net gain, not total returned"
+      ],
+      "distractors": [
+        "500%: 200,000 ÷ 40,000. That's a $5 net gain per $1 invested, or $6 back in total.",
+        "400%: (200,000 − 40,000) ÷ 40,000. That's a $4 return in total for each $1 invested.",
+        "80%: (200,000 − 40,000) ÷ 200,000. That's an 80-cent net gain per $1 invested overall."
+      ],
+      "copyOf": "c202-ch07-052"
+    },
+    {
+      "id": "c202-q2-misses-ch07-120",
+      "type": "scenario",
+      "front": "After a CRM course, Dana scores 94% on the post-training knowledge test. Which Kirkpatrick level is measured?",
+      "choices": [
+        "Reaction",
+        "Behavior",
+        "Results",
+        "Learning"
+      ],
+      "correct": 3,
+      "explanation": "A test of knowledge gained measures the learning level.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-120"
+    },
+    {
+      "id": "c202-q2-misses-ch07-121",
+      "type": "scenario",
+      "front": "Participants fill out a survey rating how engaging and useful the session felt. Which level is this?",
+      "choices": [
+        "Learning",
+        "Behavior",
+        "Results",
+        "Reaction"
+      ],
+      "correct": 3,
+      "explanation": "Feelings and satisfaction measure the reaction level, the cheapest and easiest.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-121"
+    },
+    {
+      "id": "c202-q2-misses-ch07-122",
+      "type": "scenario",
+      "front": "Three months after training, the clinic's patient wait times drop 18%. Which level is this?",
+      "choices": [
+        "Behavior",
+        "Learning",
+        "Reaction",
+        "Results"
+      ],
+      "correct": 3,
+      "explanation": "Organizational outcomes are the results level, the hardest to isolate.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-122"
+    },
+    {
+      "id": "c202-q2-misses-ch07-123",
+      "type": "scenario",
+      "front": "A month later, supervisors observe that Kai now uses the new safety checklist correctly on every shift. Which level is this?",
+      "choices": [
+        "Behavior",
+        "Learning",
+        "Results",
+        "Reaction"
+      ],
+      "correct": 0,
+      "explanation": "Applying learning on the job (transfer) is the behavior level.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-123"
+    },
+    {
+      "id": "c202-q2-misses-ch07-124",
+      "type": "scenario",
+      "front": "A sales team loved the training and aced the test, but nobody changed how they sell. Which level failed, and what does it predict?",
+      "choices": [
+        "Results; behavior will improve on its own",
+        "Behavior; results are unlikely to improve",
+        "Reaction; learning will drop next time",
+        "Learning; the test must have been invalid"
+      ],
+      "correct": 1,
+      "explanation": "Each level feeds the next. Without behavior change on the job, business results won't follow.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-124"
+    },
+    {
+      "id": "c202-q2-misses-ch07-125",
+      "type": "scenario",
+      "front": "HR has a small budget and wants the quickest, cheapest evaluation of a new course. Which level fits?",
+      "choices": [
+        "Behavior",
+        "Learning",
+        "Reaction",
+        "Results"
+      ],
+      "correct": 2,
+      "explanation": "Cost and difficulty rise by level; reaction surveys are fast, easy, and cheap.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-125"
+    },
+    {
+      "id": "c202-q2-misses-ch07-126",
+      "type": "scenario",
+      "front": "A retailer judges its sales training by the number of hours employees spent in class. What would Kirkpatrick's model suggest instead?",
+      "choices": [
+        "Measure trainer satisfaction (learning)",
+        "Measure attendance and punctuality (behavior)",
+        "Measure sales and conversion (results)",
+        "Measure more class hours (reaction)"
+      ],
+      "correct": 2,
+      "explanation": "Evaluate against the original goals; for a retailer, results like sales and conversion rates, not hours.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-126"
+    },
+    {
+      "id": "c202-q2-misses-ch07-127",
+      "type": "scenario",
+      "front": "A $25,000 customer-service course produces $100,000 in measurable benefits. What's the ROI?",
+      "choices": [
+        "25%",
+        "75%",
+        "300%",
+        "400%"
+      ],
+      "correct": 2,
+      "explanation": "(100,000 − 25,000) ÷ 25,000 × 100 = 300%: a $3 net gain per $1 invested.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-127"
+    },
+    {
+      "id": "c202-q2-misses-ch07-128",
+      "type": "scenario",
+      "front": "A training report says the program's ROI was 400%. What does that mean for each $1 invested?",
+      "choices": [
+        "$4 back in total ($3 net gain)",
+        "$400 net gain per $1",
+        "$0.40 net gain per $1",
+        "$4 net gain ($5 back in total)"
+      ],
+      "correct": 3,
+      "explanation": "ROI = (benefits − costs) ÷ costs. 400% means $4 of net gain per $1, so $5 comes back in total. The book's 'return of 400 percent, or $4' refers to the net gain.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-128"
+    },
+    {
+      "id": "c202-q2-misses-ch07-129",
+      "type": "scenario",
+      "front": "A program's ROI is negative, but leaders say it built trust and morale they didn't measure. What does the text advise?",
+      "choices": [
+        "Ignore ROI, since only reaction scores matter",
+        "Change or drop it unless those benefits justify it",
+        "Always continue any program leaders like",
+        "Always cancel immediately when ROI is negative"
+      ],
+      "correct": 1,
+      "explanation": "Negative ROI suggests changing or discontinuing the program, unless there are important unmeasured benefits.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-129"
+    },
+    {
+      "id": "c202-q2-misses-ch07-149",
+      "type": "scenario",
+      "front": "After training, John changed how he does his daily work. What is the highest Kirkpatrick level reached?",
+      "choices": [
+        "Reaction",
+        "Learning",
+        "Results",
+        "Behavior"
+      ],
+      "correct": 3,
+      "explanation": "Using learning on the job is the behavior level.",
+      "subtitle": "Ch 7.12 Practice · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-149"
+    },
+    {
+      "id": "c202-q2-misses-ch07-150",
+      "type": "scenario",
+      "front": "Susan takes a test after watching a training video. Which level is measured?",
+      "choices": [
+        "Learning",
+        "Results",
+        "Behavior",
+        "Reaction"
+      ],
+      "correct": 0,
+      "explanation": "A knowledge test measures learning.",
+      "subtitle": "Ch 7.12 Practice · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-150"
+    },
+    {
+      "id": "c202-q2-misses-ch07-151",
+      "type": "scenario",
+      "front": "HR surveys new hires about their onboarding experience. Which level is this?",
+      "choices": [
+        "Behavior",
+        "Reaction",
+        "Learning",
+        "Results"
+      ],
+      "correct": 1,
+      "explanation": "Surveys of how participants felt measure reaction.",
+      "subtitle": "Ch 7.12 Practice · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-151"
+    },
+    {
+      "id": "c202-q2-misses-ch07-152",
+      "type": "scenario",
+      "front": "A hospital's patient satisfaction rises 22% after training, matching its objectives. Which level is this?",
+      "choices": [
+        "Reaction",
+        "Behavior",
+        "Results",
+        "Learning"
+      ],
+      "correct": 2,
+      "explanation": "Organizational outcomes are the results level.",
+      "subtitle": "Ch 7.12 Practice · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-152"
+    },
+    {
+      "id": "c202-q2-misses-ch07-162",
+      "type": "scenario",
+      "front": "Feedback forms completed after training assess which Kirkpatrick level?",
+      "choices": [
+        "Behavior",
+        "Reactions",
+        "Learning",
+        "Results"
+      ],
+      "correct": 1,
+      "explanation": "Likely per text: reactions.",
+      "subtitle": "Ch 7 Quiz Q10 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-162"
+    },
+    {
+      "id": "c202-q2-misses-ch07-163",
+      "type": "scenario",
+      "front": "At which Kirkpatrick level are organizational benefits identified?",
+      "choices": [
+        "Results",
+        "Learning",
+        "Behavior",
+        "Reaction"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: results.",
+      "subtitle": "Ch 7 Quiz Q11 · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-163"
+    },
+    {
+      "id": "c202-q2-misses-ch08-005",
+      "front": "What are the three main benefits of performance management?",
+      "answer": "It aligns goals across levels, provides clear goals and feedback, and generates useful data.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Goal: all parts of the organization working together for results"
+      ],
+      "distractors": [
+        "It replaces training, cuts payroll costs, and provides a legal shield against all discrimination claims.",
+        "It ranks employees for layoffs, sets market pay rates, and decides who gets promoted each year.",
+        "It removes the need for managers, provides annual ratings, and keeps feedback confidential."
+      ],
+      "copyOf": "c202-ch08-005"
+    },
+    {
+      "id": "c202-q2-misses-ch08-006",
+      "front": "What is the primary goal of performance management across the organization?",
+      "answer": "Getting all parts (individuals, teams, units, processes, projects) working together to achieve results.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Covers more than individual employees"
+      ],
+      "distractors": [
+        "Ranking every employee each year so the top performers get raises and the lowest are let go.",
+        "Producing a legally defensible record of every employee's ratings for use in court cases.",
+        "Setting individual goals that are kept separate from team and unit goals to avoid conflict."
+      ],
+      "copyOf": "c202-ch08-006"
+    },
+    {
+      "id": "c202-q2-misses-ch08-007",
+      "front": "How does performance management align goals?",
+      "answer": "It cascades organizational goals into unit, team, and individual goals and measures progress on them.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Measure efficiency and effectiveness, then communicate to performers"
+      ],
+      "distractors": [
+        "It lets each employee set personal goals first, then rolls them up to form the organization's strategy.",
+        "It assigns the same goal to every employee, regardless of their unit, so everyone works in lockstep.",
+        "It ranks units against each other, then gives the winning unit's goals to everyone else to copy."
+      ],
+      "copyOf": "c202-ch08-007"
+    },
+    {
+      "id": "c202-q2-misses-ch08-008",
+      "front": "Why aren't behaviors the same as results?",
+      "answer": "Being busy doesn't mean contributing, and finishing doesn't mean finishing efficiently or ethically.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Performance management measures results, not just activity"
+      ],
+      "distractors": [
+        "They are the same; staying busy always shows contribution, and finishing a task means it was done well.",
+        "Results are what people do; behaviors are what they achieve, so results matter only for development.",
+        "Behaviors are measured by peers and results by customers, so the two never overlap in any review."
+      ],
+      "copyOf": "c202-ch08-008"
+    },
+    {
+      "id": "c202-q2-misses-ch08-009",
+      "front": "What useful data does performance management generate?",
+      "answer": "Benchmarks against best practices, results of change efforts, support for fair treatment, and ROI.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Example: judge whether safety training worked"
+      ],
+      "distractors": [
+        "Employees' personal medical and family data, used to predict who will need leave in the coming year.",
+        "Market salary surveys for every job, used to set pay ranges and adjust them each budget cycle.",
+        "Applicant flow and cost per hire, used to evaluate which recruiting sources work best overall."
+      ],
+      "copyOf": "c202-ch08-009"
+    },
+    {
+      "id": "c202-q2-misses-ch08-010",
+      "front": "Why should interdependent teams get team-level goals and feedback?",
+      "answer": "Individual-only goals can create stars who hurt the team; team goals reward working together.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Use both team and individual levels"
+      ],
+      "distractors": [
+        "Team goals let individuals coast, so interdependent teams should get only individual goals and ratings.",
+        "Team-level goals are illegal under the FLSA, since pay must be based on each person's own output.",
+        "Individual goals always build teamwork, since stars naturally help others to raise the team's results."
+      ],
+      "copyOf": "c202-ch08-010"
+    },
+    {
+      "id": "c202-q2-misses-ch08-011",
+      "front": "What did Google's research on managers find?",
+      "answer": "Good managers improve retention and team performance; feedback helped most low-rated managers improve a lot.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "8 good behaviors (e.g., good coach) and 5 to avoid"
+      ],
+      "distractors": [
+        "Managers didn't matter; teams performed the same no matter how their manager was rated or coached.",
+        "Good managers lowered retention, since strong employees got promoted out of the team faster.",
+        "Feedback made low-rated managers worse, so Google replaced them instead of coaching them to improve."
+      ],
+      "copyOf": "c202-ch08-011"
+    },
+    {
+      "id": "c202-q2-misses-ch08-012",
+      "front": "Why is feedback important to goal accomplishment?",
+      "answer": "Goals direct effort, but feedback tracks progress toward them so people can adjust; goals alone don't work.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Goals + feedback are among managers' most powerful tools",
+        "Matters most for complex tasks that are hard to self-judge"
+      ],
+      "distractors": [
+        "Feedback replaces goals, since people work hardest when they don't know what's expected of them.",
+        "Goals alone work best, since feedback distracts people and lowers their focus on the task at hand.",
+        "Feedback matters only once a year, since frequent progress checks make employees feel micromanaged."
+      ],
+      "copyOf": "c202-ch08-012"
+    },
+    {
+      "id": "c202-q2-misses-ch08-013",
+      "front": "Why isn't praise alone enough feedback?",
+      "answer": "People need specific, task-related information to know what to change.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "WD-40 swapped labels like 'excellent' for improvement feedback; engagement rose"
+      ],
+      "distractors": [
+        "Praise lowers motivation, since people grow complacent after it.",
+        "People need general encouragement, so praise should stay vague.",
+        "Praise is risky in reviews, since it can be used in lawsuits."
+      ],
+      "copyOf": "c202-ch08-013"
+    },
+    {
+      "id": "c202-q2-misses-ch08-015",
+      "front": "For which tasks is feedback most important?",
+      "answer": "Complex tasks where people can't easily judge their own progress.",
+      "subtitle": "Ch 8.4 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "points": [
+        "Simple tasks give natural feedback"
+      ],
+      "distractors": [
+        "Simple, routine tasks where people already know the steps.",
+        "Tasks with clear, immediate results people can see themselves.",
+        "Tasks done alone, where no one else depends on the outcome."
+      ],
+      "copyOf": "c202-ch08-015"
+    },
+    {
+      "id": "c202-q2-misses-ch08-067",
+      "front": "What is progressive discipline?",
+      "answer": "Increasingly severe measures when an employee fails to correct a problem after a reasonable chance.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "Uses the least severe action needed",
+        "Requires a legitimate reason (just cause)"
+      ],
+      "distractors": [
+        "Firing an employee immediately for any violation to set an example for other employees.",
+        "A plan to make good performance even better through development and new assignments.",
+        "Applying the same penalty to every offense regardless of how many times it has happened."
+      ],
+      "copyOf": "c202-ch08-067"
+    },
+    {
+      "id": "c202-q2-misses-ch08-068",
+      "front": "What is the purpose of progressive discipline?",
+      "answer": "To alert the employee to a problem, start with the least severe step, and escalate only if it isn't fixed.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "Correction, not punishment",
+        "Also creates fairness and legal documentation"
+      ],
+      "distractors": [
+        "To punish the employee quickly with the most severe step, so the problem isn't repeated by others.",
+        "To build a record for termination, so the employee is let go as soon as possible after a problem.",
+        "To replace coaching with formal steps, so managers don't have to discuss problems informally."
+      ],
+      "copyOf": "c202-ch08-068"
+    },
+    {
+      "id": "c202-q2-misses-ch08-070",
+      "front": "What are the four typical steps of progressive discipline?",
+      "answer": "Counseling, written warning, suspension without pay, and termination.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "Escalate only if the problem continues"
+      ],
+      "distractors": [
+        "Written warning, counseling, termination, and suspension with pay.",
+        "Verbal warning, demotion, transfer, and termination with severance.",
+        "Counseling, suspension without pay, written warning, and termination."
+      ],
+      "copyOf": "c202-ch08-070"
+    },
+    {
+      "id": "c202-q2-misses-ch08-071",
+      "front": "What is the counseling step of progressive discipline?",
+      "answer": "An informal talk that raises the problem before it needs a written warning; it needn't be documented.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "The least severe step"
+      ],
+      "distractors": [
+        "A formal written warning placed in the employee's file, with consequences and a firm timeframe.",
+        "A one- to three-day unpaid suspension that shows the employee the problem is serious now.",
+        "A final meeting where the employee is told they're terminated, with written notice afterward."
+      ],
+      "copyOf": "c202-ch08-071"
+    },
+    {
+      "id": "c202-q2-misses-ch08-072",
+      "front": "What does a written warning contain?",
+      "answer": "The problem's history, the employee's explanation, expectations, consequences, and a timeframe; it's filed.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "May be repeated with stronger wording (final warning)"
+      ],
+      "distractors": [
+        "Only the date and the manager's signature, since details could be used against the company in court.",
+        "A verbal reminder of the rule with no explanation from the employee, kept in the manager's notes.",
+        "The employee's full performance history, pay record, and medical file, sent to every coworker."
+      ],
+      "copyOf": "c202-ch08-072"
+    },
+    {
+      "id": "c202-q2-misses-ch08-073",
+      "front": "How long is a typical disciplinary suspension?",
+      "answer": "Usually less than a week, often one to three days without pay; the act matters more than the length.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "A written record is given at the start and filed"
+      ],
+      "distractors": [
+        "Usually two to four weeks without pay; a longer suspension sends a much clearer message to others.",
+        "Usually one to three days with full pay, so the employee isn't punished financially for the problem.",
+        "Usually a full month without pay; anything shorter has little effect on the employee's behavior."
+      ],
+      "copyOf": "c202-ch08-073"
+    },
+    {
+      "id": "c202-q2-misses-ch08-074",
+      "front": "What should happen before termination in progressive discipline?",
+      "answer": "The employee gets a chance to explain and a fair investigation, then written notice afterward.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "Used when earlier steps fail"
+      ],
+      "distractors": [
+        "Nothing; the manager should end employment immediately and skip any investigation to avoid delays.",
+        "The employee's coworkers vote on whether termination is fair, then HR sends written notice.",
+        "A paid suspension of at least a month, then termination by phone with no written notice."
+      ],
+      "copyOf": "c202-ch08-074"
+    },
+    {
+      "id": "c202-q2-misses-ch08-075",
+      "front": "Which progressive discipline steps can be repeated?",
+      "answer": "The text says the written warning can repeat; the quiz's likely answer is written warning and suspension.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "Moderate confidence on the quiz pairing",
+        "The second written warning is the 'final warning'"
+      ],
+      "distractors": [
+        "None; each step can be used only once, so a second problem always moves to the next step.",
+        "Counseling and termination can repeat; written warnings and suspensions can be used once only.",
+        "The text says only termination can repeat; the quiz likely answer is counseling and suspension."
+      ],
+      "copyOf": "c202-ch08-075"
+    },
+    {
+      "id": "c202-q2-misses-ch08-076",
+      "front": "When can progressive discipline skip steps?",
+      "answer": "For serious offenses like fighting, harassment, or drug use; minor issues start at the lowest step.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "Some firms suspend with pay first; the process isn't rigid"
+      ],
+      "distractors": [
+        "Never; every offense must start at counseling, even for violence, harassment, or drug use.",
+        "For any second offense, even minor ones like lateness, since repeating means skipping ahead.",
+        "Only when the employee is on probation; long-tenured staff must always go step by step."
+      ],
+      "copyOf": "c202-ch08-076"
+    },
+    {
+      "id": "c202-q2-misses-ch08-077",
+      "front": "What should a manager do in every disciplinary meeting?",
+      "answer": "State the behavior with examples, explain the standard, let the employee explain, and set expectations calmly.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "Include timeframe and consequences",
+        "Have a witness or note taker"
+      ],
+      "distractors": [
+        "State the employee's personality flaws, compare them to coworkers, and announce the penalty without discussion.",
+        "Keep the problem vague to avoid conflict, skip the employee's side, and end with a reminder of pay.",
+        "Let HR lead the meeting alone, avoid giving examples, and set expectations only in a later email."
+      ],
+      "copyOf": "c202-ch08-077"
+    },
+    {
+      "id": "c202-q2-misses-ch08-078",
+      "front": "What is Frito-Lay's 'Discipline Without Punishment'?",
+      "answer": "Oral reminder, written reminder, then a paid one-day suspension to write a commitment to change.",
+      "subtitle": "Ch 8.17 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "points": [
+        "No letter = resignation accepted"
+      ],
+      "distractors": [
+        "Verbal warning, written warning, then an unpaid one-week suspension and a final warning.",
+        "Counseling, demotion, then a transfer to another unit with a commitment to change.",
+        "Written reminder, final warning, then termination with severance pay and references."
+      ],
+      "copyOf": "c202-ch08-078"
+    },
+    {
+      "id": "c202-q2-misses-ch08-102",
+      "type": "scenario",
+      "front": "Jordan is always busy, stays late, and answers every email within minutes, but his projects rarely move company goals. What does this illustrate?",
+      "choices": [
+        "Long hours prove his high performance level",
+        "Behaviors aren't results",
+        "Busy employees always contribute to goals",
+        "Performance management measures only effort"
+      ],
+      "correct": 1,
+      "explanation": "Performance management separates activity from results: being busy doesn't mean contributing to organizational goals.",
+      "subtitle": "Ch 8.4 Apply · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-102"
+    },
+    {
+      "id": "c202-q2-misses-ch08-103",
+      "type": "scenario",
+      "front": "Which statement about performance management is TRUE?",
+      "choices": [
+        "Its data can be used to benchmark best practices",
+        "It's essentially the same as measuring behaviors",
+        "Being busy means an employee is contributing",
+        "It focuses only on individual employees"
+      ],
+      "correct": 0,
+      "explanation": "Generating useful data, like benchmarks, is one of its three benefits. It also covers teams, units, and processes, and it measures results, not just behaviors.",
+      "subtitle": "Ch 8.4 Apply · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-103"
+    },
+    {
+      "id": "c202-q2-misses-ch08-104",
+      "type": "scenario",
+      "front": "Which statement about performance management is FALSE?",
+      "choices": [
+        "Its main aim is all parts working toward results",
+        "Its data can show whether training paid off",
+        "It's essentially the same as measuring behaviors",
+        "Clear goals and feedback are powerful motivators"
+      ],
+      "correct": 2,
+      "explanation": "It's false that performance management is just measuring behaviors; behaviors aren't results. The other three are true.",
+      "subtitle": "Ch 8.4 Apply · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-104"
+    },
+    {
+      "id": "c202-q2-misses-ch08-105",
+      "type": "scenario",
+      "front": "A COO wants every department's goals to roll up to the company's three strategic priorities. Which benefit of performance management is she after?",
+      "choices": [
+        "Replacing feedback with annual ratings",
+        "Reducing the need for supervisors",
+        "Aligning organizational, team, and individual goals",
+        "Generating benchmarking data for outside reports"
+      ],
+      "correct": 2,
+      "explanation": "Aligning goals across levels with the strategy is the first of the three benefits.",
+      "subtitle": "Ch 8.4 Apply · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-105"
+    },
+    {
+      "id": "c202-q2-misses-ch08-106",
+      "type": "scenario",
+      "front": "After a new safety program, a plant uses performance data to compare accident rates before and after. Which benefit is this?",
+      "choices": [
+        "Replacing progressive discipline steps",
+        "Useful data to judge change efforts",
+        "Aligning individual goals with strategy",
+        "Providing clear goals and feedback"
+      ],
+      "correct": 1,
+      "explanation": "Useful data lets firms benchmark, judge change efforts like training or safety programs, and compute ROI.",
+      "subtitle": "Ch 8.4 Apply · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-106"
+    },
+    {
+      "id": "c202-q2-misses-ch08-107",
+      "type": "scenario",
+      "front": "A software team's members each hit personal targets, but the release keeps slipping because no one helps anyone else. What's the fix?",
+      "choices": [
+        "Raise everyone's individual targets",
+        "Rank team members against each other",
+        "Remove all goals from the team",
+        "Add team-level goals and feedback"
+      ],
+      "correct": 3,
+      "explanation": "For interdependent work, give team-level as well as individual goals and feedback; individual stars can hurt the team.",
+      "subtitle": "Ch 8.4 Apply · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-107"
+    },
+    {
+      "id": "c202-q2-misses-ch08-131",
+      "type": "scenario",
+      "front": "A friend scoffs, \"Why not just fire underperformers on the spot?\" Which best explains progressive discipline's purpose?",
+      "choices": [
+        "It alerts them first and escalates only if needed",
+        "It punishes people so they feel the cost of mistakes",
+        "It ensures every employee is eventually suspended",
+        "It replaces the need for any documentation"
+      ],
+      "correct": 0,
+      "explanation": "Progressive discipline alerts the employee, starts with the least severe step, and escalates only without improvement.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-131"
+    },
+    {
+      "id": "c202-q2-misses-ch08-132",
+      "type": "scenario",
+      "front": "Which statement does NOT describe the purpose of progressive discipline?",
+      "choices": [
+        "It starts with the least severe action possible",
+        "It escalates only if earlier steps don't work",
+        "It's mainly a tool to punish employees for mistakes",
+        "It alerts employees to a problem needing correction"
+      ],
+      "correct": 2,
+      "explanation": "Progressive discipline is about correction, not punishment.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-132"
+    },
+    {
+      "id": "c202-q2-misses-ch08-133",
+      "type": "scenario",
+      "front": "An employee is late twice in a month. Where should progressive discipline start, and why?",
+      "choices": [
+        "Termination: to set an example for others",
+        "Written warning: to skip the informal talk",
+        "Counseling: the least severe step",
+        "Suspension: to show the rule is serious"
+      ],
+      "correct": 2,
+      "explanation": "Minor issues start at the lowest step; use the least severe action needed to stimulate improvement.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-133"
+    },
+    {
+      "id": "c202-q2-misses-ch08-136",
+      "type": "scenario",
+      "front": "After repeated performance problems, Dev is sent home for two days without pay. Which step is this?",
+      "choices": [
+        "Termination",
+        "Suspension",
+        "Written warning",
+        "Counseling"
+      ],
+      "correct": 1,
+      "explanation": "Time off without pay, usually one to three days, is the suspension step.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-136"
+    },
+    {
+      "id": "c202-q2-misses-ch08-137",
+      "type": "scenario",
+      "front": "Rina's manager has an informal chat to bring a missed-deadline pattern to her attention. Which step is this?",
+      "choices": [
+        "Written warning",
+        "Suspension",
+        "Termination",
+        "Counseling"
+      ],
+      "correct": 3,
+      "explanation": "Raising the problem informally before any written warning is counseling.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-137"
+    },
+    {
+      "id": "c202-q2-misses-ch08-138",
+      "type": "scenario",
+      "front": "Omar receives a formal document listing the problem's history, his explanation, the required changes, consequences, and a deadline. Which step is this?",
+      "choices": [
+        "Suspension",
+        "Termination notice",
+        "Written warning",
+        "Counseling session"
+      ],
+      "correct": 2,
+      "explanation": "A filed document with history, explanation, expectations, consequences, and a timeframe is a written warning.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-138"
+    },
+    {
+      "id": "c202-q2-misses-ch08-139",
+      "type": "scenario",
+      "front": "After counseling, two written warnings, and a suspension, Jess still hasn't improved and is let go after a chance to explain. Which step is this?",
+      "choices": [
+        "Suspension",
+        "Written warning",
+        "Counseling",
+        "Termination"
+      ],
+      "correct": 3,
+      "explanation": "Termination follows when earlier steps fail, after a fair investigation and a chance to explain.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-139"
+    },
+    {
+      "id": "c202-q2-misses-ch08-140",
+      "type": "scenario",
+      "front": "Which sequence shows the typical progressive discipline process?",
+      "choices": [
+        "Counseling, suspension, written warning, termination",
+        "Counseling, written warning, suspension, termination",
+        "Written warning, counseling, termination, suspension",
+        "Suspension, counseling, written warning, termination"
+      ],
+      "correct": 1,
+      "explanation": "The typical order runs from least to most severe.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-140"
+    },
+    {
+      "id": "c202-q2-misses-ch08-141",
+      "type": "scenario",
+      "front": "An employee punches a coworker on the warehouse floor. Must the manager start with counseling?",
+      "choices": [
+        "No; fighting can only lead to counseling",
+        "No; serious offenses can skip steps",
+        "Yes; every step must always be used in order",
+        "Yes; but only after two written warnings"
+      ],
+      "correct": 1,
+      "explanation": "Progressive discipline isn't rigid. Serious offenses (fighting, harassment, drug use) may skip steps.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-141"
+    },
+    {
+      "id": "c202-q2-misses-ch08-142",
+      "type": "scenario",
+      "front": "A manager issues a written warning that says, \"This is a final warning; another violation will result in suspension.\" What does this show?",
+      "choices": [
+        "Counseling has been skipped, which is illegal",
+        "The employee is already suspended",
+        "The process has reached termination",
+        "Written warnings can be repeated"
+      ],
+      "correct": 3,
+      "explanation": "The text says the written warning step can repeat; the second becomes a final warning.",
+      "subtitle": "Ch 8.17 Apply · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-142"
+    },
+    {
+      "id": "c202-q2-misses-ch08-167",
+      "type": "scenario",
+      "front": "Raising a problem with an employee before it requires a written warning is called...",
+      "choices": [
+        "Written warning",
+        "Suspension without pay",
+        "Termination",
+        "Counseling"
+      ],
+      "correct": 3,
+      "explanation": "Counseling is the first, least severe step.",
+      "subtitle": "Ch 8.17 Practice · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-167"
+    },
+    {
+      "id": "c202-q2-misses-ch08-178",
+      "type": "scenario",
+      "front": "Why is feedback important?",
+      "choices": [
+        "It creates more chances for discipline",
+        "It consolidates performance data",
+        "It reduces the supervisor's workload",
+        "It tracks progress toward goals"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: feedback tracks progress toward goals so people can adjust.",
+      "subtitle": "Ch 8 Quiz Q7 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-178"
+    },
+    {
+      "id": "c202-q2-misses-ch08-179",
+      "type": "scenario",
+      "front": "A form with the problem's history, the employee's explanation, expectations, and consequences, placed in the file, is a...",
+      "choices": [
+        "Written warning",
+        "Counseling note",
+        "Suspension",
+        "Termination"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: written warning.",
+      "subtitle": "Ch 8 Quiz Q8 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-179"
+    },
+    {
+      "id": "c202-q2-misses-ch08-180",
+      "type": "scenario",
+      "front": "Which step usually lasts less than a week, often one to three days?",
+      "choices": [
+        "Suspension without pay",
+        "Written warning",
+        "Counseling",
+        "Termination"
+      ],
+      "correct": 0,
+      "explanation": "Likely per text: suspension without pay.",
+      "subtitle": "Ch 8 Quiz Q9 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-180"
+    },
+    {
+      "id": "c202-q2-misses-ch08-181",
+      "type": "scenario",
+      "front": "Which two progressive discipline steps may an employer repeat?",
+      "choices": [
+        "Counseling and written warning",
+        "Suspension and termination",
+        "Written warning and suspension",
+        "Termination and reinstatement"
+      ],
+      "correct": 2,
+      "explanation": "Likely per text: written warning and suspension. Moderate confidence: the text explicitly says only that the written warning may repeat (the second becomes a final warning); 'counseling and written warning' is the main alternative.",
+      "subtitle": "Ch 8 Quiz Q10 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-181"
+    },
+    {
+      "id": "c202-q2-misses-new-7-12-1",
+      "type": "scenario",
+      "front": "After a service-skills workshop for call-center reps, the company compares customer satisfaction scores from the quarter before and the quarter after. Which Kirkpatrick level is this?",
+      "choices": [
+        "Reaction",
+        "Learning",
+        "Behavior",
+        "Results"
+      ],
+      "correct": 3,
+      "explanation": "Customer satisfaction is a business outcome, so it's Results. Reaction is how the trainees themselves felt about the training, not how customers feel.",
+      "subtitle": "Q2 review · Kirkpatrick levels",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment"
+    },
+    {
+      "id": "c202-q2-misses-new-7-12-2",
+      "type": "scenario",
+      "front": "Trainees fill out a survey rating how engaging and useful they found a new safety course. Which level of Kirkpatrick's model does this measure?",
+      "choices": [
+        "Results",
+        "Reaction",
+        "Behavior",
+        "Learning"
+      ],
+      "correct": 1,
+      "explanation": "A participant satisfaction survey is Reaction. It's about the trainees' feelings, unlike Results, which looks at business numbers like customer satisfaction, sales, or accidents.",
+      "subtitle": "Q2 review · Kirkpatrick levels",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment"
+    },
+    {
+      "id": "c202-q2-misses-new-7-12-3",
+      "type": "scenario",
+      "front": "A hotel trains front-desk staff, then tracks guest complaint rates and repeat bookings for six months. What is the hotel evaluating?",
+      "choices": [
+        "Reaction, because guests are giving feedback",
+        "Learning, because staff gained new knowledge",
+        "Results, because it is measuring business impact",
+        "Behavior, because guests are reacting to staff"
+      ],
+      "correct": 2,
+      "explanation": "Guest complaints and repeat bookings are organizational outcomes, which is the Results level. Feedback from customers is not the Reaction level; Reaction is the trainees' own satisfaction with the training.",
+      "subtitle": "Q2 review · Kirkpatrick levels",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment"
+    },
+    {
+      "id": "c202-q2-misses-new-8-4-1",
+      "type": "scenario",
+      "front": "A manager sets clear quarterly goals with her team but never tells anyone how they are doing until the year-end review. What key element of performance management is missing?",
+      "choices": [
+        "Goal setting",
+        "Feedback",
+        "A balanced scorecard",
+        "Progressive discipline"
+      ],
+      "correct": 1,
+      "explanation": "Goals without feedback are ineffective. Feedback is what lets employees track their progress toward the goal and adjust along the way.",
+      "subtitle": "Q2 review · Feedback and goals",
+      "note": "Read more: 8.4 Why Is Performance Management Important?"
+    },
+    {
+      "id": "c202-q2-misses-new-8-4-2",
+      "type": "scenario",
+      "front": "Which element of performance management lets an employee see, during the year, how close they are to reaching an individual goal?",
+      "choices": [
+        "Feedback",
+        "A balanced scorecard",
+        "Goal setting",
+        "A job description"
+      ],
+      "correct": 0,
+      "explanation": "Feedback tracks progress relative to the goal. A balanced scorecard is an organization-level set of measures, and goal setting only defines the target.",
+      "subtitle": "Q2 review · Feedback and goals",
+      "note": "Read more: 8.4 Why Is Performance Management Important?"
+    },
+    {
+      "id": "c202-q2-misses-new-8-4-3",
+      "type": "scenario",
+      "front": "An employee says, 'I know my sales target, but I have no idea whether I'm on pace.' What should the manager add to make the goal effective?",
+      "choices": [
+        "A stretch goal with a higher target",
+        "A balanced scorecard for the whole company",
+        "Regular feedback on progress toward the target",
+        "A written warning to increase urgency"
+      ],
+      "correct": 2,
+      "explanation": "Goals direct effort, but feedback tells the employee where they stand relative to the goal. Company-wide scorecards and discipline don't track one person's progress.",
+      "subtitle": "Q2 review · Feedback and goals",
+      "note": "Read more: 8.4 Why Is Performance Management Important?"
+    },
+    {
+      "id": "c202-q2-misses-new-8-17-1",
+      "type": "scenario",
+      "front": "A supervisor has already counseled an employee and issued a written warning about missed deadlines. The employee misses another deadline. Under progressive discipline, what is the usual next action?",
+      "choices": [
+        "Terminate the employee immediately",
+        "Issue a second, final written warning",
+        "Go back to informal counseling",
+        "Assign undesirable tasks as punishment"
+      ],
+      "correct": 1,
+      "explanation": "Progressive discipline escalates one step at a time. The written warning step can be repeated with stronger wording as a final warning before suspension or termination. Firing after two steps skips the process.",
+      "subtitle": "Q2 review · Progressive discipline",
+      "note": "Read more: 8.17 Progressive Discipline"
+    },
+    {
+      "id": "c202-q2-misses-new-8-17-2",
+      "type": "scenario",
+      "front": "Which statement best describes the purpose of progressive discipline?",
+      "choices": [
+        "To punish employees quickly so others are deterred",
+        "To document reasons for firing as fast as possible",
+        "To correct the problem using the least severe step first and escalating only if it continues",
+        "To let employees choose their own consequences"
+      ],
+      "correct": 2,
+      "explanation": "Progressive discipline is corrective: it alerts the employee, starts with the mildest action that might work, and escalates only if the problem isn't fixed. Termination is the last step, not the goal.",
+      "subtitle": "Q2 review · Progressive discipline",
+      "note": "Read more: 8.17 Progressive Discipline"
+    },
+    {
+      "id": "c202-q2-misses-new-8-17-3",
+      "type": "scenario",
+      "front": "An employee who was counseled and then given one written warning for tardiness is late again. The manager wants to fire him today. What is the best advice?",
+      "choices": [
+        "Fire him, since two steps were completed",
+        "Skip to suspension, then fire him",
+        "Follow the next step, usually another written (final) warning, and document it",
+        "Ignore it to avoid conflict"
+      ],
+      "correct": 2,
+      "explanation": "Termination comes only after the earlier steps fail. Tardiness isn't a serious offense that justifies skipping steps, so the next step is a further, final written warning with clear expectations and consequences.",
+      "subtitle": "Q2 review · Progressive discipline",
+      "note": "Read more: 8.17 Progressive Discipline"
+    }
+  ]
+}
