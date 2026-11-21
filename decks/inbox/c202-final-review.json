@@ -1,0 +1,917 @@
+{
+  "id": "c202-final-review",
+  "folder": "C202 Final Quiz Review",
+  "course": "C202",
+  "sortAfter": 14,
+  "source": "Built from the C202 Ch 1-14 decks and study guides (Phillips, Human Resource Management, 3rd ed.)",
+  "summary": "# C202 final quiz: review deck\n\nA short review of the C202 final quiz (all 14 chapters). There's one test-style question for each quiz concept, reworded so you learn the idea instead of memorizing the wording. After those come a few related practice questions aimed at your flagged weak spots. Progress here is separate from the chapter decks, but every answer also counts toward the weak-spot tracker for the matching section, and the copied cards count toward their chapter originals.\n\nRounds are 20 questions, so this is about three rounds.\n",
+  "cards": [
+    {
+      "id": "c202-final-review-new-q01",
+      "type": "scenario",
+      "front": "A CEO asks what HR's biggest contribution to carrying out company strategy should be. What's the best answer?",
+      "choices": [
+        "Running safety training on a yearly schedule",
+        "Posting the employee handbook where everyone can find it",
+        "Applying discipline and terminations the same way for everyone",
+        "Bringing in, growing, and keeping the strongest talent the strategy needs"
+      ],
+      "correct": 3,
+      "explanation": "People carry out strategy, so HR adds the most strategic value by acquiring, developing, and retaining top talent. The other choices are routine administrative tasks.",
+      "subtitle": "Final review · HR and strategy",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy"
+    },
+    {
+      "id": "c202-final-review-new-q34",
+      "type": "scenario",
+      "front": "A firm shifts from cheap mass production to custom, high-touch service. What should most shape how it now moves people into, through, and out of the company?",
+      "choices": [
+        "Its marketing strategy",
+        "Its sales plan",
+        "Its financial plan",
+        "Its business strategy"
+      ],
+      "correct": 3,
+      "explanation": "The business strategy (where and how the firm competes) sets how it treats employees and how it manages the flow of people in, within, and out. Sales, marketing, and financial plans support the strategy; they don't define HR's direction.",
+      "subtitle": "Final review · HR and strategy",
+      "note": "Read more: 1.13 The Role of HRM in Executing Business Strategy"
+    },
+    {
+      "id": "c202-final-review-new-q10",
+      "type": "scenario",
+      "front": "Which HR effort most directly raises a company's overall organizational performance?",
+      "choices": [
+        "Studying which new products the market wants",
+        "Building the company's ability to handle growth and change",
+        "Rewriting the company's mission and vision statement",
+        "Coaching executives on investment and financing choices"
+      ],
+      "correct": 1,
+      "explanation": "HR boosts performance through people: making the workforce adaptable so the firm can absorb growth and change. Finance, product research, and mission-writing belong to other functions. HR also supports leadership by offering professional development and growth.",
+      "subtitle": "Final review · HR and performance",
+      "note": "Read more: 1.12 How Does HRM Influence Organizational Performance?"
+    },
+    {
+      "id": "c202-final-review-new-q02",
+      "type": "scenario",
+      "front": "Company policy requires business casual dress. A manager immediately fires every employee who ignores it. Legally, what has the manager done?",
+      "choices": [
+        "Nothing illegal: at-will employees can be fired for breaking a neutral policy",
+        "Practiced distributive fairness",
+        "Broken the law by firing without a warning first",
+        "Violated the employees' right to free expression"
+      ],
+      "correct": 0,
+      "explanation": "Under employment at will, an employer can end employment for any lawful reason, and violating a neutral, job-related policy is lawful. Progressive discipline is good practice but not required by law.",
+      "subtitle": "Final review · At-will employment",
+      "note": "Read more: 14.14 Employment at Will"
+    },
+    {
+      "id": "c202-final-review-new-q03",
+      "type": "scenario",
+      "front": "A worker says she was never paid time-and-a-half for her 50-hour weeks and earns less than the federal minimum. Which law covers this?",
+      "choices": [
+        "WARN Act (1988)",
+        "Equal Pay Act (1963)",
+        "National Labor Relations Act (1935)",
+        "Fair Labor Standards Act (1938)"
+      ],
+      "correct": 3,
+      "explanation": "The FLSA sets the federal minimum wage, overtime pay, and child-labor rules. The NLRA covers unions, the EPA covers sex-based pay gaps, and WARN covers layoff notice.",
+      "subtitle": "Final review · Employment laws",
+      "note": "Read more: 3.8 Major Federal Employment Laws (1935–1974)"
+    },
+    {
+      "id": "c202-final-review-new-q59",
+      "type": "scenario",
+      "front": "A manufacturer with 4,000 workers plans to cut 800 jobs at one plant next quarter. Which law creates specific obligations for it?",
+      "choices": [
+        "Equal Pay Act: equal severance for men and women",
+        "WARN Act: 60 days' advance notice of the mass layoff",
+        "National Labor Relations Act: a vote before any layoff",
+        "Fair Labor Standards Act: final paychecks within 24 hours"
+      ],
+      "correct": 1,
+      "explanation": "The Worker Adjustment and Retraining Notification Act (1988) requires employers with 100+ full-time workers to give 60 days' notice of plant closings and mass layoffs.",
+      "subtitle": "Final review · Employment laws",
+      "note": "Read more: 3.9 Major Federal Employment Laws (1978–1990)"
+    },
+    {
+      "id": "c202-final-review-new-q38",
+      "type": "scenario",
+      "front": "Under which law are two jobs 'equal' if they need substantially the same skill, effort, and responsibility under similar conditions at the same site?",
+      "choices": [
+        "National Labor Relations Act of 1935",
+        "Title VII of the Civil Rights Act of 1964",
+        "Genetic Information Nondiscrimination Act of 2008",
+        "Equal Pay Act of 1963"
+      ],
+      "correct": 3,
+      "explanation": "The EPA requires equal pay for men and women doing equal work, defined by skill, effort, responsibility, and working conditions in the same establishment.",
+      "subtitle": "Final review · Employment laws",
+      "note": "Read more: 3.8 Major Federal Employment Laws (1935–1974)"
+    },
+    {
+      "id": "c202-final-review-new-q30",
+      "type": "scenario",
+      "front": "A 45-year-old applicant, born in Denver and fluent in English and French, is passed over for a job he's qualified for. Which protected class is most likely at issue?",
+      "choices": [
+        "Language",
+        "Race",
+        "Age",
+        "National origin"
+      ],
+      "correct": 2,
+      "explanation": "The ADEA protects people 40 and older, so age is the protected trait here. A U.S.-born applicant points away from national origin, and language alone isn't a listed class. (On the quiz, a 37-year-old didn't qualify for age protection, so gender was the answer.)",
+      "subtitle": "Final review · Protected classes",
+      "note": "Read more: 3.8 Major Federal Employment Laws (1935–1974)"
+    },
+    {
+      "id": "c202-final-review-new-q04",
+      "type": "scenario",
+      "front": "A supervisor hints that staff who go out with him will get the best shifts and those who refuse won't. What kind of harassment is this?",
+      "choices": [
+        "Hostile environment harassment",
+        "Preferential treatment",
+        "Retaliation",
+        "Quid pro quo harassment"
+      ],
+      "correct": 3,
+      "explanation": "Quid pro quo ('this for that') ties job benefits or threats to sexual favors and usually involves someone with power over the victim. Hostile environment is pervasive unwelcome conduct with no exchange.",
+      "subtitle": "Final review · Sexual harassment",
+      "note": "Read more: 3.13 Types of Employment Lawsuits: Sexual Harassment"
+    },
+    {
+      "id": "c202-final-review-new-q39",
+      "type": "scenario",
+      "front": "A company makes only applicants of one ethnicity show a U.S. diploma to prove their English, and doesn't ask anyone else. What type of discrimination is this?",
+      "choices": [
+        "Affirmative action",
+        "Adverse impact",
+        "Sexual harassment",
+        "Disparate treatment"
+      ],
+      "correct": 3,
+      "explanation": "Holding one protected group to a different requirement is intentional, unequal treatment: disparate treatment. Adverse impact is when the same rule for everyone ends up hurting one group more.",
+      "subtitle": "Final review · Disparate treatment",
+      "note": "Read more: 3.15 Employment Lawsuits: Disparate Treatment and Adverse Impact"
+    },
+    {
+      "id": "c202-final-review-new-q42",
+      "type": "scenario",
+      "front": "Every applicant for a nursing job faces the same requirements, yet far fewer men than women get hired. What might the men be experiencing?",
+      "choices": [
+        "Adverse effect",
+        "Adverse impact",
+        "Diverse impact",
+        "Disparate treatment"
+      ],
+      "correct": 1,
+      "explanation": "Adverse impact happens when a rule that applies equally to everyone screens out a protected group at a much higher rate. Disparate treatment would mean the men faced different rules.",
+      "subtitle": "Final review · Adverse impact",
+      "note": "Read more: 3.15 Employment Lawsuits: Disparate Treatment and Adverse Impact"
+    },
+    {
+      "id": "c202-final-review-new-q40",
+      "type": "scenario",
+      "front": "Which order is essentially the source of affirmative action, requiring federal contractors to set hiring goals for women and minorities?",
+      "choices": [
+        "Executive Order 11246",
+        "Title VII of the Civil Rights Act of 1964",
+        "Genetic Information Nondiscrimination Act of 2008",
+        "Fair Labor Standards Act of 1938"
+      ],
+      "correct": 0,
+      "explanation": "Executive Order 11246 requires federal contractors to take affirmative steps to integrate their workforces, including written plans and goals. Title VII bans discrimination but doesn't require those plans.",
+      "subtitle": "Final review · Affirmative action",
+      "note": "Read more: 3.11 Affirmative Action"
+    },
+    {
+      "id": "c202-final-review-new-q36",
+      "type": "scenario",
+      "front": "Which is a legitimate way for a company to practice affirmative action?",
+      "choices": [
+        "Limiting succession programs to minority employees",
+        "Offering signing bonuses only to protected-class applicants",
+        "Promoting minority employees even when they are less qualified",
+        "Recruiting at colleges with large minority student populations"
+      ],
+      "correct": 3,
+      "explanation": "Affirmative action widens the applicant pool through outreach; final decisions still have to be merit-based. Quotas, reserved programs, or bonuses limited to one group are themselves discrimination.",
+      "subtitle": "Final review · Affirmative action",
+      "note": "Read more: 3.11 Affirmative Action"
+    },
+    {
+      "id": "c202-final-review-new-q45",
+      "type": "scenario",
+      "front": "A shop owner thinks affirmative action means she must hire someone from a minority group, so she picks an applicant based on how she looks. What is her belief an example of?",
+      "choices": [
+        "A perception of loss",
+        "Ignorance",
+        "A stereotype",
+        "Prejudice"
+      ],
+      "correct": 1,
+      "explanation": "Her mistake is about what the law requires (affirmative action doesn't force small businesses to hire by race), so it is ignorance. Ignorance is never a legal defense, and it feeds stereotyping, which applies a generalization (even a 'positive' one) to everyone in a group.",
+      "subtitle": "Final review · Human biases",
+      "note": "Read more: 3.19 Human Biases"
+    },
+    {
+      "id": "c202-final-review-new-q08",
+      "type": "scenario",
+      "front": "Managers find that salespeople spend most of their week on paperwork unrelated to selling. Before reassigning tasks, which HR tool should they use to study the job?",
+      "choices": [
+        "Job enrichment",
+        "Job rotation",
+        "Job enlargement",
+        "Job analysis"
+      ],
+      "correct": 3,
+      "explanation": "Job analysis systematically identifies a job's tasks and the traits needed to do it well. Its findings guide redesign. Enlargement, enrichment, and rotation are design choices that come afterward.",
+      "subtitle": "Final review · Job analysis",
+      "note": "Read more: 4.13 Job Analysis"
+    },
+    {
+      "id": "c202-final-review-new-q09",
+      "type": "scenario",
+      "front": "On a new hire's first day, a coworker explains who reports to whom, who to ask when she's stuck, and how decisions get made. What is he describing?",
+      "choices": [
+        "Organizational design",
+        "The organizational chart",
+        "Organizational commitment",
+        "The organizational structure"
+      ],
+      "correct": 3,
+      "explanation": "Organizational structure is the formal system of tasks, power, and reporting relationships. The chart is only a diagram of it. Organizational design is choosing and adjusting that structure to meet goals.",
+      "subtitle": "Final review · Organizational structure",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-final-review-new-q29",
+      "type": "scenario",
+      "front": "A company announces that all full-time employees get two weeks of paid vacation each year. What has it created?",
+      "choices": [
+        "A psychological contract",
+        "A policy",
+        "A procedure",
+        "A rule"
+      ],
+      "correct": 1,
+      "explanation": "A policy is a guiding principle, a decision already made. A procedure is the steps to follow (how to request the time off), and a rule is a specific must or must-not. Policies, procedures, and rules together support the organizational structure.",
+      "subtitle": "Final review · Policies, procedures, rules",
+      "note": "Read more: 4.19 Organizational Structure"
+    },
+    {
+      "id": "c202-final-review-new-q11",
+      "type": "scenario",
+      "front": "A company wants new hires who will strengthen its culture. What should it focus on most when evaluating applicants?",
+      "choices": [
+        "Whether they know current employees",
+        "Their years of experience",
+        "Their values, integrity, and ethics",
+        "Their job-specific technical skills"
+      ],
+      "correct": 2,
+      "explanation": "Culture is shared values and norms, so hiring for culture (person-organization fit) means assessing values and integrity. Skills and experience speak to person-job fit.",
+      "subtitle": "Final review · Fit",
+      "note": "Read more: 6.5 Fit"
+    },
+    {
+      "id": "c202-final-review-new-q48",
+      "type": "scenario",
+      "front": "A team lead is bored by her work, dislikes motivating people, and dreads giving reviews, though she likes the company and her team. Which fit is poor?",
+      "choices": [
+        "Person-priorities fit",
+        "Person-job fit",
+        "Person-organization fit",
+        "Person-group fit"
+      ],
+      "correct": 1,
+      "explanation": "Her problem is the job's demands and rewards, not the team or the company, so person-job fit is the mismatch.",
+      "subtitle": "Final review · Fit",
+      "note": "Read more: 6.5 Fit"
+    },
+    {
+      "id": "c202-final-review-new-q49",
+      "type": "scenario",
+      "front": "An employee thinks a promotion was decided before interviews began, since the manager had a quiet favorite. Which fairness is she questioning?",
+      "choices": [
+        "Distributive fairness",
+        "Interactional fairness",
+        "Procedural fairness",
+        "Equitable fairness"
+      ],
+      "correct": 2,
+      "explanation": "Procedural fairness is about whether the process was consistent and unbiased. Distributive fairness concerns the outcome itself, and interactional fairness concerns how respectfully people were treated.",
+      "subtitle": "Final review · Fairness perceptions",
+      "note": "Read more: 6.18 Fairness Perceptions"
+    },
+    {
+      "id": "c202-final-review-new-q52",
+      "type": "scenario",
+      "front": "At the end of each interview, a director asks manager candidates how they would bring down quitting rates in their department. What type of question is this?",
+      "choices": [
+        "A structured question",
+        "A case question",
+        "A situational question",
+        "A behavioral question"
+      ],
+      "correct": 1,
+      "explanation": "Case questions give the candidate a real business problem to analyze and solve. Behavioral questions ask about past actions ('describe a tough problem you solved'), so they test skills, not motivation. Situational questions pose a hypothetical moment for one person.",
+      "subtitle": "Final review · Interview types",
+      "note": "Read more: 6.11 Evaluative Assessment Methods: Job Knowledge Tests and Interviews"
+    },
+    {
+      "id": "c202-final-review-new-q44",
+      "type": "scenario",
+      "front": "A recruiter tracks industry trends and where skilled candidates are, then reaches out to promising people about an opening. What is she doing?",
+      "choices": [
+        "Sourcing and recruiting",
+        "Structuring and sourcing",
+        "Researching and recruiting",
+        "Recruiting and resourcing"
+      ],
+      "correct": 0,
+      "explanation": "Sourcing finds potential candidates and talent pools. Recruiting then persuades them to become applicants. She's doing sourcing first, then recruiting.",
+      "subtitle": "Final review · Sourcing and recruiting",
+      "note": "Read more: 5.4 Sourcing"
+    },
+    {
+      "id": "c202-final-review-new-q06",
+      "type": "scenario",
+      "front": "An executive moving to Japan needs to learn how to work effectively with Japanese colleagues. Which training fits best?",
+      "choices": [
+        "Culture-specific cross-cultural training",
+        "Global awareness training",
+        "General cross-cultural training",
+        "Diversity-centered training"
+      ],
+      "correct": 0,
+      "explanation": "Culture-specific training targets one country or culture. General cross-cultural training builds broad cultural awareness that isn't tied to any one place.",
+      "subtitle": "Final review · Cross-cultural training",
+      "note": "Read more: 7.15 Training in Ethics, Global Leadership, and Diversity"
+    },
+    {
+      "id": "c202-final-review-new-q46",
+      "type": "scenario",
+      "front": "A diversity program follows the usual training steps: assess needs, set objectives, design, then the next step. What comes fourth?",
+      "choices": [
+        "Check whether discrimination claims went down",
+        "Agree on the session dates and locations",
+        "Deliver the training, starting with senior managers",
+        "Decide whether a new policy would work better than training"
+      ],
+      "correct": 2,
+      "explanation": "The training process runs needs assessment, objectives, design, implementation, evaluation. Step four is implementation. Measuring the drop in claims is evaluation, and weighing a policy instead is part of needs assessment.",
+      "subtitle": "Final review · Diversity training",
+      "note": "Read more: 7.15 Training in Ethics, Global Leadership, and Diversity"
+    },
+    {
+      "id": "c202-final-review-new-q47",
+      "type": "scenario",
+      "front": "Which of these is NOT one of the sensory modalities (learning styles)?",
+      "choices": [
+        "Kinesthetic",
+        "Experiential",
+        "Visual",
+        "Auditory"
+      ],
+      "correct": 1,
+      "explanation": "The sensory modalities are visual, auditory, tactile, and kinesthetic. 'Experiential' is a training method (role plays, simulations), not a learning style.",
+      "subtitle": "Final review · Learning styles",
+      "note": "Read more: 7.9 Design the Training Program: Games to Learning Styles"
+    },
+    {
+      "id": "c202-final-review-new-q69",
+      "type": "scenario",
+      "front": "A hospital compares patient satisfaction scores from before and after its nurse training. Which Kirkpatrick level is this?",
+      "choices": [
+        "Learning",
+        "Behavior",
+        "Results",
+        "Reaction"
+      ],
+      "correct": 2,
+      "explanation": "Patient or customer satisfaction is a business outcome, so it's the results level. Reaction is how the trainees felt about the training (the trap you fell for on the Q2 quiz).",
+      "subtitle": "Final review · Kirkpatrick levels",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment"
+    },
+    {
+      "id": "c202-final-review-new-q12",
+      "type": "scenario",
+      "front": "How should employee performance goals be written to get the best results?",
+      "choices": [
+        "Easy and specific",
+        "Easy and broad",
+        "Challenging and broad",
+        "Challenging and specific"
+      ],
+      "correct": 3,
+      "explanation": "Specific, difficult goals produce higher performance than easy or vague 'do your best' goals.",
+      "subtitle": "Final review · Goal setting",
+      "note": "Read more: 8.7 Setting Goals and Standards"
+    },
+    {
+      "id": "c202-final-review-new-q13",
+      "type": "scenario",
+      "front": "A supervisor rates only the parts of an employee's work she has actually seen. Which concept is this about?",
+      "choices": [
+        "Task evaluation",
+        "Task acknowledgement",
+        "Task assessment",
+        "Task acquaintance"
+      ],
+      "correct": 3,
+      "explanation": "Task acquaintance is the amount and type of work contact a rater has with the person being rated. Accurate raters stick to what they've observed.",
+      "subtitle": "Final review · Performance information",
+      "note": "Read more: 8.8 Performance Information Sources"
+    },
+    {
+      "id": "c202-final-review-new-q56",
+      "type": "scenario",
+      "front": "Coworkers tend to rate each other most honestly when the ratings will be used for what?",
+      "choices": [
+        "Promotions",
+        "Pay decisions",
+        "Development",
+        "Discipline"
+      ],
+      "correct": 2,
+      "explanation": "Peers inflate or soften ratings when they affect a colleague's pay, promotion, or discipline. When ratings only feed development, they're more candid.",
+      "subtitle": "Final review · Performance information",
+      "note": "Read more: 8.8 Performance Information Sources"
+    },
+    {
+      "id": "c202-final-review-new-q15",
+      "type": "scenario",
+      "front": "A manager rates an employee 'average' only because the rest of the team is exceptional, without checking the job's actual standards. Which error is this?",
+      "choices": [
+        "Halo effect",
+        "Horns effect",
+        "Contrast effect",
+        "Recency effect"
+      ],
+      "correct": 2,
+      "explanation": "The contrast effect rates people against each other instead of against set standards. Halo and horns let one trait color every rating, and recency over-weights the latest events.",
+      "subtitle": "Final review · Rating errors",
+      "note": "Read more: 8.20 Human Biases and Errors"
+    },
+    {
+      "id": "c202-final-review-new-q14",
+      "type": "scenario",
+      "front": "Which progressive discipline step is informal and doesn't have to be documented?",
+      "choices": [
+        "Written warning",
+        "Termination",
+        "Suspension",
+        "Counseling"
+      ],
+      "correct": 3,
+      "explanation": "Counseling is an informal conversation that flags the problem early. Written warnings, suspensions, and terminations are documented formal steps.",
+      "subtitle": "Final review · Progressive discipline",
+      "note": "Read more: 8.17 Progressive Discipline"
+    },
+    {
+      "id": "c202-final-review-new-q17",
+      "type": "scenario",
+      "front": "Which practice most increases both inclusion and engagement?",
+      "choices": [
+        "Letting employees use their unique skills and strengths",
+        "Cutting back on promotion opportunities",
+        "Limiting how much decision authority employees have",
+        "Giving employees little feedback"
+      ],
+      "correct": 0,
+      "explanation": "People feel included and engaged when their unique abilities are valued and used. The other choices reduce autonomy, feedback, and growth.",
+      "subtitle": "Final review · Inclusion",
+      "note": "Read more: 3.6 The Importance of Diversity and Inclusion to Business Performance"
+    },
+    {
+      "id": "c202-final-review-new-q19",
+      "type": "scenario",
+      "front": "Unemployment is at a record low and the economy is booming. Which departure should HR expect to rise?",
+      "choices": [
+        "Employees quitting for better-paying jobs elsewhere",
+        "Positions eliminated in a restructuring",
+        "Terminations for policy violations",
+        "Firings after failed improvement plans"
+      ],
+      "correct": 0,
+      "explanation": "A strong economy with plenty of jobs makes voluntary turnover rise because people have options. Firings and eliminated jobs are involuntary turnover, which the employer starts.",
+      "subtitle": "Final review · Turnover",
+      "note": "Read more: 14.8 Turnover"
+    },
+    {
+      "id": "c202-final-review-new-q24",
+      "type": "scenario",
+      "front": "A star performer asks for a modest raise, hears raises happen only at the annual review, and quits. What kind of turnover is this?",
+      "choices": [
+        "Functional turnover",
+        "Involuntary turnover",
+        "Dysfunctional turnover",
+        "Unavoidable turnover"
+      ],
+      "correct": 2,
+      "explanation": "Losing a high performer the firm wanted to keep is dysfunctional turnover, and it was avoidable. Functional turnover is when low performers leave.",
+      "subtitle": "Final review · Turnover",
+      "note": "Read more: 14.8 Turnover"
+    },
+    {
+      "id": "c202-final-review-new-q21",
+      "type": "scenario",
+      "front": "Which is an INDIRECT cost when an employee quits?",
+      "choices": [
+        "Training the replacement",
+        "Paying for job ads",
+        "Lower morale among the coworkers who stay",
+        "Recruiter and placement fees"
+      ],
+      "correct": 2,
+      "explanation": "Indirect costs are hidden effects such as lost morale, heavier workloads, and lost knowledge. Training, advertising, and hiring fees are direct costs.",
+      "subtitle": "Final review · Cost of turnover",
+      "note": "Read more: 14.8 Turnover"
+    },
+    {
+      "id": "c202-final-review-new-q22",
+      "type": "scenario",
+      "front": "Which retention tactic works as a mobility barrier?",
+      "choices": [
+        "Training employees deeply in the company's own unique methods",
+        "Writing job ads that oversell the role",
+        "Making routine work less challenging",
+        "Making performance reviews less detailed"
+      ],
+      "correct": 0,
+      "explanation": "Mobility barriers make leaving harder. Firm-specific skills, like unvested stock, are worth less elsewhere, so they lower the chance employees leave.",
+      "subtitle": "Final review · Retention",
+      "note": "Read more: 14.16 Retention Strategies"
+    },
+    {
+      "id": "c202-final-review-new-q25",
+      "type": "scenario",
+      "front": "Which is NOT a benefit of succession management?",
+      "choices": [
+        "Fewer premature promotions and long vacancies",
+        "Smoother transitions when key people leave",
+        "Lower risk of discriminatory practices",
+        "Continuity of leadership"
+      ],
+      "correct": 2,
+      "explanation": "Succession management keeps ready candidates for key roles. That gives leadership continuity, smooth transitions, and fewer long vacancies or rushed promotions. It also shows employees a growth path, which helps retention. It doesn't by itself reduce discrimination risk.",
+      "subtitle": "Final review · Succession management",
+      "note": "Read more: 14.17 Managing Succession"
+    },
+    {
+      "id": "c202-final-review-new-q26",
+      "type": "scenario",
+      "front": "Which is an example of workforce redeployment?",
+      "choices": [
+        "Hiring contractors to handle supply swings",
+        "Moving employees with specialized expertise onto a critical project",
+        "Laying off staff when a branch closes",
+        "Letting top-rated employees work from home"
+      ],
+      "correct": 1,
+      "explanation": "Redeployment moves existing talent to where it's needed most instead of laying people off or hiring outside.",
+      "subtitle": "Final review · Redeploying talent",
+      "note": "Read more: 14.19 Redeploying Talent"
+    },
+    {
+      "id": "c202-final-review-new-q31",
+      "type": "scenario",
+      "front": "Facing budget cuts, a manager weighs canceling all 30 employees' holiday bonuses against laying off five part-timers, choosing whichever does the least overall harm. Which ethical standard is she using?",
+      "choices": [
+        "Utilitarian",
+        "Common good",
+        "Rights",
+        "Fairness"
+      ],
+      "correct": 0,
+      "explanation": "The utilitarian standard picks the option that produces the most good and the least harm overall. Rights protects individual entitlements, and fairness asks whether people are treated equally.",
+      "subtitle": "Final review · Ethical standards",
+      "note": "Read more: 2.7 The Role of HRM in Corporate Ethics and Social Responsibility"
+    },
+    {
+      "id": "c202-final-review-new-q65",
+      "type": "scenario",
+      "front": "Which of these is an ethical issue in HR?",
+      "choices": [
+        "Following the new dress code",
+        "Posting 'Employee of the Month' photos",
+        "Building interest in a wellness program",
+        "Deciding how to respond to a bullying complaint"
+      ],
+      "correct": 3,
+      "explanation": "Ethical issues involve right-and-wrong choices that affect people's well-being, like how to handle a bullying claim. The others are routine operations.",
+      "subtitle": "Final review · HR ethics",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior"
+    },
+    {
+      "id": "c202-final-review-new-q57",
+      "type": "scenario",
+      "front": "Which culture type stresses internal harmony, spreads power among all members, and depends on group morale?",
+      "choices": [
+        "Entrepreneurial",
+        "Consensual",
+        "Competitive",
+        "Bureaucratic"
+      ],
+      "correct": 1,
+      "explanation": "Consensual cultures value loyalty, tradition, and harmony, with power shared across the group. Competitive cultures focus on winning, entrepreneurial ones on risk and innovation, and bureaucratic ones on rules and procedures.",
+      "subtitle": "Final review · Culture types",
+      "note": "Read more: 2.4 Why Is Organizational Culture Important?"
+    },
+    {
+      "id": "c202-final-review-new-q41",
+      "type": "scenario",
+      "front": "Two companies are merging this year. Which is a key HR job?",
+      "choices": [
+        "Forecasting the combined firm's profits",
+        "Setting the merged company's business strategy",
+        "Choosing new suppliers",
+        "Planning for talent and retaining key people"
+      ],
+      "correct": 3,
+      "explanation": "In mergers, HR's role is talent: deciding who's needed, keeping key employees, and combining cultures. Suppliers, financial forecasts, and strategy belong to other leaders.",
+      "subtitle": "Final review · Mergers",
+      "note": "Read more: 2.13 HRM During Mergers and Acquisitions"
+    },
+    {
+      "id": "c202-final-review-new-q54",
+      "type": "scenario",
+      "front": "Why should a pay system's rewards be closely tied to company objectives?",
+      "choices": [
+        "People guess at what management wants",
+        "People do whatever is most convenient",
+        "People avoid unpleasant tasks",
+        "People tend to repeat whatever gets measured and rewarded"
+      ],
+      "correct": 3,
+      "explanation": "Rewards signal what matters. Employees repeat rewarded behavior, so pay should reward the behaviors the strategy needs.",
+      "subtitle": "Final review · Strategic compensation",
+      "note": "Read more: 9.5 Strategic Compensation"
+    },
+    {
+      "id": "c202-final-review-new-q58",
+      "type": "scenario",
+      "front": "A chain will send its single top-selling store manager on a luxury trip. What will this contest probably do?",
+      "choices": [
+        "Encourage cooperation among hourly staff",
+        "Increase teamwork among the store managers",
+        "Raise morale at historically weak stores",
+        "Keep and motivate the managers who think they have a real shot at winning"
+      ],
+      "correct": 3,
+      "explanation": "A winner-take-all individual incentive motivates the people who think they can win. It can hurt cooperation and discourage managers at weak stores who have little chance.",
+      "subtitle": "Final review · Incentive plans",
+      "note": "Read more: 10.9 Individual Incentive Plans"
+    },
+    {
+      "id": "c202-final-review-new-q43",
+      "type": "scenario",
+      "front": "An employer raises its 401(k) match, adds financial-planning seminars, and offers long-term care insurance. What goal is it pursuing?",
+      "choices": [
+        "Lower employee stress",
+        "Fewer health claims",
+        "Greater retirement security",
+        "Better job skills"
+      ],
+      "correct": 2,
+      "explanation": "Retirement savings, planning help, and long-term care coverage all target employees' security in retirement.",
+      "subtitle": "Final review · Benefits",
+      "note": "Read more: 11.4 What Is the Purpose of Benefits?"
+    },
+    {
+      "id": "c202-final-review-new-q32",
+      "type": "scenario",
+      "front": "Which benefit is NOT legally required of U.S. employers?",
+      "choices": [
+        "Social Security",
+        "Health insurance for all employees",
+        "Unemployment insurance",
+        "Workers' compensation"
+      ],
+      "correct": 1,
+      "explanation": "Social Security, unemployment insurance, workers' compensation, and FMLA leave are mandatory. Dropping workers' comp would violate employee rights. Health insurance is a customary benefit, not a universal legal requirement. Workers' comp is no-fault: an employee qualifies just by having a work-related injury or illness.",
+      "subtitle": "Final review · Mandatory benefits",
+      "note": "Read more: 11.6 Mandatory Benefits"
+    },
+    {
+      "id": "c202-final-review-new-q33",
+      "type": "scenario",
+      "front": "An employee feels overwhelmed and isn't sure he can keep up with his job. What is he most likely experiencing?",
+      "choices": [
+        "Functional stress",
+        "Functional turnover",
+        "Dysfunctional turnover",
+        "Dysfunctional stress"
+      ],
+      "correct": 3,
+      "explanation": "Too many demands for too long is dysfunctional stress, which is linked to withdrawal and turnover. Functional stress is the manageable, energizing kind (satisfaction, excitement), though it can still turn counterproductive if anxiety goes unmanaged. The turnover options describe people leaving, not stress.",
+      "subtitle": "Final review · Stress",
+      "note": "Read more: 12.11 Stress"
+    },
+    {
+      "id": "c202-final-review-new-q64",
+      "type": "scenario",
+      "front": "Many employers have kept workers from unionizing by investing in which relationship factor?",
+      "choices": [
+        "Onboarding and socialization",
+        "Strong psychological contracts",
+        "Collective bargaining agreements",
+        "Employee resource groups"
+      ],
+      "correct": 1,
+      "explanation": "When the unwritten expectations between employer and employees (the psychological contract) are met, workers feel less need for a union.",
+      "subtitle": "Final review · Labor relations",
+      "note": "Read more: 13.14 Establishing Positive Labor-Management Relations"
+    },
+    {
+      "id": "c202-final-review-new-q66",
+      "type": "scenario",
+      "front": "Which statement is true?",
+      "choices": [
+        "Employment at will lets an employer fire anyone for any reason at all",
+        "Handling cash with the public doesn't affect violence risk",
+        "OSHA rules cover only employers with ten or more workers",
+        "The Taft-Hartley Act banned closed shops and secondary boycotts"
+      ],
+      "correct": 3,
+      "explanation": "Taft-Hartley (1947) added union unfair labor practices and outlawed closed shops and secondary boycotts. At-will still has legal limits, OSHA covers nearly all private employers, and handling cash is a known violence risk.",
+      "subtitle": "Final review · Labor law",
+      "note": "Read more: 13.6 Labor Relations"
+    },
+    {
+      "id": "c202-final-review-new-q67",
+      "type": "scenario",
+      "front": "Which is NOT a union tactic for pressuring management during bargaining?",
+      "choices": [
+        "A slowdown",
+        "A strike",
+        "A boycott",
+        "A lockout"
+      ],
+      "correct": 3,
+      "explanation": "A lockout is a management tactic: the employer keeps workers out. Strikes, boycotts, and slowdowns are union pressure tactics.",
+      "subtitle": "Final review · Negotiation breakdowns",
+      "note": "Read more: 13.10 Negotiation Breakdowns"
+    },
+    {
+      "id": "c202-final-review-new-q70",
+      "type": "scenario",
+      "front": "In a unionized company that must cut jobs, what usually decides who is laid off first?",
+      "choices": [
+        "Pay level",
+        "Performance ratings",
+        "Union membership status",
+        "Seniority"
+      ],
+      "correct": 3,
+      "explanation": "Union contracts usually make seniority the key factor: last in, first out.",
+      "subtitle": "Final review · Unions and HR",
+      "note": "Read more: 13.13 How Unions Impact Human Resource Management"
+    },
+    {
+      "id": "c202-final-review-ch01-065",
+      "type": "scenario",
+      "front": "Which HR function makes sure what individual employees aim for lines up with what the organization is trying to achieve?",
+      "choices": [
+        "Succession planning",
+        "Compensation and benefits",
+        "Training and development",
+        "Performance management"
+      ],
+      "correct": 3,
+      "explanation": "Performance management aligns employee goals and behavior with organizational goals, then appraises and improves performance.",
+      "subtitle": "Ch 1 Quiz Q8 · Effective HRM",
+      "note": "Read more: 1.8 Performance Management",
+      "copyOf": "c202-ch01-065"
+    },
+    {
+      "id": "c202-final-review-ch02-047",
+      "type": "scenario",
+      "front": "Which of these is an ethical dilemma in HRM?",
+      "choices": [
+        "A manager asks HR to quietly drop a qualified applicant after learning he's in cancer treatment",
+        "A manager schedules quarterly career conversations",
+        "HR chooses between two strong internal candidates using posted criteria",
+        "HR moves open enrollment to November"
+      ],
+      "correct": 0,
+      "explanation": "A dilemma involves pressure to do something unfair or harmful. Picking fairly between good candidates is hard but not unethical.",
+      "subtitle": "Ch 2.8 Apply · Strategic HRM",
+      "note": "Read more: 2.8 Ethical and Unethical Behavior",
+      "copyOf": "c202-ch02-047"
+    },
+    {
+      "id": "c202-final-review-ch04-144",
+      "type": "scenario",
+      "front": "A posting reads: 'Schedules patient appointments, verifies insurance, and reports to the clinic manager. Some Saturdays required.' What document is this drawn from?",
+      "choices": [
+        "Replacement chart",
+        "Talent inventory",
+        "Job description",
+        "Person specification"
+      ],
+      "correct": 2,
+      "explanation": "Duties, reporting relationships, and special conditions are the content of a job description.",
+      "subtitle": "Ch 4.14 Apply · Effective HRM",
+      "note": "Read more: 4.14 Job Analysis Outcomes",
+      "copyOf": "c202-ch04-144"
+    },
+    {
+      "id": "c202-final-review-ch04-201",
+      "type": "scenario",
+      "front": "Employees using emergency time must call their supervisor within one hour of their shift start. This statement is a...",
+      "choices": [
+        "Policy",
+        "Protocol",
+        "Procedure",
+        "Process"
+      ],
+      "correct": 2,
+      "explanation": "Likely per text: it tells employees how to carry out the policy, which makes it a procedure.",
+      "subtitle": "Ch 4 Quiz Q19 · Effective HRM",
+      "note": "Read more: 4.19 Organizational Structure",
+      "copyOf": "c202-ch04-201"
+    },
+    {
+      "id": "c202-final-review-ch07-123",
+      "type": "scenario",
+      "front": "A month later, supervisors observe that Kai now uses the new safety checklist correctly on every shift. Which level is this?",
+      "choices": [
+        "Behavior",
+        "Learning",
+        "Results",
+        "Reaction"
+      ],
+      "correct": 0,
+      "explanation": "Applying learning on the job (transfer) is the behavior level.",
+      "subtitle": "Ch 7.12 Apply · Effective HRM",
+      "note": "Read more: 7.12 Evaluate the Training: Kirkpatrick's Model and Return on Investment",
+      "copyOf": "c202-ch07-123"
+    },
+    {
+      "id": "c202-final-review-ch08-178",
+      "type": "scenario",
+      "front": "Why is feedback important?",
+      "choices": [
+        "It creates more chances for discipline",
+        "It consolidates performance data",
+        "It reduces the supervisor's workload",
+        "It tracks progress toward goals"
+      ],
+      "correct": 3,
+      "explanation": "Likely per text: feedback tracks progress toward goals so people can adjust.",
+      "subtitle": "Ch 8 Quiz Q7 · Effective HRM",
+      "note": "Read more: 8.4 Why Is Performance Management Important?",
+      "copyOf": "c202-ch08-178"
+    },
+    {
+      "id": "c202-final-review-ch08-181",
+      "type": "scenario",
+      "front": "Which two progressive discipline steps may an employer repeat?",
+      "choices": [
+        "Counseling and written warning",
+        "Suspension and termination",
+        "Written warning and suspension",
+        "Termination and reinstatement"
+      ],
+      "correct": 2,
+      "explanation": "Likely per text: written warning and suspension. Moderate confidence: the text explicitly says only that the written warning may repeat (the second becomes a final warning); 'counseling and written warning' is the main alternative.",
+      "subtitle": "Ch 8 Quiz Q10 · Effective HRM",
+      "note": "Read more: 8.17 Progressive Discipline",
+      "copyOf": "c202-ch08-181"
+    },
+    {
+      "id": "c202-final-review-new-x-turnover",
+      "type": "scenario",
+      "front": "A sales team's two lowest performers quit on their own, and the firm easily hires stronger replacements. How is this turnover best described?",
+      "choices": [
+        "Involuntary and functional",
+        "Voluntary and functional",
+        "Involuntary and dysfunctional",
+        "Voluntary and dysfunctional"
+      ],
+      "correct": 1,
+      "explanation": "They chose to leave (voluntary), and losing low performers who are easy to replace helps the company (functional).",
+      "subtitle": "Final review · Turnover",
+      "note": "Read more: 14.9 Optimal Turnover"
+    },
+    {
+      "id": "c202-final-review-new-x-adverse",
+      "type": "scenario",
+      "front": "A strength test passes 80% of male applicants but only 40% of female applicants. What does the four-fifths rule suggest?",
+      "choices": [
+        "No problem, unless fewer than 100 people applied",
+        "Possible adverse impact, since 40% is less than 80% of the men's rate",
+        "Disparate treatment, because women were singled out",
+        "No problem, because the same test was given to everyone"
+      ],
+      "correct": 1,
+      "explanation": "If a group's pass rate is under four-fifths (80%) of the top group's rate, that's evidence of adverse impact. Here 40/80 = 50%. The employer would then have to show the test is job-related.",
+      "subtitle": "Final review · Adverse impact",
+      "note": "Read more: 3.15 Employment Lawsuits: Disparate Treatment and Adverse Impact"
+    }
+  ]
+}

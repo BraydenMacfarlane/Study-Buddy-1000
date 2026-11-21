@@ -1900,6 +1900,69 @@ async function testQ2Review() {
   await ctx.close();
 }
 
+/* ---------- Final quiz review deck ---------- */
+async function testFinalReview() {
+  console.log('\n[23] C202 Final Quiz Review deck');
+  const R = 'deck-c202-final-review';
+  const { ctx, p } = await page();
+  await p.goto(GIST); await hideToast(p);
+  const pre = await S(p, () => {
+    const st = JSON.parse(localStorage.getItem('flashcards.v1'));
+    const id = cardsIn('deck-c202-ch14')[3].id;
+    st.progress[id] = { streak: 1, retired: false }; st.attempts = { [id]: [4, 2, 1760000000000, '101101'] };
+    delete st.bundled['c202-final-review'];
+    st.folders = st.folders.filter((f) => f.id !== 'deck-c202-final-review'); st.cards = st.cards.filter((c) => c.folderId !== 'deck-c202-final-review');
+    // a still-active Q2 flag on 8.17, to see the final review count toward it
+    const k = 'C202|8.17 Progressive Discipline'; if (st.flags && st.flags[k]) st.flags[k].got = 0;
+    localStorage.setItem('flashcards.v1', JSON.stringify(st));
+    return { id, pr: st.progress[id], at: st.attempts[id], flags: Object.keys(st.flags || {}).sort() };
+  });
+  await p.reload(); await hideToast(p);
+  const info = await S(p, (R) => {
+    const f = folderById(R), cards = cardsIn(R), copies = cards.filter((c) => c.copyOf), fresh = cards.filter((c) => !c.copyOf);
+    const chapterSecs = new Set(state.cards.filter((c) => /^deck-c202-ch\d\d$/.test(c.folderId)).map(cardSection));
+    const okCopies = copies.every((c) => { const o = state.cards.find((x) => x.id === c.copyOf); return o && o.front === c.front && o.id !== c.id && /^deck-c202-ch\d\d$/.test(o.folderId); });
+    return { name: f && f.name, course: f && f.course, order: f && f.order, after: f && f.sortAfter, flagsDef: !!(f && f.deckFlags), total: cards.length, copies: copies.length, fresh: fresh.length, okCopies,
+      allScen: cards.every((c) => isScenario(c) && c.choices.length === 4 && new Set(c.choices).size === 4 && !!cleanStr(c.explanation)),
+      freshIds: fresh.every((c) => /^c202-final-review-new-/.test(c.id)),
+      secsOk: cards.every((c) => chapterSecs.has(cardSection(c))), nsecs: new Set(cards.map(cardSection)).size,
+      chapters: courseInfo('C202').chapters, flags: Object.keys(state.flags || {}).sort(), sum: syncSummary() };
+  }, R);
+  ok(info.name === 'C202 Final Quiz Review' && info.course === 'C202' && info.order === undefined && info.after === 14 && !info.flagsDef, 'bundled deck "C202 Final Quiz Review" (course C202, no chapter order, sorted after Ch 14, no seeded flags)');
+  ok(info.total === 60 && info.copies === 7 && info.fresh === 53 && info.okCopies && info.freshIds, '60 cards: 53 new final-quiz scenarios + 7 copies of chapter cards (copyOf -> original)');
+  ok(info.allScen && info.secsOk && info.nsecs >= 40, `every card is a 4-choice scenario with an explanation and a real chapter section (${info.nsecs} sections)`);
+  ok(info.chapters === 14 && JSON.stringify(info.flags) === JSON.stringify(pre.flags) && info.sum.courses.C202.length === 14 && info.sum.reviews.C202.some((r) => r.name === 'C202 Final Quiz Review'), 'plan still 14 chapters, existing quiz flags kept, share summary lists the final review as a review deck');
+  const post = await S(p, (id) => ({ pr: state.progress[id], at: state.attempts[id] }), pre.id);
+  ok(JSON.stringify(post) === JSON.stringify({ pr: pre.pr, at: pre.at }), 'existing Ch 14 progress and attempts untouched');
+  const order = await S(p, () => Array.from(document.querySelectorAll('.course .folder-card')).map((e) => e.dataset.open));
+  ok(order.indexOf(R) === order.indexOf('deck-c202-ch14') + 1 && order.indexOf('deck-c202-q2-misses') === order.indexOf('deck-c202-ch08') + 1, 'Home shows the final review right after Ch 14 (Q2 review stays after Ch 8)');
+  await p.click(`[data-open="${R}"]`); await skipVis(p);
+  ok((await S(p, () => view.page + ':' + view.folderId)) === 'folder:' + R && p.dialogLog.length === 0, 'opens freely (no gating)');
+  // A copy counts for its chapter original and for an active quiz flag in its section
+  const r = await S(p, () => {
+    const c = cardsIn('deck-c202-final-review').find((x) => x.copyOf && /^8\.17 /.test(cardSection(x)));
+    const k = 'C202|8.17 Progressive Discipline', fl = state.flags[k];
+    const b = { o: (state.attempts[c.copyOf] || [0])[0], g: fl ? fl.got : null };
+    recordAttempt(c.id, true);
+    return { b, o: state.attempts[c.copyOf][0], g: fl ? fl.got : null, has: !!fl };
+  });
+  ok(r.o === r.b.o + 1 && (!r.has || r.g === r.b.g + 1), 'a right answer on a copy counts toward its Ch 8 original and the active 8.17 quiz flag');
+  await p.click('#studyBtn'); await skipVis(p);
+  const st = await S(p, () => ({ page: view.page, n: view.queue.length }));
+  ok(st.page === 'study' && st.n === 20, 'study round is 20 of the 60 cards');
+  await answerCard(p, true);
+  ok(await noBroke(p), 'app fine');
+  await ctx.close();
+  // Phone screenshot of the deck
+  const ph = await page({ device: 'iPhone 13', now: '2026-11-20T18:30:00-07:00' });
+  await ph.p.goto(GIST); await hideToast(ph.p);
+  await ph.p.click(`[data-open="${R}"]`); await skipVis(ph.p); await hideToast(ph.p);
+  await ph.p.screenshot({ path: `${SHOTS}/final-review-phone.png` });
+  await ph.p.click('#studyBtn'); await skipVis(ph.p); await hideToast(ph.p);
+  await ph.p.screenshot({ path: `${SHOTS}/final-review-study-phone.png` });
+  await ph.ctx.close();
+}
+
 async function screenshots() {
   console.log('\n[11] Screenshots');
   const NOW = '2026-10-05T19:30:00-06:00';
@@ -1988,6 +2051,7 @@ async function screenshots() {
     await testKeys();
     await testQ1Review();
     await testQ2Review();
+    await testFinalReview();
     await screenshots();
   } catch (e) { fail++; console.log('EXCEPTION', e); }
   ok(errors.length === 0, 'no console/page errors' + (errors.length ? ':\n' + errors.join('\n') : ''));
